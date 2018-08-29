@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<decorators defaultdir="/WEB-INF/view/decorators">
+
+	<excludes>
+		<pattern>*smartEditor*</pattern>
+		<pattern>/mail/*</pattern>
+		<pattern>/login.do</pattern>
+	</excludes>
+
+	<decorator name="defaultLayout" page="defaultLayout.jsp">
+		<pattern>/*.do</pattern>
+		<pattern>/**/*.do</pattern>
+	</decorator>
+
+	
+    <decorator name="popupLayout" page="popupLayout.jsp">
+        <pattern>*/popup/*.do</pattern>
+        <pattern>popup/*.do</pattern>
+    </decorator>
+
+
+</decorators>

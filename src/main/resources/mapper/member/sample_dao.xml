@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper">
+    <select id="select" parameterType="map" resultType=" ">
+ 
+            <if test="brandCd != 'NONE'">
+                AND al.  = #{ }
+            </if> 
+            
+            			<if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(ey)">
+				AND m. =#{ }
+			</if>	
+			
+		  <![CDATA[>]]> 0 
+					    <foreach collection="productCdList" item="productCd" open="(" separator="," close=")">
+					    	#{productCd}
+					    </foreach>
+					    
+		SELECT s.* FROM (
+				SELECT 
+						DATE_FORMAT( ymdt, '%Y%m%d%H%i%s') AS  , 
+ 
+						(CASE @vsid WHEN sc._id THEN @rownum:=@ronum+1 ELSE @ronum:=1 END) rnum,
+				         (@vsid:= sc._id) vsid  
+				FROM 	stard sc
+ 
+					INNER JOIN coupon c ON sp.coupon_id = c.coupon_id 
+					, (SELECT @vsid:='', @rownum:=0 FROM DUAL) b
+				WHERE
+				 
+				  AND 	sc.s_cd = 'NORMAL' 
+			 ) s
+		WHERE s.rnum = 1
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration>
+	<!-- Appenders -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{64} - %msg %n</pattern>
+		</encoder>
+	</appender>
+	
+ 	<logger name="org.springframework.core" level="INFO" />
+	<logger name="org.springframework.beans" level="ERROR" />
+	<logger name="org.springframework.context" level="INFO" />
+	<logger name="org.springframework.aop.framework" level="INFO" />
+	
+	<logger name="org.apache.ibatis" level="ERROR" />
+	<logger name="org.mybatis.spring" level="INFO" />
+	<logger name="com.zaxxer.hikari" level="ERROR" />
+
+	<logger name="org.apache.zookeeper" level="ERROR" />
+	<logger name="com.zaxxer.hikari" level="ERROR" />
+	<logger name="HikariPool" level="ERROR" /> <!-- HealthCheck Log Debug -->
+	
+	<!-- Root Logger -->
+	<root level="DEBUG">
+		<appender-ref ref="console" />
+	</root>	
+	
+</configuration>
