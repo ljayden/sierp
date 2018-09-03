@@ -45,12 +45,16 @@ public class DatabaseConfig {
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "50");
 		config.addDataSourceProperty("useServerPrepStmts", "true");
-		config.setDriverClassName("com.mysql.jdbc.Driver");
+		
+		config.setDriverClassName("org.sqlite.JDBC");
 		
 		config.addDataSourceProperty("user", "");
 		config.addDataSourceProperty("password", "");
-		config.setJdbcUrl("");
-        return new HikariDataSource(config);
+		config.setJdbcUrl("jdbc:sqlite:D:\\workspace-study\\sierp\\db.db3");
+		
+		HikariDataSource hds = new HikariDataSource(config);
+		
+		return hds;
     }
 	
     @Bean
@@ -65,7 +69,7 @@ public class DatabaseConfig {
         return dataSourceTransactionManager;
    }
 
-    //@Bean
+   @Bean
    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 	   SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
 	   sqlSessionFactory.setDataSource(dataSource);

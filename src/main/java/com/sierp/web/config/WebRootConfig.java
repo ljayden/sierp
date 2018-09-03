@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 @Configuration
 @Import({
 	PropertiesConfig.class, 
-	PropertiesEnvConfig.class//, 
-	//DatabaseConfig.class
+	PropertiesEnvConfig.class, 
+	DatabaseConfig.class
 	})
 @ComponentScan(
 		basePackages = {"com.sierp.web.component", "com.sierp.web.**.service"},

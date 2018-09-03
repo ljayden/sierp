@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper">
-    <select id="select" parameterType="map" resultType=" ">
+<mapper namespace="mapper.company.company_dao">
+    <!-- select id="select" parameterType="map" resultType=" ">
  
             <if test="brandCd != 'NONE'">
                 AND al.  = #{ }
@@ -31,5 +31,13 @@
 				  AND 	sc.s_cd = 'NORMAL' 
 			 ) s
 		WHERE s.rnum = 1
+    </select -->
+    
+    <select id="selectCompany" resultType="map">
+    	SELECT * FROM company
+    </select>
+    
+    <select id="selectCompanyByCode" parameterType="map">
+    	SELECT * FROM company WHERE company_code = #{companyCode}
     </select>
 </mapper>
