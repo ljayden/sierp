@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sierp.web.dao.CompanyDao;
+import com.sierp.web.domain.company.dao.CompanyDao;
 
 @Controller
 @RequestMapping(value = "/project/dashboard")

@@ -20,7 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.google.common.collect.Maps;
 import com.sierp.web.config.support.ReloadWritableHttpServletRequestWrapperFilter;
-import com.sierp.web.constants.AppOsType;
+import com.sierp.web.domain.constants.AppOsType;
 
 
 @Slf4j
