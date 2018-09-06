@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum WorkerType {
+public enum WorkPosiType {
 
-	FREELANCER("프리랜서"),
-	EMPLOYEE("직원");
+	OFFICE("상주"),
+	HOMEFICE("반상주"),
+	HOME("재택");
 	
 	@Getter private String description;
 }

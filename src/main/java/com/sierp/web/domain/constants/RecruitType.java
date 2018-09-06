@@ -5,5 +5,6 @@ public enum RecruitType {
 
 	REGULAR,
 	TEMPORARY,
+	INTERN,
 	PARTTIME
 }

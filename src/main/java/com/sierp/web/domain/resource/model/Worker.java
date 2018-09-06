@@ -4,15 +4,25 @@ import java.util.Date;
 
 import lombok.Data;
 
+import com.sierp.web.domain.constants.AcademicLevel;
 import com.sierp.web.domain.constants.SiGunGuType;
 import com.sierp.web.domain.constants.SidoType;
+import com.sierp.web.domain.constants.WorkerType;
 
+
+/**
+ * 최상위 오브젝트 
+ * 프리랜서와 직원의 합 !
+ * @author NHNEnt
+ *
+ */
 @Data
 public class Worker {
 
 	private int workerSeq;
 	
-	private int statusCode;
+	private WorkerType workerType;
+
 	
 	private String customerCode;
 	
@@ -24,10 +34,11 @@ public class Worker {
 	private String birthMonthDay;
 	private String sex;
 	
+	/**등급 산정 기준 */
+	private AcademicLevel academicLevel;
 	private int startWorkYear;
+	private int startWorkMonth;
 	
-	private String memo;
-	private String secretMemo;	// 본인 등록 시 없음
 	
 	private SidoType sido;
 	private SiGunGuType siGunGu;
@@ -35,7 +46,4 @@ public class Worker {
 	
 	private Date registerYmdt;
 	private Date modifyYmdt;
-	
-	private String modifyManagerId;		//없으면 본인
-	private String resiterManagerId;	//없으면 본인
 }
