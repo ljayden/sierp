@@ -1,5 +1,10 @@
-package com.sierp.web.domain.constants;
+package com.sierp.web.domain.common.constant;
 
+/**
+ * 필요한가 고민
+ * @author NHNEnt
+ *
+ */
 public enum SkillSetType {
 
 	SERVER_DEVELOP,

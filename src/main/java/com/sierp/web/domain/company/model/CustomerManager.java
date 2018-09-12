@@ -1,4 +1,4 @@
-package com.sierp.web.domain.common.model;
+package com.sierp.web.domain.company.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Manager extends Customer {
+public class CustomerManager extends Customer {
 
 	private String id;
 	private String email;

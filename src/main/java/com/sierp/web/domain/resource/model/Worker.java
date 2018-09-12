@@ -4,17 +4,18 @@ import java.util.Date;
 
 import lombok.Data;
 
-import com.sierp.web.domain.constants.AcademicLevel;
-import com.sierp.web.domain.constants.SiGunGuType;
-import com.sierp.web.domain.constants.SidoType;
-import com.sierp.web.domain.constants.WorkerType;
+import com.sierp.web.domain.common.constant.SiGunGuType;
+import com.sierp.web.domain.common.constant.SidoType;
+import com.sierp.web.domain.resource.constant.AcademicLevel;
+import com.sierp.web.domain.resource.constant.WorkerType;
 
 
 /**
  * 최상위 오브젝트 
  * 프리랜서와 직원의 합 !
- * @author NHNEnt
  *
+ *
+ * 유니크 : customerCode + email
  */
 @Data
 public class Worker {
@@ -22,9 +23,7 @@ public class Worker {
 	private int workerSeq;
 	
 	private WorkerType workerType;
-
-	
-	private String customerCode;
+	private String customerCode;	//NONE : 유저등록 정보
 	
 	private String name;
 	private String email;

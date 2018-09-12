@@ -1,4 +1,4 @@
-package com.sierp.web.domain.constants;
+package com.sierp.web.domain.common.constant;
 
 public enum RecruitSuggestionStatus {
 

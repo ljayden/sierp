@@ -2,14 +2,21 @@ package com.sierp.web.domain.project.model;
 
 import java.util.Date;
 
-import com.sierp.web.domain.constants.DevGrade;
-import com.sierp.web.domain.constants.JobPositionStatus;
-import com.sierp.web.domain.constants.RecruitType;
-import com.sierp.web.domain.constants.SiGunGuType;
-import com.sierp.web.domain.constants.SidoType;
+import com.sierp.web.domain.common.constant.JobPositionStatus;
+import com.sierp.web.domain.common.constant.RecruitType;
+import com.sierp.web.domain.common.constant.SiGunGuType;
+import com.sierp.web.domain.common.constant.SidoType;
+import com.sierp.web.domain.common.constant.WorkType;
+import com.sierp.web.domain.resource.constant.DevGrade;
 
 import lombok.Data;
 
+
+/**
+ * 직무 정보
+ * 
+ * 직주 정보 + 직무 요건의 합
+ */
 @Data
 public class JobPosition {
 
@@ -20,7 +27,7 @@ public class JobPosition {
 	private int companySeq;
 	private int companyStaffSeq;
 	
-	private Integer projectSeq;	//채용 정보면 없을 수도
+	private Integer projectSeq;	//정규직 채용이라면 프로젝트가 없을수도 있다.
 	
 	private JobPositionStatus status;
 	private Date statusUpdateYmdt;
@@ -38,6 +45,7 @@ public class JobPosition {
 	private Integer monthPay;	//월단가
 	
 	private RecruitType recruitType; // 정규직,계약직,파트
+	private WorkType workType; //SI, SM
 
 	private Integer displayPriceMin;
 	private Integer displayPriceMax;

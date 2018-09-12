@@ -2,7 +2,7 @@ package com.sierp.web.domain.sale.model;
 
 import java.util.Date;
 
-import com.sierp.web.domain.constants.OpenGrade;
+import com.sierp.web.domain.common.constant.OpenGrade;
 
 import lombok.Data;
 

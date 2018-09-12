@@ -2,7 +2,7 @@ package com.sierp.web.domain.sale.model;
 
 import java.util.Date;
 
-import com.sierp.web.domain.constants.RecruitSuggestionStatus;
+import com.sierp.web.domain.common.constant.RecruitSuggestionStatus;
 
 import lombok.Data;
 
