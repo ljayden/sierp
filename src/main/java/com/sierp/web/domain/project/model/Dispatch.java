@@ -1,10 +1,11 @@
 package com.sierp.web.domain.project.model;
 
+import java.util.Date;
+
 import lombok.Data;
 
 /**
  * 자사 직원 - 프로젝트에 투입(파견)
- * @author NHNEnt
  *
  */
 @Data
@@ -14,13 +15,15 @@ public class Dispatch {
 	
 	private int employeeSeq;
 	
-	private int jobPosition;
+	private int jobPositionSeq;
 	
-	//기간 시작
-	//기간 종료
+	private Date workStartDate;
 	
-	//매출
-	//비용
+	private Date workEndDate;
+	
+	private int offeringPrice;
+	
+	private int cost;
 	
 	//역할
 	

@@ -2,7 +2,7 @@ package com.sierp.web.domain.sale.model;
 
 import java.util.Date;
 
-import com.sierp.web.domain.common.constant.RecruitSuggestionStatus;
+import com.sierp.web.domain.sale.constant.RecruitSuggestionProgressStatus;
 
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class RecruitSuggestionHist {
 	
 	private int recruitSuggestionSeq;
 	
-	private RecruitSuggestionStatus progressStatus;
+	private RecruitSuggestionProgressStatus progressStatus;
 	 
 	private String managerOpinion;
 	private String companyOpinion;

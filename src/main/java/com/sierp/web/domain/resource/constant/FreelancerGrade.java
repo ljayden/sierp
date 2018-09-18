@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum DevGrade {
+public enum FreelancerGrade {
 
-	LOW("초급"),
-	MID("중급"),
-	HIGH("고급"),
-	SPEC("특급");
+	LOW("초급", 1),
+	MID("중급", 2),
+	HIGH("고급", 4),
+	SPEC("특급", 8);
 	
 	@Getter private String descripion;
+	@Getter private int devGradeValue;
 }

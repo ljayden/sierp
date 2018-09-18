@@ -7,6 +7,7 @@ import lombok.Data;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
 import com.sierp.web.domain.resource.constant.AcademicLevel;
+import com.sierp.web.domain.resource.constant.WorkerExpertType;
 import com.sierp.web.domain.resource.constant.WorkerType;
 
 
@@ -22,7 +23,8 @@ public class Worker {
 
 	private int workerSeq;
 	
-	private WorkerType workerType;
+	private WorkerType workerType;	//직원, 프리랜서
+	
 	private String customerCode;	//NONE : 유저등록 정보
 	
 	private String name;
@@ -32,6 +34,8 @@ public class Worker {
 	private String birthYear;
 	private String birthMonthDay;
 	private String sex;
+	
+	private WorkerExpertType workerExpertType;
 	
 	/**등급 산정 기준 */
 	private AcademicLevel academicLevel;

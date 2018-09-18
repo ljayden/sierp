@@ -2,12 +2,14 @@ package com.sierp.web.domain.project.model;
 
 import java.util.Date;
 
-import com.sierp.web.domain.common.constant.JobPositionStatus;
+import com.sierp.web.domain.common.constant.RecruitContractUnitType;
 import com.sierp.web.domain.common.constant.RecruitType;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
 import com.sierp.web.domain.common.constant.WorkType;
-import com.sierp.web.domain.resource.constant.DevGrade;
+import com.sierp.web.domain.project.constant.JobPositionStatus;
+import com.sierp.web.domain.project.constant.JobPositionType;
+import com.sierp.web.domain.resource.constant.AcademicLevel;
 
 import lombok.Data;
 
@@ -15,7 +17,10 @@ import lombok.Data;
 /**
  * 직무 정보
  * 
- * 직주 정보 + 직무 요건의 합
+ * 직무 정보 + 직무 요건의 합
+ * 
+ * 그룹웨어에서 관리하기는 이모든것이 하나로 이루어진다.
+ * 번거롭게 하지말자.!!
  */
 @Data
 public class JobPosition {
@@ -24,46 +29,65 @@ public class JobPosition {
 	
 	private String customerCode;
 	
-	private int companySeq;
-	private int companyStaffSeq;
+	private int companySeq;			//클라이언트 업체
+	private int companyStaffSeq;	//클라이언트 업체-담당자
 	
 	private Integer projectSeq;	//정규직 채용이라면 프로젝트가 없을수도 있다.
 	
-	private JobPositionStatus status;
-	private Date statusUpdateYmdt;
-	
-	private String jobPositionName;
-
-
+	private JobPositionType jobPositionType;
 	
 	
 	/**
-	 * 프로젝트 - 직무일 때
+	 * 직무 & 근무 정보
 	 */
-	private DevGrade needGrade;	//2개이상은 어케할까?
-	private Integer workMonth;	//근무 월수 - 계약 단위
-	private Integer monthPay;	//월단가
-	
-	private RecruitType recruitType; // 정규직,계약직,파트
 	private WorkType workType; //SI, SM
-
-	private Integer displayPriceMin;
-	private Integer displayPriceMax;
-	
-	private String umm; //필수사항
-	private String um; //우대사항? 스킬셋
-	private String um1; //1월초부터.... 몇개월 단위.
-	
-	private String jobInfomation; //직무정보 소개
-	private String jobEtcInfomation; //직무부가 정보
-	
-	private String secretMemo;
 	
 	private SidoType workSido;
 	private SiGunGuType workSiGunGu;
 	private String workDetailAddr;
 	
+	
+	private String jobPositionName;
+	private String jobPositionInfo; //직무 & 근무 정보 소개
+	
+	//개발
+	//웹개발
 
+	
+	private String secretMemo;
+	
+	
+	///////////// 파견 직무는 여기까지만 있으면 된다.///////////////////////////////
+	
+	
+	/**
+	 * 직무 요건 + 채용 공고
+	 */
+	private RecruitType recruitType; // 정규직,계약직,프리
+	
+	private String recruitNoticeName; //공고명
+
+	private JobPositionStatus status;
+	
+	private String officeWorkYn; //상주 근무가능여부
+	private String officeHomeWorkYn;	//반상주 가능여부
+	private String homeWorkYn;	//재택 가능 여부
+
+	private AcademicLevel needAcademicLevel;
+	private Integer needFreeGradeValue;	//FreelancerGrade 참고!!!!  0일 경우 경력으로 구분
+	private Integer needWorkYear;		//필요 경력 
+	
+	private RecruitContractUnitType recruitContractUnitType;	//연 - 월 계약 타입
+	private int recruitContractUnitValue;	//계약 단위
+	
+	private Integer displayPriceMin;	
+	private Integer displayPriceMax;
+	
+	private int recruitManCount;	//채용 명수
+	
+
+	private String jobEtcInfomation; //채용조건 부가 정보
+	
 	private Date registerYmdt;
 	private String resiterManagerId;
 }
