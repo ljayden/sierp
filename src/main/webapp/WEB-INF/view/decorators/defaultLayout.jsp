@@ -21,6 +21,25 @@
     <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css?${scriptCachedate}" />
     <link rel="stylesheet" type="text/css" href="/share/css/offcanvas.css?${scriptCachedate}" />
 
+    <script src="/share/js/jquery/jquery-1.12.3.min.js?${scriptCachedate}"></script>
+    <script src="/share/js/jquery/jquery.scrollbar.min.js?${scriptCachedate}"></script>
+    <script src="/share/js/jquery/jquery.form.js?${scriptCachedate}"></script>
+    <script src="/share/js/jquery/jquery.serializejson.js?${scriptCachedate}"></script>
+    
+    <!-- script src="/share/js/lib/backbone.js?${scriptCachedate}"></script -->
+    <script src="/share/js/lib/ie8Compatibility.js?${scriptCachedate}"></script>
+    <script src="/share/js/lib/jscolor.js?${scriptCachedate}"></script>
+    <script src="/share/js/lib/json2.js?${scriptCachedate}"></script>
+    <script src="/share/js/lib/underscore.js?${scriptCachedate}"></script>
+    
+    <script src="/share/js/bootstrap.min.js?${scriptCachedate}"></script>
+    <script src="/share/js/common.js?${scriptCachedate}"></script>
+    <script src="/share/js/polyfill.js"></script>
+    <script src="/share/js/sample.js"></script>
+ 	<script src="/share/js/utils.js?${scriptCachedate}"></script>
+ 	
+    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
 </head>
 
 <body class="bg-light">
@@ -90,8 +109,9 @@
 		<nav class="nav nav-underline">
         	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">인재 관리</button>
         	<a class="nav-link <c:if test = "${subMenePath eq 'dashboard'}">active</c:if>" href="/resource/dashboard/main.do">Dashboard</a>
-        	<a class="nav-link <c:if test = "${subMenePath eq 'search'}">active</c:if>" href="/resource/search/main.do">프리랜서관리&nbsp;<span class="badge  badge badge-danger align-text-bottom">27</span></a>
-        	<a class="nav-link" href="#">인재풀 검색</a>
+        	<a class="nav-link <c:if test = "${subMenePath eq 'freelancer'}">active</c:if>" href="/resource/freelancer/main.do">프리랜서관리&nbsp;<span class="badge  badge badge-danger align-text-bottom">27</span></a>
+        	<a class="nav-link" <c:if test = "${subMenePath eq 'userPool'}">active</c:if>" href="/resource/userPool/main.do">인재풀 검색</a>
+        	<a class="nav-link" <c:if test = "${subMenePath eq 'employee'}">active</c:if>" href="/resource/employee/main.do">직원 관리</a>
       	</nav>
       	</c:if>
     	<c:if test = "${topMenuPath eq 'contract'}">
@@ -117,25 +137,6 @@
     
     <decorator:body/>
 
-    <script src="/share/js/jquery/jquery-1.12.3.min.js?${scriptCachedate}"></script>
-    <script src="/share/js/jquery/jquery.scrollbar.min.js?${scriptCachedate}"></script>
-    <script src="/share/js/jquery/jquery.form.js?${scriptCachedate}"></script>
-    <script src="/share/js/jquery/jquery.serializejson.js?${scriptCachedate}"></script>
-    
-    <!-- script src="/share/js/lib/backbone.js?${scriptCachedate}"></script -->
-    <script src="/share/js/lib/ie8Compatibility.js?${scriptCachedate}"></script>
-    <script src="/share/js/lib/jscolor.js?${scriptCachedate}"></script>
-    <script src="/share/js/lib/json2.js?${scriptCachedate}"></script>
-    <script src="/share/js/lib/underscore.js?${scriptCachedate}"></script>
-    
-    <script src="/share/js/bootstrap.min.js?${scriptCachedate}"></script>
-    <script src="/share/js/common.js?${scriptCachedate}"></script>
-    <script src="/share/js/polyfill.js"></script>
-    <script src="/share/js/sample.js"></script>
- 	<script src="/share/js/utils.js?${scriptCachedate}"></script>
- 	
-    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
-    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
     <script type="text/javascript">
     $(function () {
     	  'use strict'

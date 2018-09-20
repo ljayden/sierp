@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping(value = "/resource/dashboard")
-public class ResourceDashboardController {
+@RequestMapping(value = "/resource/userPool")
+public class ResourceUserPoolController {
 
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
-		return "resource/dashboard/main";
+		return "resource/userPool/main";
 	}
 }

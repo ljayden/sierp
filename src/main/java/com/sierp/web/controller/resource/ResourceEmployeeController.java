@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping(value = "/resource/search")
-public class ResourceSearchController {
+@RequestMapping(value = "/resource/employee")
+public class ResourceEmployeeController {
 
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String dashboard() {
-		return "resource/search/main";
+	public String main() {
+		return "resource/employee/main";
 	}
 }

@@ -21,9 +21,9 @@ public class CompanyDao {
 		return sql.selectList(MAPPER_NAMESPACE + "selectCompany", param);
 	}
 	
-	public Map<String, Object> selectCompanyByCode(String code) {
+	public Map<String, Object> selectCompanyBySeq(int companySeq) {
 		Map<String, Object> param = Maps.newHashMap();
-		param.put("companyCode", code);
-		return sql.selectOne(MAPPER_NAMESPACE + "selectCompanyByCode", param);
+		param.put("companySeq", companySeq);
+		return sql.selectOne(MAPPER_NAMESPACE + "selectCompanyBySeq", param);
 	}
 }

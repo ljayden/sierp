@@ -37,7 +37,7 @@
     	SELECT * FROM company
     </select>
     
-    <select id="selectCompanyByCode" parameterType="map">
-    	SELECT * FROM company WHERE company_code = #{companyCode}
+    <select id="selectCompanyBySeq" parameterType="map">
+    	SELECT * FROM company WHERE company_seq = #{companySeq}
     </select>
 </mapper>

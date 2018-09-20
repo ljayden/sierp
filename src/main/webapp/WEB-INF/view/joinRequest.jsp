@@ -13,28 +13,8 @@
 	<meta name="author" content="">
 	<link rel="icon" href="../../../../favicon.ico">
 	
-	<title>로그인</title>
+	<title>Floating labels example for Bootstrap</title>
 	
-	<script src="/share/js/jquery/jquery-1.12.3.min.js?${scriptCachedate}"></script>
-    <script src="/share/js/jquery/jquery.scrollbar.min.js?${scriptCachedate}"></script>
-    <script src="/share/js/jquery/jquery.form.js?${scriptCachedate}"></script>
-    <script src="/share/js/jquery/jquery.serializejson.js?${scriptCachedate}"></script>
-    
-    <!-- script src="/share/js/lib/backbone.js?${scriptCachedate}"></script -->
-    <script src="/share/js/lib/ie8Compatibility.js?${scriptCachedate}"></script>
-    <script src="/share/js/lib/jscolor.js?${scriptCachedate}"></script>
-    <script src="/share/js/lib/json2.js?${scriptCachedate}"></script>
-    <script src="/share/js/lib/underscore.js?${scriptCachedate}"></script>
-    
-    <script src="/share/js/bootstrap.min.js?${scriptCachedate}"></script>
-    <script src="/share/js/common.js?${scriptCachedate}"></script>
-    <script src="/share/js/polyfill.js"></script>
-    <script src="/share/js/sample.js"></script>
- 	<script src="/share/js/utils.js?${scriptCachedate}"></script>
- 	
-    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
-    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
-    
 	<!-- Bootstrap core CSS -->
 	<link href="/share/css/bootstrap.min.css" rel="stylesheet">
 	
@@ -43,19 +23,19 @@
 </head>
 
 <body>
-	<form class="form-signin" id="loginForm">
+	<form class="form-signin">
 	
 	<h1 class="h1 mb-3 font-weight-normal"><b>S</b>I <br><b>T</b>otal Management <b>S</b>olution</h1>
 	<br><br>
 		
 		<div class="form-label-group">
-		  <input type="email" id="managerId" name="managerId" class="form-control" placeholder="User Id" required autofocus>
-		  <label for="managerId">Manager Id</label>
+		  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+		  <label for="inputEmail">Email address</label>
 		</div>
 		
 		<div class="form-label-group">
-		  <input type="password" id="managerPassword" name="managerPassword" class="form-control" placeholder="Password" required>
-		  <label for="managerPassword">Password</label>
+		  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+		  <label for="inputPassword">Password</label>
 		</div>
 		
 		<div class="checkbox mb-3">
@@ -63,43 +43,16 @@
 		    <input type="checkbox" value="remember-me" id="rememberMe"> Remember me
 		  </label>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="button" id="loginBtn">Sign in</button><br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br>
 		<p class="mt-5 mb-3 text-muted text-right"><a href="https://caniuse.com/#feat=css-placeholder-shown">회원 가입</a></p>
 		<p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018 Nugal Corp. All Rights Reserved.</p>
 	</form>
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
-		//setCalendar();
-		//setGrid();
-		
-		$('#loginBtn').click(function() {
-			
-			var id = $('#managerId').val();
-			if (!id) {
-				alert('ID를 입력해 주세요');
-				return false;
-			}
-			
-			var pass = $('#managerPassword').val();
-			if (!pass) {
-				alert('패스워드를 입력해 주세요.');
-				return false;
-			}
-			
-			var formData = $('#loginForm').serialize()
-			COMMON.ajax({
-				method: 'post',
-				data : formData,
-				url: '/common/loginProc.json',
-				successHandler: function (data) {
-					 alert(data);
-				},
-				failHandler : function (code, message, result) {
-					alert(result.message); 
-				}
-			});
-		});
+		setCalendar();
+	
+		setGrid();
 	});
 	
 	function callAjaxSuccess(){
