@@ -58,8 +58,8 @@ public class DatabaseConfig {
     }
 	
     @Bean
-    public DataSource dataSource(HikariDataSource HikariDataSource) {
-    	return new LazyConnectionDataSourceProxy(HikariDataSource);
+    public DataSource dataSource(HikariDataSource hikariDataSource) {
+    	return new LazyConnectionDataSourceProxy(hikariDataSource);
     }
 
 

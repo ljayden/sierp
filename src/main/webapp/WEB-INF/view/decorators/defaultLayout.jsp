@@ -81,6 +81,9 @@
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="text" placeholder="검색" aria-label="검색">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<c:if test="${ not empty sessionScope.customerManager }">
+					&nbsp;&nbsp;<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" id="logoutBtn">Logout</button>
+				</c:if>
 			</form>
 		</div>
 	</nav>
@@ -139,12 +142,27 @@
 
     <script type="text/javascript">
     $(function () {
-    	  'use strict'
+		'use strict'
 
-    	  $('[data-toggle="offcanvas"]').on('click', function () {
-    	    $('.offcanvas-collapse').toggleClass('open')
-    	  })
+    	$('[data-toggle="offcanvas"]').on('click', function () {
+    		$('.offcanvas-collapse').toggleClass('open')
+    	})
     	  
+ 		$('#logoutBtn').click(function() {
+ 
+			var formData = $('#loginForm').serialize()
+			COMMON.ajax({
+				method: 'post',
+				data : formData,
+				url: '/logoutProc.json',
+				successHandler: function (data) {
+					location.href = '/login.do';
+				},
+				failHandler : function (code, message, result) {
+					alert(result.message); 
+				}
+			});
+		});
     	  
     })
     </script>

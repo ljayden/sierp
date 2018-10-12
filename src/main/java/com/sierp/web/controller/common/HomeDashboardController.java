@@ -1,4 +1,4 @@
-package com.sierp.web.controller.main;
+package com.sierp.web.controller.common;
 
 
 import org.springframework.stereotype.Controller;

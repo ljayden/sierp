@@ -37,6 +37,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.google.common.collect.Lists;
+import com.sierp.web.component.AuthInterceptor;
 import com.sierp.web.component.GlobalInterceptor;
 
 /**
@@ -80,9 +81,13 @@ public class WebServletConfig extends WebMvcConfigurerAdapter {
 	@Autowired
     private GlobalInterceptor globalInterceptor;
 
+	@Autowired
+	private AuthInterceptor authInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(globalInterceptor).excludePathPatterns("/**/*.err");
+		registry.addInterceptor(globalInterceptor).excludePathPatterns("/**/*.err", "/login.do");
+		registry.addInterceptor(authInterceptor).excludePathPatterns("/**/*.err", "/loginProc.json");
 	}
 
 	@Override

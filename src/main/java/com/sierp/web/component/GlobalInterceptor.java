@@ -3,19 +3,21 @@ package com.sierp.web.component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 @Component
+@Slf4j
 public class GlobalInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		
 		setMenuPath(request);
-		
-		System.out.println(request.getAttribute("topMenuPath"));
-		System.out.println(request.getAttribute("subMenuPath"));
+
+		log.debug("Top menu path={}, Sub menu Path={}", request.getAttribute("topMenuPath"), request.getAttribute("subMenuPath"));
 		return true;
 	}
 	

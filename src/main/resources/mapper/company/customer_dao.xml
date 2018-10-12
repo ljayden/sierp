@@ -6,7 +6,15 @@
     	SELECT * FROM customer
     </select>
     
-    <select id="selectCustomerByCode" parameterType="map">
+    <select id="selectCustomerByCode" parameterType="map" resultType="com.sierp.web.domain.company.model.Customer">
     	SELECT * FROM customer WHERE customer_code = #{customerCode}
     </select>
+
+    <select id="selectCustomerManagerByIdPassword" parameterType="map" resultType="com.sierp.web.domain.company.model.CustomerManager">
+    	SELECT * FROM customer_manager 
+    	WHERE customer_code = #{customerCode}
+    	AND	  id = #{id}
+    	AND   password = #{password}
+    </select>
+
 </mapper>

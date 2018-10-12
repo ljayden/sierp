@@ -91,9 +91,9 @@
 			COMMON.ajax({
 				method: 'post',
 				data : formData,
-				url: '/common/loginProc.json',
+				url: '/loginProc.json',
 				successHandler: function (data) {
-					 alert(data);
+					location.href = '/home/dashboard/main.do';
 				},
 				failHandler : function (code, message, result) {
 					alert(result.message); 
