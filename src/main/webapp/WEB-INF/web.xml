@@ -7,7 +7,13 @@
 	<welcome-file-list>
 		<welcome-file>login.do</welcome-file>
 	</welcome-file-list>
-
+	
+    <jsp-config>
+    <taglib>
+         <taglib-uri>myTags</taglib-uri>
+         <taglib-location>/WEB-INF/tld/selectOptionsEnum.tld</taglib-location>
+    </taglib>
+    </jsp-config>
 	<!-- error handler -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

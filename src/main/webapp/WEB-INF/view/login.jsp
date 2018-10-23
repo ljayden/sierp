@@ -49,12 +49,12 @@
 	<br><br>
 		
 		<div class="form-label-group">
-		  <input type="email" id="managerId" name="managerId" class="form-control" placeholder="User Id" required autofocus>
+		  <input type="email" id="managerId" name="managerId" value="demouser" class="form-control" placeholder="User Id" required autofocus>
 		  <label for="managerId">Manager Id</label>
 		</div>
 		
 		<div class="form-label-group">
-		  <input type="password" id="managerPassword" name="managerPassword" class="form-control" placeholder="Password" required>
+		  <input type="password" id="managerPassword" name="managerPassword" value="1234" class="form-control" placeholder="Password" required>
 		  <label for="managerPassword">Password</label>
 		</div>
 		

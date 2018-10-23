@@ -14,4 +14,10 @@ public class ResourceFreeLancerController {
 	public String main() {
 		return "resource/freelancer/main";
 	}
+	
+	@RequestMapping(value = "/registFreelancer", method = RequestMethod.GET)
+	public String registFreelancer() {
+		return "resource/freelancer/registFreelancer";
+	}
+	
 }

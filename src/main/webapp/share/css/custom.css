@@ -1,0 +1,30 @@
+.w40 {
+  width: 40px;
+}
+
+.w100 {
+  width: 100px;
+}
+
+.w200 {
+  width: 200px;
+}
+
+.w400 {
+  width: 400px;
+}
+
+.w600 {
+  width: 600px;
+}
+
+
+.container {
+  max-width: 960px;
+}
+
+.lh-condensed { line-height: 1.25; }
+
+.custom-control-label-sm {
+	font-size: .92rem;
+}

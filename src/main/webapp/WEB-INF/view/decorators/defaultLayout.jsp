@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css?${scriptCachedate}" />
     <link rel="stylesheet" type="text/css" href="/share/css/offcanvas.css?${scriptCachedate}" />
+    <link rel="stylesheet" type="text/css" href="/share/css/custom.css?${scriptCachedate}" />
 
     <script src="/share/js/jquery/jquery-1.12.3.min.js?${scriptCachedate}"></script>
     <script src="/share/js/jquery/jquery.scrollbar.min.js?${scriptCachedate}"></script>
@@ -45,7 +46,7 @@
 <body class="bg-light">
 
 	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-		<a class="navbar-brand mr-auto mr-lg-0" href="#"><b>디와이즈</b></a>
+		<a class="navbar-brand mr-auto mr-lg-0" href="#"><b>${ sessionScope.customer.customerName}</b></a>
 		<button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -93,17 +94,17 @@
     	<c:if test = "${topMenuPath eq 'home'}">
 		<nav class="nav nav-underline">
         	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">Home</button>
-        	<a class="nav-link <c:if test = "${subMenePath eq 'dashboard'}">active</c:if>" href="#">Dashboard</a>
-        	<a class="nav-link <c:if test = "${subMenePath eq 'search'}">active</c:if>" href="#">주간<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-        	<a class="nav-link " href="#">계약 만료</a>
-        	<a class="nav-link " href="#">관리</a>
+        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="#">Dashboard</a>
+        	<a class="nav-link" <c:if test = "${subMenePath eq 'search'}">style="font-weight: bold"</c:if> href="#">주간<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+        	<a class="nav-link" href="#">계약 만료</a>
+        	<a class="nav-link" href="#">관리</a>
       	</nav>
       	</c:if>
     	<c:if test = "${topMenuPath eq 'project'}">
 		<nav class="nav nav-underline">
         	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">프로젝트 관리</button>
-        	<a class="nav-link <c:if test = "${subMenePath eq 'dashboard'}">active</c:if>" href="/project/dashboard/main.do">Dashboard</a>
-        	<a class="nav-link <c:if test = "${subMenePath eq 'search'}">active</c:if>" href="/project/search/main.do">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/project/dashboard/main.do">Dashboard</a>
+        	<a class="nav-link" <c:if test = "${subMenePath eq 'search'}">style="font-weight: bold"</c:if> href="/project/search/main.do">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
         	<a class="nav-link" href="#">등록</a>
         	<a class="nav-link" href="#">관리</a>
       	</nav>
@@ -111,10 +112,10 @@
     	<c:if test = "${topMenuPath eq 'resource'}">
 		<nav class="nav nav-underline">
         	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">인재 관리</button>
-        	<a class="nav-link <c:if test = "${subMenePath eq 'dashboard'}">active</c:if>" href="/resource/dashboard/main.do">Dashboard</a>
-        	<a class="nav-link <c:if test = "${subMenePath eq 'freelancer'}">active</c:if>" href="/resource/freelancer/main.do">프리랜서관리&nbsp;<span class="badge  badge badge-danger align-text-bottom">27</span></a>
-        	<a class="nav-link" <c:if test = "${subMenePath eq 'userPool'}">active</c:if>" href="/resource/userPool/main.do">인재풀 검색</a>
-        	<a class="nav-link" <c:if test = "${subMenePath eq 'employee'}">active</c:if>" href="/resource/employee/main.do">직원 관리</a>
+        	<a class="nav-link" <c:if test = "${subMenuPath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/resource/dashboard/main.do">Dashboard</a>
+        	<a class="nav-link" <c:if test = "${subMenuPath eq 'freelancer'}">style="font-weight: bold"</c:if> href="/resource/freelancer/main.do">프리랜서관리&nbsp;<span class="badge  badge badge-danger align-text-bottom">27</span></a>
+        	<a class="nav-link" <c:if test = "${subMenuPath eq 'userPool'}">style="font-weight: bold"</c:if> href="/resource/userPool/main.do">인재풀 검색</a>
+        	<a class="nav-link" <c:if test = "${subMenuPath eq 'employee'}">style="font-weight: bold"</c:if> href="/resource/employee/main.do">직원 관리</a>
       	</nav>
       	</c:if>
     	<c:if test = "${topMenuPath eq 'contract'}">

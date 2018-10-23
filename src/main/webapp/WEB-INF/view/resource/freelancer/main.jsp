@@ -14,7 +14,7 @@
 		<div style="" id="searchInputTap">
 			<div class="input-group input-group-sm mb-3">
 			 	<div class="input-group-prepend">
-			    	<label class="input-group-text" for="inputGroupSelect01">계약 상태</label>
+			    	<label class="input-group-text" for="inputGroupSelect01">계약상태</label>
 			  	</div>
 				<select class="custom-select custom-select-sm" id="inputGroupSelect01">
 				    <option selected>전체</option>
@@ -59,7 +59,7 @@
   		<div style="text-align: right"><button type="button" class="btn btn-outline-secondary btn-sm">검색 조건 닫기</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">조회</button></div>
   	</div>
   	
-  	<button type="button" class="btn btn-success btn-sm " >프리랜서 등록하기</button>
+  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/resource/freelancer/registFreelancer.do'">프리랜서 등록하기</button>
   	
   	<div style="height: 6px;"></div>
 	<table class="table h3 small text-center">

@@ -31,16 +31,17 @@ public class Worker {
 	private String email;
 	private String phoneNo;
 	
-	private String birthYear;
-	private String birthMonthDay;
+	private int birthYear;
+	private Integer birthMonth;
+	private Integer birthDay;
 	private String sex;
 	
 	private WorkerExpertType workerExpertType;
 	
 	/**등급 산정 기준 */
 	private AcademicLevel academicLevel;
-	private int startWorkYear;
-	private int startWorkMonth;
+	private Integer startWorkYear;
+	private Integer startWorkMonth;
 	
 	
 	private SidoType sido;
