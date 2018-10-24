@@ -152,7 +152,7 @@
 			</div>
 		</div>
 		<div class="mb-3" style="text-align: right">
-			<button type="button" class="btn btn-info btn-sm">설정하기</button>
+			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal" id="myInput">설정하기</button>
 		</div>
 		
         <hr class="mb-4">
@@ -252,20 +252,16 @@
         <div class="row">
         	<div class="col-md-6 mb-3">
 	           	<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" id="customCheckboxInline1" name="customCheckboxInline1" class="custom-control-input">
+					<input type="checkbox" id="customCheckboxInline1" name="customCheckboxInline1" class="custom-control-input" checked="checked">
 					<label class="custom-control-label custom-control-label-sm" for="customCheckboxInline1">상주</label>
 				</div>
 				<div class="custom-control custom-checkbox custom-control-inline">
-			 		<input type="checkbox" id="customCheckboxInline2" name="customCheckboxInline1" class="custom-control-input">
+			 		<input type="checkbox" id="customCheckboxInline2" name="customCheckboxInline1" class="custom-control-input" checked="checked">
 			 		<label class="custom-control-label custom-control-label-sm"  for="customCheckboxInline2">반상주</label>
 				</div>
 				<div class="custom-control custom-checkbox custom-control-inline">
-			 		<input type="checkbox" id="customCheckboxInline3" name="customCheckboxInline1" class="custom-control-input">
+			 		<input type="checkbox" id="customCheckboxInline3" name="customCheckboxInline1" class="custom-control-input" checked="checked">
 			 		<label class="custom-control-label custom-control-label-sm"  for="customCheckboxInline3">재택</label>
-				</div>
-				<div class="custom-control custom-checkbox custom-control-inline">
-			 		<input type="checkbox" id="customCheckboxInline4" name="customCheckboxInline1" class="custom-control-input" checked="checked">
-			 		<label class="custom-control-label custom-control-label-sm"  for="customCheckboxInline4">무관</label>
 				</div>
         	</div>
         	<div class="col-md-6 mb-3">
@@ -280,10 +276,6 @@
 				<div class="custom-control custom-checkbox custom-control-inline">
 			 		<input type="checkbox" id="customCheckboxInline23" name="customCheckboxInline22" class="custom-control-input">
 			 		<label class="custom-control-label custom-control-label-sm"  for="customCheckboxInline23">단기 알바</label>
-				</div>
-				<div class="custom-control custom-checkbox custom-control-inline">
-			 		<input type="checkbox" id="customCheckboxInline24" name="customCheckboxInline22" class="custom-control-input" checked="checked">
-			 		<label class="custom-control-label custom-control-label-sm"  for="customCheckboxInline24">무관</label>
 				</div>
         	</div>
         </div>
@@ -300,7 +292,79 @@
 		</div>
   	</form>
   	</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">10</span>
+        </button>
+      </div>
+<div class="modal-body">
+바디다
+<!-- <div class="accordion" id="accordionExample"> -->
+<!-- 	<div class="card"> -->
+<!--     	<div class="card-header" id="headingOne"> -->
+<!--       		<h5 class="mb-0"> -->
+<!--         	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> -->
+<!--           	Collapsible Group Item #1 -->
+<!--         	</button> -->
+<!--       		</h5> -->
+<!--     	</div> -->
+
+<!--     	<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample"> -->
+<!--       	<div class="card-body"> -->
+<!--         	내용 -->
+<!--       	</div> -->
+<!--     	</div> -->
+<!--   </div> -->
+<!--   <div class="card"> -->
+<!--     <div class="card-header" id="headingTwo"> -->
+<!--       <h5 class="mb-0"> -->
+<!--         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> -->
+<!--           Collapsible Group Item #2 -->
+<!--         </button> -->
+<!--       </h5> -->
+<!--     </div> -->
+<!--     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample"> -->
+<!--       <div class="card-body"> -->
+<!--         Anim od tr w denim aestheti  -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!--   <div class="card"> -->
+<!--     <div class="card-header" id="headingThree"> -->
+<!--       <h5 class="mb-0"> -->
+<!--         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> -->
+<!--           Collapsible Group Item #3 -->
+<!--         </button> -->
+<!--       </h5> -->
+<!--     </div> -->
+<!--     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample"> -->
+<!--       <div class="card-body"> -->
+<!--         sap ore sustainable VHS. -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div>  	 -->
+
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </main>
+
 
 <script>
 (function() {
@@ -316,6 +380,12 @@
 	        form.classList.add('was-validated');
 	      }, false);
 	    });
+	    
+	    $('#exampleModal').on('shown.bs.modal', function () {
+	    	  $('#myInput').trigger('focus')
+	    })
+	    
+	    
 	  }, false);
 	})();
 </script>
