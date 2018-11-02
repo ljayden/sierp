@@ -26,6 +26,18 @@ version="2.0">
 		<name>emptyValueName</name>
 		<required>false</required>
 		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>optionNamePrefix</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>optionNameSuffix</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
 	</attribute> 
 </tag>
 

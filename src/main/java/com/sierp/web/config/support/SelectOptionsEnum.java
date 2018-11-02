@@ -28,7 +28,10 @@ public class SelectOptionsEnum extends SimpleTagSupport {
 	@Getter @Setter private String enumClass;
 	@Getter @Setter private String selectedValue;
 	@Getter @Setter private String emptyValueName;
-
+	@Getter @Setter private String optionNamePrefix;
+	@Getter @Setter private String optionNameSuffix;
+	
+	
 	Map<String, Class<?>> enumClassPathMap = Maps.newHashMap();
 	 
  
@@ -105,7 +108,15 @@ public class SelectOptionsEnum extends SimpleTagSupport {
 			if (targetEnum.toString().equals(selectedValue)) {
 				outputHtml.append("selected");
 			}
-			outputHtml.append(">" + EnumUtils.getDescriptionByName(clz, targetEnum.toString()) + "</option>");
+			outputHtml.append(">");
+			if (StringUtils.isNotEmpty(optionNamePrefix)) {
+				outputHtml.append(optionNamePrefix);
+			}
+			outputHtml.append(EnumUtils.getDescriptionByName(clz, targetEnum.toString()));
+			if (StringUtils.isNotEmpty(optionNameSuffix)) {
+				outputHtml.append(optionNameSuffix);
+			}
+			outputHtml.append("</option>");
 		}
  
 		return outputHtml.toString();

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="mt" uri="myTags" %>
 
 <head>
 	
@@ -12,51 +13,85 @@
 
 	<div class="my-3 p-3 bg-white rounded shadow-sm">
 		<div style="" id="searchInputTap">
-			<div class="input-group input-group-sm mb-3">
-			 	<div class="input-group-prepend">
-			    	<label class="input-group-text" for="inputGroupSelect01">계약상태</label>
-			  	</div>
-				<select class="custom-select custom-select-sm" id="inputGroupSelect01">
-				    <option selected>전체</option>
-				    <option value="1">계약</option>
-				    <option value="2">계약 진행중</option>
-				    <option value="3">없음</option>
-			  	</select>
+			
+			<div class="row">
+				<div class="input-group input-group-sm col-md-4 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text" id="inputGroup-sizing-sm">이름</span>
+			  		</div>
+			  		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group input-group-sm col-md-2 mb-3"></div>
+				<div class="input-group input-group-sm col-md-3 mb-3">
+					<div class="input-group-prepend">
+				    	<label class="input-group-text input-group-text-sm" for="inputGroupSelect01">전문 영역</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="inputGroupSelect01">
+					    <option selected>전체</option>
+					    <option value="1">개발자</option>
+					    <option value="2">퍼블리셔</option>
+					    <option value="3">기획</option>
+				  	</select>
+				</div>
 			</div>
-			<div class="input-group input-group-sm mb-3">
-				<div class="input-group-prepend">
-			    <span class="input-group-text" id="inputGroup-sizing-sm">이름검색 </span>
-			  	</div>
-			  	<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+			<div class="row">
+				
+				<div class="input-group input-group-sm col-md-3 mb-3">
+					<div class="input-group-prepend">
+				    	<label class="input-group-text" for="inputGroupSelect01">등급구분</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="inputGroupSelect01">
+						<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="전체"/>
+				  	</select>
+				</div>
+				
+				<div class="input-group input-group-sm col-md-3 mb-3">
+					<div class="input-group-prepend">
+				    	<label class="input-group-text" for="inputGroupSelect01">경력연차</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="inputGroupSelect01">
+						<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="전체"/>
+				  	</select>
+				</div>
+				
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
+				    	<label class="input-group-text" for="inputGroupSelect01">학력</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="inputGroupSelect01">
+						<mt:enumOptions enumClass="AcademicLevel" emptyValueName="전체" optionNameSuffix=" 이상"/>
+				  	</select>
+					<select class="custom-select custom-select-sm" id="inputGroupSelect01">
+						<mt:enumOptions enumClass="AcademicLevel" emptyValueName="전체" optionNameSuffix=" 이하"/>
+				  	</select>
+				</div>
 			</div>
-		 	<div class="input-group input-group-sm mb-3">
-			 	<div class="input-group-prepend">
-			    	<label class="input-group-text" for="inputGroupSelect01">등급구분</label>
-			  	</div>
-				<select class="custom-select custom-select-sm" id="inputGroupSelect01">
-				    <option selected>전체</option>
-				    <option value="1">초급</option>
-				    <option value="2">중급</option>
-				    <option value="3">고급</option>
-				    <option value="3">전체</option>
-			  	</select>
-			 	<div class="input-group-prepend">
-			    	<label class="input-group-text" for="inputGroupSelect01">전문 영역</label>
-			  	</div>
-				<select class="custom-select custom-select-sm" id="inputGroupSelect01">
-				    <option selected>전체</option>
-				    <option value="1">개발자</option>
-				    <option value="2">퍼블리셔</option>
-				    <option value="3">기획</option>
-			  	</select>
+			
+			<div class="row">
+				<div class="input-group input-group-sm col-md-3 mb-3">
+				 	<div class="input-group-prepend">
+				    	<label class="input-group-text" for="inputGroupSelect01">계약상태</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="inputGroupSelect01">
+				    	<option selected>전체</option>
+				    	<option value="1">계약</option>
+				    	<option value="2">계약 진행중</option>
+				    	<option value="3">없음</option>
+			  		</select>
+				</div>
 			</div>
-	
+			
+
+ 
 			<div class="form-group form-check form-check-sm">
 			    <input type="checkbox" class="form-check-input form-check-input-sm" id="exampleCheck1">
 			    <label class="form-check-label form-check-label-sm" for="exampleCheck1">구직 거절 제외하고 보기</label>
 	  		</div>
   		</div>
-  		<div style="text-align: right"><button type="button" class="btn btn-outline-secondary btn-sm">검색 조건 닫기</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">조회</button></div>
+  		<div style="text-align: right"><button type="button" class="btn btn-outline-secondary btn-sm">상세 검색 닫기</button></div>
+  	</div>
+  	<div style="text-align: right">
+  		<button type="button" class="btn btn-primary btn-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
   	</div>
   	
   	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/resource/freelancer/registFreelancer.do'">프리랜서 등록하기</button>

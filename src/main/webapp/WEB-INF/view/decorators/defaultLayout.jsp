@@ -18,7 +18,7 @@
 
     <meta name="apple-mobile-web-app-title" content="Si Total management Solution">
 
-    <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css?${scriptCachedate}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/share/css/offcanvas.css?${scriptCachedate}" />
     <link rel="stylesheet" type="text/css" href="/share/css/custom.css?${scriptCachedate}" />
 
@@ -33,17 +33,18 @@
     <script src="/share/js/lib/json2.js?${scriptCachedate}"></script>
     <script src="/share/js/lib/underscore.js?${scriptCachedate}"></script>
     
-    <script src="/share/js/bootstrap.min.js?${scriptCachedate}"></script>
+ 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
     <script src="/share/js/common.js?${scriptCachedate}"></script>
     <script src="/share/js/polyfill.js"></script>
     <script src="/share/js/sample.js"></script>
  	<script src="/share/js/utils.js?${scriptCachedate}"></script>
  	
-    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
-    <script src="http://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" style="margin-right: -17px;"> <!-- margin 이유 모달창때 스크롤 잇으면 17이 붙더라.. -->
 
 	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
 		<a class="navbar-brand mr-auto mr-lg-0" href="#"><b>${ sessionScope.customer.customerName}</b></a>

@@ -105,9 +105,9 @@
 	        </div>
 		</div>
 		<div class="form-row">
-			<div class="form-group col-md-5 mb-3">
+			<div class="form-group col-md-3 mb-3">
 				<div class="form-row">
-						<div class="form-group col-md-5 mb-3">
+						<div class="form-group col-md-7 mb-3">
 						<label for="" class="col-form-label-sm">경력 시작일</label>
 						<select class="custom-select custom-select-sm d-block " id="" required>
 							<option value="">년도 선택</option>
@@ -118,9 +118,9 @@
 						</select>
 						<div class="invalid-feedback">경력 시작 년도를 선택해 주세요.</div>
 					</div>
-					<div class="form-group col-md-7 mb-3">
+					<div class="form-group col-md-5 mb-3">
 						<label for="" class="col-form-label-sm">&nbsp;</label>
-						<select class="custom-select custom-select-sm d-block w-50" id="" required>
+						<select class="custom-select custom-select-sm d-block" id="" required>
 							<option value="">월 선택</option>
 						    <c:forEach var="month" begin="1" end="12" step="1">
 						    	<option value="${ month }">${ month }</option>
@@ -130,6 +130,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="form-group col-md-2 mb-3"></div>
 			<div class="form-group col-md-2 mb-3">
 				<label for="" class="col-form-label-sm">학력</label>
                 <select class="custom-select custom-select-sm d-block w-100" id="" required>
@@ -146,49 +147,53 @@
 		
 		<hr class="mb-4">
 		<h6><b>자격 사항</b></h6>
-       	<div class="mb-3 input-group">
-       		<div class="card  small border-info m-1">
-	  			<div class="card-body text-info"  style="padding: 0.40rem">
-    				<p class="card-text">정보처리기사<button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-  				</div>
-			</div>
-       		<div class="card  small border-info m-1">
-	  			<div class="card-body text-info"  style="padding: 0.40rem">
-    				<p class="card-text">Oracle-Master<button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-  				</div>
+       	<div class="mb-3">
+       		<div class="card card-sm" style="background-color: #F7F7F7">
+	  			<div class="card-body" style="padding: 0.4rem;">
+			       	<button type="button" class="btn btn-outline-primary btn-sm m-1" style="background-color: white;" disabled="disabled">정보처리기사</button>
+			       	<button type="button" class="btn btn-outline-primary btn-sm m-1" style="background-color: white;"disabled="disabled">CCOA</button>
+			       	<button type="button" class="btn btn-outline-primary btn-sm m-1" style="background-color: white;" disabled="disabled">NAP</button>
+			       	<button type="button" class="btn btn-outline-primary btn-sm m-1" style="background-color: white;" disabled="disabled">Oracle Master</button>
+	  			</div>
 			</div>
 		</div>
 		<div class="mb-3" style="text-align: right">
-			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#licenseConfModal" id="licenseConfModalBtn">설정하기</button>
+			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal" id="myInput">설정하기</button>
 		</div>
 		
 		<hr class="mb-4">
-		<h6><b>보유기술</b></h6>
+		<h6><b>자격 사항</b></h6>
        	<div class="mb-3 input-group">
        		<div class="card  small border-info m-1">
 	  			<div class="card-body text-info"  style="padding: 0.40rem">
-    				<p class="card-text">Java - 하<button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
+    				<p class="card-text">정보처리기사 - 하<button type="button" class="btn btn-outline-info btn-sm ml-3" style="margin: -3px"> &times;</button></p>
   				</div>
 			</div>
        		<div class="card  small border-info m-1">
 	  			<div class="card-body text-info"  style="padding: 0.40rem">
-    				<p class="card-text">Jasp - 중 <button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-  				</div>
-			</div>
-       		<div class="card  small border-info m-1">
-	  			<div class="card-body text-info"  style="padding: 0.40rem">
-    				<p class="card-text">Oracle - 중 <button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-  				</div>
-			</div>
-       		<div class="card  small border-info m-1">
-	  			<div class="card-body text-info"  style="padding: 0.40rem">
-    				<p class="card-text">JQuery - 중 <button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
+    				<p class="card-text">Oracle-DB - 중 <button type="button" class="btn btn-outline-info btn-sm ml-3" style="margin: -3px"> &times;</button></p>
   				</div>
 			</div>
 		</div>
-
 		<div class="mb-3" style="text-align: right">
-			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
+			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal" id="myInput">설정하기</button>
+		</div>
+		
+		
+        <hr class="mb-4">
+        <h6><b>보유 기술</b></h6>
+       	<div class="mb-3">
+       		<div class="card card-sm" style="background-color: #F7F7F7">
+	  			<div class="card-body" style="padding: 0.4rem;">
+		       	<button type="button" class="btn btn-outline-primary btn-sm" style="background-color: white;" disabled="disabled">Java</button>
+		       	<button type="button" class="btn btn-outline-primary btn-sm" style="background-color: white;"disabled="disabled">Jsp</button>
+		       	<button type="button" class="btn btn-outline-primary btn-sm" style="background-color: white;" disabled="disabled">Oracle</button>
+		       	<button type="button" class="btn btn-outline-primary btn-sm" style="background-color: white;" disabled="disabled">JQuery</button>
+	  			</div>
+			</div>
+		</div>
+		<div class="mb-3" style="text-align: right">
+			<button type="button" class="btn btn-info btn-sm">설정하기</button>
 		</div>
         <hr class="mb-4">
         <h6><b>경력 사항</b></h6>
@@ -214,7 +219,7 @@
         	<div class="form-group col-md-3 mb-3">
         		<div class="form-row">
         		    <div class="form-group col-md-10 mb-3">
-		        		<input type="text" class="form-control form-control-sm " id="username" placeholder="직장명"  disabled="disabled" value="농협은행">
+		        		<input type="text" class="form-control form-control-sm" id="username" placeholder="직장명"  disabled="disabled" value="농협은행">
 		        	</div>
 		        	<div class="form-group col-md-2 mb-3">
 		        		<button type="button" class="btn btn-outline-dark btn-sm btn-block"><strong>&times;</strong></button>
@@ -226,18 +231,18 @@
          	<div class="form-group col-md-9 mb-3">
          		<div class="form-row">
 					<div class="form-group input-group col-md-3 mb-3">
-		        		<input type="text" class="form-control form-control-sm small" id="" placeholder="" disabled="disabled" value="2012년">
-						<input type="text" class="form-control form-control-sm small" id="" placeholder="" disabled="disabled" value="06월">
+		        		<input type="text" class="form-control form-control-sm" id="" placeholder="" disabled="disabled" value="2012년">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" disabled="disabled" value="06월">
 		        	</div>	
 					<div class="form-group input-group col-md-3 mb-3">
- 						<input type="text" class="form-control form-control-sm small" id="" placeholder="" disabled="disabled" value="2015년">
-						<input type="text" class="form-control form-control-sm small" id="" placeholder="" disabled="disabled" value="09월">
+ 						<input type="text" class="form-control form-control-sm" id="" placeholder="" disabled="disabled" value="2015년">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" disabled="disabled" value="09월">
 		        	</div>	
 		        	<div class="form-group col-md-2 mb-3">
-		        		<input type="text" class="form-control form-control-sm small" id="username" placeholder="" disabled="disabled" value="정규직">
+		        		<input type="text" class="form-control form-control-sm" id="username" placeholder="" disabled="disabled" value="정규직">
 		        	</div>
 		        	<div class="form-group col-md-4 mb-3">
-		        		<input type="text" class="form-control form-control-sm small" id="username" placeholder="" disabled="disabled" value="메일서버 개발">
+		        		<input type="text" class="form-control form-control-sm" id="username" placeholder="" disabled="disabled" value="메일서버 개발">
 		        	</div>
          		</div>  
          	</div>
@@ -340,10 +345,6 @@
 				</div>
         	</div>
         </div>
-		<div class="mb-3"> 
-        	<label for="firstName" class="col-form-label-sm">담당자 메모</label>
-			<textarea class="form-control form-control-sm" aria-label="With textarea" rows="3"></textarea>
-		</div>
   		<br>
   		<br>
   		<div class="form-row">
@@ -352,234 +353,105 @@
 		  		<button class="btn btn-primary btn-md btn-block" type="submit">저장</button>
 		  	</div>
 		  	<div class="col-md-2 mb-3">
-		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/resource/freelancer/main.do'">취소</button>
+		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button">취소</button>
 		  	</div>
 		</div>
   	</form>
   	</div>
 
-
 <!-- Modal -->
-<div class="modal fade" id="licenseConfModal" tabindex="-1" role="dialog" aria-labelledby="licenseConfModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-    	<div class="modal-content">
-     		<div class="modal-header  text-white bg-info">
-        	<h5 class="modal-title" id="licenseConfModalLabel"><b>자격 사항 설정</b></h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      		</div>
-			
-			<div class="modal-body">
-				<div class="container-fluid">
-			       	<div class="mb-3 input-group">
-			       		<div class="card  small border-info m-1">
-				  			<div class="card-body text-info"  style="padding: 0.40rem">
-			    				<p class="card-text">정보처리기사<button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-			  				</div>
-						</div>
-			       		<div class="card  small border-info m-1">
-				  			<div class="card-body text-info"  style="padding: 0.40rem">
-			    				<p class="card-text">Oracle-Master<button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-			  				</div>
-						</div>
-					</div>
-					<br>
-    				<div class="row">
-      					<div class="col-md-12">
-							<div class="accordion small" id="accordionExample">
-								<div class="card">
-    								<div class="card-header" style="padding: .35rem .75rem;" id="headingOne">
-	      								<h5 class="mb-0">
-	        							<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-	          							개발관련 자격증
-	        							</button>
-	      								</h5>
-    								</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<div class="modal-body">
 
-    								<div id="collapseOne" class="collapse show p-2" aria-labelledby="headingOne" data-parent="#accordionExample">
-    									<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-	      								</div>
-    								</div>
-  								</div>
-  								<div class="card">
-	    							<div class="card-header" style="padding: .35rem .75rem;" id="headingTwo">
-	      								<h5 class="mb-0">
-						        		<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						          		디자인.퍼블리셔 관련 자격증
-						        		</button>
-						      			</h5>
-						    		</div>
-						    		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-						      			<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-						      			</div>
-						    		</div>
-					  			</div>
-					  			<div class="card">
-						    		<div class="card-header" style="padding: .35rem .75rem;" id="headingThree">
-						      			<h5 class="mb-0">
-						        		<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          		기획.영업 관련 자격증
-						        		</button>
-						      			</h5>
-						    		</div>
-						    		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-						      			<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-						      			</div>
-					    			</div>
-					  			</div>
-								<div class="card">
-						    		<div class="card-header" style="padding: .35rem .75rem;" id="headingThree">
-						      			<h5 class="mb-0">
-						        		<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-						          		업무.기타 관련 자격증
-						        		</button>
-						      			</h5>
-						    		</div>
-						    		<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-						      			<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-						      			</div>
-					    			</div>
-					  			</div>
-							</div>  	
-						</div> 
-    				</div>
-  		</div>
-
-			</div>
-    		<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
-        	<button type="button" class="btn btn-primary btn-sm">적용</button>
-      		</div>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">.col-md-4</div>
+      <div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 ml-auto">.col-md-3 .ml-auto</div>
+      <div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ml-auto">.col-md-6 .ml-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+        Level 1: .col-sm-9
+        <div class="row">
+          <div class="col-8 col-sm-6">
+            Level 2: .col-8 .col-sm-6
+          </div>
+          <div class="col-4 col-sm-6">
+            Level 2: .col-4 .col-sm-6
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+<div class="accordion small" id="accordionExample">
+	<div class="card">
+    	<div class="card-header" style="padding: .35rem .75rem;" id="headingOne">
+      		<h5 class="mb-0">
+        	<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          	Collapsible Group Item #1
+        	</button>
+      		</h5>
     	</div>
-  	</div>
+
+    	<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      	<div class="card-body" style="padding: .35rem .75rem;">
+        	내용
+      	</div>
+    	</div>
+  </div>
+  <div class="card">
+    <div class="card-header" style="padding: .35rem .75rem;" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body" style="padding: .35rem .75rem;">
+        Anim od tr w denim aestheti 
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" style="padding: .35rem .75rem;" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body" style="padding: .35rem .75rem;">
+        sap ore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>  	
+
 </div>
-
-
-
-<div class="modal fade" id="skillSetConfModal" tabindex="-1" role="dialog" aria-labelledby="skillSetConfModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-    	<div class="modal-content">
-     		<div class="modal-header  text-white bg-info">
-        	<h5 class="modal-title" id="skillSetConfModalLabel"><b>보유 기술  설정</b></h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      		</div>
-			
-			<div class="modal-body">
-				<div class="container-fluid">
-			       	<div class="mb-3 input-group">
-			       		<div class="card  small border-info m-1">
-				  			<div class="card-body text-info"  style="padding: 0.40rem">
-			    				<p class="card-text">Java - 하<button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-			  				</div>
-						</div>
-			       		<div class="card  small border-info m-1">
-				  			<div class="card-body text-info"  style="padding: 0.40rem">
-			    				<p class="card-text">Jasp - 중 <button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-			  				</div>
-						</div>
-			       		<div class="card  small border-info m-1">
-				  			<div class="card-body text-info"  style="padding: 0.40rem">
-			    				<p class="card-text">Oracle - 중 <button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-			  				</div>
-						</div>
-			       		<div class="card  small border-info m-1">
-				  			<div class="card-body text-info"  style="padding: 0.40rem">
-			    				<p class="card-text">JQuery - 중 <button type="button" class="btn btn-outline-info btn-sm ml-4" style="margin: -3px"> &times;</button></p>
-			  				</div>
-						</div>
-					</div>
-					<br>
-    				<div class="row">
-      					<div class="col-md-12">
-							<div class="accordion small" id="accordionExample">
-								<div class="card">
-    								<div class="card-header" style="padding: .35rem .75rem;" id="headingOne">
-	      								<h5 class="mb-0">
-	        							<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-	          							개발관련
-	        							</button>
-	      								</h5>
-    								</div>
-
-    								<div id="collapseOne" class="collapse show p-2" aria-labelledby="headingOne" data-parent="#accordionExample">
-    									<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-	      								</div>
-    								</div>
-  								</div>
-  								<div class="card">
-	    							<div class="card-header" style="padding: .35rem .75rem;" id="headingTwo">
-	      								<h5 class="mb-0">
-						        		<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						          		디자인.퍼블리셔 관련
-						        		</button>
-						      			</h5>
-						    		</div>
-						    		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-						      			<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-						      			</div>
-						    		</div>
-					  			</div>
-					  			<div class="card">
-						    		<div class="card-header" style="padding: .35rem .75rem;" id="headingThree">
-						      			<h5 class="mb-0">
-						        		<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          		기획.영업 관련
-						        		</button>
-						      			</h5>
-						    		</div>
-						    		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-						      			<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-						      			</div>
-					    			</div>
-					  			</div>
-								<div class="card">
-						    		<div class="card-header" style="padding: .35rem .75rem;" id="headingThree">
-						      			<h5 class="mb-0">
-						        		<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-						          		업무.기타 관련
-						        		</button>
-						      			</h5>
-						    		</div>
-						    		<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-						      			<div class="card-body" style="padding: .35rem .75rem;">
-	      									<button type="button" class="btn btn-outline-info btn-sm">정보처리기사</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">Oracle</button>
-	      									<button type="button" class="btn btn-outline-info btn-sm">CCNA</button>
-						      			</div>
-					    			</div>
-					  			</div>
-							</div>  	
-						</div> 
-    				</div>
-  		</div>
-
-			</div>
-    		<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
-        	<button type="button" class="btn btn-primary btn-sm">적용</button>
-      		</div>
-    	</div>
-  	</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -601,13 +473,10 @@
 	      }, false);
 	    });
 	    
-	    $('#licenseConfModal').on('shown.bs.modal', function () {
-	    	 $('#licenseConfModalBtn').trigger('focus');
+	    $('#exampleModal').on('shown.bs.modal', function () {
+	    	 $('#myInput').trigger('focus');
 	    })
 	    
-	    $('#skillSetConfModal').on('shown.bs.modal', function () {
-	    	 $('#skillSetConfModalBtn').trigger('focus');
-	    })
 	    
 	  }, false);
 	})();
