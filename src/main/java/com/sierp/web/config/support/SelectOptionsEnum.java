@@ -32,16 +32,10 @@ public class SelectOptionsEnum extends SimpleTagSupport {
 	@Getter @Setter private String optionNameSuffix;
 	
 	
-	Map<String, Class<?>> enumClassPathMap = Maps.newHashMap();
-	 
- 
-	public SelectOptionsEnum() {
-		init();
-	}
+	private static Map<String, Class<?>> enumClassPathMap = Maps.newHashMap();
 	
-    private void init() {
-    	
-    	try {
+	static {
+		try {
     		ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
             Resource[] commResource = patternResolver.getResources("classpath*:com/sierp/**");
      
@@ -61,7 +55,8 @@ public class SelectOptionsEnum extends SimpleTagSupport {
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
-    }
+	}
+
     
 	@SuppressWarnings("unchecked")
 	@Override

@@ -17,4 +17,11 @@
     	AND   password = #{password}
     </select>
 
+    <select id="selectCustomerManagerList" parameterType="map" resultType="com.sierp.web.domain.company.model.CustomerManager">
+    	SELECT * FROM customer_manager 
+    	WHERE customer_code = #{customerCode}
+    </select>
+    
+    
+
 </mapper>

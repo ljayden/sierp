@@ -58,23 +58,30 @@
 				<li class="nav-item <c:if test = "${topMenuPath eq 'home'}">active</c:if>">
 					<a class="nav-link" href="/home/dashboard/main.do"><b>Home</b><c:if test = "${topMenuPath eq 'home'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
-				<li class="nav-item <c:if test = "${topMenuPath eq 'project'}">active</c:if>">
-					<a class="nav-link" href="/project/dashboard/main.do"><b>프로젝트관리</b><c:if test = "${topMenuPath eq 'project'}"><span class="sr-only">(current)</span></c:if></a>
-				</li>
-				<li class="nav-item <c:if test = "${topMenuPath eq 'resource'}">active</c:if>">
-					<a class="nav-link" href="/resource/dashboard/main.do"><b>인재 관리</b><c:if test = "${topMenuPath eq 'resource'}"><span class="sr-only">(current)</span></c:if></a>
+				<li class="nav-item <c:if test = "${topMenuPath eq 'recruit'}">active</c:if>">
+					<a class="nav-link" href="/recruit/dashboard/main.do"><b>채용 관리</b><c:if test = "${topMenuPath eq 'recruit'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'contract'}">active</c:if>">
 					<a class="nav-link" href="/contract/dashboard/main.do"><b>계약관리</b><c:if test = "${topMenuPath eq 'contract'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
+				<li class="nav-item <c:if test = "${topMenuPath eq 'resource'}">active</c:if>">
+					<a class="nav-link" href="/resource/dashboard/main.do"><b>인재 관리</b><c:if test = "${topMenuPath eq 'resource'}"><span class="sr-only">(current)</span></c:if></a>
+				</li>
+				<li class="nav-item <c:if test = "${topMenuPath eq 'project'}">active</c:if>">
+					<a class="nav-link" href="/project/dashboard/main.do"><b>프로젝트관리</b><c:if test = "${topMenuPath eq 'project'}"><span class="sr-only">(current)</span></c:if></a>
+				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'business'}">active</c:if>">
-					<a class="nav-link" href="/business/dashboard/main.do"><b>영업관리</b><c:if test = "${topMenuPath eq 'business'}"><span class="sr-only">(current)</span></c:if></a>
+					<a class="nav-link" href="/business/company/main.do"><b>영업관리</b><c:if test = "${topMenuPath eq 'business'}"><span class="sr-only">(current)</span></c:if></a>
+				</li>
+				<li class="nav-item <c:if test = "${topMenuPath eq 'calander'}">active</c:if>">
+					<a class="nav-link" href="/calander/my/main.do"><b>일정관리</b><c:if test = "${topMenuPath eq 'calander'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="#">Manager관리</a>
-						<a class="dropdown-item" href="#">Another action</a>
+						<a class="dropdown-item" href="/settings/managerConf.do">Manager관리</a>
+						<a class="dropdown-item" href="/settings/dashboardConf.do">대쉬보드 관리</a>
+						<a class="dropdown-item" href="/settings/commonConf.do">설정</a>
 						<a class="dropdown-item" href="#">Something else here</a>
 					</div>
 				</li>
@@ -91,54 +98,78 @@
 	</nav>
     
 
-    <div class="nav-scroller bg-white shadow-sm">
+   
     	<c:if test = "${topMenuPath eq 'home'}">
-		<nav class="nav nav-underline">
-        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">Home</button>
-        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="#">Dashboard</a>
-        	<a class="nav-link" <c:if test = "${subMenePath eq 'search'}">style="font-weight: bold"</c:if> href="#">주간<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-        	<a class="nav-link" href="#">계약 만료</a>
-        	<a class="nav-link" href="#">관리</a>
-      	</nav>
+    	<div class="nav-scroller bg-white shadow-sm">
+			<nav class="nav nav-underline">
+	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">Home</button>
+	        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="#">Dashboard</a>
+	        	<a class="nav-link" <c:if test = "${subMenePath eq 'search'}">style="font-weight: bold"</c:if> href="#">주간<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link" href="#">계약 만료</a>
+	        	<a class="nav-link" href="#">관리</a>
+	      	</nav>
+	    </div>
       	</c:if>
-    	<c:if test = "${topMenuPath eq 'project'}">
-		<nav class="nav nav-underline">
-        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">프로젝트 관리</button>
-        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/project/dashboard/main.do">Dashboard</a>
-        	<a class="nav-link" <c:if test = "${subMenePath eq 'search'}">style="font-weight: bold"</c:if> href="/project/search/main.do">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-        	<a class="nav-link" href="#">등록</a>
-        	<a class="nav-link" href="#">관리</a>
-      	</nav>
+      	
+    	<c:if test = "${topMenuPath eq 'recruit'}">
+    	<div class="nav-scroller bg-white shadow-sm">	
+			<nav class="nav nav-underline">
+	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">채용 관리</button>
+	        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="#">Dashboard</a>
+	        	<a class="nav-link" href="#">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link" href="#">등록</a>
+	        	<a class="nav-link" href="#">관리</a>
+	      	</nav>
+      	</div>
       	</c:if>
-    	<c:if test = "${topMenuPath eq 'resource'}">
-		<nav class="nav nav-underline">
-        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">인재 관리</button>
-        	<a class="nav-link" <c:if test = "${subMenuPath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/resource/dashboard/main.do">Dashboard</a>
-        	<a class="nav-link" <c:if test = "${subMenuPath eq 'freelancer'}">style="font-weight: bold"</c:if> href="/resource/freelancer/main.do">프리랜서관리&nbsp;<span class="badge  badge badge-danger align-text-bottom">27</span></a>
-        	<a class="nav-link" <c:if test = "${subMenuPath eq 'userPool'}">style="font-weight: bold"</c:if> href="/resource/userPool/main.do">인재풀 검색</a>
-        	<a class="nav-link" <c:if test = "${subMenuPath eq 'employee'}">style="font-weight: bold"</c:if> href="/resource/employee/main.do">직원 관리</a>
-      	</nav>
-      	</c:if>
+      	
     	<c:if test = "${topMenuPath eq 'contract'}">
-		<nav class="nav nav-underline">
-        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">프로젝트 관리</button>
-        	<a class="nav-link" href="#">Dashboard</a>
-        	<a class="nav-link" href="#">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-        	<a class="nav-link" href="#">등록</a>
-        	<a class="nav-link" href="#">관리</a>
-      	</nav>
+    	<div class="nav-scroller bg-white shadow-sm">	
+			<nav class="nav nav-underline">
+	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">계약 관리</button>
+	        	<a class="nav-link" href="#">Dashboard</a>
+	        	<a class="nav-link" href="#">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link" href="#">등록</a>
+	        	<a class="nav-link" href="#">관리</a>
+	      	</nav>
+      	</div>
       	</c:if>
+      	
+    	<c:if test = "${topMenuPath eq 'resource'}">
+    	<div class="nav-scroller bg-white shadow-sm">
+			<nav class="nav nav-underline">
+	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">인재 관리</button>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/resource/dashboard/main.do">Dashboard</a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'freelancer'}">style="font-weight: bold"</c:if> href="/resource/freelancer/main.do">프리랜서관리&nbsp;<span class="badge  badge badge-danger align-text-bottom">27</span></a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'userPool'}">style="font-weight: bold"</c:if> href="/resource/userPool/main.do">인재풀 검색</a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'employee'}">style="font-weight: bold"</c:if> href="/resource/employee/main.do">직원 관리</a>
+	      	</nav>
+      	</div>
+      	</c:if>
+      	
+    	<c:if test = "${topMenuPath eq 'project'}">
+    	<div class="nav-scroller bg-white shadow-sm">
+			<nav class="nav nav-underline">
+	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">프로젝트 관리</button>
+	        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/project/dashboard/main.do">Dashboard</a>
+	        	<a class="nav-link" <c:if test = "${subMenePath eq 'search'}">style="font-weight: bold"</c:if> href="/project/search/main.do">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link" href="#">등록</a>
+	        	<a class="nav-link" href="#">관리</a>
+	      	</nav>
+      	</div>
+      	</c:if>
+      	
     	<c:if test = "${topMenuPath eq 'business'}">
-		<nav class="nav nav-underline">
-        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">프로젝트 관리</button>
-        	<a class="nav-link" href="#">Dashboard</a>
-        	<a class="nav-link" href="#">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-        	<a class="nav-link" href="#">등록</a>
-        	<a class="nav-link" href="#">관리</a>
-      	</nav>
+    	<div class="nav-scroller bg-white shadow-sm">
+			<nav class="nav nav-underline">
+	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">영업.업체 관리</button>
+	        	<a class="nav-link" href="#">업체관리</a>
+	        	<a class="nav-link" href="#">업체담당자<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link" href="#">영업관리</a>
+	    	</nav>
+	    </div>
       	</c:if>
-    </div>
-    
+      	
     
     <decorator:body/>
 

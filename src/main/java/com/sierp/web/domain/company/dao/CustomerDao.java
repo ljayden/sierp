@@ -37,4 +37,10 @@ public class CustomerDao {
 		param.put("password", password);
 		return sql.selectOne(MAPPER_NAMESPACE + "selectCustomerManagerByIdPassword", param);
 	}
+	
+	public List<CustomerManager> selectCustomerManagerList(String customerCode) {
+		Map<String, Object> param = Maps.newHashMap();
+		param.put("customerCode", customerCode);
+		return sql.selectList(MAPPER_NAMESPACE + "selectCustomerManagerList", param);
+	}
 }

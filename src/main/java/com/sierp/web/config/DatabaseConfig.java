@@ -77,11 +77,12 @@ public class DatabaseConfig {
 
 	   sqlSessionFactory.setConfigLocation(resourcePatternResolver.getResource("classpath:mybatis-config.xml"));
 	   sqlSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath*:mapper/**/*.xml"));
-
+	   
+	   
 	   TypeHandlerRegistry typeHandlerRegistry = sqlSessionFactory.getObject().getConfiguration().getTypeHandlerRegistry();
-	   typeHandlerRegistry.register(java.sql.Timestamp.class, org.apache.ibatis.type.DateTypeHandler.class);
-	   typeHandlerRegistry.register(java.sql.Time.class, org.apache.ibatis.type.DateTypeHandler.class);
-	   typeHandlerRegistry.register(java.sql.Date.class, org.apache.ibatis.type.DateTypeHandler.class);
+	   typeHandlerRegistry.register(java.sql.Timestamp.class, SqliteDateTypeHandler.class);
+	   typeHandlerRegistry.register(java.sql.Time.class, SqliteDateTypeHandler.class);
+	   typeHandlerRegistry.register(java.sql.Date.class, SqliteDateTypeHandler.class);
 	   return sqlSessionFactory.getObject();
    }
    

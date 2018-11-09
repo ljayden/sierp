@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.common.common_dao">
+
+    <select id="selectAdvantageList" parameterType="map" resultType="com.sierp.web.domain.common.model.Advantage">
+    	SELECT * FROM advantage
+    	WHERE 
+
+    	<if test="includeCommon">
+    		(customer_code = #{customerCode} OR customer_code = 'COMMON')
+    	</if>
+    	<if test="!includeCommon">
+    		customer_code = #{customerCode}
+    	</if>
+    	<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(advantageType)">
+    		AND advantage_type = #{advantageType}
+    	</if>
+    	<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(skillSetType)">
+    		AND skill_set_type = #{skillSetType} 
+    	</if>
+    	
+    </select>
+    
+   
+</mapper>

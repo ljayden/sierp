@@ -22,5 +22,5 @@ public class Company {
 	private String detailAddr;
 	
 	private Date registerYmdt;
-	private String resiterManagerId;
+	private String registerManagerId;
 }

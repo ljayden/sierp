@@ -36,8 +36,10 @@ var COMMON = {
         if (ajaxOption.form) {
             ajaxOption.url = ajaxOption.form.attr("action");
             ajaxOption.data = ajaxOption.form.serialize();
+        } else {
+            ajaxOption.headers['Content-Type'] = 'application/json';
         }
-
+        
         if (!ajaxOption.success) {
             ajaxOption.success = function (result, status) {
                 if (status == 'success') {
