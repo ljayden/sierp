@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.sierp.web.domain.common.service.LoginService;
+import com.sierp.web.result.JsonResults;
+import com.sierp.web.util.JacksonUtil;
 
 @Component
 @Slf4j
@@ -35,10 +37,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			
 		} else {
 			//로그인 안되어 있다면
-			if (!request.getRequestURI().contains("/login.do")) {
-				response.sendRedirect("/login.do");
-		        return false;
+			if (request.getRequestURI().endsWith("json")) {
+				
+				response.getWriter().write(JacksonUtil.toJson(JsonResults.fail(9000, "로그아웃 되었습니다.")));
+				return false;
+			} else {
+				if (!request.getRequestURI().contains("/login.do")) {
+					response.sendRedirect("/login.do");
+			        return false;
+				}
 			}
+
 		}
 		
 		return true;

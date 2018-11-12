@@ -51,18 +51,25 @@ var COMMON = {
                         }
 
                     } else {
+                    	if (result.code == 9000) {
+                    		alert('로그아웃 되었습니다.');
+                    		location.href = '/login.do';
+                    		//TO-DO 다음에는 다시 로그인 할수 있도록 기능제공
+                    		
+                    	} else {
+                            if (ajaxOption.failHandler && typeof(ajaxOption.failHandler) == 'function') {
 
-                        if (ajaxOption.failHandler && typeof(ajaxOption.failHandler) == 'function') {
-
-                            ajaxOption.failHandler(result.code, result.serverMessage, result);
-                        }
-                        else {
-                            if (COMMON.serverFailResponseProcessor && typeof(COMMON.serverFailResponseProcessor) == 'function') {
-                                COMMON.serverFailResponseProcessor(result.code, result.serverMessage, result);
-                            } else {
-                                COMMON.defaultServerFailResponseProcessor(result.code, result.serverMessage, result);
+                                ajaxOption.failHandler(result.code, result.serverMessage, result);
                             }
-                        }
+                            else {
+                                if (COMMON.serverFailResponseProcessor && typeof(COMMON.serverFailResponseProcessor) == 'function') {
+                                    COMMON.serverFailResponseProcessor(result.code, result.serverMessage, result);
+                                } else {
+                                    COMMON.defaultServerFailResponseProcessor(result.code, result.serverMessage, result);
+                                }
+                            }
+                    	}
+
                     }
 
                 } else {

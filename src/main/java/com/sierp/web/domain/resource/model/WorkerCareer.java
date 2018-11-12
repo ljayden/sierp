@@ -1,6 +1,6 @@
 package com.sierp.web.domain.resource.model;
 
-import java.util.Date;
+import com.sierp.web.domain.common.constant.RecruitType;
 
 import lombok.Data;
 
@@ -9,10 +9,13 @@ public class WorkerCareer {
 
 	private int workerSeq;
 	
-	private String position;
-	
-	private Date startPeriod;
-	private Date endPeriod;
+	private int workStartYear;
+	private int workStartMonth;
+	private Integer workEndYear;
+	private Integer workEndMonth;
 
-	private Date commnent;
+	private RecruitType recruitType;
+	private String jobDesc;
+	private String companyName;
+	
 }

@@ -3,6 +3,9 @@ package com.sierp.web.controller.resource.request;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
@@ -14,33 +17,33 @@ import lombok.Data;
 @Data
 public class FreelancerRegisterRequest {
 
-	private String name;
-	private String email;
+	@NotEmpty private String name;
+	@NotEmpty private String email;
 	private String phoneNo;
 	
-	private String gender;
+	@NotEmpty private String gender;
 	private Integer birthYear;
 	private Integer birthMonth;
 	private Integer birthDay;
 	
-	private SidoType sido;
-	private SiGunGuType sigungu;
+	@NotNull private SidoType sido;
+	@NotNull private SiGunGuType sigungu;
 	private String addrDetail;
 	
-	private WorkerExpertType expertType;
-	private int careerStartYear;
-	private Integer careerStartMonth;
-	private AcademicLevel academicLevel;
+	@NotNull private WorkerExpertType expertType;
+	@NotNull private int careerStartYear;
+	@NotNull private int careerStartMonth;
+	@NotNull private AcademicLevel academicLevel;
 	
 	private int hopeWorkPosiTypeVal;
 	private int hopeRecruitTypeVal;
 	
-	private String managerId;
+	@NotEmpty private String managerId;
 	private String customMemo;
 	
 	@Valid private List<FreelancerRegisterRequestCareer> careers;
 	private List<Integer> preferences;
 	private List<Integer> licenses;
 	
-//	param.skillSets = skillSets;
+	@Valid private List<FreelancerRegisterRequesSkill> skillSets;
 }

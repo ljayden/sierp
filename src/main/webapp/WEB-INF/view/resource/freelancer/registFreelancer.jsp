@@ -77,7 +77,7 @@
 		<div class="form-row">
 			<div class="form-group col-md-2 mb-3">
                 <label for="sido" class="col-form-label-sm">주소</label>
-                <select class="custom-select custom-select-sm d-block w-100" id="sido" required>
+                <select class="custom-select custom-select-sm d-block w-100" id="sido" required onchange="javascript: getSiGunGu();">
 				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
 			  	</select>
 			  	<div class="invalid-feedback" style="width: 100%;">시/도를 선택해 주세요.</div>
@@ -85,7 +85,8 @@
 			<div class="form-group col-md-3 mb-3">
                 <label for="sigungu" class="col-form-label-sm">&nbsp;</label>
                 <select class="custom-select custom-select-sm d-block w-100" id="sigungu" required>
-				    <mt:enumOptions enumClass="SiGunGuType" emptyValueName="시/군/구 "/>
+                	<option value="">시/도를 선택해 주세요.</option>
+<%-- 				    <mt:enumOptions enumClass="SiGunGuType" emptyValueName="시/도를 선택해 주세요."/> --%>
 			  	</select>
 			  	<div class="invalid-feedback" style="width: 100%;">시/군/구를 선택해 주세요.</div>
 			</div>
@@ -108,7 +109,7 @@
 				<div class="form-row">
 						<div class="form-group col-md-5 mb-3">
 						<label for="careerStartYear" class="col-form-label-sm">경력 시작일</label>
-						<select class="custom-select custom-select-sm d-block " id="careerStartYear" required>
+						<select class="custom-select custom-select-sm d-block " id="careerStartYear" required onchange="javascript: updateFreeGrade();">
 			                <c:forEach var="year" begin="1990" end="2017" step="1">
 								<c:if test="${ year eq 2012 }"><option value="${year}" selected="selected">${year}</option></c:if>
 							    <c:if test="${ year ne 2012 }"><option value="${year}">${year}</option></c:if>
@@ -118,7 +119,7 @@
 					</div>
 					<div class="form-group col-md-7 mb-3">
 						<label for="careerStartMonth" class="col-form-label-sm">&nbsp;</label>
-						<select class="custom-select custom-select-sm d-block w-50" id="careerStartMonth" required>
+						<select class="custom-select custom-select-sm d-block w-50" id="careerStartMonth" required  onchange="javascript: updateFreeGrade();">
 						    <c:forEach var="month" begin="1" end="12" step="1">
 						    	<option value="${ month }">${ month }</option>
 						    </c:forEach>
@@ -129,7 +130,7 @@
 			</div>
 			<div class="form-group col-md-2 mb-3">
 				<label for="academicLevel" class="col-form-label-sm">학력</label>
-                <select class="custom-select custom-select-sm d-block w-100" id="academicLevel" required>
+                <select class="custom-select custom-select-sm d-block w-100" id="academicLevel" required  onchange="javascript: updateFreeGrade();">
                 	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="선택"/>
                 </select>
                 <div class="invalid-feedback">학력을 선택해 주세요.</div>
@@ -137,7 +138,7 @@
 			
 			<div class="form-group col-md-5 mb-3">
 				<label for="" class="col-form-label-sm">산정 등급(경력 + 학력)</label>
-                <input type="text" class="form-control form-control-sm" id=""  value="" readonly="readonly">
+                <input type="text" class="form-control form-control-sm text-success" id="calcuFreeGrade"  value="" readonly="readonly">
 			</div>
 		</div>
 
@@ -189,13 +190,13 @@
 		        	</div>	
 					<div class="form-group input-group col-md-3 mb-3">
 		        		<select class="custom-select input-group custom-select-sm d-block" id="careersEndYear">
-		               		<option value="">년도</option>
+		               		<option value="">재직중</option>
 		 					<c:forEach var="year" begin="1996" end="2020" step="1">
 						    	<option value="${year}">${year}년</option>
 						    </c:forEach>
 		              	</select>
 						<select class="custom-select input-group custom-select-sm d-block" id="careersEndMonth">
-		               		<option value="">월</option>
+		               		<option value="">재직중</option>
 						    <c:forEach var="month" begin="1" end="12" step="1">
 						    	<option value="${ month }">${ month }월</option>
 						    </c:forEach>
@@ -261,9 +262,9 @@
                 <label for="manager" class="col-form-label-sm">담당자</label>
                 <select class="custom-select input-group custom-select-sm d-block" id="manager">
                 	<c:forEach var="manager" items="${ managerList }" >
-                		<option value="${ manager.id }">${ manager.name }</option>
+                		<c:if test="${ sessionScope.customerManager.id eq manager.id }"><option value="${ manager.id }" selected="selected">${ manager.name }</option></c:if>
+                		<c:if test="${ sessionScope.customerManager.id ne manager.id }"><option value="${ manager.id }">${ manager.name }</option></c:if>
                 	</c:forEach>
-	            	
 		        </select>
         	</div>
 		</div>
@@ -539,10 +540,10 @@ function regFreelancer(form) {
 		 
 		var careerInfo = $(this).val().split(';');
 		var careerData = {};
-		careerData['startYear'] = careerInfo[0];
-		careerData['startMonth'] = careerInfo[1];
-		careerData['endYear'] = careerInfo[2];
-		careerData['endMonth'] = careerInfo[3];
+		careerData['workStartYear'] = careerInfo[0];
+		careerData['workStartMonth'] = careerInfo[1];
+		careerData['workEndYear'] = careerInfo[2];
+		careerData['workEndMonth'] = careerInfo[3];
 		careerData['recruitType'] = careerInfo[4];
 		careerData['jobDesc'] = careerInfo[5];
 		careerData['companyName'] = careerInfo[6];
@@ -550,7 +551,7 @@ function regFreelancer(form) {
 	});
 	param.careers = careers;
 
-	 
+	
 	var preferences = new Array();
 	$('.preferenceRow').each(function(obj) {
 		preferences.push($(this).attr('data'));
@@ -585,6 +586,12 @@ function regFreelancer(form) {
 
 var careerRowIndex = 1;
 function addCareer() {
+	
+	if ($('.careersRowData').length > 10) {
+		alert('경력은 10개 이상 입력할 수 없습니다.');
+		return false;	
+	}
+	
 	if ($('#careersStartYear').val() == '') {
 		alert('시작 년도를 입력해 주세요.');
 		return false;
@@ -595,22 +602,25 @@ function addCareer() {
 		return false;
 	}
 	
-	if ($('#careersEndYear').val() == '') {
-		alert('종료 년도를 입력해 주세요.');
-		return false;
+	if ($('#careersEndYear').val() != '') {
+		//재직중이 아니라면 월을 입력받자
+		if ($('#careersEndMonth').val() == '') {
+			alert('종료 월을 입력해 주세요.');
+			return false;
+		}
+		
+		
+		var start = $('#careersStartYear').val()  + $('#careersStartMonth').val();
+		var end = $('#careersEndYear').val()  + $('#careersEndMonth').val();
+		if (parseInt(start) > parseInt(end)) {
+			alert('시작일-종료일을 확인해 주세요.');
+			return false;
+		}
+	} else {
+		//재직중이라면
+		$('#careersEndMonth').val('')
 	}
-	
-	if ($('#careersEndMonth').val() == '') {
-		alert('종료 월을 입력해 주세요.');
-		return false;
-	}
-	
-	var start = $('#careersStartYear').val()  + $('#careersStartMonth').val();
-	var end = $('#careersEndYear').val()  + $('#careersEndMonth').val();
-	if (parseInt(start) > parseInt(end)) {
-		alert('시작일-종료일을 확인해 주세요.');
-		return false;
-	}
+
 	
 	if ($('#careersRecruitType').val() == '') {
 		alert('채용 구분을 입력해 주세요.');
@@ -646,10 +656,20 @@ function addCareer() {
     				'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersStartYear').val() + ' 년">' +
 					'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersStartMonth').val() + ' 월">' +
     			'</div>	' +
-			'<div class="form-group input-group col-md-3 mb-3">' +
-				'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersEndYear').val() + ' 년">' +
-				'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersEndMonth').val() + ' 월">' +
-    		'</div>	' +
+			'<div class="form-group input-group col-md-3 mb-3">';
+		
+	if ($('#careersEndYear').val() == '') {
+		rowHtml += 
+		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="재직중">' +
+		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="-">';
+	} else {
+		rowHtml += 
+		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersEndYear').val() + ' 년">' +
+		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersEndMonth').val() + ' 월">';
+	}
+			
+		rowHtml +=
+			'</div>	' +
     		'<div class="form-group col-md-2 mb-3">' +
     			'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersRecruitType option:checked').html() + '">' +
     		'</div>' +
@@ -769,5 +789,43 @@ function skillSetSave() {
 	$('#skillSets').append($('#skillSetPopupDiv').html());
 	$('#skillSetPopupDiv').html('');
 	$('#skillSetConfModal').modal('hide');
+}
+
+function updateFreeGrade() {
+ 
+	if ($('#academicLevel').val() != '' && $('#careerStartYear').val() != '' && $('#careerStartMonth').val() != '') {
+		
+		var param = { careerStartYear : $('#careerStartYear').val() , careerStartMonth : $('#careerStartMonth').val(), academicLevel : $('#academicLevel').val() };
+		
+		COMMON.ajax({
+		    url : '/resource/freelancer/getFreelancerGrade.json',
+		    data : JSON.stringify(param),
+		    successHandler : function(data){
+		       $('#calcuFreeGrade').val(data.result);
+		    }
+		});
+	}
+}
+
+function getSiGunGu() {
+	if ($('#sido').val() == '') {
+		$('#sigungu option').remove();
+    	$('#sigungu').append('<option value="">시/도를 선택해 주세요.</option>');
+    	
+	} else {
+		
+		COMMON.ajax({
+		    url : '/common/getSiGunGu.json',
+		    data : JSON.stringify({ sido : $('#sido').val()}),
+		    successHandler : function(data){
+		    	$('#sigungu option').remove();
+		    	$('#sigungu').append('<option value="">시/군/구</option>')
+		    	$(data.result).each(function(i, sigungu) {
+		    		$('#sigungu').append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+		    	});
+		    }
+		});
+	}	
+
 }
 </script>

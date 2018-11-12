@@ -40,8 +40,8 @@ public class Worker {
 	
 	/**등급 산정 기준 */
 	private AcademicLevel academicLevel;
-	private Integer startWorkYear;
-	private Integer startWorkMonth;
+	private Integer careerStartYear;
+	private Integer careerStartMonth;
 	
 	
 	private SidoType sido;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.resource.worker_dao">
+ 
+	<insert id="insertWorker" parameterType="com.sierp.web.domain.resource.model.Freelancer">
+		INSERT INTO 
+	</insert>
+    
+	<insert id="insertWorkerCareer" parameterType="com.sierp.web.domain.resource.model.Freelancer">
+		INSERT INTO 
+	</insert> 
+
+	<insert id="insertWorkerAdvantage" parameterType="com.sierp.web.domain.resource.model.Freelancer">
+		INSERT INTO 
+	</insert>
+</mapper>
