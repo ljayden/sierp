@@ -406,16 +406,37 @@
 								</div>
 								
 								<div id="collapse${ skillSetType }" class="collapse p-2" aria-labelledby="heading${ skillSetType }" data-parent="#accordionSkillSet">
-									<div class="card-body" style="padding: .35rem .75rem;">
+									<div class="card-body clearfix" style="padding: .35rem .75rem;">
 									<c:forEach var="advantage" items="${ advantageList }">
 										<c:if test="${ advantage.advantageType eq 'SKILL' and advantage.skillSetType eq skillSetType }">
 											<c:if test="${ advantage.customerCode eq 'COMMON' }">
-												<button type="button" class="btn btn-outline-info btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }')">
-												${ advantage.advantageName }</button>
+						
+		<div class="card border-info float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
+			<div class="card-body text-info "  style="padding: 0.40rem;" >
+				${ advantage.advantageName }
+				<select class="custom-select custom-select-sm w80 ml-1 text-info border-info">
+				    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
+			  	</select>
+			  	<button type="button" class="btn btn-outline-info btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', this)">&#43;</button>
+			</div>
+    	</div>
+<%-- 												<button type="button" class="btn btn-outline-info btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }')"> --%>
+<%-- 												${ advantage.advantageName }</button> --%>
 											</c:if>
 											<c:if test="${ advantage.customerCode ne 'COMMON' }">
-												<button type="button" class="btn btn-outline-warning btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }')">
-												${ advantage.advantageName }</button>
+
+
+		<div class="card border-warning float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
+			<div class="card-body text-warning "  style="padding: 0.40rem;" >
+				${ advantage.advantageName }
+				<select class="custom-select custom-select-sm w80 ml-1 text-warning border-warning">
+				    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
+			  	</select>
+			  	<button type="button" class="btn btn-outline-warning btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', this)">&#43;</button>
+			</div>
+    	</div>
+<%-- 												<button type="button" class="btn btn-outline-warning btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }')"> --%>
+<%-- 												${ advantage.advantageName }</button> --%>
 											</c:if>
 										</c:if>
 									</c:forEach>
@@ -435,7 +456,6 @@
     	</div>
   	</div>
 </div>
-
 
 </main>
 
@@ -516,7 +536,17 @@ function regFreelancer(form) {
 	//경력
 	var careers = new Array();
 	$('.careersRowData').each(function(obj) {
-		careers.push($(this).val());
+		 
+		var careerInfo = $(this).val().split(';');
+		var careerData = {};
+		careerData['startYear'] = careerInfo[0];
+		careerData['startMonth'] = careerInfo[1];
+		careerData['endYear'] = careerInfo[2];
+		careerData['endMonth'] = careerInfo[3];
+		careerData['recruitType'] = careerInfo[4];
+		careerData['jobDesc'] = careerInfo[5];
+		careerData['companyName'] = careerInfo[6];
+		careers.push(careerData);
 	});
 	param.careers = careers;
 
@@ -710,7 +740,8 @@ function preferenceSave() {
 }
 
 
-function skillSetAdd(seq, name, customCode) {
+function skillSetAdd(seq, name, customCode, btn) {
+	
 	//있으면 추가안하는 로직도 해야하고, 그러려면 seq를 찾아야 하고
 	var color = customCode == 'COMMON' ? 'info' : 'warning';
 	var divId = 'skillSet' + seq; 
@@ -719,10 +750,14 @@ function skillSetAdd(seq, name, customCode) {
 		return false;
 	}
 	
+
+	var expVal = $(btn).parent().find('select option:checked').val();
+	var expText = $(btn).parent().find('select option:checked').text();
+	
 	var html  = 
 		'<div class="card small skillSetRow border-' + color + ' m-1" id="' + divId + '" data="' + seq + '">' +
 			'<div class="card-body text-' + color + '"  style="padding: 0.40rem">' +
-				'<p class="card-text">' + name + '<button type="button" class="btn btn-outline-' + color + ' btn-sm ml-4" style="margin: -3px" onclick="javacript: $(this).parent().parent().parent().remove();">&times;</button></p>' +
+				'<p class="card-text">' + name + '-' + expText + '<button type="button" class="btn btn-outline-' + color + ' btn-sm ml-3" style="margin: -3px" onclick="javacript: $(this).parent().parent().parent().remove();">&times;</button></p>' +
 			'</div>' +
     	'</div>';
     

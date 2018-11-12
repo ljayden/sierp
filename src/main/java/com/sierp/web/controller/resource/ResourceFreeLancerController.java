@@ -1,6 +1,7 @@
 package com.sierp.web.controller.resource;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.sierp.web.controller.resource.request.FreelancerRegisterRequest;
 import com.sierp.web.domain.common.constant.SkillSetType;
 import com.sierp.web.domain.common.dao.CommonDao;
 import com.sierp.web.domain.common.service.LoginService;
@@ -44,9 +46,11 @@ public class ResourceFreeLancerController {
 	
 	@RequestMapping(value = "/registFreelancerProc", method = RequestMethod.POST)
 	@ResponseBody
-    public JsonResult registFreelancerProc(HttpServletRequest request, @RequestBody String param) {
+    public JsonResult registFreelancerProc(HttpServletRequest request, @RequestBody @Valid FreelancerRegisterRequest param) {
 		
-		System.out.println(param);
+		System.out.println(param.toString());
+
+
 		return JsonResults.success();
     }
 	

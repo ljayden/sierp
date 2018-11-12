@@ -10,9 +10,9 @@ import lombok.Getter;
 public enum SkillSetWorkmanship {
 	
 	MASTER("마스터"),
-	TOP("상"),
-	MID("중"),
-	LOW("하"),
+	TOP("고급"),
+	MID("중급"),
+	LOW("초급"),
 	EXIST("경험있음");
 	
 	@Getter private String description;
