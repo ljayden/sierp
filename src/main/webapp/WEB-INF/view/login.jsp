@@ -43,7 +43,7 @@
 </head>
 
 <body>
-	<form class="form-signin" id="loginForm">
+	<form class="form-signin" id="loginForm" action="/loginProc.json" method="POST">
 	
 	<h1 class="h1 mb-3 font-weight-normal"><b>S</b>I <br><b>T</b>otal Management <b>S</b>olution</h1>
 	<br><br>
@@ -70,9 +70,7 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
-		//setCalendar();
-		//setGrid();
-		
+
 		$('#loginBtn').click(function() {
 			
 			var id = $('#managerId').val();
@@ -87,11 +85,8 @@
 				return false;
 			}
 			
-			var formData = $('#loginForm').serialize()
 			COMMON.ajax({
-				method: 'post',
-				data : formData,
-				url: '/loginProc.json',
+				form :  $('#loginForm'),
 				successHandler: function (data) {
 					location.href = '/home/dashboard/main.do';
 				},
@@ -102,56 +97,56 @@
 		});
 	});
 	
-	function callAjaxSuccess(){
-		$('#testForm').attr('action','/ajaxCallSuccess.json');
+// 	function callAjaxSuccess(){
+// 		$('#testForm').attr('action','/ajaxCallSuccess.json');
 		
 		
-		COMMON.ajax({
-			form : $('#testForm'),
-			successHandler : function(data){
-				alert(data + '저장되었습니다.');
-				//location.href
-			}
-		})
-	}
+// 		COMMON.ajax({
+// 			form : $('#testForm'),
+// 			successHandler : function(data){
+// 				alert(data + '저장되었습니다.');
+// 				//location.href
+// 			}
+// 		})
+// 	}
 	
-	function callAjaxFail(){
-		$('#testForm').attr('action','/ajaxCallFail.json');
-		COMMON.ajax({
-			form : $('#testForm'),
-			successHandler : function(data){
-				alert(data + '저장되었습니다.');
-				//location.href
-			}, 
-			failHandler : function(code, message, data) {
+// 	function callAjaxFail(){
+// 		$('#testForm').attr('action','/ajaxCallFail.json');
+// 		COMMON.ajax({
+// 			form : $('#testForm'),
+// 			successHandler : function(data){
+// 				alert(data + '저장되었습니다.');
+// 				//location.href
+// 			}, 
+// 			failHandler : function(code, message, data) {
 				
-			}
-		})
-	}
+// 			}
+// 		})
+// 	}
 	
-	function callAjaxException(){
-		$('#testForm').attr('action','/ajaxCallException.json');
-		COMMON.ajax({
-			form : $('#testForm')
-		})
-	}
+// 	function callAjaxException(){
+// 		$('#testForm').attr('action','/ajaxCallException.json');
+// 		COMMON.ajax({
+// 			form : $('#testForm')
+// 		})
+// 	}
 	
-	function needLogin(){
-		COMMON.ajax({ url : '/needLogin.json'})
-	}
+// 	function needLogin(){
+// 		COMMON.ajax({ url : '/needLogin.json'})
+// 	}
 	
 	
 	
-	function setCalendar(){
+// 	function setCalendar(){
 	
-		var startDate_cal = COMMON.calendar('#startCal', {
-				element : $("#startDate")
-		});
+// 		var startDate_cal = COMMON.calendar('#startCal', {
+// 				element : $("#startDate")
+// 		});
 		
-		var endDate_cal = COMMON.calendar('#endCal', {
-				element : '#endDate'
-		});
-	}
+// 		var endDate_cal = COMMON.calendar('#endCal', {
+// 				element : '#endDate'
+// 		});
+// 	}
 	</script>
 </body>
 </html>
