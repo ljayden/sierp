@@ -2,7 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.resource.freelancer_dao">
 
-	<insert id="insertFreelancer" parameterType="com.sierp.web.domain.resource.model.Freelancer">
-		INSERT INTO 
+	<insert id="insertFreelancer" parameterType="com.sierp.web.domain.resource.model.Freelancer" useGeneratedKeys="true" keyProperty="freelancerSeq">
+		INSERT INTO freelancer(worker_seq, user_seq, hope_recruit_type_val, hope_work_posi_type_val, customer_memo, main_manager_id, modify_manager_id, register_manager_id)
+		VALUES (#{workerSeq}, #{userSeq}, #{hopeRecruitTypeVal}, #{hopeWorkPosiTypeVal}, #{cutomerMemo}, #{mainManagerId}, #{modifyManagerId}, #{registerManagerId})
 	</insert>
+	
+	
+	<select id="selectFreelancerList" parameterType="map" resultType="com.sierp.web.domain.resource.model.Freelancer">
+		SELECT w.*, f.freelancer_seq, f.user_seq, f.hope_recruit_type_val, f.hope_work_posi_type_val,  f.main_manager_id
+		
+		FROM 	worker w, freelancer f 
+		WHERE 	w.worker_seq = f.worker_seq
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(name)">
+			AND w.name = #{name}
+		</if>
+				
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(academicLevel)">
+			AND w.academicLevel = #{academicLevel}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(mainManagerId)">
+			AND f.main_manager_id = #{mainManagerId}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(workerExpertType)">
+			AND w.workerExpertType = #{workerExpertType}
+		</if>
+		
+		<if test="workBaseYearMonth > 0">
+			AND ((w.careerStartYear * 100) + w.careerStartMonth ) >= #{workBaseYearMonth}
+		</if>
+		
+		<if test="advantageList != null">
+			AND EXISTS (SELECT 1 FROM worker_advantage  WHERE w.worker_seq = worker_seq <foreach item="item"  index="index" collection="advantageList"> AND advantage_seq = ${item}</foreach>) 
+		</if>
+		LIMIT 0, 10
+		
+		<!-- 계약상태, 등급구분  -->
+	</select>
 </mapper>
+  

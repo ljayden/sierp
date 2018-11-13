@@ -47,7 +47,8 @@ CREATE TABLE worker (
 		  email VARCHAR(50) not null,
 		  phone_no VARCHAR(20) null,
 		  birth_year integer not null,
-		  birth_month_day CHAR(4) null,
+		  birth_month integer null,
+		  birth_day integer null,
 		  sex CHAR(1) not null,
  
 		  worker_expert_type VARCHAR(10) not null,
@@ -57,30 +58,58 @@ CREATE TABLE worker (
 		  start_work_month integer,
 		
 		  sido VARCHAR(20) not null,
-		  siGunGu VARCHAR(20) not null,
-	      detailAddr VARCHAR(200) not null,
+		  sigungu VARCHAR(20) not null,
+	      detail_addr VARCHAR(200) not null,
 	
 		  register_ymdt DATETIME,
 		  modify_ymdt DATETIME
-);
- 
+); 
 
+CREATE TABLE worker_career (
+          worker_career_seq integer PRIMARY KEY AUTOINCREMENT,
+		  worker_seq integer not null,
+		 
+		  work_start_year integer not null,
+		  work_start_month integer not null,
+		
+		  work_end_year integer,
+		  work_end_month integer,
+		  
+		  recruit_type VARCHAR(10) not null,
+		  job_desc VARCHAR(200) null,
+	      company_name VARCHAR(100) not null 
+); 
+
+CREATE TABLE worker_advantage (
+		  worker_seq integer not null, 
+		  advantage_seq integer not null,
+		  advantage_type VARCHAR(10) not null,
+		  workmanship  VARCHAR(10),
+		  
+		  PRIMARY KEY (worker_seq, advantage_seq)
+); 
+	   
+	
 CREATE TABLE freelancer (
 
 	 freelancer_seq integer PRIMARY KEY AUTOINCREMENT,
      worker_seq integer not null,
      
      user_seq integer,
-     
+     hope_recruit_type_val integer not null,
+	 hope_work_posi_type_val integer not null,
      customer_memo VARCHAR(500),
      
-     modify_manager_id VARCHAR(500),		--없으면 본인
-	 register_manager_id	VARCHAR(500) --없으면 본인
+     main_manager_id VARCHAR(50),
+     modify_manager_id VARCHAR(50),		--없으면 본인
+	 register_manager_id	VARCHAR(50) --없으면 본인
 );
+	 
 
+	 
    
 CREATE TABLE advantage (
-	advantageSeq integer PRIMARY KEY AUTOINCREMENT,
+	advantage_seq integer PRIMARY KEY AUTOINCREMENT,
 	advantage_name VARCHAR(50) not null,
 	advantage_type VARCHAR(10) not null,
 	skill_set_type VARCHAR(20),

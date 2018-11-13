@@ -2,15 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.resource.worker_dao">
  
-	<insert id="insertWorker" parameterType="com.sierp.web.domain.resource.model.Freelancer">
-		INSERT INTO 
+	<insert id="insertWorker" parameterType="com.sierp.web.domain.resource.model.Worker" useGeneratedKeys="true" keyProperty="workerSeq">
+		INSERT INTO worker(worker_type, customer_code, name, email, phone_no, birth_year, birth_month, birth_day, sex, 
+		                   worker_expert_type, academic_level,start_work_year, start_work_month, sido, sigungu, detail_addr, register_ymdt, modify_ymdt)
+		VALUES(#{workerType},#{customerCode},#{name},#{email},#{phoneNo},#{birthYear},#{birthMonth},#{birthDay},#{sex}
+		      ,#{workerExpertType},#{academicLevel},#{careerStartYear},#{careerStartMonth},#{sido},#{siGunGu},#{detailAddr},#{registerYmdt},#{modifyYmdt})
 	</insert>
     
-	<insert id="insertWorkerCareer" parameterType="com.sierp.web.domain.resource.model.Freelancer">
-		INSERT INTO 
+	<insert id="insertWorkerCareer" parameterType="com.sierp.web.domain.resource.model.WorkerCareer">
+		INSERT INTO worker_career(worker_seq, work_start_year, work_start_month, work_end_year, work_end_month, recruit_type, job_desc, company_name)
+		VALUES(#{workerSeq}, #{workStartYear}, #{workStartMonth}, #{workEndYear}, #{workEndMonth}, #{recruitType}, #{jobDesc}, #{companyName})
 	</insert> 
 
-	<insert id="insertWorkerAdvantage" parameterType="com.sierp.web.domain.resource.model.Freelancer">
-		INSERT INTO 
+	<insert id="insertWorkerAdvantage" parameterType="com.sierp.web.domain.resource.model.WorkerAdvantage">
+		INSERT INTO worker_advantage(worker_seq, advantage_seq, advantage_type, workmanship)
+		VALUES(#{workerSeq}, #{advantageSeq}, #{advantageType}, #{workmanship})
 	</insert>
+	
 </mapper>

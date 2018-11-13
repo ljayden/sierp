@@ -3,6 +3,8 @@ package com.sierp.web.domain.resource.service;
 import java.util.Date;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import com.sierp.web.domain.resource.model.WorkerAdvantage;
 import com.sierp.web.domain.resource.model.WorkerCareer;
 
 @Service
+@Slf4j
 public class FreelancerRegisterService {
 	
 	@Autowired WorkerDao workerDao;
@@ -27,6 +30,8 @@ public class FreelancerRegisterService {
 	
 	@Transactional(rollbackFor = {Exception.class})
 	public void registerFreelancerProc(FreelancerRegisterRequest request, CustomerManager manager) {
+		
+		log.debug("등록 정보 = {}", request.toString());
 		
 		Freelancer freelancer = registerFreelancer(request, manager);
 		
@@ -39,6 +44,7 @@ public class FreelancerRegisterService {
 	@Transactional(rollbackFor = {Exception.class})
 	private Freelancer registerFreelancer(FreelancerRegisterRequest request, CustomerManager manager) {
 		Freelancer freelancer = new Freelancer();
+		freelancer.setCustomerCode(manager.getCustomerCode());
 		freelancer.setWorkerType(WorkerType.FREELANCER);
 		
 		freelancer.setName(request.getName());

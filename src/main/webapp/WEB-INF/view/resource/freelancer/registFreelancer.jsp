@@ -270,8 +270,8 @@
 		</div>
 		<div class="mb-3"> 
         	<label for="cutomerMemo" class="col-form-label-sm">담당자 메모</label>
-			<textarea class="form-control form-control-sm" id="cutomerMemo" aria-label="With textarea" rows="3"></textarea>
-		</div>
+			<textarea class="form-control form-control-sm" id="customMemo" aria-label="With textarea" rows="3"></textarea>
+		</div>                                                 
   		<br>
   		<br>
   		<div class="form-row">
@@ -568,7 +568,11 @@ function regFreelancer(form) {
 	
 	var skillSets = new Array();
 	$('.skillSetRow').each(function(obj) {
-		skillSets.push($(this).attr('data'));
+		
+		var skillSetInfo = {};
+		skillSetInfo['advantageSeq'] = $(this).attr('data').split(',')[0];
+		skillSetInfo['skillSetWorkmanship'] = $(this).attr('data').split(',')[1];
+		skillSets.push(skillSetInfo);
 	});
 	param.skillSets = skillSets;
 
@@ -580,6 +584,7 @@ function regFreelancer(form) {
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
 	       alert('프리랜서를 등록하였습니다.');
+	       location.href = 'resource/freelancer/main.do';
 	    }
 	});
 }
@@ -775,7 +780,7 @@ function skillSetAdd(seq, name, customCode, btn) {
 	var expText = $(btn).parent().find('select option:checked').text();
 	
 	var html  = 
-		'<div class="card small skillSetRow border-' + color + ' m-1" id="' + divId + '" data="' + seq + '">' +
+		'<div class="card small skillSetRow border-' + color + ' m-1" id="' + divId + '" data="' + seq + ',' + expVal + '">' +
 			'<div class="card-body text-' + color + '"  style="padding: 0.40rem">' +
 				'<p class="card-text">' + name + '-' + expText + '<button type="button" class="btn btn-outline-' + color + ' btn-sm ml-3" style="margin: -3px" onclick="javacript: $(this).parent().parent().parent().remove();">&times;</button></p>' +
 			'</div>' +
