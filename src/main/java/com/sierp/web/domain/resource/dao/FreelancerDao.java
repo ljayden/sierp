@@ -1,9 +1,13 @@
 package com.sierp.web.domain.resource.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.common.collect.Maps;
 import com.sierp.web.domain.resource.model.Freelancer;
 
 @Repository
@@ -15,5 +19,10 @@ public class FreelancerDao {
 	
 	public int insertFreelancer(Freelancer freelancer) {
 		return sql.insert(MAPPER_NAMESPACE + "insertFreelancer", freelancer);
+	}
+	
+	public List<Freelancer> selectFreelancerList() {
+		Map<String, Object> params = Maps.newHashMap();
+		return sql.selectList(MAPPER_NAMESPACE + "selectFreelancerList", params);
 	}
 }
