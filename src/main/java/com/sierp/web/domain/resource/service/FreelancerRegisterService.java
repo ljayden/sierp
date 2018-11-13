@@ -14,6 +14,7 @@ import com.sierp.web.controller.resource.request.FreelancerRegisterRequest;
 import com.sierp.web.controller.resource.request.FreelancerRegisterRequestCareer;
 import com.sierp.web.domain.common.constant.AdvantageType;
 import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.domain.resource.constant.SeekingWorkStatus;
 import com.sierp.web.domain.resource.constant.WorkerType;
 import com.sierp.web.domain.resource.dao.FreelancerDao;
 import com.sierp.web.domain.resource.dao.WorkerDao;
@@ -65,12 +66,15 @@ public class FreelancerRegisterService {
 		freelancer.setCareerStartYear(request.getCareerStartYear());
 		freelancer.setCareerStartMonth(request.getCareerStartMonth());
 		freelancer.setAcademicLevel(request.getAcademicLevel());
-
+		freelancer.setAcademicLevelVal(request.getAcademicLevel().getVal());
+		
 		freelancer.setMainManagerId(request.getManagerId());
 		freelancer.setCutomerMemo(request.getCustomMemo());
 		
 		freelancer.setHopeRecruitTypeVal(request.getHopeRecruitTypeVal());
 		freelancer.setHopeWorkPosiTypeVal(request.getHopeWorkPosiTypeVal());
+		
+		freelancer.setSeekingWorkStatus(SeekingWorkStatus.ING);
 		
 		freelancer.setRegisterManagerId(manager.getId());
 		freelancer.setRegisterYmdt(new Date());

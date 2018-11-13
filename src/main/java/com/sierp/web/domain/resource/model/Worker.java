@@ -40,6 +40,7 @@ public class Worker {
 	
 	/**등급 산정 기준 */
 	private AcademicLevel academicLevel;
+	private int academicLevelVal;
 	private Integer careerStartYear;
 	private Integer careerStartMonth;
 	

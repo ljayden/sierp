@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.google.common.collect.Maps;
+import com.sierp.web.domain.resource.constant.WorkerExpertType;
 import com.sierp.web.domain.resource.model.Freelancer;
+import com.sierp.web.domain.resource.model.FreelancerSearch;
+import com.sierp.web.result.Pager;
 
 @Repository
 public class FreelancerDao {
@@ -20,9 +22,19 @@ public class FreelancerDao {
 	public int insertFreelancer(Freelancer freelancer) {
 		return sql.insert(MAPPER_NAMESPACE + "insertFreelancer", freelancer);
 	}
+
 	
-	public List<Freelancer> selectFreelancerList() {
-		Map<String, Object> params = Maps.newHashMap();
+	public List<FreelancerSearch> selectFreelancerList(String name, Integer minAcademicLevel, Integer maxAcademicLevel, String mainManagerId, 
+			WorkerExpertType workerExpertType, int workBaseYearMonth, Pager pager) {
+		
+		Map<String, Object> params = pager.initParamMapWithPager();
+		params.put("name", name);
+		params.put("minAcademicLevelVal", minAcademicLevel);
+		params.put("maxAcademicLevelVal", maxAcademicLevel);
+		params.put("mainManagerId", mainManagerId);
+		params.put("workerExpertType", workerExpertType == null ? null : workerExpertType.name());
+		params.put("workBaseYearMonth", workBaseYearMonth);
+		params.put("advantageList", null);
 		return sql.selectList(MAPPER_NAMESPACE + "selectFreelancerList", params);
 	}
 }

@@ -54,6 +54,7 @@ CREATE TABLE worker (
 		  worker_expert_type VARCHAR(10) not null,
 		  
 		  academic_level VARCHAR(20) not null,
+		  academic_leval_val integer not null,
 		  start_work_year integer,
 		  start_work_month integer,
 		
@@ -100,12 +101,14 @@ CREATE TABLE freelancer (
 	 hope_work_posi_type_val integer not null,
      customer_memo VARCHAR(500),
      
+     seeking_work_status  VARCHAR(10) not null,
+     seeking_work_status_re_confirm_ymd  VARCHAR(8),
+     seeking_work_reject_cause VARCHAR(200),
+     
      main_manager_id VARCHAR(50),
      modify_manager_id VARCHAR(50),		--없으면 본인
 	 register_manager_id	VARCHAR(50) --없으면 본인
 );
-	 
-
 	 
    
 CREATE TABLE advantage (
