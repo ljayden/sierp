@@ -23,9 +23,8 @@ public class FreelancerDao {
 		return sql.insert(MAPPER_NAMESPACE + "insertFreelancer", freelancer);
 	}
 
-	
-	public List<FreelancerSearch> selectFreelancerList(String name, Integer minAcademicLevel, Integer maxAcademicLevel, String mainManagerId, 
-			WorkerExpertType workerExpertType, int workBaseYearMonth, Pager pager) {
+	public void selectFreelancerListCount(String name, Integer minAcademicLevel, Integer maxAcademicLevel, String mainManagerId, 
+			WorkerExpertType workerExpertType, int workBaseYear, int workBaseMonth, String customerCode, Pager pager) {
 		
 		Map<String, Object> params = pager.initParamMapWithPager();
 		params.put("name", name);
@@ -33,8 +32,28 @@ public class FreelancerDao {
 		params.put("maxAcademicLevelVal", maxAcademicLevel);
 		params.put("mainManagerId", mainManagerId);
 		params.put("workerExpertType", workerExpertType == null ? null : workerExpertType.name());
-		params.put("workBaseYearMonth", workBaseYearMonth);
+		params.put("workBaseYear", workBaseYear);
+		params.put("workBaseMonth", workBaseMonth);
 		params.put("advantageList", null);
+		params.put("customerCode", customerCode);
+	
+		pager.setTotalCount(sql.selectOne(MAPPER_NAMESPACE + "selectFreelancerListCount", params)); 
+	}
+	
+	public List<FreelancerSearch> selectFreelancerList(String name, Integer minAcademicLevel, Integer maxAcademicLevel, String mainManagerId, 
+			WorkerExpertType workerExpertType, int workBaseYear, int workBaseMonth, String customerCode, Pager pager) {
+		
+		Map<String, Object> params = pager.initParamMapWithPager();
+		params.put("name", name);
+		params.put("minAcademicLevelVal", minAcademicLevel);
+		params.put("maxAcademicLevelVal", maxAcademicLevel);
+		params.put("mainManagerId", mainManagerId);
+		params.put("workerExpertType", workerExpertType == null ? null : workerExpertType.name());
+		params.put("workBaseYear", workBaseYear);
+		params.put("workBaseMonth", workBaseMonth);
+		params.put("advantageList", null);
+		params.put("customerCode", customerCode);
+		
 		return sql.selectList(MAPPER_NAMESPACE + "selectFreelancerList", params);
 	}
 }

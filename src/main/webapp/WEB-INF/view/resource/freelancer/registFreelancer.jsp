@@ -270,7 +270,7 @@
 		</div>
 		<div class="mb-3"> 
         	<label for="cutomerMemo" class="col-form-label-sm">담당자 메모</label>
-			<textarea class="form-control form-control-sm" id="customMemo" aria-label="With textarea" rows="3"></textarea>
+			<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="3"></textarea>
 		</div>                                                 
   		<br>
   		<br>
@@ -532,7 +532,7 @@ function regFreelancer(form) {
 	});
 	
 	param.managerId = $('#manager').val();
-	param.customMemo = $('#customMemo').val();
+	param.customerMemo = $('#customerMemo').val();
 	
 	//경력
 	var careers = new Array();
@@ -584,7 +584,7 @@ function regFreelancer(form) {
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
 	       alert('프리랜서를 등록하였습니다.');
-	       location.href = 'resource/freelancer/main.do';
+	       location.href = '/resource/freelancer/main.do';
 	    }
 	});
 }

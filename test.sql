@@ -54,7 +54,7 @@ CREATE TABLE worker (
 		  worker_expert_type VARCHAR(10) not null,
 		  
 		  academic_level VARCHAR(20) not null,
-		  academic_leval_val integer not null,
+		  academic_level_val integer not null,
 		  start_work_year integer,
 		  start_work_month integer,
 		

@@ -33,7 +33,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	
 	@Override
 	protected String[] getServletMappings() {
-		return new String[]{"*.do", "*.json"};
+		return new String[]{"*.do", "*.ldo", "*.json"};
 	}
 	
 	

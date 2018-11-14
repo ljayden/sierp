@@ -39,7 +39,7 @@ public class FreelancerRegisterRequest {
 	private int hopeRecruitTypeVal;
 	
 	@NotEmpty private String managerId;
-	private String customMemo;
+	private String customerMemo;
 	
 	@Valid private List<FreelancerRegisterRequestCareer> careers;
 	private List<Integer> preferences;

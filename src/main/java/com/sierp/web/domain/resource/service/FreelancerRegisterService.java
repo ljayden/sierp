@@ -69,7 +69,7 @@ public class FreelancerRegisterService {
 		freelancer.setAcademicLevelVal(request.getAcademicLevel().getVal());
 		
 		freelancer.setMainManagerId(request.getManagerId());
-		freelancer.setCutomerMemo(request.getCustomMemo());
+		freelancer.setCustomerMemo(request.getCustomerMemo());
 		
 		freelancer.setHopeRecruitTypeVal(request.getHopeRecruitTypeVal());
 		freelancer.setHopeWorkPosiTypeVal(request.getHopeWorkPosiTypeVal());

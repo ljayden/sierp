@@ -15,7 +15,7 @@ public class Freelancer extends Worker {
 	
 	private Integer userSeq;	//사이트를 가입하면 발생
 	
-	private String cutomerMemo;
+	private String customerMemo;
 	
 	private SeekingWorkStatus seekingWorkStatus; //
 	private String seekingWorkStatusReConfirmYmd;	//구직 상태 및 거절만료일시, 

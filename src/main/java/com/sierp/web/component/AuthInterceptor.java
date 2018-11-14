@@ -8,16 +8,22 @@ import javax.servlet.http.HttpSession;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.sierp.web.domain.common.service.LoginService;
+import com.sierp.web.domain.company.model.CustomerManager;
 import com.sierp.web.result.JsonResults;
 import com.sierp.web.util.JacksonUtil;
 
 @Component
 @Slf4j
-public class AuthInterceptor extends HandlerInterceptorAdapter {
+public class AuthInterceptor extends HandlerInterceptorAdapter implements HandlerMethodArgumentResolver {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
@@ -49,8 +55,28 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			}
 
 		}
-		
 		return true;
 	}
  
+	
+    @Override
+	public boolean supportsParameter(MethodParameter parameter) {
+    	
+    	Class<?> clz = parameter.getParameterType();
+    	if (clz != null && clz == CustomerManager.class) {
+    		return true;
+    	}
+    	
+    	return false;
+    }
+ 
+    @Override
+    public Object resolveArgument(MethodParameter parameter,
+                       ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
+			           WebDataBinderFactory binderFactory) throws Exception {
+
+        HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+        
+		return request.getSession().getAttribute(LoginService.SESSION_MANAGER_ATTR_FIELD);
+	}
 }

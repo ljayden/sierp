@@ -196,8 +196,22 @@
 				}
 			});
 		});
-    	  
+    	
+		$('form[iframe-list-div]').each(function(){
+		 	var formObj = $(this);
+		 	var divId = formObj.attr('iframe-list-div');
+		 	formObj.on('submit', function() {
+		 		if ($('#listLoadingIframe').length == 0) {
+	 				formObj.attr('target', 'listLoadingIframe');
+	 				
+$('body').append('<iframe id="listLoadingIframe" name="listLoadingIframe" onload="javascipt: $(\'#' + divId + '\').html($(\'#listLoadingIframe\').contents().find(\'body\').html());" style="display: none;"></iframe>');
+	 			}
+			});
+		 	
+		 	formObj.submit();
+		})
     })
+
     </script>
 	<decorator:head/>
 </body>

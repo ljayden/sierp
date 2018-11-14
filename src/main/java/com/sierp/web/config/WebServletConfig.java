@@ -73,6 +73,7 @@ public class WebServletConfig extends WebMvcConfigurerAdapter {
 		configurer.useJaf(false);
 		configurer.mediaType("json", MediaType.APPLICATION_JSON);
 		configurer.mediaType("do", MediaType.TEXT_HTML);
+		configurer.mediaType("ldo", MediaType.TEXT_HTML);
 		configurer.defaultContentType(MediaType.TEXT_HTML);
 	    configurer.ignoreAcceptHeader(true);
 	
@@ -86,13 +87,13 @@ public class WebServletConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(globalInterceptor).excludePathPatterns("/**/*.err", "/login.do");
+		registry.addInterceptor(globalInterceptor).excludePathPatterns("/**/*.err", "/**/*.ldo", "/login.do");
 		registry.addInterceptor(authInterceptor).excludePathPatterns("/**/*.err", "/loginProc.json");
 	}
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		
+		argumentResolvers.add(authInterceptor);
 	}
 	
 	
