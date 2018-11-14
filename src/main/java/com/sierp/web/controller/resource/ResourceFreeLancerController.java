@@ -46,7 +46,7 @@ public class ResourceFreeLancerController {
 	public String mainList(Model model, CustomerManager manager, FreelancerSearchRequest request) {
 		
 		model.addAttribute("searchList", freelancerSearchService.getFreelancer(request, manager.getCustomerCode()));
-		
+		model.addAttribute("request", request);
 		return "resource/freelancer/mainList";
 	}
 	

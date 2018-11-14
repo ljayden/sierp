@@ -52,10 +52,10 @@
 		</if>
 		
 		<if test="workBaseYear > 0">
-			AND w.career_start_year <![CDATA[ >= ]]> #{workBaseYear}
+			AND w.start_work_year <![CDATA[ >= ]]> #{workBaseYear}
 		</if>
 		<if test="workBaseMonth > 0">
-			AND w.career_start_month <![CDATA[ >= ]]> #{workBaseMonth}
+			AND w.start_work_month <![CDATA[ >= ]]> #{workBaseMonth}
 		</if>
 		
 		<if test="advantageList != null">

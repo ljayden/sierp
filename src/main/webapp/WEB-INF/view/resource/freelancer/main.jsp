@@ -9,6 +9,7 @@
 <main role="main" class="container">
 
 	<form id="searchForm" action="/resource/freelancer/getMainList.ldo" method="post" iframe-list-div="listDiv">
+	<input type="hidden" id="pageInput" name="page" value="1"/>
 	<div class="my-3 p-3 bg-white rounded shadow-sm">
 		<div id="searchInputTap">
 			<div class="row">
@@ -160,4 +161,8 @@ $(document).ready(function() {
 	
 });
 
+function goPage(page) {
+	$('#pageInput').val(page);
+	$('#searchForm').submit();
+}
 </script>

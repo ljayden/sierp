@@ -65,14 +65,9 @@ public class Pager {
     }
  
     public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
         if (this.page < 1) 
         	this.page = 1;
-        
-        this.page = page;
+        return page;
     }
 
 	public void nextPage() {
