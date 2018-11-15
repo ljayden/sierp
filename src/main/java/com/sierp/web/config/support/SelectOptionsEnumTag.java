@@ -23,7 +23,7 @@ import com.sierp.web.util.EnumUtils;
  *
  */
 @Slf4j
-public class SelectOptionsEnum extends SimpleTagSupport {
+public class SelectOptionsEnumTag extends SimpleTagSupport {
 	
 	@Getter @Setter private String enumClass;
 	@Getter @Setter private String selectedValue;

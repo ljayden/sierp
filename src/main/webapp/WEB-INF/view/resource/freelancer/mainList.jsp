@@ -20,7 +20,19 @@
     	</tr>
   	</thead>
   	<tbody>
-		!!
+ 		<c:forEach var="freelancer" items="${ searchList }">
+	    	<tr>
+	      		<th scope="row">${ freelancer.name }</th>
+	      		<td>중급</td>
+	      		<td>${ freelancer.workerExpertType.description }</td>
+	      		<td>${ freelancer.sido.description }/${ freelancer.siGunGu.description }</td>
+	      		<td><b>${ freelancer.contractStatus }</b></td>
+	      		<td>농협 차세대 개발</td>
+	      		<td>2018.04 ~ 2019.04</td>
+	      		<td></td>
+	      		<td><mt:mgrNm customerCode="${ sessionScope.customerManager.customerCode }" managerId="${ freelancer.mainManagerId }"/></td>
+	    	</tr>
+ 		</c:forEach>
 	</tbody>
 </table>	
 <small class="d-block text-right mt-3">총 ${ request.totalCount } 명이 조회되었습니다</small>

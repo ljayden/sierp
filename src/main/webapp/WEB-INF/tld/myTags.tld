@@ -7,9 +7,8 @@ version="2.0">
 <tlib-version>1.0</tlib-version>
 <uri>myTags</uri>
 <tag>
-	<description>Enum Type Code Select Option</description>
 	<name>enumOptions</name>
-	<tag-class>com.sierp.web.config.support.SelectOptionsEnum</tag-class>
+	<tag-class>com.sierp.web.config.support.SelectOptionsEnumTag</tag-class>
 	<body-content>empty</body-content>
 	<attribute>
 		<name>enumClass</name>
@@ -21,25 +20,36 @@ version="2.0">
 		<required>false</required>
 		<rtexprvalue>true</rtexprvalue>
 	</attribute>
-	
 	<attribute>
 		<name>emptyValueName</name>
 		<required>false</required>
 		<rtexprvalue>true</rtexprvalue>
 	</attribute>
-	
 	<attribute>
 		<name>optionNamePrefix</name>
 		<required>false</required>
 		<rtexprvalue>true</rtexprvalue>
 	</attribute>
-	
 	<attribute>
 		<name>optionNameSuffix</name>
 		<required>false</required>
 		<rtexprvalue>true</rtexprvalue>
 	</attribute> 
 </tag>
-
+<tag>
+	<name>mgrNm</name>
+	<tag-class>com.sierp.web.config.support.GetManagerNameTag</tag-class>
+	<body-content>empty</body-content>
+	<attribute>
+		<name>customerCode</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute> 
+	<attribute>
+		<name>managerId</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
 
 </taglib>

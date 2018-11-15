@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="mt" uri="myTags" %>
 
-
 <main role="main" class="container">
 
 	<form id="searchForm" action="/resource/freelancer/getMainList.ldo" method="post" iframe-list-div="listDiv">
@@ -89,24 +88,46 @@
 			</div>
 			
 			<div class="row">
-				<div class="input-group input-group-sm col-md-3 mb-3">
+				<div class="input-group input-group-sm col-md-7 mb-3">
 					<div class="input-group-prepend">
-			    		<span class="input-group-text w80" id="skill-set">보유기술</span>
+			    		<span class="input-group-text w80" id="">보유기술</span>
 			  		</div>
-			  		<input type="text" class="form-control" aria-label="" aria-describedby="skill-set">
+					<div class="input-group-prepend w-75">
+			    		<span class="input-group-text w-100 bg-white small" id="">
+			    		정보처리기사[<strong>&times;</strong>] &nbsp;&nbsp;,&nbsp;&nbsp; 산업기사[<strong>&times;</strong>]
+			    		</span>
+			  		</div>
+			  		<button class="btn btn-outline-info btn-sm">검색</button>
 				</div>
-				<div class="input-group input-group-sm col-md-8 mb-3"></div>
+				<div class="input-group input-group-sm col-md-5 mb-3"></div>
+			</div>
+					
+			<div class="row">
+				<div class="input-group input-group-sm col-md-7 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="">자격증</span>
+			  		</div>
+					<div class="input-group-prepend w-75">
+			    		<span class="input-group-text w-100  bg-white" id=""></span>
+			  		</div>
+			  		<button class="btn btn-outline-info btn-sm">검색</button>
+				</div>
+				<div class="input-group input-group-sm col-md-5 mb-3"></div>
 			</div>
 			
 			<div class="row">
-				<div class="input-group input-group-sm col-md-3 mb-3">
+				<div class="input-group input-group-sm col-md-7 mb-3">
 					<div class="input-group-prepend">
-			    		<span class="input-group-text w80" id="license">자격사항</span>
+			    		<span class="input-group-text w80" id="">우대조건</span>
 			  		</div>
-			  		<input type="text" class="form-control" aria-label="" aria-describedby="license">
+					<div class="input-group-prepend w-75">
+			    		<span class="input-group-text w-100  bg-white" id=""></span>
+			  		</div>
+			  		<button class="btn btn-outline-info btn-sm">검색</button>
 				</div>
-				<div class="input-group input-group-sm col-md-8 mb-3"></div>
+				<div class="input-group input-group-sm col-md-5 mb-3"></div>
 			</div>
+			
   		</div>
   		<div class="d-inline clearfix">
   			<button type="button" class="btn btn-outline-secondary btn-sm float-right" id="searchFormOpen">상세 검색 열기</button>

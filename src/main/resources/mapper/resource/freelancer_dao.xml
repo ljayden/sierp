@@ -3,7 +3,7 @@
 <mapper namespace="mapper.resource.freelancer_dao">
 
 	<insert id="insertFreelancer" parameterType="com.sierp.web.domain.resource.model.Freelancer" useGeneratedKeys="true" keyProperty="freelancerSeq">
-		INSERT INTO freelancer(worker_seq, user_seq, hope_recruit_type_val, hope_work_posi_type_val,  seeking_work_status, seeking_work_status_re_confirm_ymd
+		INSERT INTO freelancer(worker_seq, user_seq, hope_recruit_type_val, hope_work_posi_type_val,  seeking_work_status, seeking_work_status_re_confirm_ymd,
 		                       seeking_work_reject_cause, customer_memo, main_manager_id, modify_manager_id, register_manager_id)
 		VALUES (#{workerSeq}, #{userSeq}, #{hopeRecruitTypeVal}, #{hopeWorkPosiTypeVal}, #{seekingWorkStatus}, null, 
 		        null, #{customerMemo}, #{mainManagerId}, #{modifyManagerId}, #{registerManagerId})
@@ -52,10 +52,10 @@
 		</if>
 		
 		<if test="workBaseYear > 0">
-			AND w.start_work_year <![CDATA[ >= ]]> #{workBaseYear}
+			AND w.start_work_year <![CDATA[ <= ]]> #{workBaseYear}
 		</if>
 		<if test="workBaseMonth > 0">
-			AND w.start_work_month <![CDATA[ >= ]]> #{workBaseMonth}
+			AND w.start_work_month <![CDATA[ <= ]]> #{workBaseMonth}
 		</if>
 		
 		<if test="advantageList != null">

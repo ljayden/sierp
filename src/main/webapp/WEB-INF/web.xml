@@ -11,7 +11,7 @@
     <jsp-config>
     <taglib>
          <taglib-uri>myTags</taglib-uri>
-         <taglib-location>/WEB-INF/tld/selectOptionsEnum.tld</taglib-location>
+         <taglib-location>/WEB-INF/tld/myTags.tld</taglib-location>
     </taglib>
     </jsp-config>
 	<!-- error handler -->
