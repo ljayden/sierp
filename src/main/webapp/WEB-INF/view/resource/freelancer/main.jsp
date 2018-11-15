@@ -21,6 +21,7 @@
 			    		<span class="input-group-text w80" id="search-name">등록일</span>
 			  		</div>
 			  		<input type="text" class="form-control" id="" name="" aria-label="시작일" aria-describedby="">
+			  		&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
 			  		<input type="text" class="form-control" id="" name="" aria-label="종료일" aria-describedby="">
 				</div>
 				<div class="input-group input-group-sm col-md-6 mb-3">
