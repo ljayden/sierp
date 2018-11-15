@@ -2,12 +2,16 @@ package com.sierp.web.domain.resource.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.sierp.web.controller.resource.request.FreelancerSearchRequest;
+import com.sierp.web.domain.common.constant.SkillSetWorkmanship;
 import com.sierp.web.domain.resource.dao.FreelancerDao;
 import com.sierp.web.domain.resource.model.FreelancerSearch;
 
@@ -48,12 +52,35 @@ public class FreelancerSearchService {
 			workBaseMonth = conditionDate.getMonthValue();
 		}
 		
+		List<Integer> advantageList = Lists.newArrayList();
+		if (StringUtils.isNotEmpty(request.getLicenses())) {
+			for (String seq : request.getLicenses().split(",")) {
+				advantageList.add(Integer.parseInt(seq));
+			}
+		}
+		if (StringUtils.isNotEmpty(request.getPreferences())) {
+			for (String seq : request.getPreferences().split(",")) {
+				advantageList.add(Integer.parseInt(seq));
+			}
+		}
+		
+		List<Map<String, Object>> skillSetList = Lists.newArrayList();
+		if (StringUtils.isNotEmpty(request.getSkillsets())) {
+			for (String seqAndWorkship : request.getSkillsets().split(",")) {
+				Map<String, Object> mapCondi = Maps.newHashMap();
+				mapCondi.put("seq", seqAndWorkship.split(":")[0]);
+				SkillSetWorkmanship skillSetWorkmanship = SkillSetWorkmanship.valueOf(seqAndWorkship.split(":")[1]);
+				mapCondi.put("workmanshipVal", skillSetWorkmanship.getVal());
+				skillSetList.add(mapCondi);
+			}
+		}
+		
 		freelancerDao.selectFreelancerListCount(request.getName(), minAcademicLevel, maxAcademicLevel, request.getMainManagerId(), request.getWorkerExpertType(), 
-					                                             workBaseYear, workBaseMonth, customerCode, request);
+					                                             workBaseYear, workBaseMonth, customerCode, advantageList, skillSetList, request);
 
 		if (request.isEnoughListQuery()) {
 			List<FreelancerSearch> resultList = freelancerDao.selectFreelancerList(request.getName(), minAcademicLevel, maxAcademicLevel, 
-				       request.getMainManagerId(), request.getWorkerExpertType(), workBaseYear, workBaseMonth, customerCode, request);
+				       request.getMainManagerId(), request.getWorkerExpertType(), workBaseYear, workBaseMonth, customerCode, advantageList, skillSetList, request);
 			
 			return resultList;
 		} else {

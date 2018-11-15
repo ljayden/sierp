@@ -131,7 +131,7 @@ public class FreelancerRegisterService {
 			workerAdvantage.setAdvantageSeq(skillSet.getAdvantageSeq());
 			workerAdvantage.setAdvantageType(AdvantageType.SKILL);
 			workerAdvantage.setWorkmanship(skillSet.getSkillSetWorkmanship());
-			
+			workerAdvantage.setWorkmanshipVal(skillSet.getSkillSetWorkmanship().getVal());
 			workerDao.insertWorkerAdvantage(workerAdvantage);
 		}
 	}

@@ -86,7 +86,7 @@ CREATE TABLE worker_advantage (
 		  advantage_seq integer not null,
 		  advantage_type VARCHAR(10) not null,
 		  workmanship  VARCHAR(10),
-		  
+		  workmanship_val integer,
 		  PRIMARY KEY (worker_seq, advantage_seq)
 ); 
 	   
@@ -139,3 +139,5 @@ INSERT INTO advantage values(14 , '인성좋음', 'PREFERENCE', null, 'DEMOCOM', 'de
 
 
 INSERT INTO advantage values(15 , 'JAVA', 'SKILL', 'EXPERT', 'COMMON', '', datetime('now'));
+
+INSERT INTO advantage values(16 , '미혼', 'PREFERENCE', null, 'DEMOCOM', 'demouser', datetime('now'));

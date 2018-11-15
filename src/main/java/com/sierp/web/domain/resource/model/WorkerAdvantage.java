@@ -14,4 +14,5 @@ public class WorkerAdvantage {
 	private AdvantageType advantageType; //반정규화로 가지고 있음 ..일단
 
 	private SkillSetWorkmanship workmanship; //숙련도
+	private int workmanshipVal;
 }

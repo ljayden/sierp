@@ -19,4 +19,8 @@ public class FreelancerSearchRequest extends Pager {
 	private WorkerExpertType workerExpertType;
 	private Integer workYear; //연차
 	private Integer workMonth; //연차
+	
+	private String licenses;
+	private String preferences;
+	private String skillsets;
 }

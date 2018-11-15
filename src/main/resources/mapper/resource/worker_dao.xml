@@ -15,8 +15,8 @@
 	</insert> 
 
 	<insert id="insertWorkerAdvantage" parameterType="com.sierp.web.domain.resource.model.WorkerAdvantage">
-		INSERT INTO worker_advantage(worker_seq, advantage_seq, advantage_type, workmanship)
-		VALUES(#{workerSeq}, #{advantageSeq}, #{advantageType}, #{workmanship})
+		INSERT INTO worker_advantage(worker_seq, advantage_seq, advantage_type, workmanship, workmanship_val)
+		VALUES(#{workerSeq}, #{advantageSeq}, #{advantageType}, #{workmanship}, #{workmanshipVal})
 	</insert>
 	
 </mapper>

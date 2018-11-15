@@ -1,4 +1,47 @@
 var PER_PAGE = 10;
+var ajaxRequests = {}
+
+function getSiGunGuTypeSearch(sigunguId) {
+	if ($('#sido').val() == '') {
+		$('#' + sigunguId + ' option').remove();
+    	$('#' + sigunguId).append('<option value=""> - </option>');
+    	
+	} else {
+		
+		COMMON.ajax({
+		    url : '/common/getSiGunGu.json',
+		    data : JSON.stringify({ sido : $('#sido').val()}),
+		    successHandler : function(data){
+		    	$('#' + sigunguId +'  option').remove();
+		    	$('#' + sigunguId).append('<option value="">전체</option>')
+		    	$(data.result).each(function(i, sigungu) {
+		    		$('#' + sigunguId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+		    	});
+		    }
+		});
+	}
+}
+
+function getSiGunGuTypeReg(sigunguId) {
+	if ($('#sido').val() == '') {
+		$('#' + sigunguId + ' option').remove();
+    	$('#' + sigunguId).append('<option value="">시/도를 선택해 주세요.</option>');
+    	
+	} else {
+		
+		COMMON.ajax({
+		    url : '/common/getSiGunGu.json',
+		    data : JSON.stringify({ sido : $('#sido').val()}),
+		    successHandler : function(data){
+		    	$('#' + sigunguId +'  option').remove();
+		    	$('#' + sigunguId).append('<option value="">시/군/구</option>')
+		    	$(data.result).each(function(i, sigungu) {
+		    		$('#' + sigunguId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+		    	});
+		    }
+		});
+	}
+}
 
 var COMMON = {
  

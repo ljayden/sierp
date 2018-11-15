@@ -44,14 +44,14 @@
  	
 </head>
 
-<body class="bg-light" style="margin-right: -17px;"> <!-- margin 이유 모달창때 스크롤 잇으면 17이 붙더라.. -->
+<body class="bg-light" style="margin-right: -34px;"> <!-- margin 이유 모달창때 스크롤 잇으면 17이 붙더라.. -->
 
 	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
 		<a class="navbar-brand mr-auto mr-lg-0" href="#"><b>${ sessionScope.customer.customerName}</b></a>
 		<button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-	  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	&nbsp;&nbsp;&nbsp;&nbsp;
 	  
 	  	<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
 		   	<ul class="navbar-nav mr-auto">
@@ -59,16 +59,16 @@
 					<a class="nav-link" href="/home/dashboard/main.do"><b>Home</b><c:if test = "${topMenuPath eq 'home'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'recruit'}">active</c:if>">
-					<a class="nav-link" href="/recruit/dashboard/main.do"><b>채용 관리</b><c:if test = "${topMenuPath eq 'recruit'}"><span class="sr-only">(current)</span></c:if></a>
+					<a class="nav-link" href="/recruit/dashboard/main.do"><b>채용관리</b><c:if test = "${topMenuPath eq 'recruit'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'contract'}">active</c:if>">
 					<a class="nav-link" href="/contract/dashboard/main.do"><b>계약관리</b><c:if test = "${topMenuPath eq 'contract'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'resource'}">active</c:if>">
-					<a class="nav-link" href="/resource/dashboard/main.do"><b>인재 관리</b><c:if test = "${topMenuPath eq 'resource'}"><span class="sr-only">(current)</span></c:if></a>
+					<a class="nav-link" href="/resource/dashboard/main.do"><b>인재관리</b><c:if test = "${topMenuPath eq 'resource'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'project'}">active</c:if>">
-					<a class="nav-link" href="/project/dashboard/main.do"><b>프로젝트관리</b><c:if test = "${topMenuPath eq 'project'}"><span class="sr-only">(current)</span></c:if></a>
+					<a class="nav-link" href="/project/dashboard/main.do"><b>프로젝트</b><c:if test = "${topMenuPath eq 'project'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'business'}">active</c:if>">
 					<a class="nav-link" href="/business/company/main.do"><b>영업관리</b><c:if test = "${topMenuPath eq 'business'}"><span class="sr-only">(current)</span></c:if></a>
@@ -88,10 +88,10 @@
 			</ul>
 		       
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="검색" aria-label="검색">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<input class="form-control form-control-sm mr-sm-2" type="text" placeholder="프리랜서 or 직원 검색" aria-label="검색">
+				<button type="button" class="btn btn-outline-success btn-sm my-2 my-sm-0" >Search</button>
 				<c:if test="${ not empty sessionScope.customerManager }">
-					&nbsp;&nbsp;<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" id="logoutBtn">Logout</button>
+					&nbsp;&nbsp;<button class="btn btn-outline-secondary my-2 my-sm-0 btn-sm" type="button" id="logoutBtn">Logout</button>
 				</c:if>
 			</form>
 		</div>

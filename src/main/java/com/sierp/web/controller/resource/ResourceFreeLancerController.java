@@ -37,6 +37,8 @@ public class ResourceFreeLancerController {
 	@RequestMapping(value = "/main", method = {RequestMethod.GET})
 	public String main(Model model, CustomerManager manager) {
 		
+		model.addAttribute("advantageList", commonDao.selectAdvantageList(manager.getCustomerCode(), null, null, true));
+		model.addAttribute("skillSetTypeList", SkillSetType.values());
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerCode()));
 		return "resource/freelancer/main";
 	}

@@ -77,7 +77,7 @@
 		<div class="form-row">
 			<div class="form-group col-md-2 mb-3">
                 <label for="sido" class="col-form-label-sm">주소</label>
-                <select class="custom-select custom-select-sm d-block w-100" id="sido" required onchange="javascript: getSiGunGu();">
+                <select class="custom-select custom-select-sm d-block w-100" id="sido" required onchange="javascript: getSiGunGuTypeReg('sigungu');">
 				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
 			  	</select>
 			  	<div class="invalid-feedback" style="width: 100%;">시/도를 선택해 주세요.</div>
@@ -287,14 +287,6 @@
   	</div>
 
 
-<!-- Generated markup by the plugin -->
-<div class="tooltip bs-tooltip-top" id="aaa" role="tooltip">
-  <div class="arrow"></div>
-  <div class="tooltip-inner">
-    Some tooltip text!
-  </div>
-</div>
-
 <!-- Modal -->
 <div class="modal fade" id="licenseConfModal" tabindex="-1" role="dialog" aria-labelledby="licenseConfModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
@@ -415,7 +407,7 @@
 		<div class="card border-info float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
 			<div class="card-body text-info "  style="padding: 0.40rem;" >
 				${ advantage.advantageName }
-				<select class="custom-select custom-select-sm w80 ml-1 text-info border-info">
+				<select class="custom-select custom-select-sm w90 ml-1 text-info border-info">
 				    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
 			  	</select>
 			  	<button type="button" class="btn btn-outline-info btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', this)">&#43;</button>
@@ -430,7 +422,7 @@
 		<div class="card border-warning float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
 			<div class="card-body text-warning "  style="padding: 0.40rem;" >
 				${ advantage.advantageName }
-				<select class="custom-select custom-select-sm w80 ml-1 text-warning border-warning">
+				<select class="custom-select custom-select-sm w90 ml-1 text-warning border-warning">
 				    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
 			  	</select>
 			  	<button type="button" class="btn btn-outline-warning btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', this)">&#43;</button>
@@ -484,16 +476,22 @@
 	    
     $('#licenseConfModal').on('shown.bs.modal', function () {
     	 $('#licenseConfModalBtn').trigger('focus');
+    	 
+    	 $('#licensePopupDiv').html('');
     	 $('#licensePopupDiv').append($('#licenses').html())
     })
     
     $('#preferenceConfModal').on('shown.bs.modal', function () {
     	 $('#preferenceConfModalBtn').trigger('focus');
+    	 
+    	 $('#preferencePopupDiv').html('');
     	 $('#preferencePopupDiv').append($('#preferences').html())
     })
     
     $('#skillSetConfModal').on('shown.bs.modal', function () {
     	 $('#skillSetConfModalBtn').trigger('focus');
+    	 
+    	 $('#skillSetPopupDiv').html('');
     	 $('#skillSetPopupDiv').append($('#skillSets').html())
     })
 	    
@@ -712,11 +710,9 @@ function removeCareerRow(id) {
 
 
 function licenseAdd(seq, name, customCode) {
-	//있으면 추가안하는 로직도 해야하고, 그러려면 seq를 찾아야 하고
 	var color = customCode == 'COMMON' ? 'info' : 'warning';
 	var divId = 'license' + seq; 
 	if ($('#licensePopupDiv #' + divId).length > 0) {
-		//이미 자격증이 추가되어 있다면
 		return false;
 	}
 	
@@ -739,11 +735,9 @@ function licenseSave() {
 
 
 function preferenceAdd(seq, name, customCode) {
-	//있으면 추가안하는 로직도 해야하고, 그러려면 seq를 찾아야 하고
 	var color = customCode == 'COMMON' ? 'info' : 'warning';
 	var divId = 'preference' + seq; 
 	if ($('#preferencePopupDiv #' + divId).length > 0) {
-		//이미 자격증이 추가되어 있다면
 		return false;
 	}
 	
@@ -766,16 +760,12 @@ function preferenceSave() {
 
 
 function skillSetAdd(seq, name, customCode, btn) {
-	
-	//있으면 추가안하는 로직도 해야하고, 그러려면 seq를 찾아야 하고
 	var color = customCode == 'COMMON' ? 'info' : 'warning';
 	var divId = 'skillSet' + seq; 
 	if ($('#skillSetPopupDiv #' + divId).length > 0) {
-		//이미 자격증이 추가되어 있다면
 		return false;
 	}
 	
-
 	var expVal = $(btn).parent().find('select option:checked').val();
 	var expText = $(btn).parent().find('select option:checked').text();
 	
@@ -810,27 +800,5 @@ function updateFreeGrade() {
 		    }
 		});
 	}
-}
-
-function getSiGunGu() {
-	if ($('#sido').val() == '') {
-		$('#sigungu option').remove();
-    	$('#sigungu').append('<option value="">시/도를 선택해 주세요.</option>');
-    	
-	} else {
-		
-		COMMON.ajax({
-		    url : '/common/getSiGunGu.json',
-		    data : JSON.stringify({ sido : $('#sido').val()}),
-		    successHandler : function(data){
-		    	$('#sigungu option').remove();
-		    	$('#sigungu').append('<option value="">시/군/구</option>')
-		    	$(data.result).each(function(i, sigungu) {
-		    		$('#sigungu').append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
-		    	});
-		    }
-		});
-	}	
-
 }
 </script>
