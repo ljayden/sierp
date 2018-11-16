@@ -30,17 +30,17 @@ public class CustomerDao {
 	}
 	
 	
-	public CustomerManager selectCustomerManagerByIdPassword(String customerCode, String id, String password) {
+	public CustomerManager selectCustomerManagerByIdPassword(int customerSeq, String id, String password) {
 		Map<String, Object> param = Maps.newHashMap();
-		param.put("customerCode", customerCode);
+		param.put("customerSeq", customerSeq);
 		param.put("id", id);
 		param.put("password", password);
 		return sql.selectOne(MAPPER_NAMESPACE + "selectCustomerManagerByIdPassword", param);
 	}
 	
-	public List<CustomerManager> selectCustomerManagerList(String customerCode) {
+	public List<CustomerManager> selectCustomerManagerList(int customerSeq) {
 		Map<String, Object> param = Maps.newHashMap();
-		param.put("customerCode", customerCode);
+		param.put("customerSeq", customerSeq);
 		return sql.selectList(MAPPER_NAMESPACE + "selectCustomerManagerList", param);
 	}
 }

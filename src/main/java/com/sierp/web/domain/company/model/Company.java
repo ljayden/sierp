@@ -12,7 +12,7 @@ public class Company {
 
 	private int companySeq;
 	
-	private String customerCode;	//NONE일 경우 고객사가 등록한 정보
+	private int customerSeq;	//0경우 없는거
 	private String companyName;
 	
 	private String bizNo;

@@ -25,7 +25,7 @@ public class Worker {
 	
 	private WorkerType workerType;	//직원, 프리랜서
 	
-	private String customerCode;	//NONE : 유저등록 정보
+	private int customerSeq;	//0 : 유저등록 정보
 	
 	private String name;
 	private String email;

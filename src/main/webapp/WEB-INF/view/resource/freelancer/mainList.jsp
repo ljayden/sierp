@@ -29,7 +29,7 @@
 	      		<td><b>${ freelancer.contractStatus }</b></td>
 	      		<td>2018.04 ~ 2019.04</td>
 	      		<td></td>
-	      		<td><mt:mgrNm customerCode="${ sessionScope.customerManager.customerCode }" managerId="${ freelancer.mainManagerId }"/></td>
+	      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ freelancer.mainManagerId }"/></td>
 	      		<td>2017.04.02</td>
 	    	</tr>
  		</c:forEach>

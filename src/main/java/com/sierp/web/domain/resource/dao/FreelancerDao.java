@@ -24,7 +24,7 @@ public class FreelancerDao {
 	}
 
 	public void selectFreelancerListCount(String name, Integer minAcademicLevel, Integer maxAcademicLevel, String mainManagerId, 
-										WorkerExpertType workerExpertType, int workBaseYear, int workBaseMonth, String customerCode, 
+										WorkerExpertType workerExpertType, int workBaseYear, int workBaseMonth, int customerSeq, 
 										List<Integer> advantageList, List<Map<String, Object>> skillSetList, Pager pager) {
 		
 		Map<String, Object> params = pager.initParamMapWithPager();
@@ -37,13 +37,13 @@ public class FreelancerDao {
 		params.put("workBaseMonth", workBaseMonth);
 		params.put("advantageList", advantageList);
 		params.put("skillSetList", skillSetList);
-		params.put("customerCode", customerCode);
+		params.put("customerSeq", customerSeq);
 	
 		pager.setTotalCount(sql.selectOne(MAPPER_NAMESPACE + "selectFreelancerListCount", params)); 
 	}
 	
 	public List<FreelancerSearch> selectFreelancerList(String name, Integer minAcademicLevel, Integer maxAcademicLevel, String mainManagerId, 
-										WorkerExpertType workerExpertType, int workBaseYear, int workBaseMonth, String customerCode, 
+										WorkerExpertType workerExpertType, int workBaseYear, int workBaseMonth, int customerSeq, 
 										List<Integer> advantageList, List<Map<String, Object>> skillSetList, Pager pager) {
 		
 		Map<String, Object> params = pager.initParamMapWithPager();
@@ -56,7 +56,7 @@ public class FreelancerDao {
 		params.put("workBaseMonth", workBaseMonth);
 		params.put("advantageList", advantageList);
 		params.put("skillSetList", skillSetList);
-		params.put("customerCode", customerCode);
+		params.put("customerSeq", customerSeq);
 		
 		return sql.selectList(MAPPER_NAMESPACE + "selectFreelancerList", params);
 	}

@@ -45,7 +45,7 @@ public class FreelancerRegisterService {
 	@Transactional(rollbackFor = {Exception.class})
 	private Freelancer registerFreelancer(FreelancerRegisterRequest request, CustomerManager manager) {
 		Freelancer freelancer = new Freelancer();
-		freelancer.setCustomerCode(manager.getCustomerCode());
+		freelancer.setCustomerSeq(manager.getCustomerSeq());
 		freelancer.setWorkerType(WorkerType.FREELANCER);
 		
 		freelancer.setName(request.getName());

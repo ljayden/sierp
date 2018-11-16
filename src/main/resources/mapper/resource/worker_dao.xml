@@ -3,9 +3,9 @@
 <mapper namespace="mapper.resource.worker_dao">
  
 	<insert id="insertWorker" parameterType="com.sierp.web.domain.resource.model.Worker" useGeneratedKeys="true" keyProperty="workerSeq">
-		INSERT INTO worker(worker_type, customer_code, name, email, phone_no, birth_year, birth_month, birth_day, sex, 
+		INSERT INTO worker(worker_type, customer_seq, name, email, phone_no, birth_year, birth_month, birth_day, sex, 
 		                   worker_expert_type, academic_level, academic_level_val, start_work_year, start_work_month, sido, sigungu, detail_addr, register_ymdt, modify_ymdt)
-		VALUES(#{workerType},#{customerCode},#{name},#{email},#{phoneNo},#{birthYear},#{birthMonth},#{birthDay},#{sex}
+		VALUES(#{workerType},#{customerSeq},#{name},#{email},#{phoneNo},#{birthYear},#{birthMonth},#{birthDay},#{sex}
 		      ,#{workerExpertType},#{academicLevel}, #{academicLevelVal},#{careerStartYear},#{careerStartMonth},#{sido},#{siGunGu},#{detailAddr},#{registerYmdt},#{modifyYmdt})
 	</insert>
     

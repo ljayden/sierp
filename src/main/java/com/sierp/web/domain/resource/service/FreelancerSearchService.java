@@ -22,7 +22,7 @@ public class FreelancerSearchService {
 	@Autowired FreelancerDao freelancerDao;
 	
 	
-	public List<FreelancerSearch> getFreelancer(FreelancerSearchRequest request, String customerCode) {
+	public List<FreelancerSearch> getFreelancer(FreelancerSearchRequest request, int customerSeq) {
 
 		Integer minAcademicLevel = null;
 		if (request.getMinAcademicLevel() != null) {
@@ -76,11 +76,11 @@ public class FreelancerSearchService {
 		}
 		
 		freelancerDao.selectFreelancerListCount(request.getName(), minAcademicLevel, maxAcademicLevel, request.getMainManagerId(), request.getWorkerExpertType(), 
-					                                             workBaseYear, workBaseMonth, customerCode, advantageList, skillSetList, request);
+					                                             workBaseYear, workBaseMonth, customerSeq, advantageList, skillSetList, request);
 
 		if (request.isEnoughListQuery()) {
 			List<FreelancerSearch> resultList = freelancerDao.selectFreelancerList(request.getName(), minAcademicLevel, maxAcademicLevel, 
-				       request.getMainManagerId(), request.getWorkerExpertType(), workBaseYear, workBaseMonth, customerCode, advantageList, skillSetList, request);
+				       request.getMainManagerId(), request.getWorkerExpertType(), workBaseYear, workBaseMonth, customerSeq, advantageList, skillSetList, request);
 			
 			return resultList;
 		} else {

@@ -10,7 +10,8 @@ import lombok.Data;
 
 @Data
 public class Customer {
-
+	
+	private int customerSeq;
 	private String customerCode;
 	private String customerName;
 	

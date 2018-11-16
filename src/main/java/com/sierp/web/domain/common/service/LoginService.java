@@ -27,18 +27,19 @@ public class LoginService {
 	public JsonResult login(String customerCode, String id, String password, HttpSession session) {
 		
 		try {
+			
+			Customer customer = customerDao.selectCustomerByCode(customerCode);
+			
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
 	        byte[] encBytes =  digest.digest(password.getBytes("UTF-8"));
 	        encBytes = Base64.encodeBase64(encBytes);
-			CustomerManager cm = customerDao.selectCustomerManagerByIdPassword(customerCode, id, new String(encBytes));
+			CustomerManager cm = customerDao.selectCustomerManagerByIdPassword(customer.getCustomerSeq(), id, new String(encBytes));
 			
 			if (cm == null) {
 				return JsonResults.fail(1001, "관리자 정보를 찾을 수 없습니다.");
 				
 			} else {
 				session.setAttribute(SESSION_MANAGER_ATTR_FIELD, cm);
-				
-				Customer customer = customerDao.selectCustomerByCode(customerCode);
 				session.setAttribute(SESSION_CUSTOM_ATTR_FIELD, customer);
 				session.setMaxInactiveInterval(SESSION_VALID_SEC);
 				return JsonResults.success();

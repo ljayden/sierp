@@ -10,6 +10,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ import lombok.Setter;
 import com.google.common.collect.Maps;
 import com.sierp.web.config.WebRootConfig;
 import com.sierp.web.domain.company.dao.CustomerDao;
+import com.sierp.web.domain.company.model.Customer;
 import com.sierp.web.domain.company.model.CustomerManager;
 
 /**
@@ -41,7 +43,10 @@ public class GetManagerNameTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException {
 		
 		if (!managers.containsKey(customerCode)) {
-			List<CustomerManager> customerManager = customerDao.selectCustomerManagerList(customerCode);
+			
+			Customer customer = customerDao.selectCustomerByCode(customerCode);
+			
+			List<CustomerManager> customerManager = customerDao.selectCustomerManagerList(customer.getCustomerSeq());
 			managers.put(customerCode, customerManager);
 		}
 		

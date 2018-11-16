@@ -29,7 +29,7 @@
 	</select>
 	
     <sql id="freelancerSearchCondition">
-		w.worker_seq = f.worker_seq AND w.customer_code = #{customerCode}
+		w.worker_seq = f.worker_seq AND w.customer_seq = #{customerSeq}
 		
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(name)">
 			AND w.name = #{name}

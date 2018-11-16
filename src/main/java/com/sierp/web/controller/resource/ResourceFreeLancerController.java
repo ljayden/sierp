@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sierp.web.controller.resource.request.FreelancerGetGradeRequest;
@@ -39,7 +40,7 @@ public class ResourceFreeLancerController {
 		
 		model.addAttribute("advantageList", commonDao.selectAdvantageList(manager.getCustomerCode(), null, null, true));
 		model.addAttribute("skillSetTypeList", SkillSetType.values());
-		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerCode()));
+		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		return "resource/freelancer/main";
 	}
 
@@ -47,7 +48,7 @@ public class ResourceFreeLancerController {
 	@RequestMapping(value = "/getMainList", method = {RequestMethod.POST})
 	public String mainList(Model model, CustomerManager manager, FreelancerSearchRequest request) {
 		
-		model.addAttribute("searchList", freelancerSearchService.getFreelancer(request, manager.getCustomerCode()));
+		model.addAttribute("searchList", freelancerSearchService.getFreelancer(request, manager.getCustomerSeq()));
 		model.addAttribute("request", request);
 		return "resource/freelancer/mainList";
 	}
@@ -59,7 +60,7 @@ public class ResourceFreeLancerController {
 
 		model.addAttribute("advantageList", commonDao.selectAdvantageList(manager.getCustomerCode(), null, null, true));
 		model.addAttribute("skillSetTypeList", SkillSetType.values());
-		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerCode()));
+		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		
 		return "resource/freelancer/registFreelancer";
 	}
@@ -75,6 +76,15 @@ public class ResourceFreeLancerController {
 		return JsonResults.success();
     }
 	
+	
+	@RequestMapping(value = "/viewFreelancer", method = RequestMethod.GET)
+    public String viewFreelancer(Model model,  CustomerManager manager, @RequestParam(name = "freelancerSeq") String freelancerSeq) {
+		
+		model.addAttribute("advantageList", commonDao.selectAdvantageList(manager.getCustomerCode(), null, null, true));
+		model.addAttribute("skillSetTypeList", SkillSetType.values());
+
+		return "resource/freelancer/viewFreelancer";
+    }
 	
 	@RequestMapping(value = "/getFreelancerGrade", method = RequestMethod.POST)
 	@ResponseBody
