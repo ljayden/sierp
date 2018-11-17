@@ -22,7 +22,7 @@
   	<tbody>
  		<c:forEach var="freelancer" items="${ searchList }">
 	    	<tr>
-	      		<th scope="row">${ freelancer.name }</th>
+	      		<th scope="row"><a href="/resource/freelancer/viewFreelancer.do?freelancerSeq=${ freelancer.freelancerSeq}">${ freelancer.name }</a></th>
 	      		<td>중급</td>
 	      		<td>${ freelancer.workerExpertType.description }</td>
 	      		<td>${ freelancer.sido.description }/${ freelancer.siGunGu.description }</td>

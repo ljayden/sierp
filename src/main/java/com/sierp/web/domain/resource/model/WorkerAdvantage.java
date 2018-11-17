@@ -2,11 +2,14 @@ package com.sierp.web.domain.resource.model;
 
 import com.sierp.web.domain.common.constant.AdvantageType;
 import com.sierp.web.domain.common.constant.SkillSetWorkmanship;
+import com.sierp.web.domain.common.model.Advantage;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class WorkerAdvantage {
+@EqualsAndHashCode(callSuper = false)
+public class WorkerAdvantage extends Advantage {
 
 	private int workerSeq;
 	private int advantageSeq;

@@ -22,6 +22,10 @@ public class FreelancerDao {
 	public int insertFreelancer(Freelancer freelancer) {
 		return sql.insert(MAPPER_NAMESPACE + "insertFreelancer", freelancer);
 	}
+	
+	public Freelancer selectFreelancer(int freelancerSeq) {
+		return sql.selectOne(MAPPER_NAMESPACE + "selectFreelancer", freelancerSeq);
+	}
 
 	public void selectFreelancerListCount(String name, Integer minAcademicLevel, Integer maxAcademicLevel, String mainManagerId, 
 										WorkerExpertType workerExpertType, int workBaseYear, int workBaseMonth, int customerSeq, 

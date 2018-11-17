@@ -13,12 +13,12 @@
 	<input type="hidden" id="preferenceInput" name="preferences" value=""/>
 	<input type="hidden" id="skillsetInput" name="skillsets" value=""/>
 	
-	<div class="my-3 p-3 bg-white rounded shadow-sm">
+	<div class="my-3 p-3 bg-white rounded shadow">
 		<div class="searchFormToggle" id="searchTap">
 			<div class="row">
 				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
-			    		<span class="input-group-text w80" id="search-name">등록일</span>
+			    		<span class="input-group-text w80 " id="search-name">등록일</span>
 			  		</div>
 			  		<input type="text" class="form-control" id="" name="" aria-label="시작일" aria-describedby="">
 			  		&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
@@ -41,12 +41,10 @@
 			  		<input type="text" class="form-control" id="name" name="name" aria-label="검색할 이름을 입력해 주세요." aria-describedby="search-name">
 				</div>
 				<div class="input-group input-group-sm col-md-3 mb-3">
-			  		<div class="input-group-prepend ">
-				    	<label class="input-group-text input-group-text-sm w80" for="workerExpertType">전문 영역</label>
-				  	</div>
-					<select class="custom-select custom-select-sm" id="workerExpertType" name="workerExpertType">
-						<mt:enumOptions enumClass="WorkerExpertType" emptyValueName="전체"></mt:enumOptions>
-				  	</select>
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-age">나이</span>
+			  		</div>
+			  		<input type="text" class="form-control" id="age" name="age" placeholder="yyyy" aria-label="생년월 입력해 주세요."  aria-describedby="search-age">
 				</div>
 				<div class="input-group input-group-sm col-md-6 mb-3">
 			  		<div class="input-group-prepend ">
@@ -61,13 +59,12 @@
 			  	</div>
 			</div>
 			<div class="row">
-				
 				<div class="input-group input-group-sm col-md-3 mb-3">
-					<div class="input-group-prepend">
-				    	<label class="input-group-text w80" for="freeGrade">등급구분</label>
+			  		<div class="input-group-prepend ">
+				    	<label class="input-group-text input-group-text-sm w80" for="workerExpertType">전문 영역</label>
 				  	</div>
-					<select class="custom-select custom-select-sm" id="freeGrade" name="freeGrade">
-						<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="전체"/>
+					<select class="custom-select custom-select-sm" id="workerExpertType" name="workerExpertType">
+						<mt:enumOptions enumClass="WorkerExpertType" emptyValueName="전체"></mt:enumOptions>
 				  	</select>
 				</div>
 				
@@ -116,6 +113,15 @@
 	                		<option value="${ manager.id }">${ manager.name }</option>
 	                	</c:forEach>
 			  		</select>
+				</div>
+				
+				<div class="input-group input-group-sm col-md-3 mb-3">
+					<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="freeGrade">등급구분</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="freeGrade" name="freeGrade">
+						<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="전체"/>
+				  	</select>
 				</div>
 			</div>
 			
@@ -361,7 +367,7 @@ $(document).ready(function() {
     	$('#licenseInput').val('')
     	$('#skillsetInput').val('')
     	
-    	$('.preferenceRow').each(function(obj) {
+    	$('#searchForm .preferenceRow').each(function(obj) {
     		if ($('#preferenceInput').val().length > 0) {
     			$('#preferenceInput').val($('#preferenceInput').val() + ',' + $(this).attr('data'))
     		} else {
@@ -369,7 +375,7 @@ $(document).ready(function() {
     		}
     	});
     	
-    	$('.licenseRow').each(function(obj) {
+    	$('#searchForm .licenseRow').each(function(obj) {
     		if ($('#licenseInput').val().length > 0) {
     			$('#licenseInput').val($('#licenseInput').val() + ',' + $(this).attr('data'))
     		} else {
@@ -378,7 +384,7 @@ $(document).ready(function() {
     	});
     	
 
-    	$('.skillSetRow').each(function(obj) {
+    	$('#searchForm .skillSetRow').each(function(obj) {
     		if ($('#skillsetInput').val().length > 0) {
     			$('#skillsetInput').val($('#skillsetInput').val() + ',' + $(this).attr('data'))
     		} else {
@@ -391,16 +397,22 @@ $(document).ready(function() {
 	
     $('#licenseConfModal').on('shown.bs.modal', function () {
    		$('#licenseConfModalBtn').trigger('focus');
+   		
+   		$('#licensePopupDiv').html('');
    	 	$('#licensePopupDiv').append($('#licenses').html())
    	})
    
    	$('#preferenceConfModal').on('shown.bs.modal', function () {
    	 	$('#preferenceConfModalBtn').trigger('focus');
+   	 	
+   		$('#preferencePopupDiv').html('');
    	 	$('#preferencePopupDiv').append($('#preferences').html())
    	})
    
    	$('#skillSetConfModal').on('shown.bs.modal', function () {
    	 	$('#skillSetConfModalBtn').trigger('focus');
+   	 	
+   		$('#skillSetPopupDiv').html('');
    	 	$('#skillSetPopupDiv').append($('#skillSets').html())
    	})
 	
@@ -455,7 +467,6 @@ function licenseAdd(seq, name, customCode) {
 function licenseSave() {
 	$('#licenses').html('');
 	$('#licenses').append($('#licensePopupDiv').html());
-	$('#licensePopupDiv').html('');
 	$('#licenseConfModal').modal('hide');
 }
 
@@ -480,7 +491,6 @@ function preferenceAdd(seq, name, customCode) {
 function preferenceSave() {
 	$('#preferences').html('');
 	$('#preferences').append($('#preferencePopupDiv').html());
-	$('#preferencePopupDiv').html('');
 	$('#preferenceConfModal').modal('hide');
 }
 
@@ -509,7 +519,6 @@ function skillSetAdd(seq, name, customCode, btn) {
 function skillSetSave() {
 	$('#skillSets').html('');
 	$('#skillSets').append($('#skillSetPopupDiv').html());
-	$('#skillSetPopupDiv').html('');
 	$('#skillSetConfModal').modal('hide');
 }
 </script>

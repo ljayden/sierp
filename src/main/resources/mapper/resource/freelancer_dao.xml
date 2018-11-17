@@ -66,4 +66,12 @@
 			) 
 		</if>
     </sql>
+    
+    
+    <select id="selectFreelancer" parameterType="int" resultType="com.sierp.web.domain.resource.model.Freelancer">
+    	SELECT	f.*, w.*
+    	FROM 	freelancer f, worker w
+    	WHERE	f.worker_seq = w.worker_seq 
+    	AND		f.worker_seq = #{freelancerSeq} 
+    </select>
 </mapper>

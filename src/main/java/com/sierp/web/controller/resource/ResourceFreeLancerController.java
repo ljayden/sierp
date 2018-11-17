@@ -18,6 +18,9 @@ import com.sierp.web.domain.common.constant.SkillSetType;
 import com.sierp.web.domain.common.dao.CommonDao;
 import com.sierp.web.domain.company.dao.CustomerDao;
 import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.domain.resource.dao.FreelancerDao;
+import com.sierp.web.domain.resource.dao.WorkerDao;
+import com.sierp.web.domain.resource.model.Freelancer;
 import com.sierp.web.domain.resource.service.FreelancerRegisterService;
 import com.sierp.web.domain.resource.service.FreelancerSearchService;
 import com.sierp.web.result.JsonResult;
@@ -30,6 +33,8 @@ public class ResourceFreeLancerController {
 	
 	@Autowired CustomerDao customDao;
 	@Autowired CommonDao commonDao;
+	@Autowired FreelancerDao freelancerDao;
+	@Autowired WorkerDao workerDao;
 	
 	@Autowired FreelancerRegisterService freelancerRegisterService;
 	@Autowired FreelancerSearchService freelancerSearchService;
@@ -78,11 +83,20 @@ public class ResourceFreeLancerController {
 	
 	
 	@RequestMapping(value = "/viewFreelancer", method = RequestMethod.GET)
-    public String viewFreelancer(Model model,  CustomerManager manager, @RequestParam(name = "freelancerSeq") String freelancerSeq) {
+    public String viewFreelancer(Model model,  CustomerManager manager, @RequestParam(name = "freelancerSeq") int freelancerSeq) {
+
+		Freelancer freelancer = freelancerDao.selectFreelancer(freelancerSeq);
+		if (freelancer.getCustomerSeq() != manager.getCustomerSeq()) {
+			throw new RuntimeException("권한이 없다");
+		}
 		
 		model.addAttribute("advantageList", commonDao.selectAdvantageList(manager.getCustomerCode(), null, null, true));
 		model.addAttribute("skillSetTypeList", SkillSetType.values());
 
+		model.addAttribute("freelancer", freelancer);
+		model.addAttribute("freelancerCareers", workerDao.selectWorkerCareerList(freelancer.getWorkerSeq()));
+		model.addAttribute("freelancerAdvantages", workerDao.selectWorkerAdvantageList(freelancer.getWorkerSeq()));
+		
 		return "resource/freelancer/viewFreelancer";
     }
 	

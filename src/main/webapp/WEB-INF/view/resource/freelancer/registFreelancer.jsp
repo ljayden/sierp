@@ -9,7 +9,7 @@
 </head>
 
 <main role="main" class="container">
-	<div class="my-3 p-3 bg-white rounded shadow-sm">
+	<div class="my-3 p-3 bg-white rounded shadow">
 	<h4 class="mb-3">프리랜서 등록하기</h4>
 	
     <form class="needs-validation" id="regForm" novalidate> <!--  -->
@@ -143,34 +143,32 @@
 		</div>
 
 		
-		<hr class="mb-4">
+		<hr class="mb-3">
 		<h6><b>보유기술</b></h6>
-       	<div class="mb-3 input-group" id="skillSets"></div>
+       	<div class="mb-2 input-group" id="skillSets"></div>
 		<div class="mb-3" style="text-align: right">
 			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
 		</div>
 		
-		<hr class="mb-4">
+		<hr class="mb-3">
 		<h6><b>우대조건</b></h6>
-       	<div class="mb-3 input-group" id="preferences"></div>
+       	<div class="mb-2 input-group" id="preferences"></div>
 		<div class="mb-3" style="text-align: right">
 			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#preferenceConfModal" id="skillSetConfModalBtn">설정하기</button>
 		</div>
 		
-		
-		<hr class="mb-4">
+		<hr class="mb-3">
 		<h6><b>자격 사항</b></h6>
-       	<div class="mb-3 input-group" id="licenses"></div>
+       	<div class="mb-2 input-group" id="licenses"></div>
 		<div class="mb-3" style="text-align: right">
 			<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#licenseConfModal" id="licenseConfModalBtn">설정하기</button>
 		</div>
 		
 		
-        <hr class="mb-4">
+        <hr class="mb-3">
         <h6><b>경력 사항</b></h6><br>
 		<div id="careers">
         </div>
-        
         <div class="form-row">
          	<div class="form-group col-md-9 mb-3">
          		<div class="form-row">
@@ -208,7 +206,7 @@
 						</select>
 		        	</div>
 		        	<div class="form-group col-md-4 mb-3">
-		        		<input type="text" class="form-control form-control-sm" id="careersJob" placeholder="업무"  value="">
+		        		<input type="text" class="form-control form-control-sm" id="careersJob" placeholder="업무 내용"  value="">
 		        	</div>
          		</div>  
          	</div>
@@ -534,7 +532,7 @@ function regFreelancer(form) {
 	
 	//경력
 	var careers = new Array();
-	$('.careersRowData').each(function(obj) {
+	$('#regForm .careersRowData').each(function(obj) {
 		 
 		var careerInfo = $(this).val().split(';');
 		var careerData = {};
@@ -551,14 +549,14 @@ function regFreelancer(form) {
 
 	
 	var preferences = new Array();
-	$('.preferenceRow').each(function(obj) {
+	$('#regForm .preferenceRow').each(function(obj) {
 		preferences.push($(this).attr('data'));
 	});
 	param.preferences = preferences;
  
 	
 	var licenses = new Array();
-	$('.licenseRow').each(function(obj) {
+	$('#regForm .licenseRow').each(function(obj) {
 		licenses.push($(this).attr('data'));
 	});
 	param.licenses = licenses;
@@ -729,7 +727,6 @@ function licenseAdd(seq, name, customCode) {
 function licenseSave() {
 	$('#licenses').html('');
 	$('#licenses').append($('#licensePopupDiv').html());
-	$('#licensePopupDiv').html('');
 	$('#licenseConfModal').modal('hide');
 }
 
@@ -754,7 +751,6 @@ function preferenceAdd(seq, name, customCode) {
 function preferenceSave() {
 	$('#preferences').html('');
 	$('#preferences').append($('#preferencePopupDiv').html());
-	$('#preferencePopupDiv').html('');
 	$('#preferenceConfModal').modal('hide');
 }
 
@@ -782,7 +778,6 @@ function skillSetAdd(seq, name, customCode, btn) {
 function skillSetSave() {
 	$('#skillSets').html('');
 	$('#skillSets').append($('#skillSetPopupDiv').html());
-	$('#skillSetPopupDiv').html('');
 	$('#skillSetConfModal').modal('hide');
 }
 

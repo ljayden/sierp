@@ -6,7 +6,7 @@
 		INSERT INTO worker(worker_type, customer_seq, name, email, phone_no, birth_year, birth_month, birth_day, sex, 
 		                   worker_expert_type, academic_level, academic_level_val, start_work_year, start_work_month, sido, sigungu, detail_addr, register_ymdt, modify_ymdt)
 		VALUES(#{workerType},#{customerSeq},#{name},#{email},#{phoneNo},#{birthYear},#{birthMonth},#{birthDay},#{sex}
-		      ,#{workerExpertType},#{academicLevel}, #{academicLevelVal},#{careerStartYear},#{careerStartMonth},#{sido},#{siGunGu},#{detailAddr},#{registerYmdt},#{modifyYmdt})
+		      ,#{workerExpertType},#{academicLevel}, #{academicLevelVal},#{startWorkYear},#{startWorkMonth},#{sido},#{siGunGu},#{detailAddr},#{registerYmdt},#{modifyYmdt})
 	</insert>
     
 	<insert id="insertWorkerCareer" parameterType="com.sierp.web.domain.resource.model.WorkerCareer">
@@ -19,4 +19,17 @@
 		VALUES(#{workerSeq}, #{advantageSeq}, #{advantageType}, #{workmanship}, #{workmanshipVal})
 	</insert>
 	
+	
+	<select id="selectWorkerCareerList" parameterType="int" resultType="com.sierp.web.domain.resource.model.WorkerCareer">
+		SELECT	*
+		FROM 	worker_career
+		WHERE	worker_seq = #{workerSeq}
+	</select>
+
+	<select id="selectWorkerAdvantageList" parameterType="int" resultType="com.sierp.web.domain.resource.model.WorkerAdvantage">
+		SELECT	wa.*, a.*
+		FROM 	worker_advantage wa, advantage a
+		WHERE	wa.advantage_seq = a.advantage_seq 
+		AND		worker_seq = #{workerSeq}
+	</select>
 </mapper>

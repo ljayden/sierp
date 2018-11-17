@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.sierp.web.domain.common.constant.Sex;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
 import com.sierp.web.domain.resource.constant.AcademicLevel;
@@ -21,7 +22,7 @@ public class FreelancerRegisterRequest {
 	@NotEmpty private String email;
 	private String phoneNo;
 	
-	@NotEmpty private String gender;
+	@NotNull private Sex gender;
 	private Integer birthYear;
 	private Integer birthMonth;
 	private Integer birthDay;

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 
+import com.sierp.web.domain.common.constant.Sex;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
 import com.sierp.web.domain.resource.constant.AcademicLevel;
@@ -34,15 +35,15 @@ public class Worker {
 	private int birthYear;
 	private Integer birthMonth;
 	private Integer birthDay;
-	private String sex;
+	private Sex sex;
 	
 	private WorkerExpertType workerExpertType;
 	
 	/**등급 산정 기준 */
 	private AcademicLevel academicLevel;
 	private int academicLevelVal;
-	private Integer careerStartYear;
-	private Integer careerStartMonth;
+	private Integer startWorkYear;
+	private Integer startWorkMonth;
 	
 	
 	private SidoType sido;

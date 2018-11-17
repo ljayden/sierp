@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,8 @@ public class LoginService {
 				return JsonResults.fail(1001, "관리자 정보를 찾을 수 없습니다.");
 				
 			} else {
+				BeanUtils.copyProperties(customer, cm);
+				
 				session.setAttribute(SESSION_MANAGER_ATTR_FIELD, cm);
 				session.setAttribute(SESSION_CUSTOM_ATTR_FIELD, customer);
 				session.setMaxInactiveInterval(SESSION_VALID_SEC);

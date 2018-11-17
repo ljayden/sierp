@@ -63,8 +63,8 @@ public class FreelancerRegisterService {
 		freelancer.setDetailAddr(request.getAddrDetail());
 		
 		freelancer.setWorkerExpertType(request.getExpertType());
-		freelancer.setCareerStartYear(request.getCareerStartYear());
-		freelancer.setCareerStartMonth(request.getCareerStartMonth());
+		freelancer.setStartWorkYear(request.getCareerStartYear());
+		freelancer.setStartWorkMonth(request.getCareerStartMonth());
 		freelancer.setAcademicLevel(request.getAcademicLevel());
 		freelancer.setAcademicLevelVal(request.getAcademicLevel().getVal());
 		
