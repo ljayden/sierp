@@ -12,14 +12,14 @@
 	<div class="my-3 p-3 bg-white rounded shadow">
 	<h4 class="mb-3">업체 등록하기</h4>
 	
-    <form class="needs-validation" id="regForm" novalidate> <!--  -->
+    <form class="needs-validation" id="regForm" novalidate>
     	<div class="form-row">
-        	<div class="form-group col-md-4 mb-3">
+        	<div class="form-group col-md-5 mb-3">
                 <label for="name" class="col-form-label-sm">업체명</label>
-                <input type="text" class="form-control form-control-sm" id="name" required>
+                <input type="text" class="form-control form-control-sm w-75" id="name" required>
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
-            <div class="form-group col-md-4 mb-3">
+            <div class="form-group col-md-3 mb-3">
               	<label for="phoneNo" class="col-form-label-sm">사업자번호<span class="text-muted">(Optional)</span></label>
                 <input type="text" class="form-control form-control-sm" id="bizNo">
         	</div>
@@ -45,35 +45,45 @@
  				<input type="text" class="form-control form-control-sm" id="addrDetail" placeholder="ex: 강남구청역 푸르지오">
 			</div>
 		</div>
-	 
-		이름/핸드폰/자리번호/이메일/직급/부서/메모
-        <hr class="mb-3">
-        <h6><b>업체 담당자 </b></h6><br>
-        <div class="form-row">
-         	<div class="form-group col-md-2 mb-3">
-		        <input type="text" class="form-control form-control-sm" id="careersJob" placeholder="이름"  value="">
-         	</div>
-        	<div class="form-group col-md-2 mb-3">
-        		<input type="text" class="form-control form-control-sm" id="careersJob" placeholder="핸드폰"  value="">
-        	</div>
-        	<div class="form-group col-md-2 mb-3">
-        		<input type="text" class="form-control form-control-sm" id="careersJob" placeholder="회사연락처"  value="">
-        	</div>
-        	<div class="form-group col-md-2 mb-3">
-        		<input type="text" class="form-control form-control-sm" id="careersJob" placeholder="이메일"  value="">
-        	</div>
-        	<div class="form-group col-md-2 mb-3">
-        		<input type="text" class="form-control form-control-sm" id="careersJob" placeholder="직급"  value="">
-        	</div>
-        	<div class="form-group col-md-2 mb-3">
-        		<input type="text" class="form-control form-control-sm" id="careersJob" placeholder="부서"  value="">
-        	</div>
-        </div>
-        
-         
 		<div class="mb-3"> 
-        	<label for="cutomerMemo" class="col-form-label-sm">담당자 메모</label>
-			<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="3"></textarea>
+        	<label for="cutomerMemo" class="col-form-label-sm">업체 메모</label>
+			<textarea class="form-control form-control-sm" id="companyMemo" aria-label="With textarea" rows="3"></textarea>
+		</div>    
+ 		<br><br>
+		
+        <h6><b>업체 담당자 </b></h6>
+        <div id="companyStaffDiv">
+        </div>
+        <br>
+        <div class="card m-1 p-2 pt-3 bg-light">
+	        <div class="form-row">
+	         	<div class="form-group col-md-2">
+			        <input type="text" class="form-control form-control-sm" id="companyStaffName" placeholder="이름"  value="">
+	         	</div>
+	        	<div class="form-group col-md-2">
+	        		<input type="text" class="form-control form-control-sm" id="companyStaffPosition" placeholder="직급(Optional)"  value="">
+	        	</div>
+	        	<div class="form-group col-md-2">
+	        		<input type="text" class="form-control form-control-sm" id="companyStaffPhone" placeholder="핸드폰(Optional)"  value="">
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<input type="text" class="form-control form-control-sm" id="companyStaffComPhone" placeholder="회사연락처(Optional)"  value="">
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<input type="text" class="form-control form-control-sm" id="companyStaffEmail" placeholder="E-mail(Optional)"  value="">
+	        	</div>
+	        </div>
+			<div class="form-row">
+	        	<div class="form-group col-md-2">
+	        		<input type="text" class="form-control form-control-sm" id="companyStaffPart" placeholder="부서(Optional)"  value="">
+	        	</div>
+				<div class="form-group col-md-9">
+					<input type="text" class="form-control form-control-sm" id="companyStaffMemo" placeholder="메모(Optional)"  value="">
+				</div>
+				<div class="form-group col-md-1">
+					<button type="button" class="btn btn-outline-dark btn-sm w-100 bg-white" onclick="javascript:addStaff()"><strong>&#43;</strong></button>
+				</div>
+			</div>
 		</div>                                                 
   		<br>
   		<div class="form-row">
@@ -82,7 +92,7 @@
 		  		<button class="btn btn-primary btn-md btn-block" type="submit">저장</button>
 		  	</div>
 		  	<div class="col-md-2 mb-3">
-		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/resource/freelancer/main.do'">취소</button>
+		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/business/company/main.do'">취소</button>
 		  	</div>
 		</div>
   	</form>
@@ -106,7 +116,7 @@
 		        
 		        form.classList.add('was-validated');
 		    } else {
-		    	//regFreelancer(event);
+		    	regCompany(event);
 		    }
 		    
 	    }, false);
@@ -116,5 +126,96 @@
 	}, false);
 })();
 
+var staffRowIndex = 1;
+function addStaff() {
+	if ($('.staffRowData').length > 20) {
+		alert('담당자는 20명 이상 추가할 수 없습니다.');
+		return false;	
+	}
+	
+	if ($('#companyStaffName').val() == '') {
+		alert('담당자명을 입력해 주세요');
+		return false;
+	}
+	if ($('#companyStaffName').val().indexOf(';') > 0 || $('#companyStaffPart').val().indexOf(';') > 0 || $('#companyStaffPosition').val().indexOf(';') > 0 ||
+		$('#companyStaffPhone').val().indexOf(';') > 0 || $('#companyStaffComPhone').val().indexOf(';') > 0 || $('#companyStaffEmail').val().indexOf(';') > 0 ||
+		$('#companyStaffMemo').val().indexOf(';') > 0 ) {
+		alert('";" 문자는 사용할 수 없습니다.');
+		return false;
+	}
+	
+	var rowId = "staffRow" + staffRowIndex;
+	staffRowIndex++;
+	var staffRowData = $('#companyStaffName').val() + ';' + $('#companyStaffPart').val() + ';' + $('#companyStaffPosition').val() + ';' + 
+	                   $('#companyStaffPhone').val() + ';' + $('#companyStaffComPhone').val() + ';' + $('#companyStaffEmail').val() + ';' + $('#companyStaffMemo').val();
+
+    var rowHtml =    	
+		'<div id="' + rowId + '" class="card small p-2 mb-2">' +
+		    '<input type="hidden" class="staffRowData" value="' + staffRowData +'"/>' +
+        	'<div class="form-row mb-m3">' +
+        		'<div class="form-group col-md-2 p-1"><b>' + $('#companyStaffName').val() + '</b></div>' +
+        		'<div class="form-group col-md-2">' + $('#companyStaffPart').val() + '/' + $('#companyStaffPosition').val() + '</div>' +
+        		'<div class="form-group col-md-2">' + $('#companyStaffPhone').val() + '</div>' +
+        		'<div class="form-group col-md-2">' + $('#companyStaffComPhone').val() + '</div>' +
+        		'<div class="form-group col-md-3">' + $('#companyStaffEmail').val() + '</div>' +
+        		'<div class="form-group col-md-1">' +
+        		'<button type="button" class="btn btn-outline-dark btn-sm w-100" onclick="javascript: $(\'#' + rowId + '\').remove();"><strong>&times;</strong></button>' +
+        		'</div>' +
+        	'</div>' +
+        	'<div class="form-row mb-m3">' +
+        		'<div class="form-group col-md-2"></div>' +
+        		'<div class="form-group col-md-8">' + $('#companyStaffMemo').val() + '</div>' +
+        	'</div>' +
+    	'</div>';
+    	
+	$('#companyStaffDiv').append(rowHtml);
+
+	$('#companyStaffName').val('');
+	$('#companyStaffPosition').val('');
+	$('#companyStaffPhone').val('');
+	$('#companyStaffComPhone').val('');
+	$('#companyStaffEmail').val('');
+	$('#companyStaffPart').val('');
+	$('#companyStaffMemo').val('');
+}
+
+
+function regCompany(form) {
+	var param = {};
+	param.name = $('#name').val();
+	param.bizNo = $('#bizNo').val();
+	param.sido = $('#sido').val();
+	param.sigungu = $('#sigungu').val();
+	param.addrDetail = $('#addrDetail').val();
+	param.customerMemo = $('#companyMemo').val();
+	 
+	var staffs = new Array();
+	$('#regForm .staffRowData').each(function(obj) {
+
+		var staffInfo = $(this).val().split(';');
+		var staffData = {};
+		staffData['staffName'] = careerInfo[0];
+		staffData['staffPart'] = careerInfo[1];
+		staffData['staffPosition'] = careerInfo[2];
+		staffData['staffPhone'] = careerInfo[3];
+		staffData['staffComPhone'] = careerInfo[4];
+		staffData['staffEmail'] = careerInfo[5];
+		staffData['staffMemo'] = careerInfo[6];
+		staffs.push(staffData);
+	});
+	param.staffs = staffs;
+
+	event.preventDefault();
+    event.stopPropagation();
+ 
+	COMMON.ajax({
+	    url : '/business/companyr/registCompanyProc.json',
+	    data : JSON.stringify(param),
+	    successHandler : function(data){
+	       alert('업체를 등록하였습니다.');
+	       location.href = '/business/companyr/main.do';
+	    }
+	});
+}
 
 </script>

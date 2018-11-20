@@ -163,8 +163,8 @@
     	<div class="nav-scroller bg-white shadow-sm">
 			<nav class="nav nav-underline">
 	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">영업.업체 관리</button>
-	        	<a class="nav-link" href="#">업체관리</a>
-	        	<a class="nav-link" href="#">업체담당자<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link <c:if test ="${subMenuPath eq 'company'}">text-primary font-weight-bold</c:if>"  href="/business/company/main.do">업체관리</a>
+	        	<a class="nav-link <c:if test ="${subMenuPath eq 'companyManager'}">text-primary font-weight-bold</c:if>" href="/business/companyManager/main.do">업체담당자<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
 	        	<a class="nav-link" href="#">영업관리</a>
 	    	</nav>
 	    </div>
