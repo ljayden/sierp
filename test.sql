@@ -1,3 +1,5 @@
+--1542257163365
+
 CREATE TABLE customer (
 		  customer_seq integer PRIMARY KEY AUTOINCREMENT,
 		  customer_code VARCHAR(8),

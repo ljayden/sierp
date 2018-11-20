@@ -89,7 +89,7 @@
 		       
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control form-control-sm mr-sm-2" type="text" placeholder="프리랜서 or 직원 검색" aria-label="검색">
-				<button type="button" class="btn btn-outline-success btn-sm my-2 my-sm-0" >Search</button>
+				<button type="button" class="btn btn-outline-success btn-sm my-2 my-sm-0" data-toggle="modal" data-target="#topSearchResultModel" id="topSearchResultModelBtn">Search</button>
 				<c:if test="${ not empty sessionScope.customerManager }">
 					&nbsp;&nbsp;<button class="btn btn-outline-secondary my-2 my-sm-0 btn-sm" type="button" id="logoutBtn">Logout</button>
 				</c:if>
@@ -173,6 +173,36 @@
     
     <decorator:body/>
 
+<!-- Modal -->
+<div class="modal fade" id="topSearchResultModel" tabindex="-1" role="dialog" aria-labelledby="topSearchResultModel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+     		<div class="modal-header  text-white bg-info">
+        	<h5 class="modal-title modal-title-sm" id="topSearchResultModelLabel"><b>검색 결과</b></h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      		</div>
+			
+			<div class="modal-body">
+		       	<div class="mb-3" id="searchResultDiv">
+					<div class="text-muted small">자사 프리랜서풀에서 1건이 검색되었습니다.</div>
+					<div class="p-3"><a href="">김철수(27/남/성남) 개발자</a></div>
+					<hr class="mb-2">
+					
+					<div class="text-muted small">인재풀에서 2건이 검색되었습니다.</div>
+					<div class="p-3"><a href="">김철수(21/남) 개발자</a>&nbsp;&nbsp;&nbsp;<a href="">김철수(26/남) 디자이너</a></div>
+					<hr class="mb-2">
+					
+					<div class="text-muted small">업체 담당자에서  1 건이 검색되었습니다.</div>
+					<div class="p-3"><a href="">김철수-네이버(35/남)</a></div>
+
+				</div>
+			</div>
+    		<div class="modal-footer">
+        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
     <script type="text/javascript">
     $(function () {
 		'use strict'

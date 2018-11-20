@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.company.company_dao">
-    <!-- select id="select" parameterType="map" resultType=" ">
+
+    <select id="selectCompany" resultType="map">
+    	SELECT * FROM company
+    </select>
+    
+    <select id="selectCompanyBySeq" parameterType="map">
+    	SELECT * FROM company WHERE company_seq = #{companySeq}
+    </select>
+    
+	<select id="selectCompanyListCount" parameterType="map" resultType="int">
+		SELECT 	count(*)
+		FROM 	company c
+		
+		<where><include refid="companySearchCondition"/></where>
+	</select>
+	
+	<select id="selectCompanyList" parameterType="map" resultType="com.sierp.web.domain.company.model.CompanySearch">
+		SELECT  c.*
+		FROM 	company c
+		
+	 	<where><include refid="companySearchCondition"/></where>
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+    <sql id="companySearchCondition">
+		c.customer_seq = #{customerSeq} AND c.company_seq <![CDATA[ <> ]]> #{ customerSeq }
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(companyName)">
+			AND c.company_name = #{companyName}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(resisterManagerId)">
+			AND c.resister_manager_id = #{resisterManagerId}
+		</if>
+		
+		<if test="sido != null">
+			AND c.sido = #{sido}
+		</if>
+		
+		<if test="siGunGu != null">
+			AND c.sigungu = #{siGunGu}
+		</if>
+    </sql>
+    
+    
+    
+        <!-- select id="select" parameterType="map" resultType=" ">
  
             <if test="brandCd != 'NONE'">
                 AND al.  = #{ }
@@ -33,11 +79,4 @@
 		WHERE s.rnum = 1
     </select -->
     
-    <select id="selectCompany" resultType="map">
-    	SELECT * FROM company
-    </select>
-    
-    <select id="selectCompanyBySeq" parameterType="map">
-    	SELECT * FROM company WHERE company_seq = #{companySeq}
-    </select>
 </mapper>
