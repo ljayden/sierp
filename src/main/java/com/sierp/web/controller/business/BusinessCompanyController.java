@@ -1,15 +1,23 @@
 package com.sierp.web.controller.business;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sierp.web.controller.business.request.CompanyRegisterRequest;
 import com.sierp.web.controller.business.request.CompanySearchRequest;
 import com.sierp.web.domain.company.dao.CompanyDao;
 import com.sierp.web.domain.company.dao.CustomerDao;
 import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.domain.company.service.CompanyRegisterService;
+import com.sierp.web.result.JsonResult;
+import com.sierp.web.result.JsonResults;
 
 @Controller
 @RequestMapping(value = "/business/company")
@@ -17,6 +25,7 @@ public class BusinessCompanyController {
 
 	@Autowired CustomerDao customDao;
 	@Autowired CompanyDao companyDao;
+	@Autowired CompanyRegisterService registerService;
 	
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String dashboard(Model model, CustomerManager manager) {
@@ -47,9 +56,16 @@ public class BusinessCompanyController {
 	
 	@RequestMapping(value = "/registCompany", method = RequestMethod.GET)
 	public String registerCompany(Model model, CustomerManager manager) {
-		
 
-		
 		return "business/company/registCompany";
 	}
+	
+	@RequestMapping(value = "/registCompanyProc", method = RequestMethod.POST)
+	@ResponseBody
+    public JsonResult registFreelancerProc(CustomerManager manager, @RequestBody @Valid CompanyRegisterRequest request) {
+		
+		registerService.registerCompanyProc(request, manager);
+		
+		return JsonResults.success();
+    }
 }

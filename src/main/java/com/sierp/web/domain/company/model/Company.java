@@ -21,6 +21,7 @@ public class Company {
 	private SiGunGuType siGunGu;
 	private String detailAddr;
 	
+	private String customerMemo;
 	private Date registerYmdt;
 	private String registerManagerId;
 }

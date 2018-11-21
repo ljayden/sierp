@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.company.company_dao">
 
+	<insert id="insertCompany" parameterType="com.sierp.web.domain.company.model.Company" useGeneratedKeys="true" keyProperty="companySeq">
+		INSERT INTO company(customer_seq, company_name, biz_no, sido,  si_gun_gu, detail_addr, customer_memo, register_ymdt, register_manager_id)
+		VALUES (#{customerSeq}, #{companyName}, #{bizNo}, #{sido}, #{siGunGu}, #{detailAddr}, #{customerMemo}, #{registerYmdt}, #{registerManagerId})
+	</insert>
+	 
+	<insert id="insertCompanyStaff" parameterType="com.sierp.web.domain.company.model.CompanyStaff" useGeneratedKeys="true" keyProperty="companyStaffSeq">
+		INSERT INTO company(customer_seq, company_name, biz_no, sido,  si_gun_gu, detail_addr, customer_memo, register_ymdt, register_manager_id)
+		VALUES (#{companySeq}, #{name}, #{phoneNo}, #{companyPhoneNo}, #{email}, #{position}, #{part}, #{customerMemo}, #{registerYmdt}, #{registerManagerId})
+	</insert>
+	 
+ 
     <select id="selectCompany" resultType="map">
     	SELECT * FROM company
     </select>
@@ -26,7 +37,8 @@
 	</select>
 	
     <sql id="companySearchCondition">
-		c.customer_seq = #{customerSeq} AND c.company_seq <![CDATA[ <> ]]> #{ customerSeq }
+		c.customer_seq = #{customerSeq} 
+<!-- 		AND c.company_seq <![CDATA[ <> ]]> #{ customerSeq } -->
 		
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(companyName)">
 			AND c.company_name = #{companyName}
@@ -44,6 +56,12 @@
 			AND c.sigungu = #{siGunGu}
 		</if>
     </sql>
+    
+    
+    
+    
+    
+    
     
     
     

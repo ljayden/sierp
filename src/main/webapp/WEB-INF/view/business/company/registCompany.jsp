@@ -81,7 +81,7 @@
 					<input type="text" class="form-control form-control-sm" id="companyStaffMemo" placeholder="메모(Optional)"  value="">
 				</div>
 				<div class="form-group col-md-1">
-					<button type="button" class="btn btn-outline-dark btn-sm w-100 bg-white" onclick="javascript:addStaff()"><strong>&#43;</strong></button>
+					<button type="button" class="btn btn-outline-dark btn-sm w-100 bg-white" onclick="javascript:addStaff()"><strong>추가</strong></button>
 				</div>
 			</div>
 		</div>                                                 
@@ -180,7 +180,7 @@ function addStaff() {
 }
 
 
-function regCompany(form) {
+function regCompany(event) {
 	var param = {};
 	param.name = $('#name').val();
 	param.bizNo = $('#bizNo').val();
@@ -194,26 +194,27 @@ function regCompany(form) {
 
 		var staffInfo = $(this).val().split(';');
 		var staffData = {};
-		staffData['staffName'] = careerInfo[0];
-		staffData['staffPart'] = careerInfo[1];
-		staffData['staffPosition'] = careerInfo[2];
-		staffData['staffPhone'] = careerInfo[3];
-		staffData['staffComPhone'] = careerInfo[4];
-		staffData['staffEmail'] = careerInfo[5];
-		staffData['staffMemo'] = careerInfo[6];
+		staffData['name'] = careerInfo[0];
+		staffData['part'] = careerInfo[1];
+		staffData['position'] = careerInfo[2];
+		staffData['phoneNo'] = careerInfo[3];
+		staffData['companyPhoneNo'] = careerInfo[4];
+		staffData['email'] = careerInfo[5];
+		staffData['memo'] = careerInfo[6];
 		staffs.push(staffData);
 	});
 	param.staffs = staffs;
 
 	event.preventDefault();
     event.stopPropagation();
- 
+ 	
+  
 	COMMON.ajax({
-	    url : '/business/companyr/registCompanyProc.json',
+	    url : '/business/company/registCompanyProc.json',
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
 	       alert('업체를 등록하였습니다.');
-	       location.href = '/business/companyr/main.do';
+	       location.href = '/business/company/main.do';
 	    }
 	});
 }

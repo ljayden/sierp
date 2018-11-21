@@ -16,7 +16,7 @@ CREATE TABLE customer_manager (
 		  email VARCHAR(50) not null,
 		  password VARCHAR(100) not null,
 		  name VARCHAR(20) not null,
-		  phone_no VARCHAR(20) not null,
+		  phone_no VARCHAR(20),
 		  position VARCHAR(20) not null,
 		  auth_type CHAR(2),
 		  
@@ -35,13 +35,28 @@ CREATE TABLE company(
 		  sido VARCHAR(20),
 		  si_gun_gu VARCHAR(20),
 		  detail_addr VARCHAR(100),
+		  customer_memo VARCHAR(500),
 		  register_ymdt DATETIME,
 		  register_manager_id VARCHAR(50)
 );
 
-INSERT INTO company values(1 , 1, '네이버', '1238796542', 'GYUNGGI', 'SUNGNAM_BUNDANG', '정자역', datetime('now'), '');
+INSERT INTO company values(1 , 1, '네이버', '1238796542', 'GYUNGGI', 'SUNGNAM_BUNDANG', '정자역', '갑질업체', datetime('now'), 'demouser2');
+INSERT INTO company values(2 , 1, '다음',  '1211196542', 'GYUNGGI', 'SUNGNAM_BUNDANG', 'H스퀘어', '진상업체', datetime('now'), 'demouser3');
 
-
+CREATE TABLE company_staff (
+	company_staff_seq integer PRIMARY KEY AUTOINCREMENT,
+	company_seq integer not NULL,
+	name VARCHAR(20) not null,
+	phone_no VARCHAR(20),
+	company_phone_no,
+	email VARCHAR(50),
+	position  VARCHAR(20),
+	part VARCHAR(40),
+	customer_memo VARCHAR(500),
+ 	register_ymdt DATETIME,
+	register_manager_id VARCHAR(50)
+) ;
+	
 CREATE TABLE worker (
 		  worker_seq integer PRIMARY KEY AUTOINCREMENT,
 		  worker_type VARCHAR(10) not null, --직원, 프리랜서

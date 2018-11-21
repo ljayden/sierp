@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.google.common.collect.Maps;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
+import com.sierp.web.domain.company.model.Company;
 import com.sierp.web.domain.company.model.CompanySearch;
+import com.sierp.web.domain.company.model.CompanyStaff;
 import com.sierp.web.result.Pager;
 
 @Repository
@@ -19,6 +21,15 @@ public class CompanyDao {
 	@Autowired SqlSessionTemplate sql;
 
 	static final String MAPPER_NAMESPACE = "mapper.company.company_dao.";
+	
+	public int insertCompany(Company company) {
+		return sql.insert(MAPPER_NAMESPACE + "insertCompany", company);
+	}
+
+	public int insertCompanyStaff(CompanyStaff companyStaff) {
+		return sql.insert(MAPPER_NAMESPACE + "insertCompanyStaff", companyStaff);
+	}
+	
 	
 	public List<Map<String, Object>> selectCompany() {
 		Map<String, Object> param = Maps.newHashMap();

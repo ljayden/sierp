@@ -15,13 +15,14 @@ public class CompanyStaff {
 	
 	private String name;
 	private String phoneNo;
+	private String companyPhoneNo;
 	private String email;
 	
 	private String position;	//직급
 	private String part;	//부서
 	
-	private String memo;	//메모
+	private String customerMemo;
 	
 	private Date registerYmdt;
-	private String resiterManagerId;	//담당자
+	private String registerManagerId;	//담당자
 }
