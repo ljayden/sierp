@@ -20,19 +20,24 @@
     	</tr>
   	</thead>
   	<tbody>
- 		<c:forEach var="freelancer" items="${ searchList }">
-	    	<tr>
-	      		<th scope="row"><a href="/resource/freelancer/viewFreelancer.do?freelancerSeq=${ freelancer.freelancerSeq}">${ freelancer.name }</a></th>
-	      		<td>중급</td>
-	      		<td>${ freelancer.workerExpertType.description }</td>
-	      		<td>${ freelancer.sido.description }/${ freelancer.siGunGu.description }</td>
-	      		<td><b>${ freelancer.contractStatus }</b></td>
-	      		<td>2018.04 ~ 2019.04</td>
-	      		<td></td>
-	      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ freelancer.mainManagerId }"/></td>
-	      		<td>2017.04.02</td>
-	    	</tr>
- 		</c:forEach>
+  		<c:if test="${ not empty searchList }">
+	 		<c:forEach var="freelancer" items="${ searchList }">
+		    	<tr>
+		      		<th scope="row"><a href="/resource/freelancer/viewFreelancer.do?freelancerSeq=${ freelancer.freelancerSeq}">${ freelancer.name }</a></th>
+		      		<td>중급</td>
+		      		<td>${ freelancer.workerExpertType.description }</td>
+		      		<td>${ freelancer.sido.description }/${ freelancer.siGunGu.description }</td>
+		      		<td><b>${ freelancer.contractStatus }</b></td>
+		      		<td>2018.04 ~ 2019.04</td>
+		      		<td></td>
+		      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ freelancer.mainManagerId }"/></td>
+		      		<td>2017.04.02</td>
+		    	</tr>
+	 		</c:forEach>
+  		</c:if>
+		<c:if test="${ empty searchList }">
+			<tr><td colspan="9">검색 결과가 없습니다.</td></tr>
+		</c:if>
 	</tbody>
 </table>	
 <small class="d-block text-right mt-3">총 ${ request.totalCount } 명이 조회되었습니다</small>

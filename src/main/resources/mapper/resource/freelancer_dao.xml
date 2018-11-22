@@ -58,13 +58,14 @@
 			AND w.start_work_month <![CDATA[ <= ]]> #{workBaseMonth}
 		</if>
 		
-		<if test="advantageList != null or skillSetList != null">
+		<if test="advantageList.size > 0 or skillSetList.size > 0">
 			AND EXISTS (SELECT 1 FROM worker_advantage  WHERE w.worker_seq = worker_seq 
 			<foreach item="item"  index="index" collection="advantageList"> AND advantage_seq = ${item}</foreach>
 			
 			<foreach item="item"  index="index" collection="skillSetList"> AND (advantage_seq = ${item.seq} AND workmanship_val <![CDATA[ >= ]]> ${item.workmanshipVal})</foreach>
 			) 
 		</if>
+		
     </sql>
     
     

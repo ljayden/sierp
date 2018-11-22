@@ -422,23 +422,13 @@ $(document).ready(function() {
 });
 
 function formReset() {
-// 	$('#preferenceInput').val('');
-// 	$('#licenseInput').val('');
-// 	$('#skillsetInput').val('');
-// 	$('#name').val('');
-// 	$('#workerExpertType').val('');
-// 	$('#freeGrade').val('');
-// 	$('#workYear').val('');
-// 	$('#workMonth').val('');
-// 	$('#minAcademicLevel').val('');
-// 	$('#maxAcademicLevel').val('');
-// 	$('#contractStatus').val('');
-// 	$('#mainManagerId').val('');
+
  	$('.licenseRow').remove();
  	$('.preferenceRow').remove();
  	$('.skillSetRow').remove();
 
-	$('#searchTap select, input').val('')
+	$('#searchTap select, input').val('');
+	$('#searchTap #page').val('1')
 }
 
 function goPage(page) {

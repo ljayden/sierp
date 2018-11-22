@@ -7,7 +7,7 @@
 
 <main role="main" class="container">
 
-	<form id="searchForm" action="/business/company/getMainList.ldo" method="post" iframe-list-div="listDiv">
+	<form id="searchForm" action="/business/companyStaff/getMainList.ldo" method="post" iframe-list-div="listDiv">
 	<input type="hidden" id="pageInput" name="page" value="1"/>
 	
 	<div class="my-3 p-3 bg-white rounded shadow">
@@ -15,24 +15,24 @@
 			<div class="row">
 				<div class="input-group input-group-sm col-md-4 mb-3">
 					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-name">담당자명</span>
+			  		</div>
+			  		<input type="text" class="form-control" id="companyStaffName" name="companyStaffName" aria-label="담당자명을 입력해 주세요." aria-describedby="search-name">
+				</div>
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id="search-name">업체명</span>
 			  		</div>
-			  		<input type="text" class="form-control" id="companyName" name="companyName" aria-label="검색할 이름을 입력해 주세요." aria-describedby="search-name">
-				</div>
-				<div class="input-group input-group-sm col-md-8 mb-3">
-			  		<div class="input-group-prepend ">
-				    	<label class="input-group-text input-group-text-sm w80" for="sido">주소</label>
-				  	</div>
-					<select class="custom-select custom-select-sm" id="sido" name="sido" required onchange="javascript: getSiGunGuTypeSearch('sigungu');">
-				    	<mt:enumOptions enumClass="SidoType" emptyValueName="전체"/>
-			  		</select>	
-					<select class="custom-select custom-select-sm" id="sigungu" name="sigungu" required>
-                		<option value=""> - </option>
-			  		</select>
+			  		<input type="text" class="form-control" id="companyName" name="companyName" aria-label="업체명을 입력해 주세요." aria-describedby="search-name">
 			  	</div>
 			</div>
-			
 			<div class="row">
+				<div class="input-group input-group-sm col-md-4 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-name">연락처</span>
+			  		</div>
+			  		<input type="text" class="form-control" id="phoneNo" name="phoneNo" aria-label="연락처를 입력해 주세요." aria-describedby="search-name">
+			  	</div>
 				<div class="input-group input-group-sm col-md-3 mb-3">
 				 	<div class="input-group-prepend">
 				    	<label class="input-group-text w80" for="registerManagerId">등록자</label>
@@ -55,9 +55,7 @@
   			</div>
   		</div>
 	</form>
-  	
-  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/business/company/registCompany.do'">업체 등록하기</button>
-  	
+  	  	
   	<div class="mt-2" id="listDiv">
   	</div>
  

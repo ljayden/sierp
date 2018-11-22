@@ -8,30 +8,30 @@
 <table class="table h3 small text-center">
 	<thead class="thead-dark" style="borde : 1px">
     	<tr>
+      		<th scope="col" class="text-center">담당자명</th>
+      		<th scope="col" >부서</th>
+      		<th scope="col" >직급</th>
       		<th scope="col" class="text-center">업체명</th>
-      		<th scope="col">주소</th>
-      		<th scope="col">업체 담당자</th>
-      		<th scope="col">계약중 건</th>
-      		<th scope="col" class="">총 계약건수</th>
+      		<th scope="col">전화번호</th>
       		<th scope="col">등록자</th>
       		<th scope="col">등록일</th>
     	</tr>
   	</thead>
   	<tbody>
-  		<c:if test="${ not empty companyList }">
-	 		<c:forEach var="company" items="${ companyList }">
-		    	<tr>
-		      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ company.companySeq}">${ company.companyName }</a></th>
-		      		<td>${ company.sido.description }/${ company.siGunGu.description }</td>
-		      		<td>2명</td>
-		      		<td>1건</td>
-		      		<td><b>4건</b></td>
-		      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/></td>
-		      		<td>2017.04.02</td>
-		    	</tr>
-	 		</c:forEach>
+  		<c:if test="${ not empty companyStaffList }">
+ 		<c:forEach var="companyStaff" items="${ companyStaffList }">
+	    	<tr>
+	      		<th scope="row"><a href="/business/companyManager/viewCompanyStaff.do?companyStaffSeq=${ companyStaff.companyStaffSeq}">${ companyStaff.name }</a></th>
+	      		<td>${ companyStaff.part }</td>
+	      		<td>${ companyStaff.position }</td>
+	      		<td>${ companyStaff.companyName }</td>
+	      		<td>${ companyStaff.phoneNo }</td>
+	      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ companyStaff.registerManagerId }"/></td>
+	      		<td>2017.04.02</td>
+	    	</tr>
+ 		</c:forEach>
  		</c:if>
- 		<c:if test="${ empty companyList }">
+ 		<c:if test="${ empty companyStaffList }">
  			<tr>
  				<td colspan="7">검색 결과가 없습니다.</td>
  			</tr>

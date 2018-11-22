@@ -31,7 +31,7 @@ public class GetManagerNameTag extends SimpleTagSupport {
 	
 	private static CustomerDao customerDao; //Rooot에서 주입함
 	
-	private Map<String, List<CustomerManager>> managers = Maps.newHashMap();
+	private static Map<String, List<CustomerManager>> managers = Maps.newHashMap();
     
 	@Getter @Setter private String customerCode;
 	@Getter @Setter private String managerId;

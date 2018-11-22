@@ -181,6 +181,7 @@ function addStaff() {
 
 
 function regCompany(event) {
+	alert('서버로 쏘기 바로전');
 	var param = {};
 	param.name = $('#name').val();
 	param.bizNo = $('#bizNo').val();
@@ -194,13 +195,13 @@ function regCompany(event) {
 
 		var staffInfo = $(this).val().split(';');
 		var staffData = {};
-		staffData['name'] = careerInfo[0];
-		staffData['part'] = careerInfo[1];
-		staffData['position'] = careerInfo[2];
-		staffData['phoneNo'] = careerInfo[3];
-		staffData['companyPhoneNo'] = careerInfo[4];
-		staffData['email'] = careerInfo[5];
-		staffData['memo'] = careerInfo[6];
+		staffData['name'] = staffInfo[0];
+		staffData['part'] = staffInfo[1];
+		staffData['position'] = staffInfo[2];
+		staffData['phoneNo'] = staffInfo[3];
+		staffData['companyPhoneNo'] = staffInfo[4];
+		staffData['email'] = staffInfo[5];
+		staffData['memo'] = staffInfo[6];
 		staffs.push(staffData);
 	});
 	param.staffs = staffs;

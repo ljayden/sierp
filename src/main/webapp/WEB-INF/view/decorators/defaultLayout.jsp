@@ -74,7 +74,7 @@
 					<a class="nav-link" href="/business/company/main.do"><b>영업관리</b><c:if test = "${topMenuPath eq 'business'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'calander'}">active</c:if>">
-					<a class="nav-link" href="/calander/my/main.do"><b>일정관리</b><c:if test = "${topMenuPath eq 'calander'}"><span class="sr-only">(current)</span></c:if></a>
+					<a class="nav-link" href="/calander/my/main.do"><b>업무관리</b><c:if test = "${topMenuPath eq 'calander'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
@@ -164,7 +164,7 @@
 			<nav class="nav nav-underline">
 	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">영업.업체 관리</button>
 	        	<a class="nav-link <c:if test ="${subMenuPath eq 'company'}">text-primary font-weight-bold</c:if>"  href="/business/company/main.do">업체관리</a>
-	        	<a class="nav-link <c:if test ="${subMenuPath eq 'companyManager'}">text-primary font-weight-bold</c:if>" href="/business/companyManager/main.do">업체담당자<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link <c:if test ="${subMenuPath eq 'companyStaff'}">text-primary font-weight-bold</c:if>" href="/business/companyStaff/main.do">업체담당자<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
 	        	<a class="nav-link" href="#">영업관리</a>
 	    	</nav>
 	    </div>

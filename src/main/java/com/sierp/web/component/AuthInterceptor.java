@@ -47,6 +47,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Handle
 				
 				response.getWriter().write(JacksonUtil.toJson(JsonResults.fail(9000, "로그아웃 되었습니다.")));
 				return false;
+			} else if(request.getRequestURI().endsWith("ldo")) {
+				
+				response.getWriter().write("<script>parent.location.href = '/login.do';</script>");
+				return false;
+				
 			} else {
 				if (!request.getRequestURI().contains("/login.do")) {
 					response.sendRedirect("/login.do");
