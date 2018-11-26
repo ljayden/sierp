@@ -21,7 +21,7 @@
   		<c:if test="${ not empty companyStaffList }">
  		<c:forEach var="companyStaff" items="${ companyStaffList }">
 	    	<tr>
-	      		<th scope="row"><a href="/business/companyManager/viewCompanyStaff.do?companyStaffSeq=${ companyStaff.companyStaffSeq}">${ companyStaff.name }</a></th>
+	      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ companyStaff.companySeq}">${ companyStaff.name }</a></th>
 	      		<td>${ companyStaff.part }</td>
 	      		<td>${ companyStaff.position }</td>
 	      		<td>${ companyStaff.companyName }</td>

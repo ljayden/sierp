@@ -181,12 +181,19 @@ function addStaff() {
 
 
 function regCompany(event) {
-	alert('서버로 쏘기 바로전');
+	
 	var param = {};
 	param.name = $('#name').val();
 	param.bizNo = $('#bizNo').val();
 	param.sido = $('#sido').val();
+	if (param.sido == '') {
+		param.sido = null;
+	}
 	param.sigungu = $('#sigungu').val();
+	if (param.sigungu == '') {
+		param.sigungu = null;
+	}
+	
 	param.addrDetail = $('#addrDetail').val();
 	param.customerMemo = $('#companyMemo').val();
 	 

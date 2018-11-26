@@ -3,97 +3,148 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
-<head>
-	
-</head>
+<%@ taglib prefix="mt" uri="myTags" %>
 
 <main role="main" class="container">
 
-	<div class="my-3 p-3 bg-white rounded shadow-sm">
-		<small class="d-block text-right mt-3">검색 조건</small>
+	<form id="searchForm" action="/project/search/getMainList.ldo" method="post" iframe-list-div="listDiv">
+	<input type="hidden" id="pageInput" name="page" value="1"/>
+
+	<div class="my-3 p-3 bg-white rounded shadow">
+		<div class="searchFormToggle" id="searchTap">
+			
+			<div class="row">
+				<div class="input-group input-group-sm col-md-6 mb-3">
+				 	<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="">상태</label>
+				  	</div>
+				  	
+				  	<div class="custom-control custom-checkbox mb-2 mt-1 ml-3">
+				    	<input type="checkbox" class="custom-control-input" name="status" value="READY" id="statusReady" checked="checked">
+				    	<label class="custom-control-label" for="statusReady">준비</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-3 mt-1 ml-4">
+				    	<input type="checkbox" class="custom-control-input" name="status" value="ING" id="statusIng" checked="checked">
+				    	<label class="custom-control-label" for="statusIng">진행</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-3 mt-1 ml-4">
+				    	<input type="checkbox" class="custom-control-input" name="status" value="END" id="statusEnd">
+				    	<label class="custom-control-label" for="statusEnd">종료</label>
+				  	</div>
+				</div>
+				
+				
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-name">업체명</span>
+			  		</div>
+			  		<input type="text" class="form-control" id="companyName" name="companyName" aria-label="검색할 이름을 입력해 주세요." aria-describedby="search-name">
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-age">프로젝트명</span>
+			  		</div>
+			  		<input type="text" class="form-control" id="projectName" name="projectName" aria-label="생년월 입력해 주세요."  aria-describedby="search-age">
+				</div>
+				<div class="input-group input-group-sm col-md-6 mb-3">
+			  		<div class="input-group-prepend ">
+				    	<label class="input-group-text input-group-text-sm w80" for="sido">근무지</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="sido" required onchange="javascript: getSiGunGuTypeSearch('sigungu');">
+				    	<mt:enumOptions enumClass="SidoType" emptyValueName="전체"/>
+			  		</select>	
+					<select class="custom-select custom-select-sm" id="sigungu" required>
+                		<option value=""> - </option>
+			  		</select>
+			  	</div>
+			</div>
+			<div class="row">
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80 " id="search-name">시작일</span>
+			  		</div>
+			  		<input type="text" class="form-control" id="" name="" aria-label="시작일" aria-describedby="">
+			  		&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
+			  		<input type="text" class="form-control" id="" name="" aria-label="종료일" aria-describedby="">
+				</div>
+				<div class="input-group input-group-sm col-md-6 mb-3">
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" >이번주</button>
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" >이번달</button>
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-4" >7일내</button>
+			  		
+			  		<input type="text" style="font-size: 90%" id="" name="" size=2 aria-label="" aria-describedby="">
+			  		<button type="button" class="btn btn-outline-secondary btn-sm" >일 내</button>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-group input-group-sm col-md-3 mb-3">
+				 	<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="mainManagerId">담당자</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="mainManagerId" name="mainManagerId">
+						<option value="">전체</option>
+	                	<c:forEach var="manager" items="${ managerList }" >
+	                		<option value="${ manager.id }">${ manager.name }</option>
+	                	</c:forEach>
+			  		</select>
+				</div>
+			</div>
+  		</div>
+  		<div class="d-inline clearfix">
+  			<button type="button" class="btn btn-outline-secondary btn-sm float-right searchFormToggle" id="searchFormOpenBtn">상세 검색 열기</button>
+  			<button type="button" class="btn btn-outline-secondary btn-sm float-right searchFormToggle ml-2" id="searchFormCloseBtn">상세 검색 닫기</button>
+  			<button type="button" class="btn btn-outline-danger btn-sm float-right searchFormToggle mr-2" id="searchResetBtn">검색 초기화</button>
+  		</div>
   	</div>
   	
-  	<small class="d-block text-right mt-3">프로젝트별 보기 / 직무별 보기</small>
-	<table class="table h3 small text-center">
-		<thead class="thead-dark">
-	    	<tr>
-	      		<th scope="col" class="text-center">#</th>
-	      		<th scope="col">진행상태</th>
-	      		<th scope="col" class="">기간</th>
-	      		<th scope="col">프로젝트명</th>
-	      		<th scope="col">개발구분</th>
-	      		<th scope="col">업무구분</th>
-	      		<th scope="col">업체</th>
-	      		<th scope="col">위치</th>
-	      		<th scope="col">구인</th>
-	      		<th scope="col">계약</th>
-	      		<th scope="col">등록자</th>
-	    	</tr>
-	  	</thead>
-	  	<tbody>
-	    	<tr>
-	      		<th scope="row">4721</th>
-	      		<td>진행중</td>
-	      		<td>2018.08 ~ 2019.08</td>
-	      		<td>PG모듈 개발</td>
-	      		<td>웹개발</td>
-	      		<td>SI</td>
-	      		<td>스마일게이트</td>
-	      		<td>성남시</td>
-	      		<td>3건</td>
-	      		<td>2건</td>
-	      		<td>김관리</td>
-	    	</tr>
-	    	<tr>
-	      		<th scope="row">4721</th>
-	      		<td>진행중</td>
-	      		<td>2018.08.21 ~ 2019.08.21</td>
-	      		<td>PG모듈 개발</td>
-	      		<td>웹개발</td>
-	      		<td>SI</td>
-	      		<td>스마일게이트</td>
-	      		<td>성남시 분당구</td>
-	      		<td>2건</td>
-	      		<td>김관리</td>
-	    	</tr>
-	    	<tr class="table-secondary">
-	      		<th scope="row">4721</th>
-	      		<td>진행중</td>
-	      		<td>2018.08.21 ~ 2019.08.21</td>
-	      		<td>PG모듈 개발</td>
-	      		<td>웹개발</td>
-	      		<td>SI</td>
-	      		<td>스마일게이트</td>
-	      		<td>성남시 분당구</td>
-	      		<td>2건</td>
-	      		<td>김관리</td>
-	    	</tr>
-	    	<tr>
-	      		<th scope="row">4721</th>
-	      		<td>진행중</td>
-	      		<td>2018.08.21 ~ 2019.08.21</td>
-	      		<td>PG모듈 개발</td>
-	      		<td>웹개발</td>
-	      		<td>SI</td>
-	      		<td>스마일게이트</td>
-	      		<td>성남시 분당구</td>
-	      		<td>2건</td>
-	      		<td>김관리</td>
-	    	</tr>
-	    	<tr class="table-success">
-	      		<th scope="row">4721</th>
-	      		<td>진행중</td>
-	      		<td>2018.08.21 ~ 2019.08.21</td>
-	      		<td>PG모듈 개발</td>
-	      		<td>웹개발</td>
-	      		<td>SI</td>
-	      		<td>스마일게이트</td>
-	      		<td>성남시 분당구</td>
-	      		<td>2건</td>
-	      		<td>김관리</td>
-	    	</tr>
-		</tbody>
-	</table>
-	<small class="d-block text-right mt-3">메일 발송</small>
-</main>
+ 	<div class="pl-4 pr-3">
+  	  	<div class="row">
+  			<div class="col-md-3 mb-3" style="margin-top: -0.5rem"></div>
+  			<div class="col-md-7 mb-3"></div>
+  			<div class="col-md-2 mb-3 text-right">
+  			 	<button type="button" class="btn btn-primary btn-sm w-100" id="searchBtn">조회</button>
+  			</div>
+  		</div>
+ 	</div>
+	</form>
+  	
+  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/project/search/registProject.do'">프로젝트 등록하기</button>
+  	
+  	<div class="mt-2" id="listDiv">
+  	</div>
+
+<script>
+$(document).ready(function() {
+	
+	$('.searchFormToggle').toggle();
+	$('#searchFormOpenBtn').show();
+	
+	$('#searchFormOpenBtn, #searchFormCloseBtn').on('click', function () {
+		$('.searchFormToggle').toggle();
+    })
+    
+    $('#searchBtn').on('click', function () {
+    	
+    	$('#searchForm').submit();
+    });
+	
+	
+    $('#searchResetBtn').on('click', function () {
+    	formReset();
+    });
+});
+
+function formReset() {
+
+	$('#searchTap select, input').val('');
+	$('#searchTap #page').val('1')
+}
+
+function goPage(page) {
+	$('#pageInput').val(page);
+	$('#searchBtn').click();
+}
+</script>

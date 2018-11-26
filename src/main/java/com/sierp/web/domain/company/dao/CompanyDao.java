@@ -40,7 +40,7 @@ public class CompanyDao {
 	public List<CompanyStaff> selectCompanyStaffListByCompanySeq(int companySeq) {
 		Map<String, Object> params = Maps.newHashMap();
 		params.put("companySeq", companySeq);
-		return sql.selectList(MAPPER_NAMESPACE + "selectCompanyStaffList", params);
+		return sql.selectList(MAPPER_NAMESPACE + "selectCompanyStaffListByCompanySeq", params);
 	}
 	
 	public Company selectCompanyBySeq(int companySeq) {
