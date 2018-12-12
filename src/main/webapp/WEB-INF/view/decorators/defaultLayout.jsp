@@ -151,8 +151,8 @@
     	<div class="nav-scroller bg-white shadow-sm">
 			<nav class="nav nav-underline">
 	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">프로젝트 관리</button>
-	        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/project/dashboard/main.do">Dashboard</a>
-	        	<a class="nav-link" <c:if test = "${subMenePath eq 'search'}">style="font-weight: bold"</c:if> href="/project/search/main.do">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/project/dashboard/main.do">Dashboard</a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'search'}">style="font-weight: bold"</c:if> href="/project/search/main.do">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
 	        	<a class="nav-link" href="#">등록</a>
 	        	<a class="nav-link" href="#">관리</a>
 	      	</nav>
