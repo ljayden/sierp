@@ -92,6 +92,7 @@
 				<c:if test="${ not empty sessionScope.customerManager }">
 					&nbsp;&nbsp;<button class="btn btn-outline-secondary my-2 my-sm-0 btn-sm" type="button" id="logoutBtn">Logout</button>
 				</c:if>
+				<input type="text" style="display: none;"/>
 			</form>
 		</div>
 	</nav>
