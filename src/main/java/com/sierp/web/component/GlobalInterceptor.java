@@ -1,5 +1,7 @@
 package com.sierp.web.component;
 
+import java.time.LocalDate;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +20,11 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 		setMenuPath(request);
 
 		log.debug("Top menu path={}, Sub menu Path={}", request.getAttribute("topMenuPath"), request.getAttribute("subMenuPath"));
+		
+		LocalDate now = LocalDate.now();
+		request.setAttribute("thisYear", now.getYear());
+		request.setAttribute("thisMonth", now.getMonthValue());
+		request.setAttribute("thisDay", now.getDayOfMonth());
 		return true;
 	}
 	

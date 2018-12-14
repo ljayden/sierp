@@ -15,8 +15,9 @@
  
  
  
-    <select id="selectCompany" resultType="com.sierp.web.domain.company.model.Company">
+    <select id="selectCompany" parameterType="map" resultType="com.sierp.web.domain.company.model.Company">
     	SELECT * FROM company
+    	WHERE customer_seq = #{customerSeq}
     </select>
 
     <select id="selectCompanyBySeq" parameterType="map" resultType="com.sierp.web.domain.company.model.Company">

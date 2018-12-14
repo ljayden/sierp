@@ -21,11 +21,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/share/css/offcanvas.css?${scriptCachedate}" />
     <link rel="stylesheet" type="text/css" href="/share/css/custom.css?${scriptCachedate}" />
-
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+ 
     <script src="/share/js/jquery/jquery-1.12.3.min.js?${scriptCachedate}"></script>
     <script src="/share/js/jquery/jquery.scrollbar.min.js?${scriptCachedate}"></script>
     <script src="/share/js/jquery/jquery.form.js?${scriptCachedate}"></script>
     <script src="/share/js/jquery/jquery.serializejson.js?${scriptCachedate}"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
     <!-- script src="/share/js/lib/backbone.js?${scriptCachedate}"></script -->
     <script src="/share/js/lib/ie8Compatibility.js?${scriptCachedate}"></script>
@@ -58,20 +60,20 @@
 				<li class="nav-item <c:if test = "${topMenuPath eq 'home'}">active</c:if>">
 					<a class="nav-link" href="/home/dashboard/main.do"><b>Home</b><c:if test = "${topMenuPath eq 'home'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
-				<li class="nav-item <c:if test = "${topMenuPath eq 'recruit'}">active</c:if>">
-					<a class="nav-link" href="/recruit/dashboard/main.do"><b>채용관리</b><c:if test = "${topMenuPath eq 'recruit'}"><span class="sr-only">(current)</span></c:if></a>
-				</li>
-				<li class="nav-item <c:if test = "${topMenuPath eq 'contract'}">active</c:if>">
-					<a class="nav-link" href="/contract/dashboard/main.do"><b>계약관리</b><c:if test = "${topMenuPath eq 'contract'}"><span class="sr-only">(current)</span></c:if></a>
-				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'resource'}">active</c:if>">
 					<a class="nav-link" href="/resource/dashboard/main.do"><b>인재관리</b><c:if test = "${topMenuPath eq 'resource'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'project'}">active</c:if>">
 					<a class="nav-link" href="/project/dashboard/main.do"><b>프로젝트</b><c:if test = "${topMenuPath eq 'project'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
+				<li class="nav-item <c:if test = "${topMenuPath eq 'recruit'}">active</c:if>">
+					<a class="nav-link" href="/recruit/dashboard/main.do"><b>채용관리</b><c:if test = "${topMenuPath eq 'recruit'}"><span class="sr-only">(current)</span></c:if></a>
+				</li>
+				<li class="nav-item <c:if test = "${topMenuPath eq 'contract'}">active</c:if>">
+					<a class="nav-link" href="/contract/dashboard/main.do"><b>계약관리</b><c:if test = "${topMenuPath eq 'contract'}"><span class="sr-only">(current)</span></c:if></a>
+				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'business'}">active</c:if>">
-					<a class="nav-link" href="/business/company/main.do"><b>영업관리</b><c:if test = "${topMenuPath eq 'business'}"><span class="sr-only">(current)</span></c:if></a>
+					<a class="nav-link" href="/business/company/main.do"><b>업체관리</b><c:if test = "${topMenuPath eq 'business'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'calander'}">active</c:if>">
 					<a class="nav-link" href="/calander/my/main.do"><b>업무관리</b><c:if test = "${topMenuPath eq 'calander'}"><span class="sr-only">(current)</span></c:if></a>
@@ -184,6 +186,7 @@
 			
 			<div class="modal-body">
 		       	<div class="mb-3" id="searchResultDiv">
+		       	
 					<div class="text-muted small">자사 프리랜서풀에서 1건이 검색되었습니다.</div>
 					<div class="p-3"><a href="">김철수(27/남/성남) 개발자</a></div>
 					<hr class="mb-2">

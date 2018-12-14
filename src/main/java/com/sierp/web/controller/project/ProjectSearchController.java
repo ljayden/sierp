@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sierp.web.controller.project.request.ProjectSearchRequest;
+import com.sierp.web.domain.company.dao.CompanyDao;
 import com.sierp.web.domain.company.dao.CustomerDao;
 import com.sierp.web.domain.company.model.CustomerManager;
 
@@ -15,10 +16,11 @@ import com.sierp.web.domain.company.model.CustomerManager;
 public class ProjectSearchController {
 
 	@Autowired CustomerDao customDao;
+	@Autowired CompanyDao companyDao;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String dashboard(Model model, CustomerManager manager) {
-		
+	public String search(Model model, CustomerManager manager) {
+
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		return "project/search/main";
 	}
@@ -34,6 +36,8 @@ public class ProjectSearchController {
 	@RequestMapping(value = "/registProject", method = RequestMethod.GET)
 	public String registFreelancer(Model model, CustomerManager manager) {
 		
+		
+		model.addAttribute("companyList", companyDao.selectCompany(manager.getCustomerSeq()));
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		
 		return "project/search/registProject";

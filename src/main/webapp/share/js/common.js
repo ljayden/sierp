@@ -430,7 +430,34 @@ var COMMON = {
     closeModal: function (element) {
         $(element).hide();
         $(".dimmed").hide();
-    }
+    },
 
+    autoCompleteInput : function(elementId, sourceList) {
+    	$('#' + elementId).autocomplete({
+    		source: sourceList,
+    		minLength: 2,
+    		change: function( event, ui ) {
+    			if (ui.item != null && ui.item.value) {
+    				$('#' + elementId).css('background-color','#bfeffb');
+    				$('#' + elementId).attr('matchItem', true);
+    			} else {
+    				$('#' + elementId).css('background-color','white');
+    				$('#' + elementId).attr('matchItem', false);
+    			}
+    		},
+    		select: function( event, ui ) {
+    			if(ui.item.value) {
+    				$('#' + elementId).css('background-color','#bfeffb');
+    				$('#' + elementId).attr('matchItem', true);
+    			} else {
+    				$('#' + elementId).css('background-color','white');
+    				$('#' + elementId).attr('matchItem', false);
+    			}
+    		},
+    		classes: {
+    		    'ui-autocomplete': 'highlight'
+    		}
+    	});
+    }
 }
 

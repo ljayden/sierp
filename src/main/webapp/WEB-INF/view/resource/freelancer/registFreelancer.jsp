@@ -59,7 +59,7 @@
                	<select class="custom-select custom-select-sm d-block w-100" id="birthMonth">
                		<option value="">월 선택</option>
 				    <c:forEach var="month" begin="1" end="12" step="1">
-				    	<option value="${ month }">${ month }</option>
+				    	<option value="${ month }"><fmt:formatNumber pattern="00" value="${month}" /></option>
 				    </c:forEach>
               	</select>
             </div>
@@ -68,7 +68,7 @@
                	<select class="custom-select custom-select-sm d-block w-100" id="birthDay">
                		<option value="">날짜 선택</option>
 				    <c:forEach var="day" begin="1" end="31" step="1">
-				    	<option value="${ day }">${ day }</option>
+				    	<option value="${ day }"><fmt:formatNumber pattern="00" value="${day}" /></option>
 				    </c:forEach>
               	</select>
             </div>
@@ -121,7 +121,7 @@
 						<label for="careerStartMonth" class="col-form-label-sm">&nbsp;</label>
 						<select class="custom-select custom-select-sm d-block w-50" id="careerStartMonth" required  onchange="javascript: updateFreeGrade();">
 						    <c:forEach var="month" begin="1" end="12" step="1">
-						    	<option value="${ month }">${ month }</option>
+						    	<option value="${ month }"><fmt:formatNumber pattern="00" value="${month}" /></option>
 						    </c:forEach>
 						</select>
 						<div class="invalid-feedback">경력 시작월을 선택해 주세요.</div>
@@ -182,7 +182,7 @@
 						<select class="custom-select input-group custom-select-sm d-block" id="careersStartMonth">
 		               		<option value="">월</option>
 						    <c:forEach var="month" begin="1" end="12" step="1">
-						    	<option value="${ month }">${ month }월</option>
+						    	<option value="${ month }"><fmt:formatNumber pattern="00" value="${month}" />월</option>
 						    </c:forEach>
 		              	</select>
 		        	</div>	
@@ -196,7 +196,7 @@
 						<select class="custom-select input-group custom-select-sm d-block" id="careersEndMonth">
 		               		<option value="">재직중</option>
 						    <c:forEach var="month" begin="1" end="12" step="1">
-						    	<option value="${ month }">${ month }월</option>
+						    	<option value="${ month }"><fmt:formatNumber pattern="00" value="${month}" />월</option>
 						    </c:forEach>
 		              	</select>
 		        	</div>	

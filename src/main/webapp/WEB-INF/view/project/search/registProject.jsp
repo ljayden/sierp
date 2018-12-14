@@ -15,51 +15,52 @@
     
     	<div class="form-row">
         	<div class="form-group col-md-5 mb-3">
-                <label for="name" class="col-form-label-sm">업체명</label>
-                <input type="text" class="form-control form-control-sm  text-info" id="name" required autocomplete="off">
+                <label for="company" class="col-form-label-sm">업체명</label>
+                <input type="text" class="form-control form-control-sm" id="company" required  onchange="javascript :checkCompany(this)">
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
             <div class="form-group col-md-1 mb-3"></div>
             <div class="form-group col-md-6 mb-3">
-              	<label for="phoneNo" class="col-form-label-sm">수행사<span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control form-control-sm" id="phoneNo">
-                <div class="invalid-feedback" style="width: 100%;">연락처를 입력해 주세요.</div>
+              	<label for="mainCompany" class="col-form-label-sm">수행사<span class="text-muted">(Optional)</span></label>
+                <input type="text" class="form-control form-control-sm" id="mainCompany" onchange="javascript :checkCompany(this)">
         	</div>
 		</div>
 		
     	<div class="form-row">
         	<div class="form-group col-md-5 mb-3">
-                <label for="name" class="col-form-label-sm">프로젝트명</label>
-                <input type="text" class="form-control form-control-sm" id="name" required>
+                <label for="projectName" class="col-form-label-sm">프로젝트명 </label>
+                <input type="text" class="form-control form-control-sm" id="projectName" required>
             	<div class="invalid-feedback">프로젝트명을 입력해 주세요.</div>
         	</div>
         	<div class="form-group col-md-1 mb-3"></div>
         	<div class="form-group col-md-2 mb-3">
-            	<label for="birthYear" class="col-form-label-sm">시작일<span class="text-muted">(Optional)</span></label>
-                <select class="custom-select custom-select-sm d-block w-100" id="birthYear"  required>
+            	<label for="startYear" class="col-form-label-sm">시작일<span class="text-muted">(Optional)</span></label>
+                <select class="custom-select custom-select-sm d-block w-100" id="startYear" required>
                 	<option value="">년도 선택</option>
- 					<c:forEach var="year" begin="1960" end="2000" step="1">
-				    	<c:if test="${ year eq 1985 }"><option value="${year}" selected="selected">${year}</option></c:if>
-				    	<c:if test="${ year ne 1985 }"><option value="${year}">${year}</option></c:if>
+ 					<c:forEach var="year" begin="${ thisYear - 20 }" end="${ thisYear + 3 }" step="1">
+				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) eq thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}" selected="selected">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
+				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) ne thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
 				    </c:forEach>
                 </select>
                 <div class="invalid-feedback">년도를 선택해 주세요.</div>
 			</div>
             <div class="form-group col-md-1 mb-3">
-              	<label for="birthMonth" class="col-form-label-sm">&nbsp;</label>
-               	<select class="custom-select custom-select-sm d-block w-100" id="birthMonth">
+              	<label for="startMonth" class="col-form-label-sm">&nbsp;</label>
+               	<select class="custom-select custom-select-sm d-block w-100" id="startMonth">
                		<option value="">월</option>
 				    <c:forEach var="month" begin="1" end="12" step="1">
-				    	<option value="${ month }">${ month }</option>
+				    	<c:if test="${ month eq thisMonth }"><option value="${month}" selected="selected"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if>
+				    	<c:if test="${ month ne thisMonth }"><option value="${month}"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if>
 				    </c:forEach>
               	</select>
             </div>
             <div class="form-group col-md-1 mb-3">
-                <label for="birthDay" class="col-form-label-sm">&nbsp;</label>
-               	<select class="custom-select custom-select-sm d-block w-100" id="birthDay">
+                <label for="startDay" class="col-form-label-sm">&nbsp;</label>
+               	<select class="custom-select custom-select-sm d-block w-100" id="startDay">
                		<option value="">날짜</option>
 				    <c:forEach var="day" begin="1" end="31" step="1">
-				    	<option value="${ day }">${ day }</option>
+				    	<c:if test="${ day eq thisDay }"><option value="${day}" selected="selected"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
+				    	<c:if test="${ day ne thisDay }"><option value="${day}"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
 				    </c:forEach>
               	</select>
             </div>
@@ -68,31 +69,33 @@
         <div class="form-row">
             <div class="form-group col-md-6 mb-3">&nbsp;</div>
         	<div class="form-group col-md-2 mb-3">
-            	<label for="birthYear" class="col-form-label-sm">종료일<span class="text-muted">(Optional)</span></label>
-                <select class="custom-select custom-select-sm d-block w-100" id="birthYear"  required>
+            	<label for="endYear" class="col-form-label-sm">종료일<span class="text-muted">(Optional)</span></label>
+                <select class="custom-select custom-select-sm d-block w-100" id="endYear"  required>
                 	<option value="">년도 선택</option>
- 					<c:forEach var="year" begin="1960" end="2000" step="1">
-				    	<c:if test="${ year eq 1985 }"><option value="${year}" selected="selected">${year}</option></c:if>
-				    	<c:if test="${ year ne 1985 }"><option value="${year}">${year}</option></c:if>
+ 					<c:forEach var="year" begin="${ thisYear - 10 }" end="${ thisYear + 13 }" step="1">
+				    	<c:if test="${ ((thisYear + 13) - year + (thisYear - 10)) eq thisYear }"><option value="${(thisYear + 13) - year + (thisYear - 10)}" selected="selected">${(thisYear + 13) - year + (thisYear - 10)}</option></c:if>
+				    	<c:if test="${ ((thisYear + 13) - year + (thisYear - 10)) ne thisYear }"><option value="${(thisYear + 13) - year + (thisYear - 10)}">${(thisYear + 13) - year + (thisYear - 10)}</option></c:if>
 				    </c:forEach>
                 </select>
                 <div class="invalid-feedback">년도를 선택해 주세요.</div>
 			</div>
             <div class="form-group col-md-1 mb-3">
-              	<label for="birthMonth" class="col-form-label-sm">&nbsp;</label>
-               	<select class="custom-select custom-select-sm d-block w-100" id="birthMonth">
+              	<label for="endMonth" class="col-form-label-sm">&nbsp;</label>
+               	<select class="custom-select custom-select-sm d-block w-100" id="endMonth">
                		<option value="">월</option>
 				    <c:forEach var="month" begin="1" end="12" step="1">
-				    	<option value="${ month }">${ month }</option>
+				    	<c:if test="${ month eq thisMonth }"><option value="${month}" selected="selected"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if>
+				    	<c:if test="${ month ne thisMonth }"><option value="${month}"><fmt:formatNumber pattern="00" value="${month}" /></option></c:if>
 				    </c:forEach>
               	</select>
             </div>
             <div class="form-group col-md-1 mb-3">
-                <label for="birthDay" class="col-form-label-sm">&nbsp;</label>
-               	<select class="custom-select custom-select-sm d-block w-100" id="birthDay">
+                <label for="endDay" class="col-form-label-sm">&nbsp;</label>
+               	<select class="custom-select custom-select-sm d-block w-100" id="endDay">
                		<option value="">날짜</option>
 				    <c:forEach var="day" begin="1" end="31" step="1">
-				    	<option value="${ day }">${ day }</option>
+				    	<c:if test="${ day eq thisDay }"><option value="${day}" selected="selected"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
+				    	<c:if test="${ day ne thisDay }"><option value="${day}"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
 				    </c:forEach>
               	</select>
             </div>
@@ -138,9 +141,12 @@
   		<br>
   		<br>
   		<div class="form-row">
-			<div class="col-md-8 mb-3">&nbsp;</div>
+			<div class="col-md-5 mb-3">&nbsp;</div>
 			<div class="col-md-2 mb-3">
-		  		<button class="btn btn-primary btn-md btn-block" type="submit">저장</button>
+		  		<button  class="btn btn-primary btn-md btn-block" type="button" id="save">저장</button>
+		  	</div>
+		  	<div class="col-md-3 mb-3">
+		  		<button class="btn btn-primary btn-md btn-block" type="button" id="saveNreg">저장 후 직무등록</button>
 		  	</div>
 		  	<div class="col-md-2 mb-3">
 		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/resource/freelancer/main.do'">취소</button>
@@ -148,243 +154,99 @@
 		</div>
   	</form>
   	</div>
-
-
 </main>
 
 
 <script>
+var companyInfos = new Array();
+<c:forEach var="company" items="${ companyList }" varStatus="status">
+companyInfos['${company.companyName}'] = ${company.companySeq}
+</c:forEach>
+
+
+var companyList = ['네이년','네이놈',
+<c:forEach var="company" items="${ companyList }" varStatus="status">
+<c:if test="${ not status.last }">'${company.companyName}',</c:if>
+<c:if test="${ status.last }">'${company.companyName}'</c:if>
+</c:forEach>
+];
+				
+				
 (function() {
 	'use strict';
 
 	window.addEventListener('load', function() {
-	var forms = document.getElementsByClassName('needs-validation');
-	var validation = Array.prototype.filter.call(forms, function(form) {
-	
-		form.addEventListener('submit', function(event) {
-		    if (form.checkValidity() === false) {
+		
+		$('#save').bind('click', function(event) {
+			var form = document.getElementById('regForm');
+		  	if (form.checkValidity() === false) {
 		    	event.preventDefault();
 		        event.stopPropagation();
-		        
 		        form.classList.add('was-validated');
 		    } else {
-		    	regFreelancer(event);
+		    	regProject();
 		    }
-		    
-	    }, false);
-	});
-	    
+		});
+		
+		COMMON.autoCompleteInput('company', companyList);
+		COMMON.autoCompleteInput('mainCompany', companyList);
+		
 	}, false);
 })();
 
 
-function regFreelancer(form) {
+function regProject(form) {
 	var param = {};
-	param.name = $('#name').val();
-	param.email = $('#email').val();
-	param.phoneNo = $('#phoneNo').val();
 	
-	param.gender = $(':radio[name="gender"]:checked').val();
-	param.birthYear = $('#birthYear').val();
-	param.birthMonth = $('#birthMonth').val();
-	param.birthDay = $('#birthDay').val();
+	var company = companyList.filter(function (value) {
+        return (value == $('#company').val());
+    });
+	if (company.length != 1) {
+		alert('업체정보를 다시 확인 해주세요.');
+		return false;
+	}
+	param.companySeq = companyInfos[company[0]];
+	
+	
+	if ($('#mainCompany').val() != '') {
+		var mainCompany = companyList.filter(function (value) {
+	        return (value == $('#mainCompany').val());
+	    });
+		if (mainCompany.length != 1) {
+			alert('수행사 정보를 다시 확인 해주세요.');
+			return false;
+		}
+		param.mainCompanySeq = companyInfos[mainCompany[0]];
+	}
+
+	param.projectName = $('#projectName').val();
+	
+	param.startYear = $('#startYear').val();
+	param.startMonth = $('#startMonth').val();
+	param.startDay = $('#startthDay').val();
+	
+	param.endYear = $('#endYear').val();
+	param.endMonth = $('#endMonth').val();
+	param.endDay = $('#endDay').val();
 	
 	param.sido = $('#sido').val();
 	param.sigungu = $('#sigungu').val();
 	param.addrDetail = $('#addrDetail').val();
 	
-	param.expertType = $('#expertType').val();
-	param.careerStartYear = $('#careerStartYear').val();
-	param.careerStartMonth = $('#careerStartMonth').val();
-	param.academicLevel = $('#academicLevel').val();
-	
-	param.hopeWorkPosiTypeVal = 0; 
-	$(':checkbox[name="hopeWorkPosiType"]:checked').each(function(obj) {
-		param.hopeWorkPosiTypeVal +=  new Number(this.value);
-	});
-	
-	param.hopeRecruitTypeVal = 0; 
-	$(':checkbox[name="hopeRecruitType"]:checked').each(function(obj) {
-		param.hopeRecruitTypeVal +=  new Number(this.value);
-	});
-	
-	param.managerId = $('#manager').val();
-	param.customerMemo = $('#customerMemo').val();
-	
-	//경력
-	var careers = new Array();
-	$('#regForm .careersRowData').each(function(obj) {
-		 
-		var careerInfo = $(this).val().split(';');
-		var careerData = {};
-		careerData['workStartYear'] = careerInfo[0];
-		careerData['workStartMonth'] = careerInfo[1];
-		careerData['workEndYear'] = careerInfo[2];
-		careerData['workEndMonth'] = careerInfo[3];
-		careerData['recruitType'] = careerInfo[4];
-		careerData['jobDesc'] = careerInfo[5];
-		careerData['companyName'] = careerInfo[6];
-		careers.push(careerData);
-	});
-	param.careers = careers;
-
-	
-	var preferences = new Array();
-	$('#regForm .preferenceRow').each(function(obj) {
-		preferences.push($(this).attr('data'));
-	});
-	param.preferences = preferences;
- 
-	
-	var licenses = new Array();
-	$('#regForm .licenseRow').each(function(obj) {
-		licenses.push($(this).attr('data'));
-	});
-	param.licenses = licenses;
-	
-	
-	var skillSets = new Array();
-	$('.skillSetRow').each(function(obj) {
-		
-		var skillSetInfo = {};
-		skillSetInfo['advantageSeq'] = $(this).attr('data').split(',')[0];
-		skillSetInfo['skillSetWorkmanship'] = $(this).attr('data').split(',')[1];
-		skillSets.push(skillSetInfo);
-	});
-	param.skillSets = skillSets;
+	param.manager = $('#manager').val();
+	param.customerMemo = $('#customerMemo').val(); 
 
 	event.preventDefault();
     event.stopPropagation();
  
 	COMMON.ajax({
-	    url : '/resource/freelancer/registFreelancerProc.json',
+	    url : '/project/freelancer/registFreelancerProc.json',
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
 	       alert('프리랜서를 등록하였습니다.');
 	       location.href = '/resource/freelancer/main.do';
 	    }
 	});
-}
-
-var careerRowIndex = 1;
-function addCareer() {
-	
-	if ($('.careersRowData').length > 10) {
-		alert('경력은 10개 이상 입력할 수 없습니다.');
-		return false;	
-	}
-	
-	if ($('#careersStartYear').val() == '') {
-		alert('시작 년도를 입력해 주세요.');
-		return false;
-	}
-	
-	if ($('#careersStartMonth').val() == '') {
-		alert('시작 월을 입력해 주세요.');
-		return false;
-	}
-	
-	if ($('#careersEndYear').val() != '') {
-		//재직중이 아니라면 월을 입력받자
-		if ($('#careersEndMonth').val() == '') {
-			alert('종료 월을 입력해 주세요.');
-			return false;
-		}
-		
-		
-		var start = $('#careersStartYear').val()  + $('#careersStartMonth').val();
-		var end = $('#careersEndYear').val()  + $('#careersEndMonth').val();
-		if (parseInt(start) > parseInt(end)) {
-			alert('시작일-종료일을 확인해 주세요.');
-			return false;
-		}
-	} else {
-		//재직중이라면
-		$('#careersEndMonth').val('')
-	}
-
-	
-	if ($('#careersRecruitType').val() == '') {
-		alert('채용 구분을 입력해 주세요.');
-		return false;
-	}
-	
-	if ($('#careersJob').val() == '') {
-		alert('업무내용을 입력해 주세요.');
-		return false;
-	}
-	
-	if ($('#careersCompanyName').val() == '') {
-		alert('직장명을 입력해 주세요.');
-		return false;
-	}
-	
-	if ($('#careersJob').val().indexOf(';') > 0 || $('#careersCompanyName').val().indexOf(';') > 0) {
-		alert('";" 문자는 사용할 수 없습니다.');
-		return false;
-	}
-	
-	var rowId = "careersRow" + careerRowIndex;
-	careerRowIndex++;
-	var careersRowData = $('#careersStartYear').val() + ';' + $('#careersStartMonth').val() + ';' + $('#careersEndYear').val() + ';' + $('#careersEndMonth').val() + ';' + $('#careersRecruitType').val() + 
-	           ';' + $('#careersJob').val() + ';' + $('#careersCompanyName').val();
-	           
-	var rowHtml = 
-	'<div id="' + rowId + '" class="form-row" style="margin-bottom: -18px;">' +
-	    '<input type="hidden" class="careersRowData" value="' + careersRowData +'"/>' +
-		'<div class="form-group col-md-9 mb-3">' +
-			'<div class="form-row">' +
-				'<div class="form-group input-group col-md-3 mb-3">' +
-    				'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersStartYear').val() + ' 년">' +
-					'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersStartMonth').val() + ' 월">' +
-    			'</div>	' +
-			'<div class="form-group input-group col-md-3 mb-3">';
-		
-	if ($('#careersEndYear').val() == '') {
-		rowHtml += 
-		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="재직중">' +
-		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="-">';
-	} else {
-		rowHtml += 
-		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersEndYear').val() + ' 년">' +
-		'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersEndMonth').val() + ' 월">';
-	}
-			
-		rowHtml +=
-			'</div>	' +
-    		'<div class="form-group col-md-2 mb-3">' +
-    			'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersRecruitType option:checked').html() + '">' +
-    		'</div>' +
-    		'<div class="form-group col-md-4 mb-3">' +
-    			'<input type="text" class="form-control form-control-sm" disabled="disabled" value="' + $('#careersJob').val() + '">' +
-    		'</div>' +
-			'</div> ' +
-	  	'</div>' +
-  		'<div class="form-group col-md-3 mb-3">' +
-  			'<div class="form-row">' +
-     	 		'<div class="form-group col-md-10 mb-3">' +
-          			'<input type="text" class="form-control form-control-sm "  disabled="disabled" value="' + $('#careersCompanyName').val() + '">' +
-      			'</div>' +
-    			'<div class="form-group col-md-2 mb-3">' +
-    				'<button type="button" class="btn btn-outline-dark btn-sm btn-block" onclick="javascript: removeCareerRow(\'' + rowId + '\')"><strong>&times;</strong></button>' +
-    			'</div>' +
-			'</div>' +
-		'</div>' +
-	'</div>';
-	
-	$('#careers').append(rowHtml);
-
-	$('#careersStartYear').val('');
-	$('#careersStartMonth').val('');
-	$('#careersEndYear').val('');
-	$('#careersEndMonth').val('');
-	$('#careersRecruitType').val('');
-	$('#careersJob').val('');
-	$('#careersCompanyName').val('');
-}
-
-function removeCareerRow(id) {
-	$('#' + id).remove();
 }
 
 

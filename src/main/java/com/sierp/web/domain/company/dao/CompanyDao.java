@@ -32,8 +32,9 @@ public class CompanyDao {
 	}
 	
 	
-	public List<Company> selectCompany() {
+	public List<Company> selectCompany(int customerSeq) {
 		Map<String, Object> param = Maps.newHashMap();
+		param.put("customerSeq", customerSeq);
 		return sql.selectList(MAPPER_NAMESPACE + "selectCompany", param);
 	}
 	
