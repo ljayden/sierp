@@ -1,4 +1,4 @@
-package com.sierp.web.domain.company.dao;
+package com.sierp.web.domain.business.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Maps;
-import com.sierp.web.domain.company.model.Customer;
-import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.domain.business.model.Customer;
+import com.sierp.web.domain.business.model.CustomerManager;
 
 @Repository
 public class CustomerDao {
 
 	@Autowired SqlSessionTemplate sql;
 
-	static final String MAPPER_NAMESPACE = "mapper.company.customer_dao.";
+	static final String MAPPER_NAMESPACE = "mapper.business.customer_dao.";
 	
 	public List<Customer> selectCustomer() {
 		Map<String, Object> param = Maps.newHashMap();

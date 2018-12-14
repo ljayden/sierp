@@ -1,4 +1,4 @@
-package com.sierp.web.domain.company.dao;
+package com.sierp.web.domain.business.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Maps;
+import com.sierp.web.domain.business.model.Company;
+import com.sierp.web.domain.business.model.CompanyManagerSearch;
+import com.sierp.web.domain.business.model.CompanySearch;
+import com.sierp.web.domain.business.model.CompanyStaff;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
-import com.sierp.web.domain.company.model.Company;
-import com.sierp.web.domain.company.model.CompanyManagerSearch;
-import com.sierp.web.domain.company.model.CompanySearch;
-import com.sierp.web.domain.company.model.CompanyStaff;
 import com.sierp.web.result.Pager;
 
 @Repository
@@ -21,7 +21,7 @@ public class CompanyDao {
 
 	@Autowired SqlSessionTemplate sql;
 
-	static final String MAPPER_NAMESPACE = "mapper.company.company_dao.";
+	static final String MAPPER_NAMESPACE = "mapper.business.company_dao.";
 	
 	public int insertCompany(Company company) {
 		return sql.insert(MAPPER_NAMESPACE + "insertCompany", company);

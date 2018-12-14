@@ -1,4 +1,4 @@
-package com.sierp.web.domain.company.service;
+package com.sierp.web.domain.business.service;
 
 import java.util.Date;
 import java.util.List;
@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sierp.web.controller.business.request.CompanyRegisterRequest;
 import com.sierp.web.controller.business.request.CompanyRegisterRequestStaff;
-import com.sierp.web.domain.company.dao.CompanyDao;
-import com.sierp.web.domain.company.model.Company;
-import com.sierp.web.domain.company.model.CompanyStaff;
-import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.domain.business.dao.CompanyDao;
+import com.sierp.web.domain.business.model.Company;
+import com.sierp.web.domain.business.model.CompanyStaff;
+import com.sierp.web.domain.business.model.CustomerManager;
 
 @Service
 @Slf4j

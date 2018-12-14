@@ -7,7 +7,7 @@
 
 <main role="main" class="container">
 
-	<form id="searchForm" action="/project/search/getMainList.ldo" method="post" iframe-list-div="listDiv">
+	<form id="searchForm" action="/business/project/getMainList.ldo" method="post" iframe-list-div="listDiv">
 	<input type="hidden" id="pageInput" name="page" value="1"/>
 
 	<div class="my-3 p-3 bg-white rounded shadow">
@@ -111,7 +111,7 @@
  	</div>
 	</form>
   	
-  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/project/search/registProject.do'">프로젝트 등록하기</button>
+  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/business/project/registProject.do'">프로젝트 등록하기</button>
   	
   	<div class="mt-2" id="listDiv">
   	</div>

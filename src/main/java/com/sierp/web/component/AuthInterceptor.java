@@ -16,8 +16,8 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.sierp.web.domain.business.model.CustomerManager;
 import com.sierp.web.domain.common.service.LoginService;
-import com.sierp.web.domain.company.model.CustomerManager;
 import com.sierp.web.result.JsonResults;
 import com.sierp.web.util.JacksonUtil;
 
@@ -47,7 +47,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Handle
 				
 				response.getWriter().write(JacksonUtil.toJson(JsonResults.fail(9000, "로그아웃 되었습니다.")));
 				return false;
-			} else if(request.getRequestURI().endsWith("ldo")) {
+			} else if (request.getRequestURI().endsWith("ldo")) {
 				
 				response.getWriter().write("<script>parent.location.href = '/login.do';</script>");
 				return false;

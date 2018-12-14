@@ -36,7 +36,7 @@
         	<div class="form-group col-md-2 mb-3">
             	<label for="startYear" class="col-form-label-sm">시작일<span class="text-muted">(Optional)</span></label>
                 <select class="custom-select custom-select-sm d-block w-100" id="startYear" required>
-                	<option value="">년도 선택</option>
+                	<option value="">시작 년도</option>
  					<c:forEach var="year" begin="${ thisYear - 20 }" end="${ thisYear + 3 }" step="1">
 				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) eq thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}" selected="selected">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
 				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) ne thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
@@ -57,7 +57,7 @@
             <div class="form-group col-md-1 mb-3">
                 <label for="startDay" class="col-form-label-sm">&nbsp;</label>
                	<select class="custom-select custom-select-sm d-block w-100" id="startDay">
-               		<option value="">날짜</option>
+               		<option value="">일</option>
 				    <c:forEach var="day" begin="1" end="31" step="1">
 				    	<c:if test="${ day eq thisDay }"><option value="${day}" selected="selected"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
 				    	<c:if test="${ day ne thisDay }"><option value="${day}"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
@@ -71,7 +71,7 @@
         	<div class="form-group col-md-2 mb-3">
             	<label for="endYear" class="col-form-label-sm">종료일<span class="text-muted">(Optional)</span></label>
                 <select class="custom-select custom-select-sm d-block w-100" id="endYear"  required>
-                	<option value="">년도 선택</option>
+                	<option value="">종료 년도</option>
  					<c:forEach var="year" begin="${ thisYear - 10 }" end="${ thisYear + 13 }" step="1">
 				    	<c:if test="${ ((thisYear + 13) - year + (thisYear - 10)) eq thisYear }"><option value="${(thisYear + 13) - year + (thisYear - 10)}" selected="selected">${(thisYear + 13) - year + (thisYear - 10)}</option></c:if>
 				    	<c:if test="${ ((thisYear + 13) - year + (thisYear - 10)) ne thisYear }"><option value="${(thisYear + 13) - year + (thisYear - 10)}">${(thisYear + 13) - year + (thisYear - 10)}</option></c:if>
@@ -92,7 +92,7 @@
             <div class="form-group col-md-1 mb-3">
                 <label for="endDay" class="col-form-label-sm">&nbsp;</label>
                	<select class="custom-select custom-select-sm d-block w-100" id="endDay">
-               		<option value="">날짜</option>
+               		<option value="">일</option>
 				    <c:forEach var="day" begin="1" end="31" step="1">
 				    	<c:if test="${ day eq thisDay }"><option value="${day}" selected="selected"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
 				    	<c:if test="${ day ne thisDay }"><option value="${day}"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
@@ -207,7 +207,6 @@ function regProject(form) {
 	}
 	param.companySeq = companyInfos[company[0]];
 	
-	
 	if ($('#mainCompany').val() != '') {
 		var mainCompany = companyList.filter(function (value) {
 	        return (value == $('#mainCompany').val());
@@ -218,8 +217,36 @@ function regProject(form) {
 		}
 		param.mainCompanySeq = companyInfos[mainCompany[0]];
 	}
-
+	
 	param.projectName = $('#projectName').val();
+	
+	if ( $('#startDay').val() != '') {
+		if ( $('#startYear').val() == '' || $('#startMonth').val() == '') {
+			alert('시작 년도. 월을 입력해 주세요.');
+			return false;
+		}
+	}
+	
+	if ( $('#startMonth').val() != '' ) {
+		if ( $('#startYear').val() == '') {
+			alert('시작 년도. 월을 입력해 주세요.');
+			return false;
+		}
+	}
+	
+	if ( $('#endtDay').val() != '') {
+		if ( $('#endYear').val() == '' || $('#endMonth').val() == '') {
+			alert('시작 년도. 월을 입력해 주세요.');
+			return false;
+		}
+	}
+	
+	if ( $('#endMonth').val() != '' ) {
+		if ( $('#endYear').val() == '') {
+			alert('시작 년도. 월을 입력해 주세요.');
+			return false;
+		}
+	}
 	
 	param.startYear = $('#startYear').val();
 	param.startMonth = $('#startMonth').val();
@@ -229,22 +256,22 @@ function regProject(form) {
 	param.endMonth = $('#endMonth').val();
 	param.endDay = $('#endDay').val();
 	
-	param.sido = $('#sido').val();
-	param.sigungu = $('#sigungu').val();
+	param.sido = $('#sido').val() == '' ? null : $('#sido').val();
+	param.sigungu = $('#sigungu').val() == '' ? null : $('#sigungu').val();
 	param.addrDetail = $('#addrDetail').val();
 	
-	param.manager = $('#manager').val();
+	param.managerId = $('#manager').val();
 	param.customerMemo = $('#customerMemo').val(); 
 
 	event.preventDefault();
     event.stopPropagation();
  
 	COMMON.ajax({
-	    url : '/project/freelancer/registFreelancerProc.json',
+	    url : '/business/project/registProjectProc.json',
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
 	       alert('프리랜서를 등록하였습니다.');
-	       location.href = '/resource/freelancer/main.do';
+	       location.href = '/business/project/main.do';
 	    }
 	});
 }

@@ -11,6 +11,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 
 
+
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +21,9 @@ import lombok.Setter;
 
 import com.google.common.collect.Maps;
 import com.sierp.web.config.WebRootConfig;
-import com.sierp.web.domain.company.dao.CustomerDao;
-import com.sierp.web.domain.company.model.Customer;
-import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.domain.business.dao.CustomerDao;
+import com.sierp.web.domain.business.model.Customer;
+import com.sierp.web.domain.business.model.CustomerManager;
 
 /**
  *

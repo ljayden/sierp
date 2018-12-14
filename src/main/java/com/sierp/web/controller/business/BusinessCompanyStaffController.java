@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sierp.web.controller.business.request.CompanyManagerSearchRequest;
-import com.sierp.web.domain.company.dao.CompanyDao;
-import com.sierp.web.domain.company.dao.CustomerDao;
-import com.sierp.web.domain.company.model.CustomerManager;
-import com.sierp.web.domain.company.service.CompanyRegisterService;
+import com.sierp.web.domain.business.dao.CompanyDao;
+import com.sierp.web.domain.business.dao.CustomerDao;
+import com.sierp.web.domain.business.model.CustomerManager;
+import com.sierp.web.domain.business.service.CompanyRegisterService;
 
 @Controller
 @RequestMapping(value = "/business/companyStaff")

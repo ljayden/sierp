@@ -9,9 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sierp.web.domain.company.dao.CustomerDao;
-import com.sierp.web.domain.company.model.Customer;
-import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.domain.business.dao.CustomerDao;
+import com.sierp.web.domain.business.model.Customer;
+import com.sierp.web.domain.business.model.CustomerManager;
 import com.sierp.web.result.JsonResult;
 import com.sierp.web.result.JsonResults;
 

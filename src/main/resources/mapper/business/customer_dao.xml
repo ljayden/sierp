@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.company.customer_dao">
+<mapper namespace="mapper.business.customer_dao">
  
     <select id="selectCustomer" resultType="map">
     	SELECT * FROM customer
     </select>
     
-    <select id="selectCustomerByCode" parameterType="map" resultType="com.sierp.web.domain.company.model.Customer">
+    <select id="selectCustomerByCode" parameterType="map" resultType="com.sierp.web.domain.business.model.Customer">
     	SELECT * FROM customer WHERE customer_code = #{customerCode}
     </select>
 
-    <select id="selectCustomerManagerByIdPassword" parameterType="map" resultType="com.sierp.web.domain.company.model.CustomerManager">
+    <select id="selectCustomerManagerByIdPassword" parameterType="map" resultType="com.sierp.web.domain.business.model.CustomerManager">
     	SELECT * FROM customer_manager 
     	WHERE customer_seq = #{customerSeq}
     	AND	  id = #{id}
     	AND   password = #{password}
     </select>
 
-    <select id="selectCustomerManagerList" parameterType="map" resultType="com.sierp.web.domain.company.model.CustomerManager">
+    <select id="selectCustomerManagerList" parameterType="map" resultType="com.sierp.web.domain.business.model.CustomerManager">
     	SELECT * FROM customer_manager 
     	WHERE customer_seq = #{customerSeq}
     </select>

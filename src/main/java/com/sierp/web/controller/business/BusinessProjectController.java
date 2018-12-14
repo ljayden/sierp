@@ -1,19 +1,26 @@
-package com.sierp.web.controller.project;
+package com.sierp.web.controller.business;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sierp.web.controller.project.request.ProjectSearchRequest;
-import com.sierp.web.domain.company.dao.CompanyDao;
-import com.sierp.web.domain.company.dao.CustomerDao;
-import com.sierp.web.domain.company.model.CustomerManager;
+import com.sierp.web.controller.business.request.ProjectRegisterRequest;
+import com.sierp.web.controller.business.request.ProjectSearchRequest;
+import com.sierp.web.domain.business.dao.CompanyDao;
+import com.sierp.web.domain.business.dao.CustomerDao;
+import com.sierp.web.domain.business.model.CustomerManager;
+import com.sierp.web.result.JsonResult;
+import com.sierp.web.result.JsonResults;
 
 @Controller
-@RequestMapping(value = "/project/search")
-public class ProjectSearchController {
+@RequestMapping(value = "/business/project")
+public class BusinessProjectController {
 
 	@Autowired CustomerDao customDao;
 	@Autowired CompanyDao companyDao;
@@ -22,24 +29,32 @@ public class ProjectSearchController {
 	public String search(Model model, CustomerManager manager) {
 
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
-		return "project/search/main";
+		return "business/project/main";
 	}
 	
 	@RequestMapping(value = "/getMainList", method = {RequestMethod.POST})
 	public String mainList(Model model, CustomerManager manager, ProjectSearchRequest request) {
 		
 		model.addAttribute("request", request);
-		return "project/search/mainList";
+		return "business/project/mainList";
 	}
 	
 	
 	@RequestMapping(value = "/registProject", method = RequestMethod.GET)
 	public String registFreelancer(Model model, CustomerManager manager) {
 		
-		
 		model.addAttribute("companyList", companyDao.selectCompany(manager.getCustomerSeq()));
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		
-		return "project/search/registProject";
+		return "business/project/registProject";
 	}
+	
+	
+	@RequestMapping(value = "/registProjectProc", method = RequestMethod.GET)
+	@ResponseBody
+	  public JsonResult registProjectProc(CustomerManager manager, @RequestBody @Valid ProjectRegisterRequest request) {
+		
+		return JsonResults.success();
+	}
+	
 }

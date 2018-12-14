@@ -1,4 +1,4 @@
-package com.sierp.web.domain.company.constant;
+package com.sierp.web.domain.business.constant;
 
 
 public enum CompanyStaffStatus {

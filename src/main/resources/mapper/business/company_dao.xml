@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.company.company_dao">
+<mapper namespace="mapper.business.company_dao">
 
-	<insert id="insertCompany" parameterType="com.sierp.web.domain.company.model.Company" useGeneratedKeys="true" keyProperty="companySeq">
+	<insert id="insertCompany" parameterType="com.sierp.web.domain.business.model.Company" useGeneratedKeys="true" keyProperty="companySeq">
 		INSERT INTO company(customer_seq, company_name, biz_no, sido,  si_gun_gu, detail_addr, customer_memo, register_ymdt, register_manager_id)
 		VALUES (#{customerSeq}, #{companyName}, #{bizNo}, #{sido}, #{siGunGu}, #{detailAddr}, #{customerMemo}, #{registerYmdt}, #{registerManagerId})
 	</insert>
 	 
-	<insert id="insertCompanyStaff" parameterType="com.sierp.web.domain.company.model.CompanyStaff" useGeneratedKeys="true" keyProperty="companyStaffSeq">
+	<insert id="insertCompanyStaff" parameterType="com.sierp.web.domain.business.model.CompanyStaff" useGeneratedKeys="true" keyProperty="companyStaffSeq">
 		INSERT INTO company_staff
 		       (company_seq, name, phone_no, company_phone_no,  email, position, part, customer_memo, register_ymdt, register_manager_id)
 		VALUES (#{companySeq}, #{name}, #{phoneNo}, #{companyPhoneNo}, #{email}, #{position}, #{part}, #{customerMemo}, #{registerYmdt}, #{registerManagerId})
@@ -15,12 +15,12 @@
  
  
  
-    <select id="selectCompany" parameterType="map" resultType="com.sierp.web.domain.company.model.Company">
+    <select id="selectCompany" parameterType="map" resultType="com.sierp.web.domain.business.model.Company">
     	SELECT * FROM company
     	WHERE customer_seq = #{customerSeq}
     </select>
 
-    <select id="selectCompanyBySeq" parameterType="map" resultType="com.sierp.web.domain.company.model.Company">
+    <select id="selectCompanyBySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.Company">
     	SELECT * FROM company WHERE company_seq = #{companySeq}
     </select>
     
@@ -31,7 +31,7 @@
 		<where><include refid="companySearchCondition"/></where>
 	</select>
 	
-	<select id="selectCompanyList" parameterType="map" resultType="com.sierp.web.domain.company.model.CompanySearch">
+	<select id="selectCompanyList" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanySearch">
 		SELECT  c.*
 		FROM 	company c
 	 	<where><include refid="companySearchCondition"/></where>
@@ -61,7 +61,7 @@
     
     
     
-    <select id="selectCompanyStaffListByCompanySeq" parameterType="map" resultType="com.sierp.web.domain.company.model.CompanyStaff">
+    <select id="selectCompanyStaffListByCompanySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanyStaff">
     	SELECT 	* 
     	FROM 	company_staff
     	WHERE	company_seq = #{companySeq}
@@ -74,7 +74,7 @@
 		<where><include refid="companyStaffSearchCondition"/></where>
 	</select>
 	
-	<select id="selectCompanyStaffList" parameterType="map" resultType="com.sierp.web.domain.company.model.CompanyManagerSearch">
+	<select id="selectCompanyStaffList" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanyManagerSearch">
 		SELECT  cs.*, c.company_name
 		FROM 	company c, company_staff cs
 	 	<where><include refid="companyStaffSearchCondition"/></where>

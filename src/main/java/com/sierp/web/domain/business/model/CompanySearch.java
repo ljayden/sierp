@@ -1,4 +1,4 @@
-package com.sierp.web.domain.company.model;
+package com.sierp.web.domain.business.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
