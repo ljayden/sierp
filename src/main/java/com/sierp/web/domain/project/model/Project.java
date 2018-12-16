@@ -12,23 +12,34 @@ public class Project {
 
 	private int projectSeq;
 	
-	private String customerCode;
-	private String managerId;
+	private int customerSeq;
+	private String mainManagerId;
 	
 	private int companySeq;
 	private int companyStaffSeq;
 	
+	private Integer mainCompanySeq;
+	private Integer mainCompanyStaffSeq;
+	
 	private String projectName;
-	private Date startYmdt;
-	private Date endYmdt;
+	private Integer startYear;
+	private Integer startMonth;
+	private Integer startDay;
+	
+	private Integer endYear;
+	private Integer endMonth;
+	private Integer endDay;
 	
 	private SidoType sido;
 	private SiGunGuType siGunGu;
 	private String detailAddr;
 	
-	private String projectInfo;
-	private String secretMemo;
+	private String projectDesc;
+	private String customerMemo;
 	
 	private Date registerYmdt;
 	private String resiterManagerId;
 }
+ 
+  
+  

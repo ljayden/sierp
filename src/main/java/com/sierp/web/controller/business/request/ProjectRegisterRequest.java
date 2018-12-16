@@ -11,21 +11,27 @@ import lombok.Data;
 public class ProjectRegisterRequest {
 	
 	private int companySeq;
+	private Integer companyStaffSeq;
+	
 	private Integer mainCompanySeq;
+	private Integer mainCompanyStaffSeq;
+	
 	@NotEmpty private String projectName;
 	
-	private String startYear;
-	private String startMonth;
-	private String startDay;
+	private Integer startYear;
+	private Integer startMonth;
+	private Integer startDay;
 	
-	private String endYear;
-	private String endMonth;
-	private String endDay;
+	private Integer endYear;
+	private Integer endMonth;
+	private Integer endDay;
 	
 	private SidoType sido;
 	private SiGunGuType sigungu;
 	private String addrDetail;
 	
-	private String managerId;
+	private String projectDesc;
+	private String mainManagerId;
 	private String customerMemo;
+	
 }

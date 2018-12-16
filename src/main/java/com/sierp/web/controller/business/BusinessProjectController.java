@@ -1,5 +1,6 @@
 package com.sierp.web.controller.business;
 
+import javax.imageio.spi.RegisterableService;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.ImmutableMap;
 import com.sierp.web.controller.business.request.ProjectRegisterRequest;
 import com.sierp.web.controller.business.request.ProjectSearchRequest;
 import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.model.CustomerManager;
+import com.sierp.web.domain.project.model.Project;
+import com.sierp.web.domain.project.service.ProjectRegisterService;
 import com.sierp.web.result.JsonResult;
 import com.sierp.web.result.JsonResults;
 
 @Controller
 @RequestMapping(value = "/business/project")
 public class BusinessProjectController {
-
+	
 	@Autowired CustomerDao customDao;
 	@Autowired CompanyDao companyDao;
+	
+	@Autowired ProjectRegisterService registerService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String search(Model model, CustomerManager manager) {
@@ -54,7 +60,8 @@ public class BusinessProjectController {
 	@ResponseBody
 	  public JsonResult registProjectProc(CustomerManager manager, @RequestBody @Valid ProjectRegisterRequest request) {
 		
-		return JsonResults.success();
+		Project project = registerService.registerProjectProc(request, manager);
+		return JsonResults.success(ImmutableMap.of("projectSeq", project.getProjectSeq()));
 	}
 	
 }

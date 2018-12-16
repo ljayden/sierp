@@ -103,7 +103,7 @@
 
 		<div class="form-row">
 			<div class="form-group col-md-2 mb-3">
-                <label for="sido" class="col-form-label-sm">주소</label>
+                <label for="sido" class="col-form-label-sm">근무지</label>
                 <select class="custom-select custom-select-sm d-block w-100" id="sido" required onchange="javascript: getSiGunGuTypeReg('sigungu');">
 				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
 			  	</select>
@@ -118,11 +118,14 @@
 			  	<div class="invalid-feedback" style="width: 100%;">시/군/구를 선택해 주세요.</div>
 			</div>
 			<div class="form-group col-md-7 mb-3">
-                <label for="addrDetail" class="col-form-label-sm">상세주소<span class="text-muted">(Optional)</span></label>
+                <label for="addrDetail" class="col-form-label-sm">상세 근무지<span class="text-muted">(Optional)</span></label>
  				<input type="text" class="form-control form-control-sm" id="addrDetail" placeholder="ex: 강남구청역 푸르지오">
 			</div>
 		</div>
-		
+		<div class="mb-3"> 
+        	<label for="projectDesc" class="col-form-label-sm">프로젝트 설명</label>
+			<textarea class="form-control form-control-sm" id="projectDesc" aria-label="With textarea" rows="3"></textarea>
+		</div>   
 		<div class="form-row">
         	<div class="form-group col-md-3 mb-3">
                 <label for="manager" class="col-form-label-sm">담당자</label>
@@ -184,7 +187,18 @@ var companyList = ['네이년','네이놈',
 		        event.stopPropagation();
 		        form.classList.add('was-validated');
 		    } else {
-		    	regProject();
+		    	regProject(false);
+		    }
+		});
+		
+		$('#save').bind('click', function(event) {
+			var form = document.getElementById('regForm');
+		  	if (form.checkValidity() === false) {
+		    	event.preventDefault();
+		        event.stopPropagation();
+		        form.classList.add('was-validated');
+		    } else {
+		    	regProject(true);
 		    }
 		});
 		
@@ -195,7 +209,7 @@ var companyList = ['네이년','네이놈',
 })();
 
 
-function regProject(form) {
+function regProject(flag) {
 	var param = {};
 	
 	var company = companyList.filter(function (value) {
@@ -206,7 +220,9 @@ function regProject(form) {
 		return false;
 	}
 	param.companySeq = companyInfos[company[0]];
-	
+	if (true) {
+		param.companyStaffSeq = '1';
+	}
 	if ($('#mainCompany').val() != '') {
 		var mainCompany = companyList.filter(function (value) {
 	        return (value == $('#mainCompany').val());
@@ -216,6 +232,9 @@ function regProject(form) {
 			return false;
 		}
 		param.mainCompanySeq = companyInfos[mainCompany[0]];
+	}
+	if (true) {
+		param.mainCompanyStaffSeq = '2';
 	}
 	
 	param.projectName = $('#projectName').val();
@@ -260,9 +279,12 @@ function regProject(form) {
 	param.sigungu = $('#sigungu').val() == '' ? null : $('#sigungu').val();
 	param.addrDetail = $('#addrDetail').val();
 	
-	param.managerId = $('#manager').val();
+	param.projectDesc = $('#projectDesc').val();
+	param.mainManagerId = $('#manager').val();
 	param.customerMemo = $('#customerMemo').val(); 
 
+	param.afterJobPostionYn = flag ? 'Y' : 'N';
+	
 	event.preventDefault();
     event.stopPropagation();
  
