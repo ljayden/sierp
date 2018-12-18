@@ -1,17 +1,22 @@
 package com.sierp.web.controller.business;
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sierp.web.controller.business.request.CompanyManagerSearchRequest;
 import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.model.CustomerManager;
 import com.sierp.web.domain.business.service.CompanyRegisterService;
+import com.sierp.web.result.JsonResult;
+import com.sierp.web.result.JsonResults;
 
 @Controller
 @RequestMapping(value = "/business/companyStaff")
@@ -46,5 +51,10 @@ public class BusinessCompanyStaffController {
 		return "business/companyStaff/mainList";
 	}
 	
-	
+	@RequestMapping(value = "/getCompanyManagerList", method = RequestMethod.POST)
+	@ResponseBody
+	  public JsonResult getCompanyManagerList(@RequestParam(value = "companySeq") int companySeq) {
+		
+		return JsonResults.success(companyDao.selectCompanyStaffListByCompanySeq(companySeq));
+	}
 }

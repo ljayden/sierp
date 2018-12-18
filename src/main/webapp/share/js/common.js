@@ -432,18 +432,23 @@ var COMMON = {
         $(".dimmed").hide();
     },
 
-    autoCompleteInput : function(elementId, sourceList) {
+    autoCompleteInput : function(elementId, sourceList, func) {
     	$('#' + elementId).autocomplete({
     		source: sourceList,
     		minLength: 2,
     		change: function( event, ui ) {
+    			var findFlag = false;
     			if (ui.item != null && ui.item.value) {
     				$('#' + elementId).css('background-color','#bfeffb');
-    				$('#' + elementId).attr('matchItem', true);
+    				findFlag = true;
     			} else {
     				$('#' + elementId).css('background-color','white');
-    				$('#' + elementId).attr('matchItem', false);
     			}
+    			
+    			$('#' + elementId).attr('matchItem', findFlag);
+                if (func && typeof(func) == 'function') {
+                	func(findFlag);
+                }
     		},
     		select: function( event, ui ) {
     			if(ui.item.value) {

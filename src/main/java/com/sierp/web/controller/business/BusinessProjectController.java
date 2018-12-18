@@ -1,6 +1,5 @@
 package com.sierp.web.controller.business;
 
-import javax.imageio.spi.RegisterableService;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,7 @@ public class BusinessProjectController {
 	}
 	
 	
-	@RequestMapping(value = "/registProjectProc", method = RequestMethod.GET)
+	@RequestMapping(value = "/registProjectProc", method = RequestMethod.POST)
 	@ResponseBody
 	  public JsonResult registProjectProc(CustomerManager manager, @RequestBody @Valid ProjectRegisterRequest request) {
 		

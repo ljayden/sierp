@@ -14,15 +14,26 @@
     <form class="needs-validation" id="regForm" novalidate> <!--  -->
     
     	<div class="form-row">
-        	<div class="form-group col-md-5 mb-3">
+        	<div class="form-group col-md-3 mb-3">
                 <label for="company" class="col-form-label-sm">업체명</label>
-                <input type="text" class="form-control form-control-sm" id="company" required  onchange="javascript :checkCompany(this)">
+                <input type="text" class="form-control form-control-sm" id="company" required >
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
+        	<div class="form-group col-md-2 mb-3">
+        		<label for="companyManager" class="col-form-label-sm">담당자</label>
+        		<select class="custom-select custom-select-sm d-block w-100" id="companyManager">
+        		</select>
+        	</div>
+        	
             <div class="form-group col-md-1 mb-3"></div>
-            <div class="form-group col-md-6 mb-3">
+            <div class="form-group col-md-4 mb-3">
               	<label for="mainCompany" class="col-form-label-sm">수행사<span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control form-control-sm" id="mainCompany" onchange="javascript :checkCompany(this)">
+                <input type="text" class="form-control form-control-sm" id="mainCompany" >
+        	</div>
+        	<div class="form-group col-md-2 mb-3">
+        		<label for="mainCompanyManager" class="col-form-label-sm">담당자</label>
+        		<select class="custom-select custom-select-sm d-block w-100" id="mainCompanyManager">
+        		</select>
         	</div>
 		</div>
 		
@@ -35,7 +46,7 @@
         	<div class="form-group col-md-1 mb-3"></div>
         	<div class="form-group col-md-2 mb-3">
             	<label for="startYear" class="col-form-label-sm">시작일<span class="text-muted">(Optional)</span></label>
-                <select class="custom-select custom-select-sm d-block w-100" id="startYear" required>
+                <select class="custom-select custom-select-sm d-block w-100" id="startYear">
                 	<option value="">시작 년도</option>
  					<c:forEach var="year" begin="${ thisYear - 20 }" end="${ thisYear + 3 }" step="1">
 				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) eq thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}" selected="selected">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
@@ -70,7 +81,7 @@
             <div class="form-group col-md-6 mb-3">&nbsp;</div>
         	<div class="form-group col-md-2 mb-3">
             	<label for="endYear" class="col-form-label-sm">종료일<span class="text-muted">(Optional)</span></label>
-                <select class="custom-select custom-select-sm d-block w-100" id="endYear"  required>
+                <select class="custom-select custom-select-sm d-block w-100" id="endYear" >
                 	<option value="">종료 년도</option>
  					<c:forEach var="year" begin="${ thisYear - 10 }" end="${ thisYear + 13 }" step="1">
 				    	<c:if test="${ ((thisYear + 13) - year + (thisYear - 10)) eq thisYear }"><option value="${(thisYear + 13) - year + (thisYear - 10)}" selected="selected">${(thisYear + 13) - year + (thisYear - 10)}</option></c:if>
@@ -138,7 +149,7 @@
         	</div>
 		</div>
 		<div class="mb-3"> 
-        	<label for="cutomerMemo" class="col-form-label-sm">담당자 메모</label>
+        	<label for="cutomerMemo" class="col-form-label-sm">메모</label>
 			<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="3"></textarea>
 		</div>                                                 
   		<br>
@@ -167,7 +178,7 @@ companyInfos['${company.companyName}'] = ${company.companySeq}
 </c:forEach>
 
 
-var companyList = ['네이년','네이놈',
+var companyList = [//'네이년','네이놈',
 <c:forEach var="company" items="${ companyList }" varStatus="status">
 <c:if test="${ not status.last }">'${company.companyName}',</c:if>
 <c:if test="${ status.last }">'${company.companyName}'</c:if>
@@ -202,8 +213,32 @@ var companyList = ['네이년','네이놈',
 		    }
 		});
 		
-		COMMON.autoCompleteInput('company', companyList);
-		COMMON.autoCompleteInput('mainCompany', companyList);
+		COMMON.autoCompleteInput('company', companyList, function(findFlag) {
+			if (findFlag) {
+				var company = companyList.filter(function (value) {
+			        return (value == $('#company').val());
+			    });
+				if (company.length == 1) {
+					getCompanyManagerList('companyManager', companyInfos[company[0]])
+				}
+			} else {
+				$('#companyManager option').remove();
+		    	$('#companyManager').append('<option value="">&nbsp;</option>')
+			}
+		});
+		COMMON.autoCompleteInput('mainCompany', companyList, function(findFlag) {
+			if (findFlag) {
+				var company = companyList.filter(function (value) {
+			        return (value == $('#mainCompany').val());
+			    });
+				if (company.length == 1) {
+					getCompanyManagerList('mainCompanyManager', companyInfos[company[0]])
+				}
+			} else {
+				$('#mainCompanyManager option').remove();
+		    	$('#mainCompanyManager').append('<option value="">&nbsp;</option>')
+			}
+		});
 		
 	}, false);
 })();
@@ -283,8 +318,6 @@ function regProject(flag) {
 	param.mainManagerId = $('#manager').val();
 	param.customerMemo = $('#customerMemo').val(); 
 
-	param.afterJobPostionYn = flag ? 'Y' : 'N';
-	
 	event.preventDefault();
     event.stopPropagation();
  
@@ -292,11 +325,29 @@ function regProject(flag) {
 	    url : '/business/project/registProjectProc.json',
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
-	       alert('프리랜서를 등록하였습니다.');
-	       location.href = '/business/project/main.do';
+	    	
+	    	if (afterJobPostionYn) {
+	    		
+	    	} else {
+	 	       alert('프로젝트를 등록하였습니다..');
+		       location.href = '/business/project/main.do';
+	    	}
+
 	    }
 	});
 }
 
-
+function getCompanyManagerList(selectId, companySeq) {
+	COMMON.ajax({
+	    url : '/business/companyStaff/getCompanyManagerList.json?companySeq=' + companySeq,
+	    successHandler : function(data){
+	    	$('#' + selectId +'  option').remove();
+	    	$('#' + selectId).append('<option value=""> - </option>')
+	    	$(data.result).each(function(i, companyStaff) {
+	    		$('#' + selectId).append('<option value="' + companyStaff.companyStaffSeq + '">' + companyStaff.name + '</option>')
+	    	});
+	    }
+	});
+	
+}
 </script>
