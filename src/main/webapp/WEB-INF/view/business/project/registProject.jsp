@@ -202,7 +202,7 @@ var companyList = [//'네이년','네이놈',
 		    }
 		});
 		
-		$('#save').bind('click', function(event) {
+		$('#saveNreg').bind('click', function(event) {
 			var form = document.getElementById('regForm');
 		  	if (form.checkValidity() === false) {
 		    	event.preventDefault();
@@ -255,8 +255,8 @@ function regProject(flag) {
 		return false;
 	}
 	param.companySeq = companyInfos[company[0]];
-	if (true) {
-		param.companyStaffSeq = '1';
+	if ($('#companyManager').val() != '') {
+		param.companyStaffSeq = $('#companyManager').val();
 	}
 	if ($('#mainCompany').val() != '') {
 		var mainCompany = companyList.filter(function (value) {
@@ -267,10 +267,12 @@ function regProject(flag) {
 			return false;
 		}
 		param.mainCompanySeq = companyInfos[mainCompany[0]];
+
+		if ($('#mainCompanyManager').val() != '') {
+			param.mainCompanyStaffSeq = $('#mainCompanyManager').val();
+		}
 	}
-	if (true) {
-		param.mainCompanyStaffSeq = '2';
-	}
+
 	
 	param.projectName = $('#projectName').val();
 	
@@ -288,16 +290,16 @@ function regProject(flag) {
 		}
 	}
 	
-	if ( $('#endtDay').val() != '') {
+	if ( $('#endDay').val() != '') {
 		if ( $('#endYear').val() == '' || $('#endMonth').val() == '') {
-			alert('시작 년도. 월을 입력해 주세요.');
+			alert('종료 년도. 월을 입력해 주세요.');
 			return false;
 		}
 	}
 	
 	if ( $('#endMonth').val() != '' ) {
 		if ( $('#endYear').val() == '') {
-			alert('시작 년도. 월을 입력해 주세요.');
+			alert('종료 년도. 월을 입력해 주세요.');
 			return false;
 		}
 	}
@@ -327,9 +329,10 @@ function regProject(flag) {
 	    successHandler : function(data){
 	    	
 	    	if (afterJobPostionYn) {
-	    		
+	    		   alert('프로젝트를 등록하였습니다. 직무 등록 페이지로 이동합니다.');
+			       location.href = '/business/project/main.do';
 	    	} else {
-	 	       alert('프로젝트를 등록하였습니다..');
+	 	       alert('프로젝트를 등록하였습니다.');
 		       location.href = '/business/project/main.do';
 	    	}
 

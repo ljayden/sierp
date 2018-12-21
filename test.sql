@@ -159,3 +159,31 @@ INSERT INTO advantage values(14 , '인성좋음', 'PREFERENCE', null, 1, 'demouser',
 INSERT INTO advantage values(15 , 'JAVA', 'SKILL', 'EXPERT', 0, '', datetime('now'));
 
 INSERT INTO advantage values(16 , '미혼', 'PREFERENCE', null, 1, 'demouser', datetime('now'));
+
+
+
+CREATE TABLE project (
+	project_seq integer PRIMARY KEY AUTOINCREMENT,
+	customer_seq integer,
+	main_manager_id  VARCHAR(50),
+	company_seq integer not NULL,
+	company_staff_seq integer,
+	main_company_seq integer,
+	main_company_staff_seq integer,
+	project_name VARCHAR(100),
+	start_year integer,
+	start_month integer,
+	start_day integer,
+	end_year integer,
+	end_month integer,
+	end_day integer,
+	sido VARCHAR(20),
+	sigungu VARCHAR(20),
+	detail_addr VARCHAR(200),
+	project_desc VARCHAR(500),
+	customer_memo VARCHAR(1000),
+	register_manager_id VARCHAR(50),
+	register_ymdt DATETIME,
+	
+	end_yn VARCHAR(1)
+);

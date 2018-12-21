@@ -39,6 +39,8 @@ public class Project {
 	
 	private Date registerYmdt;
 	private String resiterManagerId;
+
+	private String endYn;
 }
  
   
