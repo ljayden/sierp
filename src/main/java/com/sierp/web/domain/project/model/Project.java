@@ -25,10 +25,12 @@ public class Project {
 	private Integer startYear;
 	private Integer startMonth;
 	private Integer startDay;
+	private Date startYmdt;
 	
 	private Integer endYear;
 	private Integer endMonth;
 	private Integer endDay;
+	private Date endYmdt;
 	
 	private SidoType sido;
 	private SiGunGuType siGunGu;

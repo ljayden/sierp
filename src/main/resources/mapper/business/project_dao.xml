@@ -4,11 +4,67 @@
  
 	<insert id="insertProject" parameterType="com.sierp.web.domain.project.model.Project" useGeneratedKeys="true" keyProperty="projectSeq">
 		INSERT INTO project(customer_seq, main_manager_id, company_seq, company_staff_seq, main_company_seq, main_company_staff_seq, project_name,
-		start_year, start_month, start_day, end_year, end_month, end_day, sido, sigungu, detail_addr, project_desc, customer_memo,register_manager_id, register_ymdt, end_yn)
+		start_year, start_month, start_day, start_ymdt,end_year, end_month, end_day, end_ymdt, sido, sigungu, detail_addr, project_desc, customer_memo,register_manager_id, register_ymdt, end_yn)
 		
 		VALUES (#{customerSeq}, #{mainManagerId}, #{companySeq}, #{companyStaffSeq}, #{mainCompanySeq}, #{mainCompanyStaffSeq}, #{projectName}, 
-		#{startYear}, #{startMonth}, #{startDay}, #{endYear}, #{endMonth}, #{endDay}, #{sido}, #{siGunGu}, #{detailAddr}, 
+		#{startYear}, #{startMonth}, #{startDay}, #{startYmdt}, #{endYear}, #{endMonth}, #{endDay}, #{endYmdt}, #{sido}, #{siGunGu}, #{detailAddr}, 
 		#{projectDesc}, #{customerMemo}, #{registerYmdt}, #{resiterManagerId}, 'N')
 	</insert>
 
+	
+	<select id="selectProjectListCount" parameterType="map" resultType="int">
+		SELECT 	count(*)
+		FROM	project p
+		
+		<where><include refid="projectSearchCondition"/></where>
+	</select>
+	
+	<select id="selectProjectList" parameterType="map" resultType="com.sierp.web.domain.business.model.ProjectSearch">
+		SELECT  
+		FROM	project p
+		
+	 	<where><include refid="projectSearchCondition"/></where>
+		LIMIT #{offset}, #{limit}
+		
+	</select>
+	
+    <sql id="projectSearchCondition">
+		 p.customer_seq = #{customerSeq}
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(companyName)">
+			AND p.company_name LIKE  '%'||#{companyName}||'%'
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(projectName)">
+			AND p.project_name LIKE '%'||#{proejctName}||'%'
+		</if>
+				
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(projectName)">
+			AND p.sido = {sido}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(projectName)">
+			AND p.sigungu = {sigungu}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(mainManagerId)">
+			AND p.main_manager_id = #{mainManagerId}
+		</if>
+		
+		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'READY')">
+			AND p.end_yn ='N' AND 
+		</if>
+		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'ING')">
+			AND p.end_yn ='N' AND 
+		</if>
+		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'END')">
+		    AND (p.end_yn ='Y' OR ) <!-- 강제 종료했거나.. 종료일시가 입력되었고.. 지난거 -->
+		</if>
+		
+<!-- 		<if test="workBaseMonth > 0"> -->
+<!-- 			AND w.start_work_month <![CDATA[ <= ]]> #{workBaseMonth} -->
+<!-- 		</if> -->
+ 
+		
+    </sql>
 </mapper>

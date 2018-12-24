@@ -1,6 +1,10 @@
 package com.sierp.web.domain.project.service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +48,32 @@ public class ProjectRegisterService {
 		project.setStartYear(request.getStartYear());
 		project.setStartMonth(request.getStartMonth());
 		project.setStartDay(request.getStartDay());
-		
+		if (request.getStartYear() != null) {
+			int month = request.getStartMonth() == null ? 1 : request.getStartMonth();
+			int day = request.getStartDay() == null ? 1 : request.getStartDay();
+			
+			Date start = Date.from(LocalDate.of(request.getStartYear(), month, day).atStartOfDay(ZoneId.systemDefault()).toInstant());
+			project.setStartYmdt(start);
+			log.debug("프로젝트 start ymdt = {}", start);
+		}
 		project.setEndYear(request.getEndYear());
 		project.setEndMonth(request.getEndMonth());
 		project.setEndDay(request.getEndDay());
-	
+		if (request.getEndYear() != null) {
+			int month = request.getEndMonth() == null ? 12 : request.getEndMonth();
+			
+			LocalDate endLocalDate = null;
+			if (request.getEndDay() == null) {
+				endLocalDate = LocalDate.of(request.getEndYear(), month, 1).with(TemporalAdjusters.lastDayOfMonth());
+			} else {
+				endLocalDate = LocalDate.of(request.getEndYear(), month, request.getEndDay());
+			}
+  
+			Date end = Date.from(endLocalDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
+			project.setEndYmdt(end);
+			log.debug("프로젝트 end ymdt = {}", end);
+		}
+		
 		project.setSido(request.getSido());
 		project.setSiGunGu(request.getSigungu());
 		project.setDetailAddr(request.getAddrDetail());
@@ -65,4 +90,5 @@ public class ProjectRegisterService {
 		return project;
 	}
 }
+
  

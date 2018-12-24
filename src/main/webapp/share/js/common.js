@@ -432,7 +432,7 @@ var COMMON = {
         $(".dimmed").hide();
     },
 
-    autoCompleteInput : function(elementId, sourceList, func) {
+    autoCompleteInput : function(elementId, sourceList, changeNotFoundfunc) {
     	$('#' + elementId).autocomplete({
     		source: sourceList,
     		minLength: 2,
@@ -445,24 +445,33 @@ var COMMON = {
     				$('#' + elementId).css('background-color','white');
     			}
     			
-    			$('#' + elementId).attr('matchItem', findFlag);
-                if (func && typeof(func) == 'function') {
-                	func(findFlag);
+    			$('#' + elementId).attr('isMatchItem', findFlag);
+    			
+                if (!findFlag && changeNotFoundfunc && typeof(changeNotFoundfunc) == 'function') {
+                	if (changeNotFoundfunc()) {
+                		$('#' + elementId).css('background-color','#bfeffb');
+                		$('#' + elementId).attr('isMatchItem', true);
+                	}
                 }
     		},
     		select: function( event, ui ) {
     			if(ui.item.value) {
     				$('#' + elementId).css('background-color','#bfeffb');
-    				$('#' + elementId).attr('matchItem', true);
+    				$('#' + elementId).attr('isMatchItem', true);
     			} else {
     				$('#' + elementId).css('background-color','white');
-    				$('#' + elementId).attr('matchItem', false);
+    				$('#' + elementId).attr('isMatchItem', false);
     			}
     		},
     		classes: {
     		    'ui-autocomplete': 'highlight'
     		}
     	});
+    	
+//    	$("#test1").bind('mouseenter', function () { // bind(이벤트 타입, 실행시킬 함수)
+//			$(this).css({"background":"black", "color":"white"}); 
+// 
+//    	$('#' + elementId).bind(
     }
 }
 

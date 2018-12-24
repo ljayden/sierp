@@ -16,7 +16,7 @@
     	<div class="form-row">
         	<div class="form-group col-md-3 mb-3">
                 <label for="company" class="col-form-label-sm">업체명</label>
-                <input type="text" class="form-control form-control-sm" id="company" required >
+                <input type="text" class="form-control form-control-sm" id="company" required onchange="javascript: companyChange('company')">
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
         	<div class="form-group col-md-2 mb-3">
@@ -28,7 +28,7 @@
             <div class="form-group col-md-1 mb-3"></div>
             <div class="form-group col-md-4 mb-3">
               	<label for="mainCompany" class="col-form-label-sm">수행사<span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control form-control-sm" id="mainCompany" >
+                <input type="text" class="form-control form-control-sm" id="mainCompany" onchange="javascript: companyChange('mainCompany')">
         	</div>
         	<div class="form-group col-md-2 mb-3">
         		<label for="mainCompanyManager" class="col-form-label-sm">담당자</label>
@@ -213,36 +213,50 @@ var companyList = [//'네이년','네이놈',
 		    }
 		});
 		
-		COMMON.autoCompleteInput('company', companyList, function(findFlag) {
-			if (findFlag) {
-				var company = companyList.filter(function (value) {
-			        return (value == $('#company').val());
-			    });
-				if (company.length == 1) {
-					getCompanyManagerList('companyManager', companyInfos[company[0]])
-				}
-			} else {
-				$('#companyManager option').remove();
-		    	$('#companyManager').append('<option value="">&nbsp;</option>')
-			}
+		COMMON.autoCompleteInput('company', companyList, function() {
+			var company = companyList.filter(function (value) {
+		        return (value == $('#company').val());
+		    });
+			return company.length == 1;
 		});
-		COMMON.autoCompleteInput('mainCompany', companyList, function(findFlag) {
-			if (findFlag) {
-				var company = companyList.filter(function (value) {
-			        return (value == $('#mainCompany').val());
-			    });
-				if (company.length == 1) {
-					getCompanyManagerList('mainCompanyManager', companyInfos[company[0]])
-				}
-			} else {
-				$('#mainCompanyManager option').remove();
-		    	$('#mainCompanyManager').append('<option value="">&nbsp;</option>')
-			}
+		COMMON.autoCompleteInput('mainCompany', companyList, function() {
+			var company = companyList.filter(function (value) {
+		        return (value == $('#mainCompany').val());
+		    });
+			return company.length == 1;
 		});
 		
 	}, false);
 })();
-
+ 
+function companyChange(id) {
+	
+	if ($('#' + id).val() && $('#' + id).val().length > 0) {
+		var company = companyList.filter(function (value) {
+	        return (value == $('#' + id).val());
+	    });
+		if (company.length == 1) {
+			
+			COMMON.ajax({
+			    url : '/business/companyStaff/getCompanyManagerList.json?companySeq=' + companyInfos[company[0]],
+			    successHandler : function(data){
+			    	$('#' + id + 'Manager  option').remove();
+			    	$('#' + id + 'Manager').append('<option value=""> - </option>')
+			    	$(data.result).each(function(i, companyStaff) {
+			    		$('#' + id + 'Manager').append('<option value="' + companyStaff.companyStaffSeq + '">' + companyStaff.name + '</option>')
+			    	});
+			    }
+			});
+			
+		} else {
+			$('#' + id + 'Manager option').remove();
+	    	$('#' + id + 'Manager').append('<option value="">&nbsp;</option>')
+		}
+	} else {
+		$('#' + id + 'Manager option').remove();
+    	$('#' + id + 'Manager').append('<option value="">&nbsp;</option>')
+	}
+}
 
 function regProject(flag) {
 	var param = {};
@@ -328,12 +342,12 @@ function regProject(flag) {
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
 	    	
-	    	if (afterJobPostionYn) {
-	    		   alert('프로젝트를 등록하였습니다. 직무 등록 페이지로 이동합니다.');
-			       location.href = '/business/project/main.do';
+	    	if (flag) {
+	    		alert('프로젝트를 등록하였습니다. 직무 등록 페이지로 이동합니다.');
+			    location.href = '/business/project/main.do';
 	    	} else {
-	 	       alert('프로젝트를 등록하였습니다.');
-		       location.href = '/business/project/main.do';
+	 	    	alert('프로젝트를 등록하였습니다.');
+		       	location.href = '/business/project/main.do';
 	    	}
 
 	    }
@@ -341,16 +355,7 @@ function regProject(flag) {
 }
 
 function getCompanyManagerList(selectId, companySeq) {
-	COMMON.ajax({
-	    url : '/business/companyStaff/getCompanyManagerList.json?companySeq=' + companySeq,
-	    successHandler : function(data){
-	    	$('#' + selectId +'  option').remove();
-	    	$('#' + selectId).append('<option value=""> - </option>')
-	    	$(data.result).each(function(i, companyStaff) {
-	    		$('#' + selectId).append('<option value="' + companyStaff.companyStaffSeq + '">' + companyStaff.name + '</option>')
-	    	});
-	    }
-	});
+
 	
 }
 </script>
