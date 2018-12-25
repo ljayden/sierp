@@ -50,7 +50,7 @@ public class DatabaseConfig {
 		
 		config.addDataSourceProperty("user", "");
 		config.addDataSourceProperty("password", "");
-		config.setJdbcUrl("jdbc:sqlite:D:\\workspace-study\\sierp\\db.db3");
+		config.setJdbcUrl("jdbc:sqlite:C:\\workspace\\sierp\\db.db3");
 		
 		HikariDataSource hds = new HikariDataSource(config);
 		

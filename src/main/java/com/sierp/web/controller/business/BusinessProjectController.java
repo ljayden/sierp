@@ -18,6 +18,7 @@ import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.model.CustomerManager;
 import com.sierp.web.domain.project.model.Project;
 import com.sierp.web.domain.project.service.ProjectRegisterService;
+import com.sierp.web.domain.project.service.ProjectSearchService;
 import com.sierp.web.result.JsonResult;
 import com.sierp.web.result.JsonResults;
 
@@ -29,6 +30,7 @@ public class BusinessProjectController {
 	@Autowired CompanyDao companyDao;
 	
 	@Autowired ProjectRegisterService registerService;
+	@Autowired ProjectSearchService searchService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String search(Model model, CustomerManager manager) {
@@ -41,10 +43,11 @@ public class BusinessProjectController {
 	public String mainList(Model model, CustomerManager manager, ProjectSearchRequest request) {
 		
 		model.addAttribute("request", request);
+		model.addAttribute("searchList", searchService.getProjectList(request, manager.getCustomerSeq()));
 		return "business/project/mainList";
 	}
 	
-	
+
 	@RequestMapping(value = "/registProject", method = RequestMethod.GET)
 	public String registFreelancer(Model model, CustomerManager manager) {
 		

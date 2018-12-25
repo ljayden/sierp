@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="selectProjectList" parameterType="map" resultType="com.sierp.web.domain.business.model.ProjectSearch">
-		SELECT  
+		SELECT  p.*
 		FROM	project p
 		
 	 	<where><include refid="projectSearchCondition"/></where>
@@ -36,7 +36,7 @@
 		</if>
 		
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(projectName)">
-			AND p.project_name LIKE '%'||#{proejctName}||'%'
+			AND p.project_name LIKE '%'||#{projectName}||'%'
 		</if>
 				
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(projectName)">
@@ -52,19 +52,16 @@
 		</if>
 		
 		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'READY')">
-			AND p.end_yn ='N' AND 
+			AND p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt  <![CDATA[ < ]]> date('now')
 		</if>
 		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'ING')">
-			AND p.end_yn ='N' AND 
+			AND p.end_yn ='N' 
+			AND p.start_ymdt is NOT NULL AND p.start_ymdt > date('now') 
+			AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now')))
 		</if>
 		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'END')">
-		    AND (p.end_yn ='Y' OR ) <!-- 강제 종료했거나.. 종료일시가 입력되었고.. 지난거 -->
+		    AND (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))
 		</if>
-		
-<!-- 		<if test="workBaseMonth > 0"> -->
-<!-- 			AND w.start_work_month <![CDATA[ <= ]]> #{workBaseMonth} -->
-<!-- 		</if> -->
- 
 		
     </sql>
 </mapper>

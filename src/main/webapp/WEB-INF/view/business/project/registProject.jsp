@@ -163,7 +163,7 @@
 		  		<button class="btn btn-primary btn-md btn-block" type="button" id="saveNreg">저장 후 직무등록</button>
 		  	</div>
 		  	<div class="col-md-2 mb-3">
-		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/resource/freelancer/main.do'">취소</button>
+		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/business/project/main.do'">취소</button>
 		  	</div>
 		</div>
   	</form>
@@ -271,7 +271,10 @@ function regProject(flag) {
 	param.companySeq = companyInfos[company[0]];
 	if ($('#companyManager').val() != '') {
 		param.companyStaffSeq = $('#companyManager').val();
+	} else {
+		param.companyStaffSeq = null;
 	}
+	
 	if ($('#mainCompany').val() != '') {
 		var mainCompany = companyList.filter(function (value) {
 	        return (value == $('#mainCompany').val());
@@ -284,7 +287,11 @@ function regProject(flag) {
 
 		if ($('#mainCompanyManager').val() != '') {
 			param.mainCompanyStaffSeq = $('#mainCompanyManager').val();
+		} else {
+			param.mainCompanyStaffSeq = null;
 		}
+	} else {
+		param.mainCompanySeq = null;
 	}
 
 	
@@ -325,6 +332,13 @@ function regProject(flag) {
 	param.endYear = $('#endYear').val();
 	param.endMonth = $('#endMonth').val();
 	param.endDay = $('#endDay').val();
+	
+	var start = param.startYear + '-' + param.startMonth + '-' + param.startDay;
+	var end = param.endYear + '-' + param.endMonth + '-' + param.endDay;
+	if (end > start) {
+		alert('프로젝트 기간을 확인해 주세요.');
+		return false;
+	}
 	
 	param.sido = $('#sido').val() == '' ? null : $('#sido').val();
 	param.sigungu = $('#sigungu').val() == '' ? null : $('#sigungu').val();

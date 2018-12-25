@@ -16,7 +16,7 @@ public class Project {
 	private String mainManagerId;
 	
 	private int companySeq;
-	private int companyStaffSeq;
+	private Integer companyStaffSeq;
 	
 	private Integer mainCompanySeq;
 	private Integer mainCompanyStaffSeq;

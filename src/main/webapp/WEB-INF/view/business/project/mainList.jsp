@@ -18,51 +18,27 @@
 	    	</tr>
   	</thead>
   	<tbody>
-  		<c:if test="${ not empty companyList }">
-	 		<c:forEach var="company" items="${ companyList }">
+  		<c:if test="${ not empty searchList }">
+	 		<c:forEach var="project" items="${ searchList }">
 		    	<tr>
-		      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ company.companySeq}">${ company.companyName }</a></th>
-		      		<td>${ company.sido.description }/${ company.siGunGu.description }</td>
-		      		<td>2명</td>
-		      		<td>1건</td>
+		    		<th>진행중</th>
+		      		<td>2018.08.21 ~ </td>
+		      		<th>${ project.projectName }</th>
+		      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ project.projectSeq}">${ project.companyName }</a></th>
+		      		<td>${ project.mainCompanyName }</td>
+		      		<td>${ project.sido.description }/${ project.siGunGu.description }</td>
 		      		<td><b>4건</b></td>
-		      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/></td>
-		      		<td>2017.04.02</td>
 		    	</tr>
 	 		</c:forEach>
  		</c:if>
  		<c:if test="${ empty companyList }">
 	    	<tr class="table-secondary">
-	      		<th>종료</th>
-	      		<td>2018.08.21 ~ 2019.08.21</td>
-	      		<td>STOVE 개발</td>
-	      		<td>스마일게이트</td>
-	      		<td>BD</td>
-	      		<td>경기/성남시분당구</td>
-	      		<td>2건</td>
-	    	</tr>
-	    	<tr>
-	      		<th>진행중</th>
-	      		<td>2018.08 ~ 2019.08</td>
-	      		<td>PG모듈 개발</td>
-	      		<td>웹케시</td>
-	      		<td>-</td>
-	      		<td>서울/마포구</td>
-	      		<td>3건</td>
-	    	</tr>
-	    	<tr class="table-success">
-	      		<th>준비중</th>
-	      		<td>2018.08.21 ~ 2019.08.21</td>
-	      		<td>사이트 유지보수</td>
-	      		<td>네이버</td>
-	      		<td>-</td>
-	      		<td>경기/성남시분당구</td>
-	      		<td>0건</td>
+	      		<td colspan="7">검색 결과가 없습니다.</td>
 	    	</tr>
  		</c:if>
 	</tbody>
 </table>	
-<small class="d-block text-right mt-3">총 ${ request.totalCount } 명이 조회되었습니다</small>
+<small class="d-block text-right mt-3">총 ${ request.totalCount } 건이 조회되었습니다</small>
 
 
 <jsp:include page="/WEB-INF/view/decorators/page.jsp"></jsp:include>
