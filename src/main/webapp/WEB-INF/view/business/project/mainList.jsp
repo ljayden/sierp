@@ -26,12 +26,12 @@
 		      		<th>${ project.projectName }</th>
 		      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ project.projectSeq}">${ project.companyName }</a></th>
 		      		<td>${ project.mainCompanyName }</td>
-		      		<td>${ project.sido.description }/${ project.siGunGu.description }</td>
+		      		<td>${ project.sido.description }/${ project.sigungu.description }</td>
 		      		<td><b>4건</b></td>
 		    	</tr>
 	 		</c:forEach>
  		</c:if>
- 		<c:if test="${ empty companyList }">
+ 		<c:if test="${ empty searchList }">
 	    	<tr class="table-secondary">
 	      		<td colspan="7">검색 결과가 없습니다.</td>
 	    	</tr>

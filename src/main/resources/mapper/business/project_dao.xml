@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.business.project_dao">
  
-	<insert id="insertProject" parameterType="com.sierp.web.domain.project.model.Project" useGeneratedKeys="true" keyProperty="projectSeq">
+	<insert id="insertProject" parameterType="com.sierp.web.domain.business.model.Project" useGeneratedKeys="true" keyProperty="projectSeq">
 		INSERT INTO project(customer_seq, main_manager_id, company_seq, company_staff_seq, main_company_seq, main_company_staff_seq, project_name,
 		start_year, start_month, start_day, start_ymdt,end_year, end_month, end_day, end_ymdt, sido, sigungu, detail_addr, project_desc, customer_memo,register_manager_id, register_ymdt, end_yn)
 		
@@ -20,7 +20,9 @@
 	</select>
 	
 	<select id="selectProjectList" parameterType="map" resultType="com.sierp.web.domain.business.model.ProjectSearch">
-		SELECT  p.*
+		SELECT  p.*,
+				(SELECT company_name FROM company WHERE company_seq = p.company_seq) as companyName,
+				(SELECT company_name FROM company WHERE company_seq = p.main_company_seq) as mainCompanyName
 		FROM	project p
 		
 	 	<where><include refid="projectSearchCondition"/></where>
@@ -50,18 +52,29 @@
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(mainManagerId)">
 			AND p.main_manager_id = #{mainManagerId}
 		</if>
-		
-		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'READY')">
-			AND p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt  <![CDATA[ < ]]> date('now')
-		</if>
-		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'ING')">
-			AND p.end_yn ='N' 
-			AND p.start_ymdt is NOT NULL AND p.start_ymdt > date('now') 
-			AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now')))
-		</if>
-		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'END')">
-		    AND (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))
-		</if>
-		
+ 		<if test="statusList.size() > 0">
+ 			AND (
+			<if test="statusList.contains('READY')">
+				(p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt  <![CDATA[ < ]]> date('now'))
+				<if test="statusList.contains('ING')">
+				OR (p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt > date('now') AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now')))) 	
+				</if>
+				<if test="statusList.contains('END')">
+				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))	
+				</if>
+			</if>
+			
+			<if test="!statusList.contains('READY') and statusList.contains('ING')">
+				(p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt > date('now') AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now'))))
+				<if test="statusList.contains('END')">
+				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))	
+				</if>
+			</if>
+			<if test="!statusList.contains('READY') and !statusList.contains('ING') and statusList.contains('END')">
+			    (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))
+			</if>
+ 			)
+ 		</if>
     </sql>
 </mapper>
+<!-- 		<if test="@org.apache.commons.lang3.StringUtils@equals(status, 'READY')"> -->

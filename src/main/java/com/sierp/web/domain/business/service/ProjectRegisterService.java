@@ -1,4 +1,4 @@
-package com.sierp.web.domain.project.service;
+package com.sierp.web.domain.business.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sierp.web.controller.business.request.ProjectRegisterRequest;
+import com.sierp.web.domain.business.dao.ProjectDao;
 import com.sierp.web.domain.business.model.CustomerManager;
-import com.sierp.web.domain.project.dao.ProjectDao;
-import com.sierp.web.domain.project.model.Project;
+import com.sierp.web.domain.business.model.Project;
 
 @Service
 @Slf4j

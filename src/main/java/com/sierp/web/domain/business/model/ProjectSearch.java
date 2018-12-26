@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class ProjectSearch {
 
+	private int projectSeq;
 	private String companyName;
 	private String mainCompanyName;
 	

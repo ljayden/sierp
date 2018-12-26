@@ -16,9 +16,9 @@ import com.sierp.web.controller.business.request.ProjectSearchRequest;
 import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.model.CustomerManager;
-import com.sierp.web.domain.project.model.Project;
-import com.sierp.web.domain.project.service.ProjectRegisterService;
-import com.sierp.web.domain.project.service.ProjectSearchService;
+import com.sierp.web.domain.business.model.Project;
+import com.sierp.web.domain.business.service.ProjectRegisterService;
+import com.sierp.web.domain.business.service.ProjectSearchService;
 import com.sierp.web.result.JsonResult;
 import com.sierp.web.result.JsonResults;
 
