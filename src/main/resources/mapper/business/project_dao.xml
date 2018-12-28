@@ -57,7 +57,7 @@
 			<if test="statusList.contains('READY')">
 				(p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt  <![CDATA[ < ]]> date('now'))
 				<if test="statusList.contains('ING')">
-				OR (p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt > date('now') AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now')))) 	
+				OR (p.end_yn ='N' AND (p.start_ymdt is NULL OR p.start_ymdt is NOT NULL AND p.start_ymdt > date('now')) AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now')))) 	
 				</if>
 				<if test="statusList.contains('END')">
 				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))	
@@ -65,7 +65,7 @@
 			</if>
 			
 			<if test="!statusList.contains('READY') and statusList.contains('ING')">
-				(p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt > date('now') AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now'))))
+				(p.end_yn ='N' AND (  p.start_ymdt is NULL OR p.start_ymdt is NOT NULL AND p.start_ymdt > date('now')) AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now'))))
 				<if test="statusList.contains('END')">
 				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))	
 				</if>
