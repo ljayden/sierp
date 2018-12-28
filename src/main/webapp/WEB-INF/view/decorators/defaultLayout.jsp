@@ -81,7 +81,7 @@
 						<a class="dropdown-item" href="/settings/managerConf.do">Manager관리</a>
 						<a class="dropdown-item" href="/settings/dashboardConf.do">대쉬보드 관리</a>
 						<a class="dropdown-item" href="/settings/commonConf.do">설정</a>
-						<a class="dropdown-item" href="#">Something else here</a>
+						<a class="dropdown-item" href="#">계정관리</a>
 					</div>
 				</li>
 			</ul>

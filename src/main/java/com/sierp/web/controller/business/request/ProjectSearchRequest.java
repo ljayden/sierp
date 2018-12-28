@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class ProjectSearchRequest extends Pager {
 	
-	private int projectSeq;
+	private Integer companySeq;
 	private String companyName;
 	private String projectName;
 

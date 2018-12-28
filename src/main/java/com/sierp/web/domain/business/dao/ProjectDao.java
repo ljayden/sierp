@@ -1,5 +1,6 @@
 package com.sierp.web.domain.business.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +25,11 @@ public class ProjectDao {
 		return sql.insert(MAPPER_NAMESPACE + "insertProject", project);
 	}
 	
-	public void selectProjectListCount(int customerSeq, String companyName, String projectName, List<String> statusList,
-										SidoType sido, SiGunGuType sigungu, String mainManagerId, Pager pager) {
+	public void selectProjectListCount(int customerSeq, Integer companySeq, String companyName, String projectName, List<String> statusList,
+										SidoType sido, SiGunGuType sigungu, String mainManagerId, Pager pager, Date now) {
 
 		Map<String, Object> params = pager.initParamMapWithPager();
+		params.put("companySeq", companySeq);
 		params.put("customerSeq", customerSeq);
 		params.put("companyName", companyName);
 		params.put("projectName", projectName);
@@ -35,14 +37,15 @@ public class ProjectDao {
 		params.put("sigungu", sigungu);
 		params.put("mainManagerId", mainManagerId);
 		params.put("statusList", statusList);
-		
+		params.put("now", now);
 		pager.setTotalCount(sql.selectOne(MAPPER_NAMESPACE + "selectProjectListCount", params)); 
 	}
 
-	public List<ProjectSearch> selectProjectList(int customerSeq, String companyName, String projectName, List<String> statusList,
-													SidoType sido, SiGunGuType sigungu, String mainManagerId, Pager pager) {
+	public List<ProjectSearch> selectProjectList(int customerSeq, Integer companySeq, String companyName, String projectName, List<String> statusList,
+													SidoType sido, SiGunGuType sigungu, String mainManagerId, Pager pager, Date now) {
 	
 		Map<String, Object> params = pager.initParamMapWithPager();
+		params.put("companySeq", companySeq);
 		params.put("customerSeq", customerSeq);
 		params.put("companyName", companyName);
 		params.put("projectName", projectName);
@@ -50,7 +53,7 @@ public class ProjectDao {
 		params.put("sigungu", sigungu);
 		params.put("mainManagerId", mainManagerId);
 		params.put("statusList", statusList);
-		
+		params.put("now", now);
 		return sql.selectList(MAPPER_NAMESPACE + "selectProjectList", params);
 	}
 } 

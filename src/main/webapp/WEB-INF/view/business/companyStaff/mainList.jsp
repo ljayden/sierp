@@ -21,10 +21,10 @@
   		<c:if test="${ not empty companyStaffList }">
  		<c:forEach var="companyStaff" items="${ companyStaffList }">
 	    	<tr>
-	      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ companyStaff.companySeq}">${ companyStaff.name }</a></th>
+	      		<th scope="row">${ companyStaff.name }</th>
 	      		<td>${ companyStaff.part }</td>
 	      		<td>${ companyStaff.position }</td>
-	      		<td>${ companyStaff.companyName }</td>
+	      		<td><a href="/business/company/viewCompany.do?companySeq=${ companyStaff.companySeq}">${ companyStaff.companyName }</a></td>
 	      		<td>${ companyStaff.phoneNo }</td>
 	      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ companyStaff.registerManagerId }"/></td>
 	      		<td>2017.04.02</td>

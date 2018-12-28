@@ -139,8 +139,8 @@ $(document).ready(function() {
 
 function formReset() {
 
-	$('#searchTap select, input').val('');
-	$('#searchTap #page').val('1')
+	$('#searchTap select, input[type="text"]').val('');
+	$('#pageInput').val('1')
 }
 
 function goPage(page) {

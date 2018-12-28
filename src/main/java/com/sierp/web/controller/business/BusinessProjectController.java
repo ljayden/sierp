@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.ImmutableMap;
@@ -33,25 +34,35 @@ public class BusinessProjectController {
 	@Autowired ProjectSearchService searchService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String search(Model model, CustomerManager manager) {
+	public String main(Model model, CustomerManager manager) {
 
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		return "business/project/main";
 	}
 	
 	@RequestMapping(value = "/getMainList", method = {RequestMethod.POST})
-	public String mainList(Model model, CustomerManager manager, ProjectSearchRequest request) {
+	public String getMainList(Model model, CustomerManager manager, ProjectSearchRequest request) {
 		
 		model.addAttribute("request", request);
 		model.addAttribute("searchList", searchService.getProjectList(request, manager.getCustomerSeq()));
 		return "business/project/mainList";
 	}
 	
+	@RequestMapping(value = "/getCompanyProjectList", method = {RequestMethod.POST})
+	public String getCompanyMainList(Model model, CustomerManager manager, ProjectSearchRequest request) {
+		
+		model.addAttribute("request", request);
+		model.addAttribute("searchList", searchService.getProjectList(request, manager.getCustomerSeq()));
+		return "business/project/companyProjectList";
+	}
 
 	@RequestMapping(value = "/registProject", method = RequestMethod.GET)
-	public String registFreelancer(Model model, CustomerManager manager) {
+	public String registFreelancer(Model model, CustomerManager manager, @RequestParam(value ="companySeq", required = false) Integer companySeq) {
 		
-		model.addAttribute("companyList", companyDao.selectCompany(manager.getCustomerSeq()));
+		if (companySeq != null) {
+			model.addAttribute("selectedCompany", companyDao.selectCompanyBySeq(companySeq));
+		}
+		model.addAttribute("companyList", companyDao.selectCompanyList(manager.getCustomerSeq()));
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		
 		return "business/project/registProject";

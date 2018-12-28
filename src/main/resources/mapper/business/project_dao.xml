@@ -31,7 +31,12 @@
 	</select>
 	
     <sql id="projectSearchCondition">
-		 p.customer_seq = #{customerSeq}
+		p.customer_seq = #{customerSeq}
+		
+		
+		<if test="companySeq != null">
+			AND p.company_seq = #{companySeq}
+		</if>
 		
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(companyName)">
 			AND p.company_name LIKE  '%'||#{companyName}||'%'
@@ -42,11 +47,11 @@
 		</if>
 				
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(projectName)">
-			AND p.sido = {sido}
+			AND p.sido = #{sido}
 		</if>
 		
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(projectName)">
-			AND p.sigungu = {sigungu}
+			AND p.sigungu = #{sigungu}
 		</if>
 		
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(mainManagerId)">
@@ -55,23 +60,23 @@
  		<if test="statusList.size() > 0">
  			AND (
 			<if test="statusList.contains('READY')">
-				(p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt  <![CDATA[ < ]]> date('now'))
+				(p.end_yn ='N' AND p.start_ymdt is NOT NULL AND p.start_ymdt > #{now})
 				<if test="statusList.contains('ING')">
-				OR (p.end_yn ='N' AND (p.start_ymdt is NULL OR p.start_ymdt is NOT NULL AND p.start_ymdt > date('now')) AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now')))) 	
+				OR (p.end_yn ='N' AND (p.start_ymdt is NULL OR p.start_ymdt is NOT NULL AND p.start_ymdt  <![CDATA[ < ]]> #{now}) AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  > #{now}))) 	
 				</if>
 				<if test="statusList.contains('END')">
-				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))	
+				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> #{now}))	
 				</if>
 			</if>
 			
 			<if test="!statusList.contains('READY') and statusList.contains('ING')">
-				(p.end_yn ='N' AND (  p.start_ymdt is NULL OR p.start_ymdt is NOT NULL AND p.start_ymdt > date('now')) AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> date('now'))))
+				(p.end_yn ='N' AND (  p.start_ymdt is NULL OR p.start_ymdt is NOT NULL AND p.start_ymdt  <![CDATA[ < ]]> #{now}) AND (p.end_ymdt is NULL OR (p.end_ymdt is NOT NULL AND p.end_ymdt > #{now})))
 				<if test="statusList.contains('END')">
-				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))	
+				OR (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> #{now}))	
 				</if>
 			</if>
 			<if test="!statusList.contains('READY') and !statusList.contains('ING') and statusList.contains('END')">
-			    (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt > date('now')))
+			    (p.end_yn ='Y' OR (p.end_ymdt is NOT NULL AND p.end_ymdt  <![CDATA[ < ]]> #{now}))
 			</if>
  			)
  		</if>

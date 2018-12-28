@@ -6,12 +6,11 @@
 <%@ taglib prefix="mt" uri="myTags" %>
 
 <table class="table h3 small text-center">
-	<thead class="thead-dark" style="borde : 1px">
+	<thead class="thead-light" style="borde : 1px">
 	    	<tr>
 	      		<th scope="col">진행상태</th>
 	      		<th scope="col" class="">기간</th>
 	      		<th scope="col">프로젝트명</th>
-	      		<th scope="col">업체</th>
 	      		<th scope="col">수행사</th>
 	      		<th scope="col">위치</th>
 	      		<th scope="col">구인</th>
@@ -24,7 +23,6 @@
 		    		<th>${ project.statusName }</th>
 		      		<td>${ project.startYmd } ~ ${ project.endYmd }</td>
 		      		<td><a href="/business/project/viewProject.do?projectSeq=${ project.projectSeq }">${ project.projectName }</a></td>
-		      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ project.companySeq}">${ project.companyName }</a></th>
 		      		<td><a href="/business/company/viewCompany.do?companySeq=${ project.mainCompanySeq}">${ project.mainCompanyName }</a></td>
 		      		<td>${ project.sido.description }/${ project.sigungu.description }</td>
 		      		<td><b>4건</b></td>

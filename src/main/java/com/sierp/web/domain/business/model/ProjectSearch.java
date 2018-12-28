@@ -47,6 +47,28 @@ public class ProjectSearch {
 		return getDateStr(endYear, endMonth, endDay);
 	}
 	
+	public String getStatusName() {
+		String status = getStatus();
+		if (StringUtils.equalsIgnoreCase("READY", status)) {
+			return "준비";
+		} else if (StringUtils.equalsIgnoreCase("ING", status)) {
+			return "진행중";
+		} else {
+			return "종료";
+		}
+	}
+	
+	public String getStatusColorClass() {
+		String status = getStatus();
+		if (StringUtils.equalsIgnoreCase("READY", status)) {
+			return "table-success";
+		} else if (StringUtils.equalsIgnoreCase("ING", status)) {
+			return "";
+		} else {
+			return "table-secondary";
+		}
+	}
+	
 	private String getStatus() {
 		
 		
@@ -56,14 +78,38 @@ public class ProjectSearch {
 		
 		if (startYmdt != null) {
 			//시작기간이 입력되었으니..
-			if (startYmdt.getTime() > now.getTime()) {
+			if (startYmdt.getTime() < now.getTime()) {
 				//시작되었다면..
+				if (endYmdt == null) {
+					//종료기간이 없으니. 진행중인거지..
+					return "ING";
+				} else {
+					//종료기간이 있다.
+					if (endYmdt.getTime() < now.getTime()) {
+						//
+						return "END";
+					} else {
+						return "ING";
+					}
+				}
 			} else {
 				//시작되지 않았다면...
 				return "READY";
 			}
 		} else {
 			//시작기간이 없다.
+			if (endYmdt == null) {
+				//종료기간도 입력되지 않았으니. 진행중인거지..
+				return "ING";
+			} else {
+				//종료기간은 있다.
+				if (endYmdt.getTime() < now.getTime()) {
+					return "END";
+				} else {
+					return "ING";
+				}
+			
+			}
 		}
 	}
 	

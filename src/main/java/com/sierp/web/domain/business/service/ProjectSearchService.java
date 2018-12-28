@@ -1,5 +1,6 @@
 package com.sierp.web.domain.business.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,15 @@ public class ProjectSearchService {
 		if (request.getStatus() == null || request.getStatus().size() == 0 || request.getStatus().size() == 3) {
 			request.setStatus(Lists.newArrayList());
 		}
-
-		projectDao.selectProjectListCount(customerSeq, request.getCompanyName(), request.getProjectName(), request.getStatus(),
-										request.getSido(), request.getSigungu(), request.getMainManagerId(), request);
+		
+		Date now = new Date();
+		
+		projectDao.selectProjectListCount(customerSeq, request.getCompanySeq(), request.getCompanyName(), request.getProjectName(), request.getStatus(),
+										request.getSido(), request.getSigungu(), request.getMainManagerId(), request, now);
 
 		if (request.isEnoughListQuery()) {
-			return projectDao.selectProjectList(customerSeq, request.getCompanyName(), request.getProjectName(), request.getStatus(),
-										request.getSido(), request.getSigungu(), request.getMainManagerId(), request);
+			return projectDao.selectProjectList(customerSeq, request.getCompanySeq(), request.getCompanyName(), request.getProjectName(), request.getStatus(),
+										request.getSido(), request.getSigungu(), request.getMainManagerId(), request, now);
 		} else {
 			return Lists.newArrayList();
 		}

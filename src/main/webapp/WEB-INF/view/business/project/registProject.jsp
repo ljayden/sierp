@@ -10,7 +10,7 @@
 <main role="main" class="container">
 	<div class="my-3 p-3 bg-white rounded shadow">
 	<h4 class="mb-3">프로젝트 등록하기</h4>
-	
+	<input type="hidden" id="selectedCompanyName" value="${ selectedCompany.companyName }">
     <form class="needs-validation" id="regForm" novalidate> <!--  -->
     
     	<div class="form-row">
@@ -226,6 +226,13 @@ var companyList = [//'네이년','네이놈',
 			return company.length == 1;
 		});
 		
+		
+		if ($('#selectedCompanyName').val() != '') {
+			$('#company').val($('#selectedCompanyName').val());
+			$('#company').css('background-color','#bfeffb');
+			$('#company').attr('isMatchItem', true);
+			companyChange('company');
+		}
 	}, false);
 })();
  

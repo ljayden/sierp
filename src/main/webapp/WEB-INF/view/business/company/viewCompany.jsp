@@ -43,8 +43,9 @@
 	</div>
 	<div class="mb-3"> 
 		<label for="cutomerMemo" class="col-form-label-sm">업체 메모 :</label>
-		<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="3" disabled="disabled">${ company.customerMemo }</textarea>
+		<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="5" disabled="disabled">${ company.customerMemo }</textarea>
 	</div>
+	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" id="">업체정보 변경</button>
 	<br>
 	<div class="row">
 		<div class="col-md-3 mb-3">
@@ -78,45 +79,80 @@
 		</c:if>
 		<br>
 	</div>
-
-
-	<br>
 	
 	<div class=" clearfix mb-4">
-		<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" onclick="javascript: location.href = '/business/company/main.do'">목록으로..</button>
 		<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" id="">담당자 추가</button>
-		<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" id="">수정 페이지로 이동</button>
 	</div>
-<!-- 	hopeRecruitTypeVal; -->
-<!-- 	hopeWorkPosiTypeVal; -->
+	
+	<form id="searchForm" action="/business/project/getCompanyProjectList.ldo" method="post" iframe-list-div="listDiv">
+		<input type="hidden" id="pageInput" name="page" value="1"/>
+		<input type="hidden" id="companySeqInput" name="companySeq" value="${ company.companySeq }">
+	</form>
+	<input type="hidden" id="subMeneTypeInput" name="subMenuType" value="project">
 	<div class="card text-center">
 		<div class="card-header small">
 	    	<ul class="nav nav-tabs card-header-tabs">
 	      		<li class="nav-item">
-	        		<a class="nav-link active" href="#">프로젝트 정보</a>
+	        		<a class="nav-link active" id="nav-link-project" href="javascript:changeSubMenu('project')">프로젝트 정보</a>
 	      		</li>
 	      		<li class="nav-item">
-	        		<a class="nav-link" href="#">계약 정보</a>
+	        		<a class="nav-link" id="nav-link-notice" href="javascript:changeSubMenu('notice')">채용 공고</a>
 	      		</li>
 	      		<li class="nav-item">
-	        		<a class="nav-link disabled" href="#">채용 공고</a>
+	        		<a class="nav-link" id="nav-link-contract" href="javascript:changeSubMenu('contract')">계약 정보</a>
 	      		</li>
 	    	</ul>
 	  	</div>
-	  	<div class="card-body ">
+	  	<div class="card-body p-0">
 	    	<h5 class="card-title"></h5>
-	    	<div class="mb-3">
-		     
-	    	</div>
-	    	<div class="mb-3">
-		     
+	    	<div class="mb-3 float-right">
+		    	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="javacript: registerCompanyProject(${company.companySeq})">프로젝트 등록</button>
 	    	</div>
 	    	
-	    	<div class="mb-3">
-		     
-	    	</div>
+		  	<div class="mt-2 p-2" id="listDiv">
+		  	</div>
 	  	</div>
+	</div>
+	<br>
+	<div class="clearfix mb-4">
+		<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" onclick="javascript: location.href = '/business/company/main.do'">목록으로..</button>
 	</div>
 </div>
 
 </main>
+
+<script>
+$(document).ready(function() {
+ 
+});
+
+function registerCompanyProject(companySeq) {
+	location.href = '/business/project/registProject.do?companySeq=' + companySeq;
+}
+
+function changeSubMenu(type, aTagObj) {
+	if (type == $('#subMeneTypeInput').val()) {
+		return;
+	}
+
+	$('#subMeneTypeInput').val(type);
+	
+	$('.nav-link').removeClass('active');
+	$('#nav-link-' + type).addClass('active');
+	
+ 	if (type == 'project'){
+ 		$('#searchForm').attr('action','/business/project/getCompanyProjectList.ldo');	
+ 		
+ 	} else if (type == 'notice'){
+ 		$('#searchForm').attr('action','/' + type);	
+ 		
+ 	} else {
+ 		$('#searchForm').attr('action','/' + type);		
+ 	}
+	
+
+	$('#searchForm').submit();
+}
+</script>
+
+ 
