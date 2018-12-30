@@ -54,7 +54,8 @@ CREATE TABLE company_staff (
 	part VARCHAR(40),
 	customer_memo VARCHAR(500),
  	register_ymdt DATETIME,
-	register_manager_id VARCHAR(50)
+	register_manager_id VARCHAR(50),
+	remove_yn char(1) default 'N'
 ) ;
 	
 CREATE TABLE worker (

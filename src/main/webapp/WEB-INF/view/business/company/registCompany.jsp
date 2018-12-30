@@ -20,7 +20,7 @@
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
             <div class="form-group col-md-3 mb-3">
-              	<label for="phoneNo" class="col-form-label-sm">사업자번호<span class="text-muted">(Optional)</span></label>
+              	<label for="bizNo" class="col-form-label-sm">사업자번호<span class="text-muted">(Optional)</span></label>
                 <input type="text" class="form-control form-control-sm" id="bizNo">
         	</div>
 		</div>
@@ -28,7 +28,7 @@
 		<div class="form-row">
 			<div class="form-group col-md-2 mb-3">
                 <label for="sido" class="col-form-label-sm">주소</label>
-                <select class="custom-select custom-select-sm d-block w-100" id="sido"  onchange="javascript: getSiGunGuTypeReg('sigungu');">
+                <select class="custom-select custom-select-sm d-block w-100" id="sido"  onchange="javascript: getSiGunGuTypeReg('sido','sigungu');">
 				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
 			  	</select>
 			  	<div class="invalid-feedback" style="width: 100%;">시/도를 선택해 주세요.</div>

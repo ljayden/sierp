@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 public class CompanySearch extends Company {
 
 	
-	private int managerCount = 1;
+	private int staffCnt = 1;
 	private int contractTotalCount = 4;
 	private int contractIngCount = 2;
 }

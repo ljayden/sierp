@@ -1,8 +1,6 @@
 package com.sierp.web.domain.business.service;
 
 import java.util.Date;
-import java.util.List;
-
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sierp.web.controller.business.request.CompanyRegisterRequest;
-import com.sierp.web.controller.business.request.CompanyRegisterRequestStaff;
+import com.sierp.web.controller.business.request.CompanyStaffRegisterRequest;
 import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.model.Company;
 import com.sierp.web.domain.business.model.CompanyStaff;
@@ -30,7 +28,11 @@ public class CompanyRegisterService {
 		
 		Company company = registerCompany(request, manager);
 		
-		registerCompanyStaff(company.getCompanySeq(), request.getStaffs(), manager);
+		Date registerYmdt = new Date();
+		for (CompanyStaffRegisterRequest staff : request.getStaffs()) {
+			registerCompanyStaff(company.getCompanySeq(), staff, manager, registerYmdt);
+		}
+	
 	}
 	
 	
@@ -55,11 +57,8 @@ public class CompanyRegisterService {
 	
 	
 	@Transactional(rollbackFor = {Exception.class})
-	private void registerCompanyStaff(int companySeq, List<CompanyRegisterRequestStaff> staffs, CustomerManager manager) {
-		
-		Date registerYmdt = new Date();
-		for (CompanyRegisterRequestStaff staff : staffs) {
-			
+	public void registerCompanyStaff(int companySeq, CompanyStaffRegisterRequest staff, CustomerManager manager, Date registerYmdt) {
+
 			CompanyStaff companyStaff = new CompanyStaff();
 			companyStaff.setCompanySeq(companySeq);
 			companyStaff.setName(staff.getName());
@@ -74,6 +73,6 @@ public class CompanyRegisterService {
 			companyStaff.setRegisterYmdt(registerYmdt);
 			companyStaff.setRegisterManagerId(manager.getId());
 			companyDao.insertCompanyStaff(companyStaff);
-		}
+	 
 	}
 }

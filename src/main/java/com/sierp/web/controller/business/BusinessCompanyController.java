@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sierp.web.controller.business.request.CompanyModifyRequest;
 import com.sierp.web.controller.business.request.CompanyRegisterRequest;
 import com.sierp.web.controller.business.request.CompanySearchRequest;
 import com.sierp.web.domain.business.dao.CompanyDao;
@@ -63,12 +64,19 @@ public class BusinessCompanyController {
 	
 	@RequestMapping(value = "/registCompanyProc", method = RequestMethod.POST)
 	@ResponseBody
-    public JsonResult registFreelancerProc(CustomerManager manager, @RequestBody @Valid CompanyRegisterRequest request) {
+    public JsonResult registCompanyProc(CustomerManager manager, @RequestBody @Valid CompanyRegisterRequest request) {
 		
 		registerService.registerCompanyProc(request, manager);
 		return JsonResults.success();
     }
 	
+	@RequestMapping(value = "/modifyCompanyProc", method = RequestMethod.POST)
+	@ResponseBody
+    public JsonResult modifyCompanyProc(CustomerManager manager, @RequestBody @Valid CompanyModifyRequest request) {
+		
+		companyDao.updateCompany(request.getSeq(), request.getName(), request.getBizNo(), request.getSido(), request.getSigungu(), request.getAddrDetail(), request.getCustomerMemo());
+		return JsonResults.success();
+    }
 	
 	
 	@RequestMapping(value = "/viewCompany", method = RequestMethod.GET)

@@ -38,6 +38,12 @@ public class CompanyDao {
 		return sql.selectList(MAPPER_NAMESPACE + "selectCompany", param);
 	}
 	
+	public CompanyStaff selectCompanyStaffBySeq(int companyStaffSeq) {
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("companyStaffSeq", companyStaffSeq);
+		return sql.selectOne(MAPPER_NAMESPACE + "selectCompanyStaffBySeq", params);
+	}
+	
 	public List<CompanyStaff> selectCompanyStaffListByCompanySeq(int companySeq) {
 		Map<String, Object> params = Maps.newHashMap();
 		params.put("companySeq", companySeq);
@@ -88,5 +94,36 @@ public class CompanyDao {
 		params.put("phoneNo", phoneNo);
 		params.put("registerManagerId", registerManagerId);
 		return sql.selectList(MAPPER_NAMESPACE + "selectCompanyStaffList", params);
+	}
+	
+	public int updateCompany(int companySeq, String name, String bizNo, SidoType sido, SiGunGuType siGunGu, String detailAddr, String customerMemo) {
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("companySeq", companySeq);
+		params.put("companyName", name);
+		params.put("bizNo", bizNo);
+		params.put("sido", sido);
+		params.put("siGunGu", siGunGu);
+		params.put("detailAddr", detailAddr);
+		params.put("customerMemo", customerMemo);
+		return sql.update(MAPPER_NAMESPACE + "updateCompany", params);
+	}
+	
+	public int updateCompanyStaff(int companyStaffSeq, String name, String phoneNo, String companyPhoneNo, String email, String position, String part, String customerMemo) {
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("companyStaffSeq", companyStaffSeq);
+		params.put("name", name);
+		params.put("phoneNo", phoneNo);
+		params.put("companyPhoneNo", companyPhoneNo);
+		params.put("email", email);
+		params.put("position", position);
+		params.put("part", part);
+		params.put("customerMemo", customerMemo);
+		return sql.update(MAPPER_NAMESPACE + "updateCompanyStaff", params);
+	}
+	
+	public int deleteCompanyStaff(int companyStaffSeq) {
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("companyStaffSeq", companyStaffSeq);
+		return sql.update(MAPPER_NAMESPACE + "deleteCompanyStaff", params);
 	}
 }

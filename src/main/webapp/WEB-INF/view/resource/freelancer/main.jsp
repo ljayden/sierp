@@ -50,7 +50,7 @@
 			  		<div class="input-group-prepend ">
 				    	<label class="input-group-text input-group-text-sm w80" for="sido">주소</label>
 				  	</div>
-					<select class="custom-select custom-select-sm" id="sido" required onchange="javascript: getSiGunGuTypeSearch('sigungu');">
+					<select class="custom-select custom-select-sm" id="sido" required onchange="javascript: getSiGunGuTypeSearch('sido','sigungu');">
 				    	<mt:enumOptions enumClass="SidoType" emptyValueName="전체"/>
 			  		</select>	
 					<select class="custom-select custom-select-sm" id="sigungu" required>
@@ -428,7 +428,7 @@ function formReset() {
  	$('.skillSetRow').remove();
 
 	$('#searchTap select, input').val('');
-	$('#searchTap #page').val('1')
+	$('#pageInput').val('1')
 }
 
 function goPage(page) {

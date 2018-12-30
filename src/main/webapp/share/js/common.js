@@ -1,43 +1,47 @@
 var PER_PAGE = 10;
 var ajaxRequests = {}
 
-function getSiGunGuTypeSearch(sigunguId) {
-	if ($('#sido').val() == '') {
-		$('#' + sigunguId + ' option').remove();
-    	$('#' + sigunguId).append('<option value=""> - </option>');
+function getSiGunGuTypeSearch(sidoElementId, sigunguElementId) {
+	if ($('#' + sidoElementId).val() == '') {
+		$('#' + sigunguElementId + ' option').remove();
+    	$('#' + sigunguElementId).append('<option value="">전체</option>');
     	
 	} else {
 		
 		COMMON.ajax({
 		    url : '/common/getSiGunGu.json',
-		    data : JSON.stringify({ sido : $('#sido').val()}),
+		    data : JSON.stringify({ sido : $('#' + sidoElementId).val()}),
 		    successHandler : function(data){
-		    	$('#' + sigunguId +'  option').remove();
-		    	$('#' + sigunguId).append('<option value="">전체</option>')
+		    	$('#' + sigunguElementId +'  option').remove();
+		    	$('#' + sigunguElementId).append('<option value="">전체</option>')
 		    	$(data.result).each(function(i, sigungu) {
-		    		$('#' + sigunguId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+		    		$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
 		    	});
 		    }
 		});
 	}
 }
 
-function getSiGunGuTypeReg(sigunguId) {
-	if ($('#sido').val() == '') {
-		$('#' + sigunguId + ' option').remove();
-    	$('#' + sigunguId).append('<option value="">시/도를 선택해 주세요.</option>');
+function getSiGunGuTypeReg(sidoElementId, sigunguElementId, selectedValue) {
+	if ($('#' + sidoElementId).val() == '') {
+		$('#' + sigunguElementId + ' option').remove();
+    	$('#' + sigunguElementId).append('<option value="">시/도를 선택해 주세요.</option>');
     	
 	} else {
 		
 		COMMON.ajax({
 		    url : '/common/getSiGunGu.json',
-		    data : JSON.stringify({ sido : $('#sido').val()}),
+		    data : JSON.stringify({ sido : $('#' + sidoElementId).val()}),
 		    successHandler : function(data){
-		    	$('#' + sigunguId +'  option').remove();
-		    	$('#' + sigunguId).append('<option value="">시/군/구</option>')
+		    	$('#' + sigunguElementId +'  option').remove();
+		    	$('#' + sigunguElementId).append('<option value="">시/군/구</option>')
 		    	$(data.result).each(function(i, sigungu) {
-		    		$('#' + sigunguId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+		    		$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
 		    	});
+		    	
+		    	if (selectedValue) {
+		    		$('#' + sigunguElementId).val(selectedValue);
+		    	}
 		    }
 		});
 	}
@@ -192,7 +196,6 @@ var COMMON = {
                 left: 1
             }
         };
-
 
         if (timePickerOptionParam) {
             $.each(timePickerOptionParam, function (name, val) {

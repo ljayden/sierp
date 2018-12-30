@@ -14,7 +14,6 @@
       		<th scope="col">계약중 건</th>
       		<th scope="col" class="">총 계약건수</th>
       		<th scope="col">등록자</th>
-      		<th scope="col">등록일</th>
     	</tr>
   	</thead>
   	<tbody>
@@ -22,23 +21,38 @@
 	 		<c:forEach var="company" items="${ companyList }">
 		    	<tr>
 		      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ company.companySeq}">${ company.companyName }</a></th>
-		      		<td>${ company.sido.description }/${ company.siGunGu.description }</td>
-		      		<td>2명</td>
+		      		<td>
+		      		
+		      		<c:if test="${ not empty company.sido }">
+		      			${ company.sido.description }
+		      			<c:if test="${ not empty company.siGunGu }">
+		      				/${ company.siGunGu.description }
+		      			</c:if>
+		      			<c:if test="${ empty company.siGunGu }">
+		      				/ -
+		      			</c:if>
+		      		</c:if>
+		      		<c:if test="${ empty company.sido }">
+		      			- / - 
+		      		</c:if>	
+						
+		      			
+		      		</td>
+		      		<td>${ company.staffCnt }명</td>
 		      		<td>1건</td>
 		      		<td><b>4건</b></td>
 		      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/></td>
-		      		<td>2017.04.02</td>
 		    	</tr>
 	 		</c:forEach>
  		</c:if>
  		<c:if test="${ empty companyList }">
  			<tr>
- 				<td colspan="7">검색 결과가 없습니다.</td>
+ 				<td colspan="6">검색 결과가 없습니다.</td>
  			</tr>
  		</c:if>
 	</tbody>
 </table>	
-<small class="d-block text-right mt-3">총 ${ request.totalCount } 명이 조회되었습니다</small>
+<small class="d-block text-right mt-3">총 ${ request.totalCount } 건이 조회되었습니다</small>
 
 
 <jsp:include page="/WEB-INF/view/decorators/page.jsp"></jsp:include>

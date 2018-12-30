@@ -32,7 +32,8 @@
 	</select>
 	
 	<select id="selectCompanyList" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanySearch">
-		SELECT  c.*
+		SELECT  c.*, 
+				(SELECT count(*) FROM company_staff WHERE company_seq = c.company_seq  AND delete_yn = 'N') as staffCnt
 		FROM 	company c
 	 	<where><include refid="companySearchCondition"/></where>
 		LIMIT #{offset}, #{limit}
@@ -60,11 +61,16 @@
     
     
     
+    <select id="selectCompanyStaffBySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanyStaff">
+    	SELECT 	* 
+    	FROM 	company_staff
+    	WHERE	company_staff_seq = #{companyStaffSeq}
+    </select>
     
     <select id="selectCompanyStaffListByCompanySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanyStaff">
     	SELECT 	* 
     	FROM 	company_staff
-    	WHERE	company_seq = #{companySeq}
+    	WHERE	company_seq = #{companySeq} AND delete_yn = 'N'
     </select>
     
 
@@ -83,6 +89,7 @@
 	
     <sql id="companyStaffSearchCondition">
         cs.company_seq = c.company_seq
+        AND cs.delete_yn = 'N'
 		AND c.customer_seq = #{customerSeq} 
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(companyName)">
 			AND c.company_name like CONCAT('%',#{companyName},'%')
@@ -101,14 +108,34 @@
 		</if>
     </sql>
     
+    <update id="updateCompany" parameterType="map">
+    	UPDATE	company
+    	SET		company_name = #{companyName},
+    			biz_no = #{bizNo},
+    			sido = #{sido},
+    			si_gun_gu = #{siGunGu},
+    			detail_addr = #{detailAddr},
+    			customer_memo = #{customerMemo}
+    	WHERE	company_seq = #{companySeq}
+    </update>
+	
+    <update id="updateCompanyStaff" parameterType="map">
+    	UPDATE	company_staff
+    	SET		name = #{name},
+    			phone_no = #{phoneNo},
+    			company_phone_no = #{companyPhoneNo},
+    			email = #{email},
+    			position = #{position},
+    			part = #{part},
+    			customer_memo = #{customerMemo}
+    	WHERE	company_staff_seq = #{companyStaffSeq}
+    </update>
     
-    
-    
-    
-    
-    
-    
-    
+    <update id="deleteCompanyStaff" parameterType="map">
+    	UPDATE	company_staff 
+    	SET		delete_yn = 'Y'
+    	WHERE	company_staff_seq = #{companyStaffSeq}
+    </update>
     
     
     

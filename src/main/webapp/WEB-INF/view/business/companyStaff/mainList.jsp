@@ -14,7 +14,6 @@
       		<th scope="col" class="text-center">업체명</th>
       		<th scope="col">전화번호</th>
       		<th scope="col">등록자</th>
-      		<th scope="col">등록일</th>
     	</tr>
   	</thead>
   	<tbody>
@@ -27,13 +26,12 @@
 	      		<td><a href="/business/company/viewCompany.do?companySeq=${ companyStaff.companySeq}">${ companyStaff.companyName }</a></td>
 	      		<td>${ companyStaff.phoneNo }</td>
 	      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ companyStaff.registerManagerId }"/></td>
-	      		<td>2017.04.02</td>
 	    	</tr>
  		</c:forEach>
  		</c:if>
  		<c:if test="${ empty companyStaffList }">
  			<tr>
- 				<td colspan="7">검색 결과가 없습니다.</td>
+ 				<td colspan="6">검색 결과가 없습니다.</td>
  			</tr>
  		</c:if>
 	</tbody>
