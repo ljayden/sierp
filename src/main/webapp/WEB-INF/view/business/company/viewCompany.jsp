@@ -17,17 +17,6 @@
 		등록 :<fmt:formatDate value="${company.registerYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/>)
 		</div>
 	</div>
-	<div class="row text-muted small">
-		<div class="col-md-12 mb-2 text-right">
-		수정 : 
-		<c:if test="${ not empty company.registerYmdt }">
-			<fmt:formatDate value="${company.registerYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/>)
-		</c:if>
-		<c:if test="${ empty freelancer.modifyYmdt }">
-			<fmt:formatDate value="${company.registerYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/>)
-		</c:if>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col-md-3 mb-2">
 		<b>업체명 : ${ company.companyName } </b>
@@ -43,13 +32,13 @@
 	</div>
 	<div class="mb-3"> 
 		<label for="cutomerMemo" class="col-form-label-sm">업체 메모 :</label>
-		<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="5" disabled="disabled">${ company.customerMemo }</textarea>
+		<textarea class="form-control form-control-sm" aria-label="With textarea" rows="5" disabled="disabled">${ company.customerMemo }</textarea>
 	</div>
 	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#companyModifyModal" id="companyModifyModalBtn">업체정보 변경</button>
 	<br>
 	<div class="row">
 		<div class="col-md-3 mb-3">
-		업체 담당자
+		담당자 정보
 		</div>
 	</div>
 	<div class="pl-2 pr-2 small">
@@ -59,7 +48,7 @@
 		</c:if>
 		<c:if test="${ not empty companyStaffs }">
 			<c:forEach var="staff" items="${ companyStaffs }">
- 				<div class="card">
+ 				<div class="card mb-1 p-1">
 					<div class="row p-1">
 						<div class="col-md-2" style="font-size: 1.0rem; margin-top : -4px;"><strong>${ staff.name }</strong></div>
 						<div class="col-md-3">부서/직급: ${ staff.part }/${ staff.position }</div>
@@ -75,7 +64,7 @@
 						<div class="col-md-2">&nbsp;</div>
 						<div class="col-md-8">메모 : ${ staff.customerMemo }</div>
 						<div class="col-md-2">
-						<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" onclick="javascript: removeStaff(${staff.companyStaffSeq})">삭제</button>
+						<button type="button" class="btn btn-outline-secondary btn-sm float-right" onclick="javascript: removeStaff(${staff.companyStaffSeq})">삭제</button>
 						<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" data-toggle="modal" data-target="#staffModifyModal" id="staffModifyModalBtn"
 						onclick="javascript: setCompanyStaffInfo(${staff.companyStaffSeq})">수정</button>
 						</div>
@@ -102,7 +91,7 @@
 	        		<a class="nav-link active" id="nav-link-project" href="javascript:changeSubMenu('project')">프로젝트 정보</a>
 	      		</li>
 	      		<li class="nav-item">
-	        		<a class="nav-link" id="nav-link-notice" href="javascript:changeSubMenu('notice')">채용 공고</a>
+	        		<a class="nav-link" id="nav-link-notice" href="javascript:changeSubMenu('notice')">직무 &amp; 공고</a>
 	      		</li>
 	      		<li class="nav-item">
 	        		<a class="nav-link" id="nav-link-contract" href="javascript:changeSubMenu('contract')">계약 정보</a>

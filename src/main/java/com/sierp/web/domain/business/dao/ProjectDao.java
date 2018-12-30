@@ -8,7 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.common.collect.Maps;
 import com.sierp.web.domain.business.model.Project;
+import com.sierp.web.domain.business.model.ProjectJoin;
 import com.sierp.web.domain.business.model.ProjectSearch;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
@@ -23,6 +25,18 @@ public class ProjectDao {
 	
 	public int insertProject(Project project) {
 		return sql.insert(MAPPER_NAMESPACE + "insertProject", project);
+	}
+	
+	public Project selectProjectBySeq(int projectSeq) {
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("projectSeq", projectSeq);
+		return sql.selectOne(MAPPER_NAMESPACE + "selectProjectBySeq", params);
+	}
+	
+	public ProjectJoin selectProjectJoinBySeq(int projectSeq) {
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("projectSeq", projectSeq);
+		return sql.selectOne(MAPPER_NAMESPACE + "selectProjectJoinBySeq", params);
 	}
 	
 	public void selectProjectListCount(int customerSeq, Integer companySeq, String companyName, String projectName, List<String> statusList,

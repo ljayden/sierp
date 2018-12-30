@@ -40,7 +40,7 @@ public class Project {
 	private String customerMemo;
 	
 	private Date registerYmdt;
-	private String resiterManagerId;
+	private String registerManagerId;
 
 	private String endYn;
 }

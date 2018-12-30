@@ -16,8 +16,10 @@ import com.sierp.web.controller.business.request.ProjectRegisterRequest;
 import com.sierp.web.controller.business.request.ProjectSearchRequest;
 import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.dao.CustomerDao;
+import com.sierp.web.domain.business.dao.ProjectDao;
 import com.sierp.web.domain.business.model.CustomerManager;
 import com.sierp.web.domain.business.model.Project;
+import com.sierp.web.domain.business.model.ProjectJoin;
 import com.sierp.web.domain.business.service.ProjectRegisterService;
 import com.sierp.web.domain.business.service.ProjectSearchService;
 import com.sierp.web.result.JsonResult;
@@ -29,6 +31,7 @@ public class BusinessProjectController {
 	
 	@Autowired CustomerDao customDao;
 	@Autowired CompanyDao companyDao;
+	@Autowired ProjectDao projectDao;
 	
 	@Autowired ProjectRegisterService registerService;
 	@Autowired ProjectSearchService searchService;
@@ -77,4 +80,17 @@ public class BusinessProjectController {
 		return JsonResults.success(ImmutableMap.of("projectSeq", project.getProjectSeq()));
 	}
 	
+	
+	@RequestMapping(value = "/viewProject", method = RequestMethod.GET)
+	public String viewProject(Model model, CustomerManager manager, @RequestParam(name = "projectSeq") int projectSeq) {
+		
+		ProjectJoin project = projectDao.selectProjectJoinBySeq(projectSeq);
+		if (project.getCustomerSeq() != manager.getCustomerSeq()) {
+			throw new RuntimeException("권한이 없다");
+		}
+ 
+		model.addAttribute("project", project);
+		
+		return "business/project/viewProject";
+	}
 }

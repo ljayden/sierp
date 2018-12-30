@@ -83,7 +83,7 @@ public class ProjectRegisterService {
 		project.setCustomerMemo(request.getCustomerMemo());
 	 	
 		project.setRegisterYmdt(new Date());
-		project.setResiterManagerId(manager.getId());
+		project.setRegisterManagerId(manager.getId());
 		
 		projectDao.insertProject(project);
 		

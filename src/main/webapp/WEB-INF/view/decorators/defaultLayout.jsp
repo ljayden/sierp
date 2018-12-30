@@ -115,10 +115,10 @@
     	<div class="nav-scroller bg-white shadow-sm">	
 			<nav class="nav nav-underline">
 	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">채용 관리</button>
-	        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="#">Dashboard</a>
-	        	<a class="nav-link" href="#">조회<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-	        	<a class="nav-link" href="#">등록</a>
-	        	<a class="nav-link" href="#">관리</a>
+	        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/recruit/dashboard/main.do">Dashboard</a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'jobPosition'}">style="font-weight: bold"</c:if> href="/recruit/jobPosition/main.do">직무관리<!--span class="badge badge-pill bg-light align-text-bottom">27</span--></a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'jobNotice'}">style="font-weight: bold"</c:if> href="/recruit/jobNotice/main.do">공고관리</a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'suggestion'}">style="font-weight: bold"</c:if> href="/recruit/suggestion/main.do">제안서관리</a>
 	      	</nav>
       	</div>
       	</c:if>
@@ -174,15 +174,16 @@
 			<div class="modal-body">
 		       	<div class="mb-3" id="searchResultDiv">
 		       	
-					<div class="text-muted small">자사 프리랜서풀에서 1건이 검색되었습니다.</div>
+					<div class="text-muted small">자사 인재풀에서 1건이 검색되었습니다.</div>
 					<div class="p-3"><a href="">김철수(27/남/성남) 개발자</a></div>
+					<div class="">더보기</div>
 					<hr class="mb-2">
 					
 					<div class="text-muted small">인재풀에서 2건이 검색되었습니다.</div>
 					<div class="p-3"><a href="">김철수(21/남) 개발자</a>&nbsp;&nbsp;&nbsp;<a href="">김철수(26/남) 디자이너</a></div>
 					<hr class="mb-2">
 					
-					<div class="text-muted small">업체 담당자에서  1 건이 검색되었습니다.</div>
+					<div class="text-muted small">업체 담당자에서 1 건이 검색되었습니다.</div>
 					<div class="p-3"><a href="">김철수-네이버(35/남)</a></div>
 
 				</div>

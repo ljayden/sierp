@@ -8,9 +8,26 @@
 		
 		VALUES (#{customerSeq}, #{mainManagerId}, #{companySeq}, #{companyStaffSeq}, #{mainCompanySeq}, #{mainCompanyStaffSeq}, #{projectName}, 
 		#{startYear}, #{startMonth}, #{startDay}, #{startYmdt}, #{endYear}, #{endMonth}, #{endDay}, #{endYmdt}, #{sido}, #{siGunGu}, #{detailAddr}, 
-		#{projectDesc}, #{customerMemo}, #{registerYmdt}, #{resiterManagerId}, 'N')
+		#{projectDesc}, #{customerMemo}, #{registerManagerId}, #{registerYmdt}, 'N')
 	</insert>
 
+	<select id="selectProjectBySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.Project">
+		SELECT  p.*
+		FROM	project p
+		WHERE	project_seq = #{projectSeq}
+	</select>
+	
+	<select id="selectProjectJoinBySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.ProjectJoin">
+		SELECT  p.*,
+				(SELECT company_name FROM company WHERE company_seq = p.company_seq ) AS companyName,
+				(SELECT name FROM company_staff WHERE company_staff_seq = p.company_staff_seq AND delete_yn = 'N' ) AS companyStaffName,
+				(SELECT company_name FROM company WHERE company_seq = p.main_company_seq ) AS mainCompanyName,
+				(SELECT name FROM company_staff WHERE company_staff_seq = p.main_company_staff_seq AND delete_yn = 'N'  ) AS mainCompanyStaffName
+				
+		FROM	project p
+		WHERE	project_seq = #{projectSeq}
+	</select>
+	
 	
 	<select id="selectProjectListCount" parameterType="map" resultType="int">
 		SELECT 	count(*)
