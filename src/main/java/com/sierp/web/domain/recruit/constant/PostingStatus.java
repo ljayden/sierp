@@ -1,15 +1,14 @@
-package com.sierp.web.domain.project.constant;
+package com.sierp.web.domain.recruit.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum JobPositionStatus {
+public enum PostingStatus {
 	
 	ING("진행중"),
-	OUT("마감"),
-	END("종료"),
-	CONTRACT("타계약-종료");
+	CONTRACT("계약"),
+	END("종료");
 	
 	
 	

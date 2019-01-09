@@ -116,9 +116,8 @@
 			<nav class="nav nav-underline">
 	        	<button type="button" class="btn btn-outline-secondary btn-sm active" style="height : 34px; margin-top: 6px; margin-left : 6px;">채용 관리</button>
 	        	<a class="nav-link" <c:if test = "${subMenePath eq 'dashboard'}">style="font-weight: bold"</c:if> href="/recruit/dashboard/main.do">Dashboard</a>
-	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'jobPosition'}">style="font-weight: bold"</c:if> href="/recruit/jobPosition/main.do">직무관리<!--span class="badge badge-pill bg-light align-text-bottom">27</span--></a>
-	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'jobNotice'}">style="font-weight: bold"</c:if> href="/recruit/jobNotice/main.do">공고관리</a>
-	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'suggestion'}">style="font-weight: bold"</c:if> href="/recruit/suggestion/main.do">제안서관리</a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'posting'}">style="font-weight: bold"</c:if> href="/recruit/posting/main.do">채용공고 관리<!--span class="badge badge-pill bg-light align-text-bottom">27</span--></a>
+	        	<a class="nav-link" <c:if test = "${subMenuPath eq 'suggestion'}">style="font-weight: bold"</c:if> href="/recruit/suggestion/main.do">제안서 관리</a>
 	      	</nav>
       	</div>
       	</c:if>

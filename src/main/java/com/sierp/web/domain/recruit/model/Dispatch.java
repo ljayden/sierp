@@ -1,4 +1,4 @@
-package com.sierp.web.domain.project.model;
+package com.sierp.web.domain.recruit.model;
 
 import java.util.Date;
 

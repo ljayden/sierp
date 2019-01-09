@@ -1,9 +1,9 @@
-package com.sierp.web.domain.project.model;
+package com.sierp.web.domain.recruit.model;
 
 import lombok.Data;
 
 @Data
-public class JobPositionSkill {
+public class PostingSkill {
 
 	private int jobPositionSeq;
 	

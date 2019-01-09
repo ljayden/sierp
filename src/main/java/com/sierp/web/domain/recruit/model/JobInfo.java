@@ -1,4 +1,4 @@
-package com.sierp.web.domain.project.model;
+package com.sierp.web.domain.recruit.model;
 
 import java.util.Date;
 
@@ -7,8 +7,7 @@ import com.sierp.web.domain.common.constant.RecruitType;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
 import com.sierp.web.domain.common.constant.WorkType;
-import com.sierp.web.domain.project.constant.JobPositionStatus;
-import com.sierp.web.domain.project.constant.JobPositionType;
+import com.sierp.web.domain.recruit.constant.PostingStatus;
 import com.sierp.web.domain.resource.constant.AcademicLevel;
 
 import lombok.Data;
@@ -23,7 +22,7 @@ import lombok.Data;
  * 번거롭게 하지말자.!!
  */
 @Data
-public class JobPosition {
+public class JobInfo {
 
 	private int jobPositionSeq;
 	
@@ -32,16 +31,14 @@ public class JobPosition {
 	private int companySeq;			//클라이언트 업체
 	private int companyStaffSeq;	//클라이언트 업체-담당자
 	
-	private Integer projectSeq;	//정규직 채용이라면 프로젝트가 없을수도 있다.
+	private Integer projectSeq;	//정규직 채용이라면 프로젝트가 없을수도 있다. 혹은 프로젝트 정보가 없을 수 있지.
 	
-	private JobPositionType jobPositionType;
 	
 	
 	/**
 	 * 직무 & 근무 정보
 	 */
 	private WorkType workType; //SI, SM
-	
 	private SidoType workSido;
 	private SiGunGuType workSiGunGu;
 	private String workDetailAddr;
@@ -49,10 +46,6 @@ public class JobPosition {
 	
 	private String jobPositionName;
 	private String jobPositionInfo; //직무 & 근무 정보 소개
-	
-	//개발
-	//웹개발
-
 	
 	private String secretMemo;
 	
@@ -67,7 +60,7 @@ public class JobPosition {
 	
 	private String recruitNoticeName; //공고명
 
-	private JobPositionStatus status;
+	private PostingStatus status;
 	
 	private String officeWorkYn; //상주 근무가능여부
 	private String officeHomeWorkYn;	//반상주 가능여부
@@ -90,4 +83,6 @@ public class JobPosition {
 	
 	private Date registerYmdt;
 	private String resiterManagerId;
+	
+	private String endYn;
 }

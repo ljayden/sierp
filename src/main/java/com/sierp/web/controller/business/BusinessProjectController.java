@@ -60,7 +60,7 @@ public class BusinessProjectController {
 	}
 
 	@RequestMapping(value = "/registProject", method = RequestMethod.GET)
-	public String registFreelancer(Model model, CustomerManager manager, @RequestParam(value ="companySeq", required = false) Integer companySeq) {
+	public String registFreelancer(Model model, CustomerManager manager, @RequestParam(value = "companySeq", required = false) Integer companySeq) {
 		
 		if (companySeq != null) {
 			model.addAttribute("selectedCompany", companyDao.selectCompanyBySeq(companySeq));
