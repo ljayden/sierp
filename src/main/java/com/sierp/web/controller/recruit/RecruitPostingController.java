@@ -37,21 +37,21 @@ public class RecruitPostingController {
 	public String getMainList(Model model, CustomerManager manager, PostingSearchRequest request) {
 		
 		model.addAttribute("request", request);
-		return "business/posting/mainList";
+		return "recruit/posting/mainList";
 	}
 	
 	@RequestMapping(value = "/getCompanyPostingList", method = {RequestMethod.POST})
 	public String getCompanyPostingList(Model model, CustomerManager manager, PostingSearchRequest request) {
 		
 		model.addAttribute("request", request);
-		return "business/posting/companyPostingList";
+		return "recruit/posting/companyPostingList";
 	}
 	
 	@RequestMapping(value = "/getProjectPostingList", method = {RequestMethod.POST})
 	public String getProjectPostingList(Model model, CustomerManager manager, PostingSearchRequest request) {
 		
 		model.addAttribute("request", request);
-		return "business/posting/projectPostingList";
+		return "recruit/posting/projectPostingList";
 	}
 
 	@RequestMapping(value = "/registPosting", method = RequestMethod.GET)
@@ -65,7 +65,7 @@ public class RecruitPostingController {
 		model.addAttribute("companyList", companyDao.selectCompanyList(manager.getCustomerSeq()));
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		
-		return "business/posting/registPosting";
+		return "recruit/posting/registPosting";
 	}
 	
 	

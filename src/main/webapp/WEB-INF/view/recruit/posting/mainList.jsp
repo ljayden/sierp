@@ -9,7 +9,7 @@
 	<thead class="thead-dark" style="borde : 1px">
 	    	<tr>
 	      		<th scope="col">진행상태</th>
-	      		<th scope="col" class="">채용형태</th>
+	      		<th scope="col" class="">채용구분</th>
 	      		<th scope="col">공고명</th>
 	      		<th scope="col">업체</th>
 	      		<th scope="col">게시여부</th>
