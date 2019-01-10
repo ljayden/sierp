@@ -4,7 +4,6 @@ import java.util.Date;
 
 import lombok.Data;
 
-import com.sierp.web.domain.common.constant.RecruitContractUnitType;
 import com.sierp.web.domain.common.constant.RecruitType;
 import com.sierp.web.domain.common.constant.RewardType;
 import com.sierp.web.domain.common.constant.SiGunGuType;
@@ -35,9 +34,11 @@ public class Posting {
 
 	private AcademicLevel needAcademicLevel;
 	private Integer needFreeGradeValue;	//FreelancerGrade 참고!!!!  0일 경우 경력으로 구분
-	private Integer needWorkYear;		//필요 경력 
+	private Integer limitWorkYearMin;		//필요 최소경력 
+	private Integer limitWorkYearMax;		//필요 최대경력 
+	private Integer limitAgeMin;		//나이제한
+	private Integer limitAgeMax;
 	
-	private RecruitContractUnitType recruitContractUnitType;	//연 - 월 계약 타입
 	private Integer recruitContractUnitValue;	//계약 단위
 	
 	private RewardType rewardType;	//보상구분 연봉-월급

@@ -39,7 +39,7 @@
 					<label class="custom-control-label custom-control-label-sm" for="genderM">남자</label>
 				</div>
 				<div class="custom-control custom-radio custom-control-inline">
-			 		<input type="radio" id="genderF" name="gender" value="M" class="custom-control-input">
+			 		<input type="radio" id="genderF" name="gender" value="F" class="custom-control-input">
 			 		<label class="custom-control-label custom-control-label-sm"  for="genderF">여자</label>
 				</div>
 			</div>

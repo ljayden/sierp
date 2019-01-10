@@ -15,19 +15,24 @@
 
     	<div class="form-row">
         	<div class="form-group col-md-8 mb-3">
-                <label for="projectName" class="col-form-label-sm">채용공고 제목 </label>
-                <input type="text" class="form-control form-control-sm" id="projectName" required>
+                <label for="posingTitle" class="col-form-label-sm">채용공고 제목 </label>
+                <input type="text" class="form-control form-control-sm" id="posingTitle" required>
             	<div class="invalid-feedback">채용공고 제목을 입력해 주세요.</div>
         	</div>
-        	<div class="form-group col-md-1 mb-3"></div>
-        	<div class="form-group col-md-3 mb-3">
+        	<div class="form-group col-md-2 mb-3"></div>
+        	<div class="form-group col-md-2 mb-3">
 				<label for="projectName" class="col-form-label-sm">게시 여부 </label>
-                <input type="text" class="form-control form-control-sm" id="projectName" required>
+				<div>
+		           	<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" id="chkSitePostgYn" value="Y" class="custom-control-input">
+						<label class="custom-control-label custom-control-label-sm" for="chkSitePostgYn">사이트 게시</label>
+					</div>
+				</div>
         	</div>
 		</div>  
 
     	<div class="form-row">
-        	<div class="form-group col-md-3 mb-3">
+        	<div class="form-group col-md-4 mb-3">
                 <label for="company" class="col-form-label-sm">업체명</label>
                 <input type="text" class="form-control form-control-sm" id="company" required onchange="javascript: companyChange('company')">
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
@@ -37,64 +42,197 @@
         		<select class="custom-select custom-select-sm d-block w-100" id="companyManager">
         		</select>
         	</div>
-        	
-            <div class="form-group col-md-1 mb-3"></div>
-            <div class="form-group col-md-6 mb-3">
-              	<label for="mainCompany" class="col-form-label-sm">프로젝트<span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control form-control-sm w-70" id="mainCompany" onchange="javascript: companyChange('mainCompany')">
-                <button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#staffAddModal" id="staffAddModalBtn">찾아보기</button>
-        	</div>
 		</div>
 
+    	<div class="form-row">
+        	<div class="form-group col-md-2 mb-3">
+                <label for="workType" class="col-form-label-sm">업무 구분<span class="text-muted">(Optional)</span></label>
+				<select class="custom-select custom-select-sm d-block w-100"  id="workType" required>
+                	<mt:enumOptions enumClass="WorkType" emptyValueName="없음"></mt:enumOptions>
+                </select>
+        	</div>
+        	<div class="form-group col-md-2 mb-3"></div>
+            <div class="form-group col-md-6 mb-3 ">
+              	<label for="project" class="col-form-label-sm">프로젝트1<span class="text-muted">(Optional)</span></label>
+                <input type="text" class="form-control form-control-sm w-75 float-left " id="project">
+                <button type="button" class="btn btn-outline-primary btn-sm float-left ml-2" data-toggle="modal" data-target="#staffAddModal" id="staffAddModalBtn">찾아보기</button>
+        	</div>
+		</div>
 		
     	<div class="form-row">
-        	<div class="form-group col-md-4 mb-3">
-                <label for="projectName" class="col-form-label-sm">채용구분 </label>
-                <select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="expertType" required>
+        	<div class="form-group col-md-2 mb-3">
+                <label for="recruitType" class="col-form-label-sm">채용구분 </label>
+                <select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="recruitType" required>
                 	<mt:enumOptions enumClass="RecruitType"></mt:enumOptions>
                 </select>
         	</div>
-        	<div class="form-group col-md-4 mb-3">
-                <label for="projectName" class="col-form-label-sm">업무구분<span class="text-muted">(Optional)</span></label>
-				<select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="expertType" required>
-                	<mt:enumOptions enumClass="WorkType" emptyValueName="선택"></mt:enumOptions>
+			<div class="form-group col-md-2 mb-3">
+                <label for="recruitManCount" class="col-form-label-sm">채용 수</label>
+				<select class="custom-select custom-select-sm d-block w-100" id="recruitManCount">
+               		<option value="">0 명</option>
+               		<option value="">00 명</option>
+	                <c:forEach var="manCount" begin="1" end="10" step="1">
+						<option value="${manCount}">${manCount} 명</option>
+					</c:forEach>
+               	</select>
+        	</div>
+        	<div class="form-group col-md-2 mb-3">
+                <label for="recruitContractUnitValue" class="col-form-label-sm">계약 단위 </label>
+				<select class="custom-select custom-select-sm d-block w-100" id="recruitContractUnitValue">
+					<option>없음</option>
+	                <c:forEach var="monthVal" begin="1" end="60" step="1">
+						<option value="${monthVal}">${monthVal} 개월</option>
+					</c:forEach>
+               	</select>
+        	</div>
+        	<div class="form-group col-md-6 mb-3">
+                <label for="rewardType" class="col-form-label-sm">보상 정보 </label>
+                <div>
+					<select class="custom-select custom-select-sm d-block w-25 float-left"  id="rewardType" required>
+	                	<mt:enumOptions enumClass="RewardType" emptyValueName="없음" selectedValue="MONTH"></mt:enumOptions>
+	                </select>
+	                <input type="text" class="form-control form-control-sm w-25 float-left ml-2" id="rewardMinPrice" placeholder="만원 이상">
+	                <div class="float-left ">&nbsp; ~ &nbsp;</div>
+	                <input type="text" class="form-control form-control-sm w-25 float-left" id="rewardMaxPrice" placeholder="만원 이하">
+                </div>
+        	</div>
+		</div>  
+
+		<br>
+		<br>
+		<h6><b>채용 조건</b></h6>
+    	<div class="form-row">
+        	<div class="form-group col-md-3 mb-3">
+                <label for="needAcademicLevel" class="col-form-label-sm">학력 제한 </label>
+                <select class="custom-select custom-select-sm d-block w-100" style="font-weight: bold" id="needAcademicLevel" required>
+                	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="없음" optionNameSuffix=" 이상"></mt:enumOptions>
                 </select>
         	</div>
-			<div class="form-group col-md-4 mb-3">
-                <label for="projectName" class="col-form-label-sm">채용 수</label>
-				<select class="custom-select custom-select-sm d-block w-100" id="startYear">
-               		<option value="">0명</option><option value="">00명</option>
-               		<option value="">1명</option><option value="">시작 년도</option><option value="">시작 년도</option>
-               		<option value="">시작 년도</option><option value="">시작 년도</option><option value="">시작 년도</option><option value="">시작 년도</option><option value="">시작 년도</option>
+			<div class="form-group col-md-3 mb-3">
+                <label for="needFreeGradeValue" class="col-form-label-sm">등급 제한</label>
+				<select class="custom-select custom-select-sm d-block w-100" id="needFreeGradeValue">
+               		<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="없음" optionNameSuffix=" 이상"></mt:enumOptions>
                	</select>
+        	</div>
+        	<div class="form-group col-md-1 mb-3"></div>
+			<div class="form-group col-md-5 mb-3">
+                <label for="limitWorkYearMin" class="col-form-label-sm">연차 제한</label>
+                <div>
+					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitWorkYearMin">
+						<option value="0" selected="selected">없음</option>
+		                <c:forEach var="year" begin="1" end="20" step="1">
+							<option value="${year}" >${year} 년</option>
+						</c:forEach>
+	               	</select>
+	               	<div class="float-left">&nbsp; ~ &nbsp;</div>
+					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitWorkYearMax">
+						<option value="0" selected="selected">없음</option>
+		                <c:forEach var="year" begin="1" end="20" step="1">
+							<option value="${year}" >${year} 년</option>
+						</c:forEach>
+	               	</select>
+                </div>
+        	</div>
+		</div>  
+		
+    	<div class="form-row">
+        	<div class="form-group col-md-7 mb-3"></div>
+			<div class="form-group col-md-5 mb-3">
+                <label for="limitAgeMin" class="col-form-label-sm">나이 제한</label>
+                <div>
+					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitAgeMin">
+						<option value="0" selected="selected">없음</option>
+		                <c:forEach var="year" begin="1980" end="2014" step="1">
+							<option value="${year}" >${year} 년생 </option>
+						</c:forEach>
+	               	</select>
+	               	<div class="float-left">&nbsp; ~ &nbsp;</div>
+					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitAgeMax">
+						<option value="0" selected="selected">없음</option>
+		                <c:forEach var="year" begin="1980" end="2014" step="1">
+							<option value="${year}" >${year} 년생</option>
+						</c:forEach>
+	               	</select>
+                </div>
         	</div>
 		</div>  
 		
 		<div class="form-row">
+        	<div class="form-group col-md-12 mb-3">
+        		<label for="projectName" class="col-form-label-sm">필수 조건</label>
+		       	<div class="mb-2 input-group" id="skillSets"></div>
+				<div class="mb-3" style="text-align: right">
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
+				</div>
+        	</div>	
+        </div>
+		<div class="form-row">
+        	<div class="form-group col-md-12 mb-3">
+        		<label for="projectName" class="col-form-label-sm">우대 조건</label>
+		       	<div class="mb-2 input-group" id="skillSets"></div>
+				<div class="mb-3" style="text-align: right">
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
+				</div>
+        	</div>	
+        </div>
+		
+		<div class="mb-3"> 
+        	<label for="recruitInfo" class="col-form-label-sm">채용 정보</label>
+			<textarea class="form-control form-control-sm" id="recruitInfo" aria-label="With textarea" rows="3"></textarea>
+		</div>
+		
+		
+		<br>
+		<br>
+		<h6><b>근무 정보</b></h6>
+		<div class="form-row">
 			<div class="form-group col-md-2 mb-3">
-                <label for="sido" class="col-form-label-sm">근무지</label>
-                <select class="custom-select custom-select-sm d-block w-100" id="sido" required onchange="javascript: getSiGunGuTypeReg('sido','sigungu');">
+                <label for="workSido" class="col-form-label-sm">근무지</label>
+                <select class="custom-select custom-select-sm d-block w-100" id="workSido" required onchange="javascript: getSiGunGuTypeReg('workSido','workSiGunGu');">
 				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
 			  	</select>
 			  	<div class="invalid-feedback" style="width: 100%;">시/도를 선택해 주세요.</div>
 			</div>
 			<div class="form-group col-md-3 mb-3">
-                <label for="sigungu" class="col-form-label-sm">&nbsp;</label>
-                <select class="custom-select custom-select-sm d-block w-100" id="sigungu" required>
+                <label for="workSiGunGu" class="col-form-label-sm">&nbsp;</label>
+                <select class="custom-select custom-select-sm d-block w-100" id="workSiGunGu" required>
                 	<option value="">시/도를 선택해 주세요.</option>
-<%-- 				    <mt:enumOptions enumClass="SiGunGuType" emptyValueName="시/도를 선택해 주세요."/> --%>
 			  	</select>
 			  	<div class="invalid-feedback" style="width: 100%;">시/군/구를 선택해 주세요.</div>
 			</div>
 			<div class="form-group col-md-7 mb-3">
-                <label for="addrDetail" class="col-form-label-sm">상세 근무지<span class="text-muted">(Optional)</span></label>
- 				<input type="text" class="form-control form-control-sm" id="addrDetail" placeholder="ex: 강남구청역 푸르지오">
+                <label for="workDetailAddr" class="col-form-label-sm">상세 근무지<span class="text-muted">(Optional)</span></label>
+ 				<input type="text" class="form-control form-control-sm" id="workDetailAddr" placeholder="ex: 강남구청역 푸르지오">
 			</div>
 		</div>
+		
+		<div class="form-row">
+        	<div class="form-group col-md-8 mb-3">
+                <label for="projectName" class="col-form-label-sm">근무 형태 </label>
+                <div>
+		           	<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" id="officeWorkYn"  value="Y" class="custom-control-input" checked="checked">
+						<label class="custom-control-label custom-control-label-sm" for="officeWorkYn">상주</label>
+					</div>
+					<div class="custom-control custom-checkbox custom-control-inline">
+				 		<input type="checkbox" id="officeHomeWorkYn"  value="Y" class="custom-control-input" checked="checked">
+				 		<label class="custom-control-label custom-control-label-sm"  for="officeHomeWorkYn">반상주</label>
+					</div>
+					<div class="custom-control custom-checkbox custom-control-inline">
+				 		<input type="checkbox" id="homeWorkYn"   value="Y" class="custom-control-input" checked="checked">
+				 		<label class="custom-control-label custom-control-label-sm"  for="homeWorkYn">재택 가능</label>
+					</div>
+				</div>
+        	</div>
+		</div>  
+		
 		<div class="mb-3"> 
-        	<label for="projectDesc" class="col-form-label-sm">프로젝트 설명</label>
-			<textarea class="form-control form-control-sm" id="projectDesc" aria-label="With textarea" rows="3"></textarea>
-		</div>   
+        	<label for="jobInfo" class="col-form-label-sm">직무 안내</label>
+			<textarea class="form-control form-control-sm" id="jobInfo" aria-label="With textarea" rows="3"></textarea>
+		</div>
+
+		<br>
+		<br>
 		<div class="form-row">
         	<div class="form-group col-md-3 mb-3">
                 <label for="manager" class="col-form-label-sm">담당자</label>
@@ -107,21 +245,21 @@
         	</div>
 		</div>
 		<div class="mb-3"> 
-        	<label for="cutomerMemo" class="col-form-label-sm">메모</label>
-			<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="3"></textarea>
+        	<label for="managerMemo" class="col-form-label-sm">담당자 메모</label>
+			<textarea class="form-control form-control-sm" id="managerMemo" aria-label="With textarea" rows="3"></textarea>
 		</div>                                                 
   		<br>
   		<br>
   		<div class="form-row">
 			<div class="col-md-5 mb-3">&nbsp;</div>
+		  	<div class="col-md-3 mb-3">
+		  		<button class="btn btn-primary btn-md btn-block" type="button" id="saveNreg">미리보기</button>
+		  	</div>
 			<div class="col-md-2 mb-3">
 		  		<button  class="btn btn-primary btn-md btn-block" type="button" id="save">저장</button>
 		  	</div>
-		  	<div class="col-md-3 mb-3">
-		  		<button class="btn btn-primary btn-md btn-block" type="button" id="saveNreg">저장 후 직무등록</button>
-		  	</div>
 		  	<div class="col-md-2 mb-3">
-		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/business/project/main.do'">취소</button>
+		  		<button class="btn btn-outline-secondary btn-md btn-block" type="button" onclick="javascript: location.href = '/recruit/posting/main.do'">취소</button>
 		  	</div>
 		</div>
   	</form>
@@ -174,12 +312,6 @@ var companyList = [//'네이년','네이놈',
 		COMMON.autoCompleteInput('company', companyList, function() {
 			var company = companyList.filter(function (value) {
 		        return (value == $('#company').val());
-		    });
-			return company.length == 1;
-		});
-		COMMON.autoCompleteInput('mainCompany', companyList, function() {
-			var company = companyList.filter(function (value) {
-		        return (value == $('#mainCompany').val());
 		    });
 			return company.length == 1;
 		});
@@ -240,55 +372,7 @@ function regProject(flag) {
 		param.companyStaffSeq = null;
 	}
 	
-	if ($('#mainCompany').val() != '') {
-		var mainCompany = companyList.filter(function (value) {
-	        return (value == $('#mainCompany').val());
-	    });
-		if (mainCompany.length != 1) {
-			alert('수행사 정보를 다시 확인 해주세요.');
-			return false;
-		}
-		param.mainCompanySeq = companyInfos[mainCompany[0]];
-
-		if ($('#mainCompanyManager').val() != '') {
-			param.mainCompanyStaffSeq = $('#mainCompanyManager').val();
-		} else {
-			param.mainCompanyStaffSeq = null;
-		}
-	} else {
-		param.mainCompanySeq = null;
-	}
-
-	
 	param.projectName = $('#projectName').val();
-	
-	if ( $('#startDay').val() != '') {
-		if ( $('#startYear').val() == '' || $('#startMonth').val() == '') {
-			alert('시작 년도. 월을 입력해 주세요.');
-			return false;
-		}
-	}
-	
-	if ( $('#startMonth').val() != '' ) {
-		if ( $('#startYear').val() == '') {
-			alert('시작 년도. 월을 입력해 주세요.');
-			return false;
-		}
-	}
-	
-	if ( $('#endDay').val() != '') {
-		if ( $('#endYear').val() == '' || $('#endMonth').val() == '') {
-			alert('종료 년도. 월을 입력해 주세요.');
-			return false;
-		}
-	}
-	
-	if ( $('#endMonth').val() != '' ) {
-		if ( $('#endYear').val() == '') {
-			alert('종료 년도. 월을 입력해 주세요.');
-			return false;
-		}
-	}
 	
 	param.startYear = $('#startYear').val();
 	param.startMonth = $('#startMonth').val();

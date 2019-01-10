@@ -2,7 +2,6 @@ package com.sierp.web.domain.recruit.model;
 
 import java.util.Date;
 
-import com.sierp.web.domain.common.constant.RecruitContractUnitType;
 import com.sierp.web.domain.common.constant.RecruitType;
 import com.sierp.web.domain.common.constant.SiGunGuType;
 import com.sierp.web.domain.common.constant.SidoType;
@@ -70,7 +69,6 @@ public class JobInfo {
 	private Integer needFreeGradeValue;	//FreelancerGrade 참고!!!!  0일 경우 경력으로 구분
 	private Integer needWorkYear;		//필요 경력 
 	
-	private RecruitContractUnitType recruitContractUnitType;	//연 - 월 계약 타입
 	private int recruitContractUnitValue;	//계약 단위
 	
 	private Integer displayPriceMin;	
