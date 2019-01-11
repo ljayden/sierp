@@ -59,6 +59,13 @@ public class BusinessProjectController {
 		return "business/project/companyProjectList";
 	}
 
+	@RequestMapping(value = "/getCompanyProjectListAjax", method = {RequestMethod.POST})
+	@ResponseBody
+	public JsonResult getCompanyProjectListAjax(Model model, CustomerManager manager, ProjectSearchRequest request) {
+		
+		return JsonResults.grid(request, searchService.getProjectList(request, manager.getCustomerSeq()));
+	}
+	
 	@RequestMapping(value = "/registProject", method = RequestMethod.GET)
 	public String registFreelancer(Model model, CustomerManager manager, @RequestParam(value = "companySeq", required = false) Integer companySeq) {
 		

@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 public class ProjectSearchRequest extends Pager {
 	
 	private Integer companySeq;
+	private Integer projectSeq;
 	private String companyName;
 	private String projectName;
 

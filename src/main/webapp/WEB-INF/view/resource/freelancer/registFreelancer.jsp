@@ -259,6 +259,7 @@
         	<div class="form-group col-md-3 mb-3">
                 <label for="manager" class="col-form-label-sm">담당자</label>
                 <select class="custom-select input-group custom-select-sm d-block" id="manager">
+                	<option value="">미정</option>
                 	<c:forEach var="manager" items="${ managerList }" >
                 		<c:if test="${ sessionScope.customerManager.id eq manager.id }"><option value="${ manager.id }" selected="selected">${ manager.name }</option></c:if>
                 		<c:if test="${ sessionScope.customerManager.id ne manager.id }"><option value="${ manager.id }">${ manager.name }</option></c:if>

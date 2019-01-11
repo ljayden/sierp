@@ -1,5 +1,8 @@
 package com.sierp.web.result;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Maps;
 import com.sierp.web.result.exception.define.ExceptionDefinition;
 import com.sierp.web.result.exception.define.ExceptionDefinitions;
 import com.sierp.web.result.exception.define.HasCode;
@@ -43,6 +47,15 @@ public class JsonResults {
         return successResult;
     }
     
+	public static JsonResult grid(Pager pager, List<?> resultList) {
+		
+		Map<String, Object> resultMap = Maps.newHashMap();
+		
+		resultMap.put("pager", pager);
+		resultMap.put("list", resultList);
+		return success(resultMap);
+	}
+	
     /**
      * 실패 응답 생성
      */

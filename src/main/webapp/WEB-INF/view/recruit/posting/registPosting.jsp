@@ -38,7 +38,7 @@
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
         	<div class="form-group col-md-2 mb-3">
-        		<label for="companyManager" class="col-form-label-sm">담당자</label>
+        		<label for="companyManager" class="col-form-label-sm">담당자<span class="text-muted">(Optional)</span></label>
         		<select class="custom-select custom-select-sm d-block w-100" id="companyManager">
         		</select>
         	</div>
@@ -52,17 +52,21 @@
                 </select>
         	</div>
         	<div class="form-group col-md-2 mb-3"></div>
-            <div class="form-group col-md-6 mb-3 ">
-              	<label for="project" class="col-form-label-sm">프로젝트1<span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control form-control-sm w-75 float-left " id="project">
-                <button type="button" class="btn btn-outline-primary btn-sm float-left ml-2" data-toggle="modal" data-target="#staffAddModal" id="staffAddModalBtn">찾아보기</button>
+            <div class="form-group col-md-7 mb-3 ">
+              	<label for="project" class="col-form-label-sm">프로젝트<span class="text-muted">(Optional)</span></label>
+              	<div>
+	                <input type="text" class="form-control form-control-sm w-75 float-left " id="project" readonly="readonly">
+	                <input type="hidden" id="projectSeq" value="">
+	                <button type="button" class="btn btn-outline-secondary btn-sm float-left ml-2"   id="deleteProjectBtn"><b>&times;</b></button>
+	                <button type="button" class="btn btn-outline-primary btn-sm float-left ml-2" data-toggle="modal" data-target="#projectFindModal" id="projectFindModalBtn">찾아보기</button>
+              	</div>
         	</div>
 		</div>
 		
     	<div class="form-row">
         	<div class="form-group col-md-2 mb-3">
-                <label for="recruitType" class="col-form-label-sm">채용구분 </label>
-                <select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="recruitType" required>
+                <label for="recruitType" class="col-form-label-sm">채용 구분 </label>
+                <select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="recruitType">
                 	<mt:enumOptions enumClass="RecruitType"></mt:enumOptions>
                 </select>
         	</div>
@@ -77,7 +81,7 @@
                	</select>
         	</div>
         	<div class="form-group col-md-2 mb-3">
-                <label for="recruitContractUnitValue" class="col-form-label-sm">계약 단위 </label>
+                <label for="recruitContractUnitValue" class="col-form-label-sm">계약 단위<span class="text-muted">(Optional)</span> </label>
 				<select class="custom-select custom-select-sm d-block w-100" id="recruitContractUnitValue">
 					<option>없음</option>
 	                <c:forEach var="monthVal" begin="1" end="60" step="1">
@@ -86,7 +90,7 @@
                	</select>
         	</div>
         	<div class="form-group col-md-6 mb-3">
-                <label for="rewardType" class="col-form-label-sm">보상 정보 </label>
+                <label for="rewardType" class="col-form-label-sm">보상 정보<span class="text-muted">(Optional)</span> </label>
                 <div>
 					<select class="custom-select custom-select-sm d-block w-25 float-left"  id="rewardType" required>
 	                	<mt:enumOptions enumClass="RewardType" emptyValueName="없음" selectedValue="MONTH"></mt:enumOptions>
@@ -160,7 +164,7 @@
 		<div class="form-row">
         	<div class="form-group col-md-12 mb-3">
         		<label for="projectName" class="col-form-label-sm">필수 조건</label>
-		       	<div class="mb-2 input-group" id="skillSets"></div>
+		       	<div class="mb-2 input-group rounded" id="needs" style="background-color: #F5F5F5; min-height: 40px"></div>
 				<div class="mb-3" style="text-align: right">
 					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
 				</div>
@@ -169,7 +173,7 @@
 		<div class="form-row">
         	<div class="form-group col-md-12 mb-3">
         		<label for="projectName" class="col-form-label-sm">우대 조건</label>
-		       	<div class="mb-2 input-group" id="skillSets"></div>
+		       	<div class="mb-2 input-group rounded" id="prefers" style="background-color: #F5F5F5; min-height: 40px"></div>
 				<div class="mb-3" style="text-align: right">
 					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
 				</div>
@@ -177,8 +181,8 @@
         </div>
 		
 		<div class="mb-3"> 
-        	<label for="recruitInfo" class="col-form-label-sm">채용 정보</label>
-			<textarea class="form-control form-control-sm" id="recruitInfo" aria-label="With textarea" rows="3"></textarea>
+        	<label for="recruitInfo" class="col-form-label-sm">채용 정보<span class="text-muted">(Optional)</span></label>
+			<textarea class="form-control form-control-sm" id="recruitInfo" aria-label="With textarea" rows="4"></textarea>
 		</div>
 		
 		
@@ -187,7 +191,7 @@
 		<h6><b>근무 정보</b></h6>
 		<div class="form-row">
 			<div class="form-group col-md-2 mb-3">
-                <label for="workSido" class="col-form-label-sm">근무지</label>
+                <label for="workSido" class="col-form-label-sm">근무지<span class="text-muted">(Optional)</span></label>
                 <select class="custom-select custom-select-sm d-block w-100" id="workSido" required onchange="javascript: getSiGunGuTypeReg('workSido','workSiGunGu');">
 				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
 			  	</select>
@@ -208,18 +212,18 @@
 		
 		<div class="form-row">
         	<div class="form-group col-md-8 mb-3">
-                <label for="projectName" class="col-form-label-sm">근무 형태 </label>
+                <label for="projectName" class="col-form-label-sm">근무 형태</label>
                 <div>
 		           	<div class="custom-control custom-checkbox custom-control-inline">
 						<input type="checkbox" id="officeWorkYn"  value="Y" class="custom-control-input" checked="checked">
 						<label class="custom-control-label custom-control-label-sm" for="officeWorkYn">상주</label>
 					</div>
 					<div class="custom-control custom-checkbox custom-control-inline">
-				 		<input type="checkbox" id="officeHomeWorkYn"  value="Y" class="custom-control-input" checked="checked">
+				 		<input type="checkbox" id="officeHomeWorkYn"  value="Y" class="custom-control-input">
 				 		<label class="custom-control-label custom-control-label-sm"  for="officeHomeWorkYn">반상주</label>
 					</div>
 					<div class="custom-control custom-checkbox custom-control-inline">
-				 		<input type="checkbox" id="homeWorkYn"   value="Y" class="custom-control-input" checked="checked">
+				 		<input type="checkbox" id="homeWorkYn"   value="Y" class="custom-control-input">
 				 		<label class="custom-control-label custom-control-label-sm"  for="homeWorkYn">재택 가능</label>
 					</div>
 				</div>
@@ -228,7 +232,7 @@
 		
 		<div class="mb-3"> 
         	<label for="jobInfo" class="col-form-label-sm">직무 안내</label>
-			<textarea class="form-control form-control-sm" id="jobInfo" aria-label="With textarea" rows="3"></textarea>
+			<textarea class="form-control form-control-sm" id="jobInfo" aria-label="With textarea" rows="4"></textarea>
 		</div>
 
 		<br>
@@ -237,6 +241,7 @@
         	<div class="form-group col-md-3 mb-3">
                 <label for="manager" class="col-form-label-sm">담당자</label>
                 <select class="custom-select input-group custom-select-sm d-block" id="manager">
+                	<option value="">미정</option>
                 	<c:forEach var="manager" items="${ managerList }" >
                 		<c:if test="${ sessionScope.customerManager.id eq manager.id }"><option value="${ manager.id }" selected="selected">${ manager.name }</option></c:if>
                 		<c:if test="${ sessionScope.customerManager.id ne manager.id }"><option value="${ manager.id }">${ manager.name }</option></c:if>
@@ -253,7 +258,7 @@
   		<div class="form-row">
 			<div class="col-md-5 mb-3">&nbsp;</div>
 		  	<div class="col-md-3 mb-3">
-		  		<button class="btn btn-primary btn-md btn-block" type="button" id="saveNreg">미리보기</button>
+		  		<button class="btn btn-primary btn-md btn-block" type="button" id="preview">미리보기</button>
 		  	</div>
 			<div class="col-md-2 mb-3">
 		  		<button  class="btn btn-primary btn-md btn-block" type="button" id="save">저장</button>
@@ -264,6 +269,45 @@
 		</div>
   	</form>
   	</div>
+  	
+<div class="modal fade" id="projectFindModal" tabindex="-1" role="dialog" aria-labelledby="projectFindModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+     		<div class="modal-header  text-white bg-info">
+        		<h5 class="modal-title" id="projectFindModalLabel"><b>프로젝트 찾기</b></h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      		</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">프로젝트를 선택해 주세요.</span>
+						</div>
+						<div class="card-body">
+							<table class="table h3 small text-center">
+								<thead class="thead-light" style="borde : 1px">
+								    	<tr>
+								      		<th scope="col">진행상태</th>
+								      		<th scope="col" class="">기간</th>
+								      		<th scope="col">프로젝트명</th>
+								      		<th scope="col">수행사</th>
+								      		<th scope="col">위치</th>
+								      		<th scope="col">구인</th>
+								    	</tr>
+							  	</thead>
+							  	<tbody  id="projectList">
+								</tbody>
+							</table>	
+						</div>
+					</div> 
+  				</div>
+			</div>
+    		<div class="modal-footer">
+        		<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
+      		</div>
+    	</div>
+  	</div>
+</div>  	
 </main>
 
 
@@ -287,6 +331,10 @@ var companyList = [//'네이년','네이놈',
 
 	window.addEventListener('load', function() {
 		
+		$('#preview').bind('click', function(event) {
+
+		});
+		
 		$('#save').bind('click', function(event) {
 			var form = document.getElementById('regForm');
 		  	if (form.checkValidity() === false) {
@@ -294,20 +342,63 @@ var companyList = [//'네이년','네이놈',
 		        event.stopPropagation();
 		        form.classList.add('was-validated');
 		    } else {
-		    	regProject(false);
+		    	regPosting();
 		    }
 		});
 		
-		$('#saveNreg').bind('click', function(event) {
-			var form = document.getElementById('regForm');
-		  	if (form.checkValidity() === false) {
-		    	event.preventDefault();
-		        event.stopPropagation();
-		        form.classList.add('was-validated');
-		    } else {
-		    	regProject(true);
-		    }
+		$('#deleteProjectBtn').bind('click', function(event) {
+			$('#project').val('');
+			$('#projectSeq').val('');
 		});
+		
+	    $('#projectFindModal').on('shown.bs.modal', function () {
+	    	$('#projectFindModalBtn').trigger('focus');
+	    	$('#projectList').html('');
+	    	
+ 			var company = companyList.filter(function (value) {
+		        return (value == $('#company').val());
+		    });
+			if (company.length != 1) {
+		    	$('#projectFindModal').modal('hide');
+				alert('업체정보를 다시 확인 해주세요.');
+				return false;
+			}
+			
+			var param = {}
+			param.companySeq = companyInfos[company[0]];
+			param.status = ['READY','ING'];
+			
+ 			COMMON.ajax({
+			    url : '/business/project/getCompanyProjectListAjax.json',
+			    data : JSON.stringify(param),
+			    successHandler : function(data){
+			    	
+			    	var pageInf = data.result.pager;
+			    	var list = data.result.list;
+			    	$(list).each(function(project) {
+			    		
+			    		var html = '<tr>' +  '<th>' + project.statusName  + '</th>' + '<td>' + project.statusName  + '</td>' + 
+			    	});
+			    	//TODO -다음에는 페이지 처리
+			    	
+			 	 
+			    	
+			    		
+			      		<>${ project.startYmd } ~ ${ project.endYmd }</>
+			      		<td><a href="/business/project/viewProject.do?projectSeq=${ project.projectSeq }">${ project.projectName }</a></td>
+			      		<td><a href="/business/company/viewCompany.do?companySeq=${ project.mainCompanySeq}">${ project.mainCompanyName }</a></td>
+			      		<td>${ project.sido.description }/${ project.sigungu.description }</td>
+			      		<td><b>4건</b></td>
+			    	</tr>
+ 
+	<small class="d-block text-right mt-3">총 ${ request.totalCount } 건이 조회되었습니다</small>
+			    	
+			    }
+			});
+	    	 
+	    })
+	    
+		
 		
 		COMMON.autoCompleteInput('company', companyList, function() {
 			var company = companyList.filter(function (value) {
@@ -321,6 +412,10 @@ var companyList = [//'네이년','네이놈',
 			$('#company').val($('#selectedCompanyName').val());
 			$('#company').css('background-color','#bfeffb');
 			$('#company').attr('isMatchItem', true);
+			
+			$('#project').val('');
+			$('#projectSeq').val('');
+			
 			companyChange('company');
 		}
 	}, false);
@@ -355,7 +450,7 @@ function companyChange(id) {
 	}
 }
 
-function regProject(flag) {
+function regPosting() {
 	var param = {};
 	
 	var company = companyList.filter(function (value) {
@@ -401,24 +496,15 @@ function regProject(flag) {
     event.stopPropagation();
  
 	COMMON.ajax({
-	    url : '/business/project/registProjectProc.json',
+	    url : '/recruit/posting/registPostingProc.json',
 	    data : JSON.stringify(param),
 	    successHandler : function(data){
 	    	
-	    	if (flag) {
-	    		alert('프로젝트를 등록하였습니다. 직무 등록 페이지로 이동합니다.');
-			    location.href = '/business/project/main.do';
-	    	} else {
-	 	    	alert('프로젝트를 등록하였습니다.');
-		       	location.href = '/business/project/main.do';
-	    	}
-
+	    	alert('채용공고를 등록하였습니다.');
+			location.href = '/recruit/posting/main.do';
 	    }
 	});
 }
 
-function getCompanyManagerList(selectId, companySeq) {
-
-	
-}
+//TODO 등록 후에 프리랜서 검색으로 이동해서 검색되고.... 검색 조건 체크하는 항목
 </script>

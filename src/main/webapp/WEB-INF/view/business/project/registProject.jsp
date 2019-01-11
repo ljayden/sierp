@@ -375,8 +375,4 @@ function regProject(flag) {
 	});
 }
 
-function getCompanyManagerList(selectId, companySeq) {
-
-	
-}
 </script>

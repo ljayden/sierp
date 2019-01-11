@@ -91,7 +91,7 @@
  	</div>
 	</form>
   	
-  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">공고 등록하기</button>
+  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">채용공고 등록하기</button>
   	
   	<div class="mt-2" id="listDiv">
   	</div>

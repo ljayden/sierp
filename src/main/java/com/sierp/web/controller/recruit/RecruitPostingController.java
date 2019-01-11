@@ -62,6 +62,9 @@ public class RecruitPostingController {
 		if (companySeq != null) {
 			model.addAttribute("selectedCompany", companyDao.selectCompanyBySeq(companySeq));
 		}
+		if (projectSeq != null) {
+			model.addAttribute("selectedProject", projectDao.selectProjectBySeq(projectSeq));
+		}
 		model.addAttribute("companyList", companyDao.selectCompanyList(manager.getCustomerSeq()));
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		
@@ -72,6 +75,7 @@ public class RecruitPostingController {
 	@RequestMapping(value = "/registPostingProc", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult registPostingProc(CustomerManager manager, @RequestBody @Valid ProjectRegisterRequest request) {
+		
 		
 		 
 		return JsonResults.success(1);
