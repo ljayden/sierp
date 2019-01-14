@@ -36,4 +36,22 @@ public class ProjectSearchService {
 			return Lists.newArrayList();
 		}
 	}
+	
+	
+	public List<ProjectSearch> getCompanyProjectList(ProjectSearchRequest request, int customerSeq) {
+		
+		if (request.getStatus() == null || request.getStatus().size() == 0 || request.getStatus().size() == 3) {
+			request.setStatus(Lists.newArrayList());
+		}
+		
+		Date now = new Date();
+		
+		projectDao.selectProjectListCount(customerSeq, request.getCompanySeq(), null, null, request.getStatus(), null, null, null, request, now);
+
+		if (request.isEnoughListQuery()) {
+			return projectDao.selectProjectSimpleList(customerSeq, request.getCompanySeq(), request.getStatus(), request, now);
+		} else {
+			return Lists.newArrayList();
+		}
+	}
 }

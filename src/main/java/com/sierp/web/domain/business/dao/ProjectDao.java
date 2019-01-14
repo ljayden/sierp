@@ -38,6 +38,16 @@ public class ProjectDao {
 		params.put("projectSeq", projectSeq);
 		return sql.selectOne(MAPPER_NAMESPACE + "selectProjectJoinBySeq", params);
 	}
+
+	public List<ProjectSearch> selectProjectSimpleList(int customerSeq, Integer companySeq, List<String> statusList, Pager pager, Date now) {
+	
+		Map<String, Object> params = pager.initParamMapWithPager();
+		params.put("companySeq", companySeq);
+		params.put("customerSeq", customerSeq);
+		params.put("statusList", statusList);
+		params.put("now", now);
+		return sql.selectList(MAPPER_NAMESPACE + "selectProjectSimpleList", params);
+	}
 	
 	public void selectProjectListCount(int customerSeq, Integer companySeq, String companyName, String projectName, List<String> statusList,
 										SidoType sido, SiGunGuType sigungu, String mainManagerId, Pager pager, Date now) {

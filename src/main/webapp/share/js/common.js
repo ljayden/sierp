@@ -1,24 +1,42 @@
 var PER_PAGE = 10;
 var ajaxRequests = {}
 
+var staticSigunguList = new Array();
+staticSigunguList.push({'code':'YANGCHEONGU', 'sido':'SEOUL', 'description':'양천구'});
+staticSigunguList.push({'code':'SUNGNAM_BUNDANG', 'sido':'GYUNGGI', 'description':'양천구'});
+
+
+function getSigungu(sidoCode) {
+	
+	var sigunguListOfSido = staticSigunguList.filter(function (sigungu) {
+        return (sigungu.sido == sidoCode);
+    });
+	return sigunguListOfSido ? sigunguListOfSido: new Array();	
+}
+
 function getSiGunGuTypeSearch(sidoElementId, sigunguElementId) {
 	if ($('#' + sidoElementId).val() == '') {
 		$('#' + sigunguElementId + ' option').remove();
     	$('#' + sigunguElementId).append('<option value="">전체</option>');
     	
 	} else {
-		
-		COMMON.ajax({
-		    url : '/common/getSiGunGu.json',
-		    data : JSON.stringify({ sido : $('#' + sidoElementId).val()}),
-		    successHandler : function(data){
-		    	$('#' + sigunguElementId +'  option').remove();
-		    	$('#' + sigunguElementId).append('<option value="">전체</option>')
-		    	$(data.result).each(function(i, sigungu) {
-		    		$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
-		    	});
-		    }
-		});
+		var sigunguList = getSigungu($('#' + sidoElementId).val());
+		$('#' + sigunguElementId +'  option').remove();
+		$('#' + sigunguElementId).append('<option value="">전체</option>')
+		$(sigunguList).each(function(i, sigungu) {
+	    	$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+	    });
+//		COMMON.ajax({
+//		    url : '/common/getSiGunGu.json',
+//		    data : JSON.stringify({ sido : $('#' + sidoElementId).val()}),
+//		    successHandler : function(data){
+//		    	$('#' + sigunguElementId +'  option').remove();
+//		    	$('#' + sigunguElementId).append('<option value="">전체</option>')
+//		    	$(data.result).each(function(i, sigungu) {
+//		    		$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+//		    	});
+//		    }
+//		});
 	}
 }
 
@@ -28,24 +46,38 @@ function getSiGunGuTypeReg(sidoElementId, sigunguElementId, selectedValue) {
     	$('#' + sigunguElementId).append('<option value="">시/도를 선택해 주세요.</option>');
     	
 	} else {
-		
-		COMMON.ajax({
-		    url : '/common/getSiGunGu.json',
-		    data : JSON.stringify({ sido : $('#' + sidoElementId).val()}),
-		    successHandler : function(data){
-		    	$('#' + sigunguElementId +'  option').remove();
-		    	$('#' + sigunguElementId).append('<option value="">시/군/구</option>')
-		    	$(data.result).each(function(i, sigungu) {
-		    		$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
-		    	});
-		    	
-		    	if (selectedValue) {
-		    		$('#' + sigunguElementId).val(selectedValue);
-		    	}
-		    }
+		var sigunguList = getSigungu($('#' + sidoElementId).val());
+		$('#' + sigunguElementId +'  option').remove();
+		$('#' + sigunguElementId).append('<option value="">시/군/구</option>')
+		$(data.result).each(function(i, sigungu) {
+			$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
 		});
+		    	
+		if (selectedValue) {
+			$('#' + sigunguElementId).val(selectedValue);
+		}
 	}
 }
+			
+//		COMMON.ajax({
+//		    url : '/common/getSiGunGu.json',
+//		    data : JSON.stringify({ sido : $('#' + sidoElementId).val()}),
+//		    successHandler : function(data){
+//		    	$('#' + sigunguElementId +'  option').remove();
+//		    	$('#' + sigunguElementId).append('<option value="">시/군/구</option>')
+//		    	$(data.result).each(function(i, sigungu) {
+//		    		$('#' + sigunguElementId).append('<option value="' + sigungu.code + '">' + sigungu.description + '</option>')
+//		    	});
+//		    	
+//		    	if (selectedValue) {
+//		    		$('#' + sigunguElementId).val(selectedValue);
+//		    	}
+//		    }
+//		});
+
+
+
+
 
 var COMMON = {
  

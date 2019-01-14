@@ -36,6 +36,7 @@ public class ProjectSearch {
 	
 	private SidoType sido;
 	private SiGunGuType sigungu;
+	private String detailAddr;
 	
 	private Date now = new Date();
 	

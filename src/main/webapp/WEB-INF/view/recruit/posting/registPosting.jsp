@@ -38,7 +38,7 @@
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
         	<div class="form-group col-md-2 mb-3">
-        		<label for="companyManager" class="col-form-label-sm">담당자<span class="text-muted">(Optional)</span></label>
+        		<label for="companyManager" class="col-form-label-sm">업체 담당자<span class="text-muted">(Optional)</span></label>
         		<select class="custom-select custom-select-sm d-block w-100" id="companyManager">
         		</select>
         	</div>
@@ -58,7 +58,7 @@
 	                <input type="text" class="form-control form-control-sm w-75 float-left " id="project" readonly="readonly">
 	                <input type="hidden" id="projectSeq" value="">
 	                <button type="button" class="btn btn-outline-secondary btn-sm float-left ml-2"   id="deleteProjectBtn"><b>&times;</b></button>
-	                <button type="button" class="btn btn-outline-primary btn-sm float-left ml-2" data-toggle="modal" data-target="#projectFindModal" id="projectFindModalBtn">찾아보기</button>
+	                <button type="button" class="btn btn-outline-primary btn-sm float-left ml-2"  id="projectFindModalBtn">찾아보기</button>
               	</div>
         	</div>
 		</div>
@@ -71,8 +71,8 @@
                 </select>
         	</div>
 			<div class="form-group col-md-2 mb-3">
-                <label for="recruitManCount" class="col-form-label-sm">채용 수</label>
-				<select class="custom-select custom-select-sm d-block w-100" id="recruitManCount">
+                <label for="recruitManCount" class="col-form-label-sm" >채용 수</label>
+				<select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="recruitManCount">
                		<option value="">0 명</option>
                		<option value="">00 명</option>
 	                <c:forEach var="manCount" begin="1" end="10" step="1">
@@ -92,9 +92,9 @@
         	<div class="form-group col-md-6 mb-3">
                 <label for="rewardType" class="col-form-label-sm">보상 정보<span class="text-muted">(Optional)</span> </label>
                 <div>
-					<select class="custom-select custom-select-sm d-block w-25 float-left"  id="rewardType" required>
+					<select class="custom-select custom-select-sm d-block w-25 float-left"  id="rewardType" onchange="javascript : changeRewardType();">
 	                	<mt:enumOptions enumClass="RewardType" emptyValueName="없음" selectedValue="MONTH"></mt:enumOptions>
-	                </select>
+	                </select> 
 	                <input type="text" class="form-control form-control-sm w-25 float-left ml-2" id="rewardMinPrice" placeholder="만원 이상">
 	                <div class="float-left ">&nbsp; ~ &nbsp;</div>
 	                <input type="text" class="form-control form-control-sm w-25 float-left" id="rewardMaxPrice" placeholder="만원 이하">
@@ -102,6 +102,55 @@
         	</div>
 		</div>  
 
+		<br>
+		<h6><b>근무 정보</b></h6>
+		<div class="form-row">
+			<div class="form-group col-md-2 mb-3">
+                <label for="workSido" class="col-form-label-sm">근무지<span class="text-muted">(Optional)</span></label>
+                <select class="custom-select custom-select-sm d-block w-100" id="workSido" required onchange="javascript: getSiGunGuTypeReg('workSido','workSiGunGu');">
+				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
+			  	</select>
+			  	<div class="invalid-feedback" style="width: 100%;">시/도를 선택해 주세요.</div>
+			</div>
+			<div class="form-group col-md-3 mb-3">
+                <label for="workSiGunGu" class="col-form-label-sm">&nbsp;</label>
+                <select class="custom-select custom-select-sm d-block w-100" id="workSiGunGu" required>
+                	<option value="">시/도를 선택해 주세요.</option>
+			  	</select>
+			  	<div class="invalid-feedback" style="width: 100%;">시/군/구를 선택해 주세요.</div>
+			</div>
+			<div class="form-group col-md-7 mb-3">
+                <label for="workDetailAddr" class="col-form-label-sm">상세 근무지<span class="text-muted">(Optional)</span></label>
+ 				<input type="text" class="form-control form-control-sm" id="workDetailAddr" placeholder="ex: 강남구청역 푸르지오">
+			</div>
+		</div>
+		
+		<div class="form-row">
+        	<div class="form-group col-md-8 mb-3">
+                <label for="projectName" class="col-form-label-sm">근무 형태</label>
+                <div>
+		           	<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" id="officeWorkYn"  value="Y" class="custom-control-input" checked="checked">
+						<label class="custom-control-label custom-control-label-sm" for="officeWorkYn">상주</label>
+					</div>
+					<div class="custom-control custom-checkbox custom-control-inline">
+				 		<input type="checkbox" id="officeHomeWorkYn"  value="Y" class="custom-control-input">
+				 		<label class="custom-control-label custom-control-label-sm"  for="officeHomeWorkYn">반상주</label>
+					</div>
+					<div class="custom-control custom-checkbox custom-control-inline">
+				 		<input type="checkbox" id="homeWorkYn"   value="Y" class="custom-control-input">
+				 		<label class="custom-control-label custom-control-label-sm"  for="homeWorkYn">재택 가능</label>
+					</div>
+				</div>
+        	</div>
+		</div>  
+		
+		<div class="mb-3"> 
+        	<label for="jobInfo" class="col-form-label-sm">직무 안내</label>
+			<textarea class="form-control form-control-sm" id="jobInfo" aria-label="With textarea" rows="4"></textarea>
+		</div>
+		
+		
 		<br>
 		<br>
 		<h6><b>채용 조건</b></h6>
@@ -185,55 +234,6 @@
 			<textarea class="form-control form-control-sm" id="recruitInfo" aria-label="With textarea" rows="4"></textarea>
 		</div>
 		
-		
-		<br>
-		<br>
-		<h6><b>근무 정보</b></h6>
-		<div class="form-row">
-			<div class="form-group col-md-2 mb-3">
-                <label for="workSido" class="col-form-label-sm">근무지<span class="text-muted">(Optional)</span></label>
-                <select class="custom-select custom-select-sm d-block w-100" id="workSido" required onchange="javascript: getSiGunGuTypeReg('workSido','workSiGunGu');">
-				    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 "/>
-			  	</select>
-			  	<div class="invalid-feedback" style="width: 100%;">시/도를 선택해 주세요.</div>
-			</div>
-			<div class="form-group col-md-3 mb-3">
-                <label for="workSiGunGu" class="col-form-label-sm">&nbsp;</label>
-                <select class="custom-select custom-select-sm d-block w-100" id="workSiGunGu" required>
-                	<option value="">시/도를 선택해 주세요.</option>
-			  	</select>
-			  	<div class="invalid-feedback" style="width: 100%;">시/군/구를 선택해 주세요.</div>
-			</div>
-			<div class="form-group col-md-7 mb-3">
-                <label for="workDetailAddr" class="col-form-label-sm">상세 근무지<span class="text-muted">(Optional)</span></label>
- 				<input type="text" class="form-control form-control-sm" id="workDetailAddr" placeholder="ex: 강남구청역 푸르지오">
-			</div>
-		</div>
-		
-		<div class="form-row">
-        	<div class="form-group col-md-8 mb-3">
-                <label for="projectName" class="col-form-label-sm">근무 형태</label>
-                <div>
-		           	<div class="custom-control custom-checkbox custom-control-inline">
-						<input type="checkbox" id="officeWorkYn"  value="Y" class="custom-control-input" checked="checked">
-						<label class="custom-control-label custom-control-label-sm" for="officeWorkYn">상주</label>
-					</div>
-					<div class="custom-control custom-checkbox custom-control-inline">
-				 		<input type="checkbox" id="officeHomeWorkYn"  value="Y" class="custom-control-input">
-				 		<label class="custom-control-label custom-control-label-sm"  for="officeHomeWorkYn">반상주</label>
-					</div>
-					<div class="custom-control custom-checkbox custom-control-inline">
-				 		<input type="checkbox" id="homeWorkYn"   value="Y" class="custom-control-input">
-				 		<label class="custom-control-label custom-control-label-sm"  for="homeWorkYn">재택 가능</label>
-					</div>
-				</div>
-        	</div>
-		</div>  
-		
-		<div class="mb-3"> 
-        	<label for="jobInfo" class="col-form-label-sm">직무 안내</label>
-			<textarea class="form-control form-control-sm" id="jobInfo" aria-label="With textarea" rows="4"></textarea>
-		</div>
 
 		<br>
 		<br>
@@ -284,20 +284,20 @@
       						<span class="text-muted small">프로젝트를 선택해 주세요.</span>
 						</div>
 						<div class="card-body">
-							<table class="table h3 small text-center">
+							<table class="table h3 small text-center" >
 								<thead class="thead-light" style="borde : 1px">
 								    	<tr>
 								      		<th scope="col">진행상태</th>
 								      		<th scope="col" class="">기간</th>
 								      		<th scope="col">프로젝트명</th>
-								      		<th scope="col">수행사</th>
-								      		<th scope="col">위치</th>
-								      		<th scope="col">구인</th>
+								    		<th>선택</th>
 								    	</tr>
 							  	</thead>
 							  	<tbody  id="projectList">
 								</tbody>
-							</table>	
+							</table>
+							<div id="projectCountDiv">
+							</div>
 						</div>
 					</div> 
   				</div>
@@ -351,19 +351,21 @@ var companyList = [//'네이년','네이놈',
 			$('#projectSeq').val('');
 		});
 		
-	    $('#projectFindModal').on('shown.bs.modal', function () {
-	    	$('#projectFindModalBtn').trigger('focus');
-	    	$('#projectList').html('');
+		$('#projectFindModalBtn').bind('click', function(event) {
+			$('#projectFindModalBtn').trigger('focus');
+
 	    	
  			var company = companyList.filter(function (value) {
 		        return (value == $('#company').val());
 		    });
 			if (company.length != 1) {
-		    	$('#projectFindModal').modal('hide');
 				alert('업체정보를 다시 확인 해주세요.');
 				return false;
 			}
 			
+			$('#projectFindModal').modal('show');
+	    	$('#projectList').html('');
+	    	
 			var param = {}
 			param.companySeq = companyInfos[company[0]];
 			param.status = ['READY','ING'];
@@ -375,30 +377,24 @@ var companyList = [//'네이년','네이놈',
 			    	
 			    	var pageInf = data.result.pager;
 			    	var list = data.result.list;
-			    	$(list).each(function(project) {
-			    		
-			    		var html = '<tr>' +  '<th>' + project.statusName  + '</th>' + '<td>' + project.statusName  + '</td>' + 
-			    	});
+			    	var html = '';
+			    	if (list != null && list.length > 0) { 
+				    	$(list).each(function(i, project) {
+				    		
+				    		html += '<tr>' +  '<th>' + project.statusName  + '</th>' + '<td>' + project.startYmd + ' ~ ' + project.endYmd + '</td>' 
+				    		+ '<td>' + project.projectName + '</td><td><button type="button" class="btn btn-outline-primary btn-sm float-left ml-2"  onclick="javacript:selectProject(' 
+				    				+ project.projectSeq +', \'' + project.projectName +'\', \'' + project.sido +'\', \'' + project.sigungu +'\', \'' + project.detailAddr +'\')">선택</button></td></tr>'
+				    	});
+			    	} else {
+			    		html = '<tr class=""><td colspan="4">등록된 프로젝트가 없습니다.</td></tr>'
+			    	}
+					
+			    	$('#projectList').append(html);
+			    	$('#projectCountDiv').html('<small class="d-block text-right mt-3">총 ' + pageInf.totalCount + ' 건이 조회되었습니다</small>');
 			    	//TODO -다음에는 페이지 처리
-			    	
-			 	 
-			    	
-			    		
-			      		<>${ project.startYmd } ~ ${ project.endYmd }</>
-			      		<td><a href="/business/project/viewProject.do?projectSeq=${ project.projectSeq }">${ project.projectName }</a></td>
-			      		<td><a href="/business/company/viewCompany.do?companySeq=${ project.mainCompanySeq}">${ project.mainCompanyName }</a></td>
-			      		<td>${ project.sido.description }/${ project.sigungu.description }</td>
-			      		<td><b>4건</b></td>
-			    	</tr>
- 
-	<small class="d-block text-right mt-3">총 ${ request.totalCount } 건이 조회되었습니다</small>
-			    	
 			    }
 			});
-	    	 
-	    })
-	    
-		
+		});
 		
 		COMMON.autoCompleteInput('company', companyList, function() {
 			var company = companyList.filter(function (value) {
@@ -420,7 +416,40 @@ var companyList = [//'네이년','네이놈',
 		}
 	}, false);
 })();
- 
+
+function selectProject(projectSeq, projectName, sido, sigungu, detailAddr) {
+	$('#projectSeq').val(projectSeq);
+	$('#project').val(projectName);
+	$('#projectFindModal').modal('hide');
+	
+	$('#workSido').val('');
+	$('#workSiGunGu').val('');
+	$('#workDetailAddr').val('');
+	
+	if (sido && sido != 'null') {
+		$('#workSido').val(sido);
+		if (sigungu && sigungu != 'null') {
+			getSiGunGuTypeReg('workSido', 'workSiGunGu', sigungu);
+		}
+		
+		if (detailAddr && detailAddr != 'null') {
+			$('#workDetailAddr').val(detailAddr)
+		}
+	}
+}
+
+function changeRewardType() {
+	if ($('#rewardType option:selected').val() == '') {
+		$('#rewardMinPrice').val('');
+		$('#rewardMinPrice').prop('readonly', true);
+		$('#rewardMaxPrice').val('');
+		$('#rewardMaxPrice').prop('readonly', true);
+	} else {
+		$('#rewardMinPrice').prop('readonly', false);
+		$('#rewardMaxPrice').prop('readonly', false);	
+	}
+}
+
 function companyChange(id) {
 	
 	if ($('#' + id).val() && $('#' + id).val().length > 0) {

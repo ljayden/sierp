@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -50,6 +51,9 @@ public class JsonResults {
 	public static JsonResult grid(Pager pager, List<?> resultList) {
 		
 		Map<String, Object> resultMap = Maps.newHashMap();
+		
+		Pager pageInfo = new Pager();
+		BeanUtils.copyProperties(pager, pageInfo); 
 		
 		resultMap.put("pager", pager);
 		resultMap.put("list", resultList);

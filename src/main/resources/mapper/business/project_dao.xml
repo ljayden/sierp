@@ -28,7 +28,6 @@
 		WHERE	project_seq = #{projectSeq}
 	</select>
 	
-	
 	<select id="selectProjectListCount" parameterType="map" resultType="int">
 		SELECT 	count(*)
 		FROM	project p
@@ -40,6 +39,15 @@
 		SELECT  p.*,
 				(SELECT company_name FROM company WHERE company_seq = p.company_seq) as companyName,
 				(SELECT company_name FROM company WHERE company_seq = p.main_company_seq) as mainCompanyName
+		FROM	project p
+		
+	 	<where><include refid="projectSearchCondition"/></where>
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="selectProjectSimpleList" parameterType="map" resultType="com.sierp.web.domain.business.model.ProjectSearch">
+		SELECT  p.*,
+				(SELECT company_name FROM company WHERE company_seq = p.company_seq) as companyName
 		FROM	project p
 		
 	 	<where><include refid="projectSearchCondition"/></where>
