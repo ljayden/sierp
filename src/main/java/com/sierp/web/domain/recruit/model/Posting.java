@@ -21,7 +21,7 @@ public class Posting {
 	
 	private String posingTitle; //공고명
 	private PostingStatus status;
-	private String sitePostgYn;
+	private String sitePostYn;
 	
 	private Integer companySeq;			
 	private Integer companyStaffSeq;

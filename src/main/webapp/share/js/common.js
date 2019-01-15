@@ -2,8 +2,42 @@ var PER_PAGE = 10;
 var ajaxRequests = {}
 
 var staticSigunguList = new Array();
+staticSigunguList.push({'code':'GANGNAMGU', 'sido':'SEOUL', 'description':'강남구'});
+staticSigunguList.push({'code':'GANGDONGGU', 'sido':'SEOUL', 'description':'강동구'});
+staticSigunguList.push({'code':'GANGBUKGU', 'sido':'SEOUL', 'description':'강북구'});
+staticSigunguList.push({'code':'GANGSEOGU', 'sido':'SEOUL', 'description':'강서구'});
+staticSigunguList.push({'code':'GWANAKGU', 'sido':'SEOUL', 'description':'관악구'});
+staticSigunguList.push({'code':'GWANGJINGU', 'sido':'SEOUL', 'description':'광진구'});
+staticSigunguList.push({'code':'GUROGU', 'sido':'SEOUL', 'description':'구로구'});
+staticSigunguList.push({'code':'GEUMCHEONGU', 'sido':'SEOUL', 'description':'금천구'});
+staticSigunguList.push({'code':'NOWONGU', 'sido':'SEOUL', 'description':'노원구'});
+staticSigunguList.push({'code':'DOBONGGU', 'sido':'SEOUL', 'description':'도봉구'});
+staticSigunguList.push({'code':'DONGDAEMOONGU', 'sido':'SEOUL', 'description':'동대문구'});
+staticSigunguList.push({'code':'DONGJAKGU', 'sido':'SEOUL', 'description':'동작구'});
+staticSigunguList.push({'code':'MAPOGU', 'sido':'SEOUL', 'description':'마포구'});
+staticSigunguList.push({'code':'SEODAEMOONGU', 'sido':'SEOUL', 'description':'서대문구'});
+staticSigunguList.push({'code':'SEOCHOGU', 'sido':'SEOUL', 'description':'서초구'});
+staticSigunguList.push({'code':'SEONGDONGGU', 'sido':'SEOUL', 'description':'성동구'});
+staticSigunguList.push({'code':'SEONGBUKGU', 'sido':'SEOUL', 'description':'성북구'});
+staticSigunguList.push({'code':'SONGPAGU', 'sido':'SEOUL', 'description':'송파구'});
 staticSigunguList.push({'code':'YANGCHEONGU', 'sido':'SEOUL', 'description':'양천구'});
-staticSigunguList.push({'code':'SUNGNAM_BUNDANG', 'sido':'GYUNGGI', 'description':'양천구'});
+staticSigunguList.push({'code':'YEONGDEUNGPOGU', 'sido':'SEOUL', 'description':'영등포구'});
+staticSigunguList.push({'code':'YONGSANGU', 'sido':'SEOUL', 'description':'용산구'});
+staticSigunguList.push({'code':'EUNPYEONGGU', 'sido':'SEOUL', 'description':'은평구'});
+staticSigunguList.push({'code':'JONGNOGU  ', 'sido':'SEOUL', 'description':'종로구'});
+staticSigunguList.push({'code':'JUNGGU', 'sido':'SEOUL', 'description':'중구'});
+staticSigunguList.push({'code':'JUNGNANGGU', 'sido':'SEOUL', 'description':'중랑구'});
+
+
+staticSigunguList.push({'code':'GAPYEONGGUN', 'sido':'GYUNGGI', 'description':'가평군'});
+staticSigunguList.push({'code':'GOYANGSI_DUKYANGGU', 'sido':'GYUNGGI', 'description':'고양시 덕양구'});
+staticSigunguList.push({'code':'GOYANGSI_ILSANDONGGU', 'sido':'GYUNGGI', 'description':'고양시 일산동구'});
+staticSigunguList.push({'code':'GOYANGSI_ILSANSEOGU', 'sido':'GYUNGGI', 'description':'고양시 일산서구'});
+staticSigunguList.push({'code':'GWACHEONSI', 'sido':'GYUNGGI', 'description':'과천시'});
+staticSigunguList.push({'code':'GWANGMYEONGSI', 'sido':'GYUNGGI', 'description':'광명시'});
+staticSigunguList.push({'code':'GWANGJUSI', 'sido':'GYUNGGI', 'description':'광주시'});
+staticSigunguList.push({'code':'GURISI', 'sido':'GYUNGGI', 'description':'구리시'});
+
 
 
 function getSigungu(sidoCode) {

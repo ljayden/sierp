@@ -6,18 +6,17 @@
 <%@ taglib prefix="mt" uri="myTags" %>
 
 <div class="mb-3 float-right">
-   	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="javacript: location.href = '/business/project/registProject.do?companySeq=${param.companySeq}'">프로젝트 등록</button>
+   	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="javacript: location.href = '/recruit/posting/registPosting.do?companySeq=${param.companySeq}'">채용공고 등록</button>
 </div>
 	    	
 <table class="table h3 small text-center">
 	<thead class="thead-light" style="borde : 1px">
 	    	<tr>
 	      		<th scope="col">진행상태</th>
-	      		<th scope="col" class="">기간</th>
-	      		<th scope="col">프로젝트명</th>
-	      		<th scope="col">수행사</th>
-	      		<th scope="col">위치</th>
-	      		<th scope="col">구인</th>
+	      		<th scope="col" class="">채용구분</th>
+	      		<th scope="col">채용공고명</th>
+	      		<th scope="col">게시여부</th>
+	      		<th scope="col">담당자</th>
 	    	</tr>
   	</thead>
   	<tbody>

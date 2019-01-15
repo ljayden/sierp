@@ -91,7 +91,7 @@
 	        		<a class="nav-link active" id="nav-link-project" href="javascript:changeSubMenu('project')">프로젝트 정보</a>
 	      		</li>
 	      		<li class="nav-item">
-	        		<a class="nav-link" id="nav-link-notice" href="javascript:changeSubMenu('notice')">직무 &amp; 공고</a>
+	        		<a class="nav-link" id="nav-link-posting" href="javascript:changeSubMenu('posting')">채용 공고</a>
 	      		</li>
 	      		<li class="nav-item">
 	        		<a class="nav-link" id="nav-link-contract" href="javascript:changeSubMenu('contract')">계약 정보</a>
@@ -100,10 +100,6 @@
 	  	</div>
 	  	<div class="card-body p-0">
 	    	<h5 class="card-title"></h5>
-	    	<div class="mb-3 float-right">
-		    	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="javacript: registerCompanyProject(${company.companySeq})">프로젝트 등록</button>
-	    	</div>
-	    	
 		  	<div class="mt-2 p-2" id="listDiv">
 		  	</div>
 	  	</div>
@@ -342,10 +338,6 @@ function setCompanyStaffInfo(companyStaffSeq) {
 	});
 }
 
-function registerCompanyProject(companySeq) {
-	location.href = '/business/project/registProject.do?companySeq=' + companySeq;
-}
-
 function changeSubMenu(type, aTagObj) {
 	if (type == $('#subMeneTypeInput').val()) {
 		return;
@@ -359,8 +351,8 @@ function changeSubMenu(type, aTagObj) {
  	if (type == 'project'){
  		$('#searchForm').attr('action','/business/project/getCompanyProjectList.ldo');	
  		
- 	} else if (type == 'notice'){
- 		$('#searchForm').attr('action','/' + type);	
+ 	} else if (type == 'posting'){
+ 		$('#searchForm').attr('action','/recruit/posting/getCompanyPostingList.ldo');	
  		
  	} else {
  		$('#searchForm').attr('action','/' + type);		

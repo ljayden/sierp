@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sierp.web.controller.business.request.ProjectRegisterRequest;
 import com.sierp.web.controller.recruit.request.PostingSearchRequest;
+import com.sierp.web.controller.recruit.request.RecruitPostingRegisterRequest;
 import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.dao.ProjectDao;
 import com.sierp.web.domain.business.model.CustomerManager;
+import com.sierp.web.domain.common.constant.SkillSetType;
+import com.sierp.web.domain.common.dao.CommonDao;
+import com.sierp.web.domain.recruit.service.PostingRegisterService;
 import com.sierp.web.result.JsonResult;
 import com.sierp.web.result.JsonResults;
 
@@ -27,6 +30,9 @@ public class RecruitPostingController {
 	@Autowired CompanyDao companyDao;
 	@Autowired ProjectDao projectDao;
 	@Autowired CustomerDao customDao;
+	@Autowired CommonDao commonDao;
+	
+	@Autowired PostingRegisterService postingRegisterService;
 	
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String main() {
@@ -68,15 +74,18 @@ public class RecruitPostingController {
 		model.addAttribute("companyList", companyDao.selectCompanyList(manager.getCustomerSeq()));
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		
+		model.addAttribute("advantageList", commonDao.selectAdvantageList(manager.getCustomerCode(), null, null, true));
+		model.addAttribute("skillSetTypeList", SkillSetType.values());
+		
 		return "recruit/posting/registPosting";
 	}
 	
 	
 	@RequestMapping(value = "/registPostingProc", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult registPostingProc(CustomerManager manager, @RequestBody @Valid ProjectRegisterRequest request) {
+	public JsonResult registPostingProc(CustomerManager manager, @RequestBody @Valid RecruitPostingRegisterRequest request) {
 		
-		
+		postingRegisterService.registerPosting(request, manager);
 		 
 		return JsonResults.success(1);
 	}

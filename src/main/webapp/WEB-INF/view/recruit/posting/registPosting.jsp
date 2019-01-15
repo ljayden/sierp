@@ -9,32 +9,66 @@
 
 <main role="main" class="container">
 	<div class="my-3 p-3 bg-white rounded shadow">
-	<h4 class="mb-3">채용공고 등록하기</h4>
+	
 	<input type="hidden" id="selectedCompanyName" value="${ selectedCompany.companyName }">
     <form class="needs-validation" id="regForm" novalidate> <!--  -->
-
+    
+		<div class="form-row">
+        	<div class="form-group col-md-6 mb-3"><h4 class="mb-3">채용공고 등록하기</h4></div>
+        	<div class="form-group col-md-2 mb-3 float-right">
+				<label for="projectName" class="col-form-label-sm ">게시 여부 </label>
+				<div>
+		           	<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" id="sitePostYn" value="Y" class="custom-control-input">
+						<label class="custom-control-label custom-control-label-sm" for="sitePostYn">사이트 게시</label>
+					</div>
+				</div>
+        	</div>
+        	<div class="form-group col-md-2 mb-3">
+            	<label for="postingEndYear" class="col-form-label-sm">공고 마감일<span class="text-muted">(Optional)</span></label>
+                <select class="custom-select custom-select-sm d-block w-100" id="postingEndYear">
+                	<option value="">년도</option>
+ 					<c:forEach var="year" begin="${ thisYear - 20 }" end="${ thisYear + 3 }" step="1">
+				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) eq thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}" selected="selected">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
+				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) ne thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
+				    </c:forEach>
+                </select>
+                <div class="invalid-feedback">년도를 선택해 주세요.</div>
+			</div>
+            <div class="form-group col-md-1 mb-3">
+              	<label for="postingEndMonth" class="col-form-label-sm">&nbsp;</label>
+               	<select class="custom-select custom-select-sm d-block w-100" id="postingEndMonth">
+               		<option value="">월</option>
+				    <c:forEach var="month" begin="1" end="12" step="1">
+				    	<c:if test="${ month eq thisMonth }"><option value="${month}" selected="selected"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if>
+				    	<c:if test="${ month ne thisMonth }"><option value="${month}"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if>
+				    </c:forEach>
+              	</select>
+            </div>
+            <div class="form-group col-md-1 mb-3">
+                <label for="postingEndDay" class="col-form-label-sm">&nbsp;</label>
+               	<select class="custom-select custom-select-sm d-block w-100" id="postingEndDay">
+               		<option value="">일</option>
+				    <c:forEach var="day" begin="1" end="31" step="1">
+				    	<c:if test="${ day eq thisDay }"><option value="${day}" selected="selected"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
+				    	<c:if test="${ day ne thisDay }"><option value="${day}"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
+				    </c:forEach>
+              	</select>
+            </div>
+		</div>  
+		<br>
     	<div class="form-row">
         	<div class="form-group col-md-8 mb-3">
                 <label for="posingTitle" class="col-form-label-sm">채용공고 제목 </label>
                 <input type="text" class="form-control form-control-sm" id="posingTitle" required>
             	<div class="invalid-feedback">채용공고 제목을 입력해 주세요.</div>
         	</div>
-        	<div class="form-group col-md-2 mb-3"></div>
-        	<div class="form-group col-md-2 mb-3">
-				<label for="projectName" class="col-form-label-sm">게시 여부 </label>
-				<div>
-		           	<div class="custom-control custom-checkbox custom-control-inline">
-						<input type="checkbox" id="chkSitePostgYn" value="Y" class="custom-control-input">
-						<label class="custom-control-label custom-control-label-sm" for="chkSitePostgYn">사이트 게시</label>
-					</div>
-				</div>
-        	</div>
 		</div>  
 
     	<div class="form-row">
         	<div class="form-group col-md-4 mb-3">
                 <label for="company" class="col-form-label-sm">업체명</label>
-                <input type="text" class="form-control form-control-sm" id="company" required onchange="javascript: companyChange('company')">
+                <input type="text" class="form-control form-control-sm" id="company" onchange="javascript: companyChange('company')">
             	<div class="invalid-feedback">업체명을 입력해 주세요.</div>
         	</div>
         	<div class="form-group col-md-2 mb-3">
@@ -55,14 +89,22 @@
             <div class="form-group col-md-7 mb-3 ">
               	<label for="project" class="col-form-label-sm">프로젝트<span class="text-muted">(Optional)</span></label>
               	<div>
-	                <input type="text" class="form-control form-control-sm w-75 float-left " id="project" readonly="readonly">
-	                <input type="hidden" id="projectSeq" value="">
+	                <input type="text" class="form-control form-control-sm w-75 float-left " id="project" readonly="readonly" value="">
+	                <c:if test="${ empty selectedProject }">
+	                	<input type="hidden" id="projectSeq" value="">
+	                </c:if>
+	                <c:if test="${ not empty selectedProject }">
+	                	<input type="hidden" id="projectSeq" value="${ selectedProject.projectSeq }">
+	                	<input type="hidden" id="selectedProjectName" value="${ selectedProject.projectName }">
+	                	<input type="hidden" id="selectedProjectSido" value="${ selectedProject.sido }">
+	                	<input type="hidden" id="selectedProjectSigungu" value="${ selectedProject.siGunGu }">
+	                	<input type="hidden" id="selectedProjectDetailAddr" value="${ selectedProject.detailAddr }">
+	                </c:if>
 	                <button type="button" class="btn btn-outline-secondary btn-sm float-left ml-2"   id="deleteProjectBtn"><b>&times;</b></button>
 	                <button type="button" class="btn btn-outline-primary btn-sm float-left ml-2"  id="projectFindModalBtn">찾아보기</button>
               	</div>
         	</div>
 		</div>
-		
     	<div class="form-row">
         	<div class="form-group col-md-2 mb-3">
                 <label for="recruitType" class="col-form-label-sm">채용 구분 </label>
@@ -73,9 +115,9 @@
 			<div class="form-group col-md-2 mb-3">
                 <label for="recruitManCount" class="col-form-label-sm" >채용 수</label>
 				<select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="recruitManCount">
-               		<option value="">0 명</option>
-               		<option value="">00 명</option>
-	                <c:forEach var="manCount" begin="1" end="10" step="1">
+               		<option value="-2">0 명</option>
+               		<option value="-1">00 명</option>
+	                <c:forEach var="manCount" begin="1" end="20" step="1">
 						<option value="${manCount}">${manCount} 명</option>
 					</c:forEach>
                	</select>
@@ -158,12 +200,12 @@
         	<div class="form-group col-md-3 mb-3">
                 <label for="needAcademicLevel" class="col-form-label-sm">학력 제한 </label>
                 <select class="custom-select custom-select-sm d-block w-100" style="font-weight: bold" id="needAcademicLevel" required>
-                	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="없음" optionNameSuffix=" 이상"></mt:enumOptions>
+                	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="무관" optionNameSuffix=" 이상"></mt:enumOptions>
                 </select>
         	</div>
 			<div class="form-group col-md-3 mb-3">
-                <label for="needFreeGradeValue" class="col-form-label-sm">등급 제한</label>
-				<select class="custom-select custom-select-sm d-block w-100" id="needFreeGradeValue">
+                <label for="needFreeGrade" class="col-form-label-sm">등급 제한</label>
+				<select class="custom-select custom-select-sm d-block w-100" id="needFreeGrade">
                		<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="없음" optionNameSuffix=" 이상"></mt:enumOptions>
                	</select>
         	</div>
@@ -172,14 +214,14 @@
                 <label for="limitWorkYearMin" class="col-form-label-sm">연차 제한</label>
                 <div>
 					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitWorkYearMin">
-						<option value="0" selected="selected">없음</option>
+						<option value="" selected="selected">없음</option>
 		                <c:forEach var="year" begin="1" end="20" step="1">
 							<option value="${year}" >${year} 년</option>
 						</c:forEach>
 	               	</select>
 	               	<div class="float-left">&nbsp; ~ &nbsp;</div>
 					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitWorkYearMax">
-						<option value="0" selected="selected">없음</option>
+						<option value="" selected="selected">없음</option>
 		                <c:forEach var="year" begin="1" end="20" step="1">
 							<option value="${year}" >${year} 년</option>
 						</c:forEach>
@@ -194,14 +236,14 @@
                 <label for="limitAgeMin" class="col-form-label-sm">나이 제한</label>
                 <div>
 					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitAgeMin">
-						<option value="0" selected="selected">없음</option>
+						<option value="" selected="selected">없음</option>
 		                <c:forEach var="year" begin="1980" end="2014" step="1">
 							<option value="${year}" >${year} 년생 </option>
 						</c:forEach>
 	               	</select>
 	               	<div class="float-left">&nbsp; ~ &nbsp;</div>
 					<select class="custom-select custom-select-sm d-block w120 float-left" id="limitAgeMax">
-						<option value="0" selected="selected">없음</option>
+						<option value="" selected="selected">없음</option>
 		                <c:forEach var="year" begin="1980" end="2014" step="1">
 							<option value="${year}" >${year} 년생</option>
 						</c:forEach>
@@ -213,18 +255,18 @@
 		<div class="form-row">
         	<div class="form-group col-md-12 mb-3">
         		<label for="projectName" class="col-form-label-sm">필수 조건</label>
-		       	<div class="mb-2 input-group rounded" id="needs" style="background-color: #F5F5F5; min-height: 40px"></div>
+		       	<div class="mb-2 input-group rounded p-2" id="needs" style="background-color: #F5F5F5; min-height: 40px"></div>
 				<div class="mb-3" style="text-align: right">
-					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#postingNeedsModal" id="postingNeedsModalBtn">설정하기</button>
 				</div>
         	</div>	
         </div>
 		<div class="form-row">
         	<div class="form-group col-md-12 mb-3">
         		<label for="projectName" class="col-form-label-sm">우대 조건</label>
-		       	<div class="mb-2 input-group rounded" id="prefers" style="background-color: #F5F5F5; min-height: 40px"></div>
+		       	<div class="mb-2 input-group rounded p-2" id="prefers" style="background-color: #F5F5F5; min-height: 40px"></div>
 				<div class="mb-3" style="text-align: right">
-					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#skillSetConfModal" id="skillSetConfModalBtn">설정하기</button>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#postingPrefersModal" id="postingPrefersModalBtn">설정하기</button>
 				</div>
         	</div>	
         </div>
@@ -283,7 +325,7 @@
 						<div class="card-header">
       						<span class="text-muted small">프로젝트를 선택해 주세요.</span>
 						</div>
-						<div class="card-body">
+						<div class="card-body p-2">
 							<table class="table h3 small text-center" >
 								<thead class="thead-light" style="borde : 1px">
 								    	<tr>
@@ -307,7 +349,240 @@
       		</div>
     	</div>
   	</div>
-</div>  	
+</div>  
+
+<div class="modal fade" id="postingNeedsModal" tabindex="-1" role="dialog" aria-labelledby="postingNeedsModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+     		<div class="modal-header  text-white bg-info">
+        	<h5 class="modal-title" id="postingNeedsModalLabel"><b>필수 조건  설정</b></h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      		</div>
+			
+			<div class="modal-body">
+				<div class="container-fluid">
+			       	<div class="mb-3 input-group" id="needsPopupDiv"> </div>
+					<br>
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">우대조건을 선택해 추가해 주세요.</span>
+						</div>
+						<div class="card-body">
+							<c:forEach var="advantage" items="${ advantageList }">
+								<c:if test="${ advantage.advantageType eq 'PREFERENCE' }">
+									<c:if test="${ advantage.customerCode eq 'COMMON' }">
+										<button type="button" class="btn btn-outline-info btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:preferenceAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'needs')">
+										${ advantage.advantageName }</button>
+									</c:if>
+									<c:if test="${ advantage.customerCode ne 'COMMON' }">
+										<button type="button" class="btn btn-outline-warning btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:preferenceAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'needs')">
+										${ advantage.advantageName }</button>
+									</c:if>
+								</c:if>
+							</c:forEach>
+						</div>
+					</div> 
+					<br>
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">자격증을 선택해 추가해 주세요.</span>
+						</div>
+						<div class="card-body">
+							<c:forEach var="advantage" items="${ advantageList }">
+								<c:if test="${ advantage.advantageType eq 'LICENSE' }">
+									<c:if test="${ advantage.customerCode eq 'COMMON' }">
+										<button type="button" class="btn btn-outline-info btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:licenseAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'needs')">
+										${ advantage.advantageName }</button>
+									</c:if>
+									<c:if test="${ advantage.customerCode ne 'COMMON' }">
+										<button type="button" class="btn btn-outline-warning btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:licenseAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'needs')">
+										${ advantage.advantageName }</button>
+									</c:if>
+								</c:if>
+							</c:forEach>
+						</div>
+					</div> 
+					<br>
+					
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">보유 기술을 선택해 추가해 주세요.</span>
+						</div>
+						<div class="card-body p-2">
+					<div class="accordion small" id="accordionSkillSet">
+						<div class="card">
+							<c:forEach var="skillSetType" items="${ skillSetTypeList }">
+								<div class="card-header" style="padding: .35rem .75rem;" id="heading${ skillSetType }">
+	   								<h5 class="mb-0">
+	     							<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapse${skillSetType}" aria-expanded="false" aria-controls="collapse${skillSetType}">
+	       							${ skillSetType.description } - 관련 기술
+	     							</button>
+	   								</h5>
+								</div>
+								
+								<div id="collapse${ skillSetType }" class="collapse p-2" aria-labelledby="heading${ skillSetType }" data-parent="#accordionSkillSet">
+									<div class="card-body clearfix" style="padding: .35rem .75rem;">
+									<c:forEach var="advantage" items="${ advantageList }">
+										<c:if test="${ advantage.advantageType eq 'SKILL' and advantage.skillSetType eq skillSetType }">
+											<c:if test="${ advantage.customerCode eq 'COMMON' }">
+											<div class="card border-info float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
+												<div class="card-body text-info "  style="padding: 0.40rem;" >
+													${ advantage.advantageName }
+													<select class="custom-select custom-select-sm w90 ml-1 text-info border-info">
+													    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
+												  	</select>
+												  	<button type="button" class="btn btn-outline-info btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'needs', this)">&#43;</button>
+												</div>
+									    	</div>
+											</c:if>
+											<c:if test="${ advantage.customerCode ne 'COMMON' }">
+											<div class="card border-warning float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
+												<div class="card-body text-warning "  style="padding: 0.40rem;" >
+													${ advantage.advantageName }
+													<select class="custom-select custom-select-sm w90 ml-1 text-warning border-warning">
+													    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
+												  	</select>
+												  	<button type="button" class="btn btn-outline-warning btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'needs', this)">&#43;</button>
+												</div>
+									    	</div>
+											</c:if>
+										</c:if>
+									</c:forEach>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>  
+						</div>
+					</div> 
+					
+	
+  				</div>
+			</div>
+    		<div class="modal-footer">
+        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
+        	<button type="button" class="btn btn-primary btn-sm" onclick="javascript:needsSave();">적용</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
+
+<div class="modal fade" id="postingPrefersModal" tabindex="-1" role="dialog" aria-labelledby="postingPrefersModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+     		<div class="modal-header  text-white bg-info">
+        	<h5 class="modal-title" id="postingPrefersModalLabel"><b>우대 조건  설정</b></h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      		</div>
+			
+			<div class="modal-body">
+				<div class="container-fluid">
+			       	<div class="mb-3 input-group" id="prefersPopupDiv"> </div>
+					<br>
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">우대조건을 선택해 추가해 주세요.</span>
+						</div>
+						<div class="card-body">
+							<c:forEach var="advantage" items="${ advantageList }">
+								<c:if test="${ advantage.advantageType eq 'PREFERENCE' }">
+									<c:if test="${ advantage.customerCode eq 'COMMON' }">
+										<button type="button" class="btn btn-outline-info btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:preferenceAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'prefers')">
+										${ advantage.advantageName }</button>
+									</c:if>
+									<c:if test="${ advantage.customerCode ne 'COMMON' }">
+										<button type="button" class="btn btn-outline-warning btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:preferenceAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'prefers')">
+										${ advantage.advantageName }</button>
+									</c:if>
+								</c:if>
+							</c:forEach>
+						</div>
+					</div> 
+					<br>
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">자격증을 선택해 추가해 주세요.</span>
+						</div>
+						<div class="card-body">
+							<c:forEach var="advantage" items="${ advantageList }">
+								<c:if test="${ advantage.advantageType eq 'LICENSE' }">
+									<c:if test="${ advantage.customerCode eq 'COMMON' }">
+										<button type="button" class="btn btn-outline-info btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:licenseAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'prefers')">
+										${ advantage.advantageName }</button>
+									</c:if>
+									<c:if test="${ advantage.customerCode ne 'COMMON' }">
+										<button type="button" class="btn btn-outline-warning btn-sm" value="${ advantage.advantageSeq }" onclick="javascipt:licenseAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'prefers')">
+										${ advantage.advantageName }</button>
+									</c:if>
+								</c:if>
+							</c:forEach>
+						</div>
+					</div> 
+					<br>
+					
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">보유 기술을 선택해 추가해 주세요.</span>
+						</div>
+						<div class="card-body p-2">
+					<div class="accordion small" id="accordionSkillSet">
+						<div class="card">
+							<c:forEach var="skillSetType" items="${ skillSetTypeList }">
+								<div class="card-header" style="padding: .35rem .75rem;" id="heading${ skillSetType }">
+	   								<h5 class="mb-0">
+	     							<button class="btn btn-link collapsed btn-sm" type="button" data-toggle="collapse" data-target="#collapse${skillSetType}" aria-expanded="false" aria-controls="collapse${skillSetType}">
+	       							${ skillSetType.description } - 관련 기술
+	     							</button>
+	   								</h5>
+								</div>
+								
+								<div id="collapse${ skillSetType }" class="collapse p-2" aria-labelledby="heading${ skillSetType }" data-parent="#accordionSkillSet">
+									<div class="card-body clearfix" style="padding: .35rem .75rem;">
+									<c:forEach var="advantage" items="${ advantageList }">
+										<c:if test="${ advantage.advantageType eq 'SKILL' and advantage.skillSetType eq skillSetType }">
+											<c:if test="${ advantage.customerCode eq 'COMMON' }">
+											<div class="card border-info float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
+												<div class="card-body text-info "  style="padding: 0.40rem;" >
+													${ advantage.advantageName }
+													<select class="custom-select custom-select-sm w90 ml-1 text-info border-info">
+													    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
+												  	</select>
+												  	<button type="button" class="btn btn-outline-info btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'prefers', this)">&#43;</button>
+												</div>
+									    	</div>
+											</c:if>
+											<c:if test="${ advantage.customerCode ne 'COMMON' }">
+											<div class="card border-warning float-left m-1" style="border-bottom-width : 1px; border-bottom-style : solid;">
+												<div class="card-body text-warning "  style="padding: 0.40rem;" >
+													${ advantage.advantageName }
+													<select class="custom-select custom-select-sm w90 ml-1 text-warning border-warning">
+													    <mt:enumOptions enumClass="SkillSetWorkmanship" selectedValue="EXIST"/>
+												  	</select>
+												  	<button type="button" class="btn btn-outline-warning btn-sm ml-1" style="margin: -3px" onclick="javacript: skillSetAdd('${ advantage.advantageSeq }','${ advantage.advantageName }','${ advantage.customerCode }', 'prefers', this)">&#43;</button>
+												</div>
+									    	</div>
+											</c:if>
+										</c:if>
+									</c:forEach>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>  
+						</div>
+					</div> 
+					
+	
+  				</div>
+			</div>
+    		<div class="modal-footer">
+        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
+        	<button type="button" class="btn btn-primary btn-sm" onclick="javascript:prefersSave();">적용</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
 </main>
 
 
@@ -408,12 +683,14 @@ var companyList = [//'네이년','네이놈',
 			$('#company').val($('#selectedCompanyName').val());
 			$('#company').css('background-color','#bfeffb');
 			$('#company').attr('isMatchItem', true);
-			
-			$('#project').val('');
-			$('#projectSeq').val('');
-			
-			companyChange('company');
+
+			companyChange('company', $('#projectSeq').val() != '' ? true : false);
 		}
+		
+		if ($('#projectSeq').val() != '') {
+			selectProject($('#projectSeq').val(), $('#selectedProjectName').val(), $('#selectedProjectSido').val(), $('#selectedProjectSigungu').val(), $('#selectedProjectDetailAddr').val());
+		}
+    	
 	}, false);
 })();
 
@@ -450,7 +727,7 @@ function changeRewardType() {
 	}
 }
 
-function companyChange(id) {
+function companyChange(id , flag) {
 	
 	if ($('#' + id).val() && $('#' + id).val().length > 0) {
 		var company = companyList.filter(function (value) {
@@ -477,6 +754,77 @@ function companyChange(id) {
 		$('#' + id + 'Manager option').remove();
     	$('#' + id + 'Manager').append('<option value="">&nbsp;</option>')
 	}
+	
+	if (!flag) {
+		$('#project').val('');
+		$('#projectSeq').val('');
+	}
+}
+
+function licenseAdd(seq, name, customCode, tapId) {
+	var color = customCode == 'COMMON' ? 'info' : 'warning';
+	var divId = 'license' + seq; 
+	if ($('#' + tapId + 'PopupDiv #' + divId).length > 0) {
+		return false;
+	}
+	
+	var html  = 
+		'<div class="card small licenseRow border-' + color + ' m-1" id="' + divId + '" data="' + seq + '">' +
+			'<div class="card-body text-' + color + '"  style="padding: 0.40rem">' +
+				'<p class="card-text">' + name + '<button type="button" class="btn btn-outline-' + color + ' btn-sm ml-4" style="margin: -3px" onclick="javacript: $(this).parent().parent().parent().remove();">&times;</button></p>' +
+			'</div>' +
+    	'</div>';
+    
+    $('#' + tapId + 'PopupDiv').append(html);
+}
+
+function preferenceAdd(seq, name, customCode, tapId) {
+	var color = customCode == 'COMMON' ? 'info' : 'warning';
+	var divId = 'preference' + seq; 
+	if ($('#' + tapId + 'PopupDiv #' + divId).length > 0) {
+		return false;
+	}
+	
+	var html  = 
+		'<div class="card small preferenceRow border-' + color + ' m-1" id="' + divId + '" data="' + seq + '">' +
+			'<div class="card-body text-' + color + '"  style="padding: 0.40rem">' +
+				'<p class="card-text">' + name + '<button type="button" class="btn btn-outline-' + color + ' btn-sm ml-4" style="margin: -3px" onclick="javacript: $(this).parent().parent().parent().remove();">&times;</button></p>' +
+			'</div>' +
+    	'</div>';
+    
+    $('#' + tapId + 'PopupDiv').append(html);
+}
+
+function skillSetAdd(seq, name, customCode, tapId, btn) {
+	var color = customCode == 'COMMON' ? 'info' : 'warning';
+	var divId = 'skillSet' + seq; 
+	if ($('#' + tapId + 'PopupDiv #' + divId).length > 0) {
+		return false;
+	}
+	
+	var expVal = $(btn).parent().find('select option:checked').val();
+	var expText = $(btn).parent().find('select option:checked').text();
+	
+	var html  = 
+		'<div class="card small skillSetRow border-' + color + ' m-1" id="' + divId + '" data="' + seq + ',' + expVal + '">' +
+			'<div class="card-body text-' + color + '"  style="padding: 0.40rem">' +
+				'<p class="card-text">' + name + '-' + expText + '<button type="button" class="btn btn-outline-' + color + ' btn-sm ml-3" style="margin: -3px" onclick="javacript: $(this).parent().parent().parent().remove();">&times;</button></p>' +
+			'</div>' +
+    	'</div>';
+    
+    $('#' + tapId + 'PopupDiv').append(html);
+}
+
+function needsSave() {
+	$('#needs').html('');
+	$('#needs').append($('#needsPopupDiv').html());
+	$('#postingNeedsModal').modal('hide');
+}
+
+function prefersSave() {
+	$('#prefers').html('');
+	$('#prefers').append($('#prefersPopupDiv').html());
+	$('#postingPrefersModal').modal('hide');
 }
 
 function regPosting() {
@@ -496,31 +844,123 @@ function regPosting() {
 		param.companyStaffSeq = null;
 	}
 	
-	param.projectName = $('#projectName').val();
+	param.posingTitle = $('#posingTitle').val();
+	param.sitePostYn = $('#sitePostYn').is(':checked') ? 'Y' : 'N';
 	
-	param.startYear = $('#startYear').val();
-	param.startMonth = $('#startMonth').val();
-	param.startDay = $('#startthDay').val();
-	
-	param.endYear = $('#endYear').val();
-	param.endMonth = $('#endMonth').val();
-	param.endDay = $('#endDay').val();
-	
-	var start = param.startYear + '-' + param.startMonth + '-' + param.startDay;
-	var end = param.endYear + '-' + param.endMonth + '-' + param.endDay;
-	if (end > start) {
-		alert('프로젝트 기간을 확인해 주세요.');
-		return false;
+	if ($('#workType').val() != '') {
+		param.workType = $('#workType').val();
+	}
+	if ($('#projectSeq').val() != '') {
+		param.projectSeq = $('#projectSeq').val();
 	}
 	
-	param.sido = $('#sido').val() == '' ? null : $('#sido').val();
-	param.sigungu = $('#sigungu').val() == '' ? null : $('#sigungu').val();
-	param.addrDetail = $('#addrDetail').val();
+	param.recruitType = $('#recruitType').val();
+	param.recruitManCount = $('#recruitManCount').val();
 	
-	param.projectDesc = $('#projectDesc').val();
-	param.mainManagerId = $('#manager').val();
-	param.customerMemo = $('#customerMemo').val(); 
+	if ($('#recruitContractUnitValue').val() != '') {
+		param.recruitContractUnitValue = $('#recruitContractUnitValue').val();
+	}
+	
+	param.rewardType = $('#rewardType').val();
+	if ($('#rewardMinPrice').val() != '' && $('#rewardMaxPrice').val() != '') {
+		var minNum = new Number($('#rewardMinPrice').val());
+		var maxNum = new Number($('#rewardMaxPrice').val());
+		if (minNum > maxNum) {
+			alert('보상 정보를 확인해 주세요.');
+			return false;
+		}
+	}
+	
+	if ($('#rewardMinPrice').val() != '') {
+		param.rewardMinPrice = $('#rewardMinPrice').val();
+	}
+	if ($('#rewardMaxPrice').val() != '') {
+		param.rewardMaxPrice = $('#rewardMaxPrice').val();
+	}
+	
+	if ($('#needAcademicLevel').val() != '') {
+		param.needAcademicLevel = $('#needAcademicLevel').val();
+	}
+	if ($('#needFreeGrade').val() != '') {
+		param.needFreeGrade = $('#needFreeGrade').val();
+	}
+	
+	if ($('#limitWorkYearMin').val() != '' && $('#limitWorkYearMax').val() != '') {
+		var minNum = new Number($('#limitWorkYearMin').val());
+		var maxNum = new Number($('#limitWorkYearMax').val());
+		if (minNum > maxNum) {
+			alert('필요 경력을 확인해 주세요.');
+			return false;
+		}
+	}
+	
+	if ($('#limitWorkYearMin').val() != '') {
+		param.limitWorkYearMin = $('#limitWorkYearMin').val();
+	}
+	if ($('#rewardMaxPrice').val() != '') {
+		param.limitWorkYearMax = $('#limitWorkYearMax').val();
+	}
+	
+	
+	if ($('#limitAgeMin').val() != '' && $('#limitAgeMax').val() != '') {
+		var minNum = new Number($('#limitAgeMin').val());
+		var maxNum = new Number($('#limitAgeMax').val());
+		if (minNum > maxNum) {
+			alert('연령 제한을 확인해 주세요.');
+			return false;
+		}
+	}
+	
+	if ($('#limitAgeMin').val() != '') {
+		param.limitAgeMin = $('#limitAgeMin').val();
+	}
+	if ($('#limitAgeMax').val() != '') {
+		param.limitAgeMax = $('#limitAgeMax').val();
+	}
+	
+	param.workSido = $('#workSido').val() == '' ? null : $('#workSido').val();
+	param.workSiGunGu = $('#workSiGunGu').val() == '' ? null : $('#workSiGunGu').val();
+	param.workDetailAddr = $('#workDetailAddr').val();
+	
 
+	param.officeWorkYn = $('#officeWorkYn').is(':checked') ? 'Y' : 'N';
+	param.officeHomeWorkYn = $('#officeHomeWorkYn').is(':checked') ? 'Y' : 'N';
+	param.homeWorkYn = $('#homeWorkYn').is(':checked') ? 'Y' : 'N';
+	
+	param.jobInfo = $('#jobInfo').val();
+	param.recruitInfo = $('#recruitInfo').val();
+	
+	param.mainManagerId = $('#manager').val();
+	param.managerMemo = $('#managerMemo').val(); 
+
+	var prefers = new Array();
+	$('#prefers .preferenceRow').each(function(obj) {
+		prefers.push({'advantageSeq' : $(this).attr('data'), 'advantageType' : 'PREFERENCE'});
+	});
+	 
+	$('#prefers  .licenseRow').each(function(obj) {
+		prefers.push({'advantageSeq' : $(this).attr('data'), 'advantageType' : 'LICENSE'});
+	});
+	var skillSets = new Array();
+	$('#prefers .skillSetRow').each(function(obj) {
+		prefers.push({'advantageSeq' : $(this).attr('data').split(',')[0], 'skillSetWorkmanship' : $(this).attr('data').split(',')[1], 'advantageType' : 'SKILL'});
+	});
+	param.prefers = prefers;
+	
+	var needs = new Array();
+	$('#needs .preferenceRow').each(function(obj) {
+		needs.push({'advantageSeq' : $(this).attr('data'), 'advantageType' : 'PREFERENCE'});
+	});
+	 
+	$('#needs  .licenseRow').each(function(obj) {
+		needs.push({'advantageSeq' : $(this).attr('data'), 'advantageType' : 'LICENSE'});
+	});
+	var skillSets = new Array();
+	$('#needs .skillSetRow').each(function(obj) {
+		needs.push({'advantageSeq' : $(this).attr('data').split(',')[0], 'workmanship' : $(this).attr('data').split(',')[1], 'advantageType' : 'SKILL'});
+	});
+	param.needs = needs;
+	
 	event.preventDefault();
     event.stopPropagation();
  

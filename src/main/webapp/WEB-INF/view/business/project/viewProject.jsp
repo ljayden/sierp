@@ -82,11 +82,12 @@
 		메모
 		<textarea class="form-control form-control-sm" aria-label="With textarea" rows="3" disabled="disabled">${ project.customerMemo }</textarea>
 	</div>
-	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#projectModifyModal" id="projectModifyModalBtn">변경</button>
- 
-	 <br>
-	 <br>
-	 <br>
+	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" id="projectModifyModalBtn">수정 페이지로 이동</button>
+	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="registerProjectPosting(${ project.companySeq}, ${project.projectSeq})">채용공고 등록</button>
+	
+	<br>
+	<br>
+	<br>
 </main>
 
 
@@ -96,6 +97,9 @@ $(document).ready(function() {
 
 });
 
+function registerProjectPosting(companySeq, projectSeq) {
+	location.href = '/recruit/posting/registPosting.do?companySeq=' + companySeq + '&projectSeq=' + projectSeq;
+}
 </script>
 
  
