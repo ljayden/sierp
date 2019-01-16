@@ -17,10 +17,11 @@ public class Posting {
 
 	private int postingSeq;
 	
-	private String customerCode;
+	private int customerSeq;
 	
 	private String posingTitle; //공고명
 	private PostingStatus status;
+	private Date endYmdt;
 	private String sitePostYn;
 	
 	private Integer companySeq;			
@@ -61,5 +62,5 @@ public class Posting {
 	
 	private String mainManagerId;
 	private Date registerYmdt;
-	private String resiterManagerId;
+	private String registerManagerId;
 }

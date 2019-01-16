@@ -85,7 +85,7 @@ public class RecruitPostingController {
 	@ResponseBody
 	public JsonResult registPostingProc(CustomerManager manager, @RequestBody @Valid RecruitPostingRegisterRequest request) {
 		
-		postingRegisterService.registerPosting(request, manager);
+		postingRegisterService.registerPostingProc(request, manager);
 		 
 		return JsonResults.success(1);
 	}

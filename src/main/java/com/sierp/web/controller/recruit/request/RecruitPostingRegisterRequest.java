@@ -22,6 +22,7 @@ public class RecruitPostingRegisterRequest {
 	
 	private String postingTitle;
 	@NotEmpty private String sitePostYn;
+	private String endYmd;
 	
 	@NotNull private Integer companySeq;			
 	@NotNull private Integer companyStaffSeq;
