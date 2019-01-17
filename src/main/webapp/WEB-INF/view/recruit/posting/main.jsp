@@ -43,7 +43,7 @@
 			<div class="row">
 				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
-			    		<span class="input-group-text w80 " id="search-name">시작일</span>
+			    		<span class="input-group-text w80 " id="search-name">마감일</span>
 			  		</div>
 			  		<input type="text" class="form-control" id="" name="" aria-label="시작일" aria-describedby="">
 			  		&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;

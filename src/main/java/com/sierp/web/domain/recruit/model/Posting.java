@@ -11,6 +11,7 @@ import com.sierp.web.domain.common.constant.SidoType;
 import com.sierp.web.domain.common.constant.WorkType;
 import com.sierp.web.domain.recruit.constant.PostingStatus;
 import com.sierp.web.domain.resource.constant.AcademicLevel;
+import com.sierp.web.domain.resource.constant.FreelancerGrade;
 
 @Data
 public class Posting {
@@ -34,6 +35,8 @@ public class Posting {
 	private int recruitManCount;	//채용 명수
 
 	private AcademicLevel needAcademicLevel;
+	private Integer needAcademicLevelValue;
+	private FreelancerGrade needFreeGrade;
 	private Integer needFreeGradeValue;	//FreelancerGrade 참고!!!!  0일 경우 경력으로 구분
 	private Integer limitWorkYearMin;		//필요 최소경력 
 	private Integer limitWorkYearMax;		//필요 최대경력 
@@ -48,7 +51,7 @@ public class Posting {
 	
 	
 	private SidoType workSido;
-	private SiGunGuType workSiGunGu;
+	private SiGunGuType workSigungu;
 	private String workDetailAddr;
 	
 	private String officeWorkYn; 		//상주 근무가능여부

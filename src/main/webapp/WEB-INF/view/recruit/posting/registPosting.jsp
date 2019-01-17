@@ -81,7 +81,7 @@
     	<div class="form-row">
         	<div class="form-group col-md-2 mb-3">
                 <label for="workType" class="col-form-label-sm">업무 구분<span class="text-muted">(Optional)</span></label>
-				<select class="custom-select custom-select-sm d-block w-100"  id="workType" required>
+				<select class="custom-select custom-select-sm d-block w-100"  id="workType">
                 	<mt:enumOptions enumClass="WorkType" emptyValueName="없음"></mt:enumOptions>
                 </select>
         	</div>
@@ -199,7 +199,7 @@
     	<div class="form-row">
         	<div class="form-group col-md-3 mb-3">
                 <label for="needAcademicLevel" class="col-form-label-sm">학력 제한 </label>
-                <select class="custom-select custom-select-sm d-block w-100" style="font-weight: bold" id="needAcademicLevel" required>
+                <select class="custom-select custom-select-sm d-block w-100" style="font-weight: bold" id="needAcademicLevel">
                 	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="무관" optionNameSuffix=" 이상"></mt:enumOptions>
                 </select>
         	</div>
@@ -703,13 +703,15 @@ function selectProject(projectSeq, projectName, sido, sigungu, detailAddr) {
 	$('#workSiGunGu').val('');
 	$('#workDetailAddr').val('');
 	
-	if (sido && sido != 'null') {
+	if (sido && sido != 'null' && $('#workSido').val() == '' && $('#workSiGunGu').val() == '' ) {
 		$('#workSido').val(sido);
+		
 		if (sigungu && sigungu != 'null') {
 			getSiGunGuTypeReg('workSido', 'workSiGunGu', sigungu);
 		}
 		
-		if (detailAddr && detailAddr != 'null') {
+		
+		if (detailAddr && detailAddr != 'null'  && $('#workDetailAddr').val() == '') {
 			$('#workDetailAddr').val(detailAddr)
 		}
 	}
@@ -844,7 +846,7 @@ function regPosting() {
 		param.companyStaffSeq = null;
 	}
 	
-	param.posingTitle = $('#posingTitle').val();
+	param.postingTitle = $('#posingTitle').val();
 	param.sitePostYn = $('#sitePostYn').is(':checked') ? 'Y' : 'N';
 	
 	if ($('#workType').val() != '') {

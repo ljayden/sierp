@@ -10,8 +10,9 @@ import lombok.Data;
 public class PostingCondition {
 	
 	private int postingConditionSeq;
+	private int postingSeq;
 	
-	private PostingConditionType type;	//필수, 우대
+	private PostingConditionType conditionType;	//필수, 우대
 	
 	private int advantageSeq;
 	

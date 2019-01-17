@@ -56,8 +56,21 @@ public class PostingRegisterService {
 		posting.setWorkType(request.getWorkType());
 		posting.setRecruitType(request.getRecruitType());
 		posting.setRecruitManCount(request.getRecruitManCount());
+		
 		posting.setNeedAcademicLevel(request.getNeedAcademicLevel());
-		posting.setNeedFreeGradeValue(request.getNeedFreeGrade().getDevGradeValue());
+		if (request.getNeedAcademicLevel() != null) {
+			posting.setNeedAcademicLevelValue(request.getNeedAcademicLevel().getVal());
+		} else {
+			posting.setNeedAcademicLevelValue(0);
+		}
+		
+		posting.setNeedFreeGrade(request.getNeedFreeGrade());
+		if (request.getNeedFreeGrade() != null) {
+			posting.setNeedFreeGradeValue(request.getNeedFreeGrade().getDevGradeValue());
+		} else {
+			posting.setNeedFreeGradeValue(0);
+		}
+		
 		posting.setLimitWorkYearMin(request.getLimitWorkYearMin());
 		posting.setLimitWorkYearMax(request.getLimitWorkYearMax());
 		posting.setLimitAgeMin(request.getLimitAgeMin());
@@ -72,7 +85,7 @@ public class PostingRegisterService {
 
 		
 		posting.setWorkSido(request.getWorkSido());
-		posting.setWorkSiGunGu(request.getWorkSiGunGu());
+		posting.setWorkSigungu(request.getWorkSiGunGu());
 		posting.setWorkDetailAddr(request.getWorkDetailAddr());
 		
 		posting.setOfficeWorkYn(request.getOfficeWorkYn());
@@ -94,7 +107,8 @@ public class PostingRegisterService {
 	private void registerPostingCondition(Posting posting, List<PostingCondition> needs, List<PostingCondition> prefers, CustomerManager manager) {
 		
 		for (PostingCondition needCondition : needs) {
-			needCondition.setType(PostingConditionType.REQUIRE);
+			needCondition.setConditionType(PostingConditionType.REQUIRE);
+			needCondition.setPostingSeq(posting.getPostingSeq());
 			
 			if (needCondition.getWorkmanship() != null) {
 				needCondition.setWorkmanshipVal(needCondition.getWorkmanship().getVal());
@@ -103,7 +117,8 @@ public class PostingRegisterService {
 		}
 		
 		for (PostingCondition preferCondition : prefers) {
-			preferCondition.setType(PostingConditionType.PREFER);
+			preferCondition.setConditionType(PostingConditionType.PREFER);
+			preferCondition.setPostingSeq(posting.getPostingSeq());
 			
 			if (preferCondition.getWorkmanship() != null) {
 				preferCondition.setWorkmanshipVal(preferCondition.getWorkmanship().getVal());

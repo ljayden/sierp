@@ -190,3 +190,71 @@ CREATE TABLE project (
 	
 	end_yn VARCHAR(1)
 );
+
+
+
+
+CREATE TABLE posting (
+	posting_seq integer PRIMARY KEY AUTOINCREMENT,
+	customer_seq integer not null,
+	
+	posting_title VARCHAR(200) not null,
+	
+	status VARCHAR(10) not null,
+	end_ymdt DATETIME,
+	site_post_yn CHAR(1) not null,
+	
+	company_seq integer not null,			
+	company_staff_seq integer,
+	project_seq integer,
+	
+	work_type VARCHAR(10),
+	
+	recruit_type VARCHAR(10) not null,
+	recruit_man_count integer,
+
+	need_academic_level VARCHAR(10),
+	need_academic_level_value integer not null,
+	need_free_grade VARCHAR(10),
+	need_free_grade_value integer not null,
+	limit_work_year_min integer,
+	limit_work_year_max integer,
+	limit_age_min integer,
+	limit_age_max integer,
+	
+	recruit_contract_unit_value integer,
+	
+	reward_type VARCHAR(10),
+	reward_min_price integer,
+	reward_max_price integer,
+	
+	work_sido VARCHAR(20)  not null,
+	work_sigungu VARCHAR(20) not null,
+	work_detail_addr VARCHAR(200),
+	
+	office_work_yn CHAR(1) not null,
+	office_home_work_yn CHAR(1) not null,
+	home_work_yn CHAR(1) not null,
+
+	job_info VARCHAR(1000),
+	recruit_info VARCHAR(1000),
+
+	manager_memo VARCHAR(1000),
+	
+	main_manager_id  VARCHAR(50),
+	register_manager_id VARCHAR(50) not null,
+	register_ymdt DATETIME not null
+);
+
+
+CREATE TABLE posting_condition (
+	posting_condition_seq integer PRIMARY KEY AUTOINCREMENT,
+	posting_seq integer not null,
+	
+	condition_type VARCHAR(10),
+	
+	advantage_seq integer not null,
+	advantage_type VARCHAR(10) not null,
+	workmanship  VARCHAR(10),
+	workmanship_val integer
+);

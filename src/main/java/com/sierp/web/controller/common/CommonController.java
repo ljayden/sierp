@@ -42,6 +42,26 @@ public class CommonController {
 		return JsonResults.success(siGunGuList);
 	}
 	
+	/**
+	 * SiGunGu값 조회
+	 */
+	@RequestMapping(value = "/getAllSiGunGu", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult getAllSiGunGu() {
+		
+		List<Map<String, String>> siGunGuList = Lists.newArrayList();
+		for (SiGunGuType sigungu : SiGunGuType.values()) {
+			Map<String, String> map = Maps.newHashMap();
+			map.put("code", sigungu.name());
+			map.put("sido", sigungu.getSido().name());
+			map.put("description", sigungu.getDescription());
+			
+			siGunGuList.add(map);
+		}
+		
+		return JsonResults.success(siGunGuList);
+	}
+	
 	@Data
 	public static class GetSiGunGuRequest {
 		

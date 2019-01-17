@@ -196,7 +196,16 @@
     <script type="text/javascript">
     $(function () {
 		'use strict'
-
+		
+		COMMON.ajax({
+		    url : '/common/getAllSiGunGu.json',
+		    successHandler : function(data){
+		    	$(data.result).each(function(i, sigungu) {
+		    		staticSigunguList.push({'code': sigungu.code , 'sido': sigungu.sido , 'description': sigungu.description});
+		    	});
+		    }
+		});
+		
     	$('[data-toggle="offcanvas"]').on('click', function () {
     		$('.offcanvas-collapse').toggleClass('open')
     	})

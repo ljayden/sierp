@@ -3,15 +3,22 @@
 <mapper namespace="mapper.recruit.posting_dao">
  
 	<insert id="insertPosting" parameterType="com.sierp.web.domain.recruit.model.Posting" useGeneratedKeys="true" keyProperty="postingSeq">
-		INSERT INTO worker(worker_type, customer_seq, name, email, phone_no, birth_year, birth_month, birth_day, sex, 
-		                   worker_expert_type, academic_level, academic_level_val, start_work_year, start_work_month, sido, sigungu, detail_addr, register_ymdt, modify_ymdt)
-		VALUES(#{workerType},#{customerSeq},#{name},#{email},#{phoneNo},#{birthYear},#{birthMonth},#{birthDay},#{sex}
-		      ,#{workerExpertType},#{academicLevel}, #{academicLevelVal},#{startWorkYear},#{startWorkMonth},#{sido},#{siGunGu},#{detailAddr},#{registerYmdt},#{modifyYmdt})
+		INSERT INTO posting(customer_seq, posting_title, status, end_ymdt, site_post_yn,
+							company_seq, company_staff_seq, project_seq, work_type, recruit_type, recruit_man_count,
+							need_academic_level, need_academic_level_value, need_free_grade, need_free_grade_value, limit_work_year_min, limit_work_year_max, limit_age_min, limit_age_max,
+							recruit_contract_unit_value, reward_type, reward_min_price, reward_max_price, work_sido, work_sigungu, work_detail_addr,
+							office_work_yn,office_home_work_yn,home_work_yn,job_info,recruit_info,manager_memo,main_manager_id,register_manager_id,register_ymdt)
+	
+		VALUES(	#{customerSeq},#{posingTitle},#{status},#{endYmdt},#{sitePostYn},
+				#{companySeq},#{companyStaffSeq},#{projectSeq},#{workType}, #{recruitType},#{recruitManCount},
+				#{needAcademicLevel},#{needAcademicLevelValue},#{needFreeGrade},#{needFreeGradeValue},#{limitWorkYearMin},#{limitWorkYearMax},#{limitAgeMin},#{limitAgeMax},
+		      	#{recruitContractUnitValue},#{rewardType}, #{rewardMinPrice},#{rewardMaxPrice},#{workSido},#{workSigungu},#{workDetailAddr},
+		       	#{officeWorkYn}, #{officeHomeWorkYn}, #{homeWorkYn}, #{jobInfo},#{recruitInfo},#{managerMemo},#{mainManagerId},#{registerYmdt},#{registerManagerId})
 	</insert>
     
 	<insert id="insertPostingCondition" parameterType="com.sierp.web.domain.recruit.model.PostingCondition" useGeneratedKeys="true" keyProperty="postingConditionSeq">
-		INSERT INTO worker_career(worker_seq, work_start_year, work_start_month, work_end_year, work_end_month, recruit_type, job_desc, company_name)
-		VALUES(#{workerSeq}, #{workStartYear}, #{workStartMonth}, #{workEndYear}, #{workEndMonth}, #{recruitType}, #{jobDesc}, #{companyName})
+		INSERT INTO posting_condition(posting_seq, condition_type, advantage_seq, advantage_type, workmanship, workmanship_val)
+		VALUES(#{postingSeq}, #{conditionType}, #{advantageSeq}, #{advantageType}, #{workmanship}, #{workmanshipVal})
 	</insert> 
 
 </mapper>
