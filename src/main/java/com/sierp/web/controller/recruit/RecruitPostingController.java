@@ -20,6 +20,7 @@ import com.sierp.web.domain.business.model.CustomerManager;
 import com.sierp.web.domain.common.constant.SkillSetType;
 import com.sierp.web.domain.common.dao.CommonDao;
 import com.sierp.web.domain.recruit.service.PostingRegisterService;
+import com.sierp.web.domain.recruit.service.PostingSearchService;
 import com.sierp.web.result.JsonResult;
 import com.sierp.web.result.JsonResults;
 
@@ -33,15 +34,18 @@ public class RecruitPostingController {
 	@Autowired CommonDao commonDao;
 	
 	@Autowired PostingRegisterService postingRegisterService;
+	@Autowired PostingSearchService postingSearchService;
 	
 	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String main() {
+	public String main(Model model, CustomerManager manager) {
+		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
 		return "recruit/posting/main";
 	}
 	
 	@RequestMapping(value = "/getMainList", method = {RequestMethod.POST})
 	public String getMainList(Model model, CustomerManager manager, PostingSearchRequest request) {
 		
+		model.addAttribute("searchList", postingSearchService.getPosting(request, manager.getCustomerSeq()));
 		model.addAttribute("request", request);
 		return "recruit/posting/mainList";
 	}

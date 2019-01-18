@@ -7,9 +7,9 @@
 							company_seq, company_staff_seq, project_seq, work_type, recruit_type, recruit_man_count,
 							need_academic_level, need_academic_level_value, need_free_grade, need_free_grade_value, limit_work_year_min, limit_work_year_max, limit_age_min, limit_age_max,
 							recruit_contract_unit_value, reward_type, reward_min_price, reward_max_price, work_sido, work_sigungu, work_detail_addr,
-							office_work_yn,office_home_work_yn,home_work_yn,job_info,recruit_info,manager_memo,main_manager_id,register_manager_id,register_ymdt)
+							office_work_yn,office_home_work_yn,home_work_yn,job_info,recruit_info,manager_memo,main_manager_id,register_ymdt, register_manager_id)
 	
-		VALUES(	#{customerSeq},#{posingTitle},#{status},#{endYmdt},#{sitePostYn},
+		VALUES(	#{customerSeq},#{postingTitle},#{status},#{endYmdt},#{sitePostYn},
 				#{companySeq},#{companyStaffSeq},#{projectSeq},#{workType}, #{recruitType},#{recruitManCount},
 				#{needAcademicLevel},#{needAcademicLevelValue},#{needFreeGrade},#{needFreeGradeValue},#{limitWorkYearMin},#{limitWorkYearMax},#{limitAgeMin},#{limitAgeMax},
 		      	#{recruitContractUnitValue},#{rewardType}, #{rewardMinPrice},#{rewardMaxPrice},#{workSido},#{workSigungu},#{workDetailAddr},
@@ -20,5 +20,73 @@
 		INSERT INTO posting_condition(posting_seq, condition_type, advantage_seq, advantage_type, workmanship, workmanship_val)
 		VALUES(#{postingSeq}, #{conditionType}, #{advantageSeq}, #{advantageType}, #{workmanship}, #{workmanshipVal})
 	</insert> 
+
+
+
+	<select id="selectPostingListCount" parameterType="map" resultType="int">
+		SELECT count(*)
+		FROM 	posting p
+		<where><include refid="postingSearchCondition"/></where>
+	</select>
+	
+	<select id="selectPostingList" parameterType="map" resultType="com.sierp.web.domain.recruit.model.PostingSearch">
+		SELECT 	p.*, 
+				(SELECT company_name FROM company WHERE company_seq = p.company_seq) AS company_name
+		FROM 	posting p
+		
+	 	<where><include refid="postingSearchCondition"/></where>
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+    <sql id="postingSearchCondition">
+		p.customer_seq = #{customerSeq}
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(postingYn)">
+			AND p.site_post_yn = #{postingYn}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(mainManagerId)">
+			AND p.main_manager_id = #{mainManagerId}
+		</if>
+		
+		<if test="freelancerGradeValue != null">
+			AND p.need_free_grade_value <![CDATA[ <= ]]> #{freelancerGradeValue}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(workType)">
+			AND p.work_type = #{workType}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(recruitType)">
+			AND p.recruit_type = #{recruitType}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(officeWorkYn)">
+			AND p.office_workYn = #{officeWorkYn}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(officeHomeWorkYn)">
+			AND p.office_home_work_yn = #{officeHomeWorkYn}
+		</if>
+		
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(homeWorkYn)">
+			AND p.home_work_yn = #{homeWorkYn}
+		</if>
+
+		<if test="statusList.size > 0">
+			AND p.status IN <foreach item="item"  index="index" collection="statusList" separator="," open="(" close=")" >'${item}'</foreach> 
+		</if>
+ 
+		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(companyName)">
+			AND p.company_seq IN (SELECT company_name FROM company WHERE company_name LIKE '%'||#{companyName}||'%')
+		</if>
+		
+ 		<if test="closeStartDate != null">
+			AND p.end_ymdt <![CDATA[ >= ]]> #{closeStartDate}
+		</if>
+		<if test="closeEndDate != null">
+			AND p.end_ymdt <![CDATA[ < ]]> #{closeEndDate}
+		</if>
+    </sql>
 
 </mapper>

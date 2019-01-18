@@ -15,19 +15,38 @@
 			
 			<div class="row">
 				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80 " id="search-name">마감일</span>
+			  		</div>
+			  		<input type="text" class="form-control" id="closeStart" name="closeStart" aria-label="시작일" aria-describedby="" autocomplete="off">
+			  		&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
+			  		<input type="text" class="form-control" id="closeEnd" name="closeEnd" aria-label="종료일" aria-describedby="" autocomplete="off">
+				</div>
+				<div class="input-group input-group-sm col-md-6 mb-3">
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" onclick="javascript: selectMonthEnd();">이번달</button>
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" onclick="javascript: selectWeekEnd();">이번주</button>
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-4" onclick="javascript: select7DayEnd();">7일내</button>
+			  		
+			  		<input type="text" style="font-size: 90%" id="endDayInput"  size=2 aria-label="" aria-describedby="">
+			  		<button type="button" class="btn btn-outline-secondary btn-sm" onclick="javascript: selectSomethingEnd();">일 내</button>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-group input-group-sm col-md-6 mb-3">
 				 	<div class="input-group-prepend">
 				    	<label class="input-group-text w80" for="">상태</label>
 				  	</div>
 				  	
-				  	<div class="custom-control custom-checkbox mb-2 mt-1 ml-3">
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3">
 				    	<input type="checkbox" class="custom-control-input" name="status" value="ING" id="statusReady" checked="checked">
-				    	<label class="custom-control-label" for="statusReady">진행</label>
+				    	<label class="custom-control-label custom-control-label-sm" for="statusReady">진행</label>
 				  	</div>
-				  	<div class="custom-control custom-checkbox mb-3 mt-1 ml-4">
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
 				    	<input type="checkbox" class="custom-control-input" name="status" value="CONTRACT" id="statusIng" checked="checked">
-				    	<label class="custom-control-label" for="statusIng">계약</label>
+				    	<label class="custom-control-label custom-control-label-sm" for="statusIng">계약</label>
 				  	</div>
-				  	<div class="custom-control custom-checkbox mb-3 mt-1 ml-4">
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
 				    	<input type="checkbox" class="custom-control-input" name="status" value="END" id="statusEnd">
 				    	<label class="custom-control-label" for="statusEnd">종료</label>
 				  	</div>
@@ -35,30 +54,87 @@
 				
 				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-name">게시 여부</span>
+			  		</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
+				    	<input type="radio" class="custom-control-input" name="postingYn" value="" id="postingAll" checked="checked">
+				    	<label class="custom-control-label" for="postingAll">전체</label>
+				  	</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
+				    	<input type="radio" class="custom-control-input" name="postingYn" value="Y" id="postingY" >
+				    	<label class="custom-control-label" for="postingY">게시건만</label>
+				  	</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-4">
+				    	<input type="radio" class="custom-control-input" name="postingYn" value="N" id="postingN" >
+				    	<label class="custom-control-label" for="postingN">미 게시건만</label>
+				  	</div>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="input-group input-group-sm col-md-3 mb-3">
+ 					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="freelancerGrade">요구 등급</span>
+			  		</div>
+		      		<select class="custom-select custom-select-sm d-block"  name="freelancerGrade" id="freelancerGrade">
+	                	<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="전체" ></mt:enumOptions>
+	                </select>
+				</div>
+				<div class="input-group input-group-sm col-md-3 mb-3"></div>
+				<div class="input-group input-group-sm col-md-3 mb-3">
+ 					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="workType">업무 구분</span>
+			  		</div>
+		      		<select class="custom-select custom-select-sm d-block"  name="workType" id="workType">
+	                	<mt:enumOptions enumClass="WorkType" emptyValueName="전체"></mt:enumOptions>
+	                </select>
+				</div>
+			</div>	  
+			    
+			    
+			<div class="row">
+				<div class="input-group input-group-sm col-md-3 mb-3">
+ 					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-recruit-type">채용구분</span>
+			  		</div>
+		      		<select class="custom-select custom-select-sm d-block"  name="recruitType" id="recruitType">
+	                	<mt:enumOptions enumClass="RecruitType" emptyValueName="전체"></mt:enumOptions>
+	                </select>
+				</div>
+				<div class="input-group input-group-sm col-md-3 mb-3"></div>
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id="search-name">업체명</span>
 			  		</div>
 			  		<input type="text" class="form-control" id="companyName" name="companyName" aria-label="검색할 이름을 입력해 주세요." aria-describedby="search-name">
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-group input-group-sm col-md-6 mb-3">
-					<div class="input-group-prepend">
-			    		<span class="input-group-text w80 " id="search-name">마감일</span>
-			  		</div>
-			  		<input type="text" class="form-control" id="" name="" aria-label="시작일" aria-describedby="">
-			  		&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
-			  		<input type="text" class="form-control" id="" name="" aria-label="종료일" aria-describedby="">
-				</div>
-				<div class="input-group input-group-sm col-md-6 mb-3">
-			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" >이번주</button>
-			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" >이번달</button>
-			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-4" >7일내</button>
-			  		
-			  		<input type="text" style="font-size: 90%" id="" name="" size=2 aria-label="" aria-describedby="">
-			  		<button type="button" class="btn btn-outline-secondary btn-sm" >일 내</button>
-				</div>
-			</div>
+			</div>    
 			
+			<div class="row">
+				<div class="input-group input-group-sm col-md-10 mb-3">
+				 	<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="">재택여부</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3">
+				    	<input type="checkbox" class="custom-control-input" value="" id="workWhereAll" checked="checked">
+				    	<label class="custom-control-label" for="workWhereAll">전체</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3">
+				    	<input type="checkbox" class="custom-control-input" name="officeWorkYn" value="Y" id="workWhereOffice" >
+				    	<label class="custom-control-label" for="workWhereOffice">상주근무</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
+				    	<input type="checkbox" class="custom-control-input" name="officeHomeWorkYn" value="Y" id="workWhereOfficeHome">
+				    	<label class="custom-control-label" for="workWhereOfficeHome">반상주</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
+				    	<input type="checkbox" class="custom-control-input" name="homeWorkYn" value="Y" id="workWhereHome">
+				    	<label class="custom-control-label" for="workWhereHome">재택가능</label>
+				  	</div>
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="input-group input-group-sm col-md-3 mb-3">
 				 	<div class="input-group-prepend">
@@ -71,6 +147,15 @@
 	                	</c:forEach>
 			  		</select>
 				</div>
+				<div class="input-group input-group-sm col-md-3 mb-3"></div>
+				<div class="input-group input-group-sm col-md-6 mb-3">
+ 					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id=" ">파트너 공고</span>
+			  		</div>
+		      		<select class="custom-select custom-select-sm d-block"  name="" id="">
+	                	<option>자사</option>
+	                </select>
+				</div>
 			</div>
   		</div>
   		<div class="d-inline clearfix">
@@ -79,7 +164,9 @@
   			<button type="button" class="btn btn-outline-danger btn-sm float-right searchFormToggle mr-2" id="searchResetBtn">검색 초기화</button>
   		</div>
   	</div>
-  	
+
+  
+ 
  	<div class="pl-4 pr-3">
   	  	<div class="row">
   			<div class="col-md-3 mb-3" style="margin-top: -0.5rem"></div>
@@ -111,6 +198,8 @@ $(document).ready(function() {
     	$('#searchForm').submit();
     });
 	
+	COMMON.calendar('closeStart');
+	COMMON.calendar('closeEnd');
 	
     $('#searchResetBtn').on('click', function () {
     	formReset();
@@ -127,4 +216,21 @@ function goPage(page) {
 	$('#pageInput').val(page);
 	$('#searchBtn').click();
 }
+
+function selectSomethingEnd() {
+	
+}
+
+function selectMonthEnd() {
+	
+}
+
+function selectWeekEnd() {
+	
+}
+
+function select7DayEnd() {
+	
+}
 </script>
+<!-- TODO 파트너사 넣자 -->

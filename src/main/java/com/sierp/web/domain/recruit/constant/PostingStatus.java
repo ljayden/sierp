@@ -13,5 +13,5 @@ public enum PostingStatus {
 	
 	
 	
-	@Getter private String descripion;
+	@Getter private String description;
 }

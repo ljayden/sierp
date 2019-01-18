@@ -20,7 +20,7 @@ public class Posting {
 	
 	private int customerSeq;
 	
-	private String posingTitle; //공고명
+	private String postingTitle; //공고명
 	private PostingStatus status;
 	private Date endYmdt;
 	private String sitePostYn;

@@ -19,15 +19,15 @@
 				    	<label class="input-group-text w80" for="">상태</label>
 				  	</div>
 				  	
-				  	<div class="custom-control custom-checkbox mb-2 mt-1 ml-3">
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3">
 				    	<input type="checkbox" class="custom-control-input" name="status" value="READY" id="statusReady" checked="checked">
 				    	<label class="custom-control-label" for="statusReady">준비</label>
 				  	</div>
-				  	<div class="custom-control custom-checkbox mb-3 mt-1 ml-4">
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
 				    	<input type="checkbox" class="custom-control-input" name="status" value="ING" id="statusIng" checked="checked">
 				    	<label class="custom-control-label" for="statusIng">진행</label>
 				  	</div>
-				  	<div class="custom-control custom-checkbox mb-3 mt-1 ml-4">
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
 				    	<input type="checkbox" class="custom-control-input" name="status" value="END" id="statusEnd">
 				    	<label class="custom-control-label" for="statusEnd">종료</label>
 				  	</div>

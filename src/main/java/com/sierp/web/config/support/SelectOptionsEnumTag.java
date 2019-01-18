@@ -28,6 +28,7 @@ public class SelectOptionsEnumTag extends SimpleTagSupport {
 	@Getter @Setter private String enumClass;
 	@Getter @Setter private String selectedValue;
 	@Getter @Setter private String emptyValueName;
+	@Getter @Setter private String emptyValue;
 	@Getter @Setter private String optionNamePrefix;
 	@Getter @Setter private String optionNameSuffix;
 	
@@ -86,7 +87,12 @@ public class SelectOptionsEnumTag extends SimpleTagSupport {
 		StringBuffer outputHtml = new StringBuffer();
 
 		if (StringUtils.isNotEmpty(emptyValueName)) {
-			outputHtml.append("<option value=\"\" ");
+			outputHtml.append("<option value=\"");
+			if (StringUtils.isNotEmpty(emptyValue)) {
+				outputHtml.append(emptyValue);
+			}
+			outputHtml.append("\" ");
+			
 			if (StringUtils.isEmpty(selectedValue)) {
 				outputHtml.append("selected");
 			}

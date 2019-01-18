@@ -12,7 +12,23 @@
 	<h4 class="mb-3">프로젝트 등록하기</h4>
 	<input type="hidden" id="selectedCompanyName" value="${ selectedCompany.companyName }">
     <form class="needs-validation" id="regForm" novalidate> <!--  -->
-    
+    	
+    	
+    	<c:if test="${ sessionScope.customer.serviceType eq 'BOTH' }">
+    	<div class="form-row">
+        	<div class="form-group col-md-10 mb-4"></div>
+        	<div class="form-group col-md-2 mb-4 float-right">
+				<div>
+		           	<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" id="selfProject" class="custom-control-input" onclick="javascript : selftProject();">
+						<label class="custom-control-label custom-control-label-sm" for="selfProject">자사 프로젝트</label>
+					</div>
+				</div>
+        	</div>
+		</div>
+		</c:if>
+		
+		
     	<div class="form-row">
         	<div class="form-group col-md-3 mb-3">
                 <label for="company" class="col-form-label-sm">업체명</label>
@@ -235,7 +251,7 @@ var companyList = [//'네이년','네이놈',
 		}
 	}, false);
 })();
- 
+
 function companyChange(id) {
 	
 	if ($('#' + id).val() && $('#' + id).val().length > 0) {
@@ -265,6 +281,9 @@ function companyChange(id) {
 	}
 }
 
+function selftProject() {
+	
+}
 function regProject(flag) {
 	var param = {};
 	

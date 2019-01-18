@@ -60,14 +60,14 @@
 				<li class="nav-item <c:if test = "${topMenuPath eq 'home'}">active</c:if>">
 					<a class="nav-link" href="/home/dashboard/main.do"><b>Home</b><c:if test = "${topMenuPath eq 'home'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
-				<li class="nav-item <c:if test = "${topMenuPath eq 'resource'}">active</c:if>">
-					<a class="nav-link" href="/resource/dashboard/main.do"><b>인재관리</b><c:if test = "${topMenuPath eq 'resource'}"><span class="sr-only">(current)</span></c:if></a>
-				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'recruit'}">active</c:if>">
 					<a class="nav-link" href="/recruit/dashboard/main.do"><b>채용관리</b><c:if test = "${topMenuPath eq 'recruit'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'contract'}">active</c:if>">
 					<a class="nav-link" href="/contract/dashboard/main.do"><b>계약관리</b><c:if test = "${topMenuPath eq 'contract'}"><span class="sr-only">(current)</span></c:if></a>
+				</li>
+				<li class="nav-item <c:if test = "${topMenuPath eq 'resource'}">active</c:if>">
+					<a class="nav-link" href="/resource/dashboard/main.do"><b>인재관리</b><c:if test = "${topMenuPath eq 'resource'}"><span class="sr-only">(current)</span></c:if></a>
 				</li>
 				<li class="nav-item <c:if test = "${topMenuPath eq 'business'}">active</c:if>">
 					<a class="nav-link" href="/business/company/main.do"><b>업체관리</b><c:if test = "${topMenuPath eq 'business'}"><span class="sr-only">(current)</span></c:if></a>
@@ -153,6 +153,7 @@
 	        	<a class="nav-link <c:if test ="${subMenuPath eq 'company'}">text-primary font-weight-bold</c:if>"  href="/business/company/main.do">업체관리</a>
 	        	<a class="nav-link <c:if test ="${subMenuPath eq 'companyStaff'}">text-primary font-weight-bold</c:if>" href="/business/companyStaff/main.do">업체담당자<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
 	        	<a class="nav-link <c:if test ="${subMenuPath eq 'project'}">text-primary font-weight-bold</c:if>" href="/business/project/main.do">프로젝트 관리</a>
+	        	<a class="nav-link <c:if test ="${subMenuPath eq 'partner'}">text-primary font-weight-bold</c:if>" href="/business/partner/main.do">파트너사 관리</a>
 	        	<a class="nav-link" href="#">영업관리</a>
 	    	</nav>
 	    </div>

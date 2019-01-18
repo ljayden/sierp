@@ -9,10 +9,10 @@ import lombok.Setter;
 public enum RecruitType {
 	
 	REGULAR("정규직", 16),
-	TEMPORARY("계약직", 8),
-	INTERN("인턴", 4),
-	ALBA("아르바이트", 2),
-	FREELANCER("프리랜서", 1);
+	FREELANCER("프리랜서", 8),
+	TEMPORARY("계약직", 4),
+	INTERN("인턴", 2),
+	ALBA("아르바이트", 1);
 	
 	@Getter private String description;
 	@Setter private int code;

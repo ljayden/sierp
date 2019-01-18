@@ -40,7 +40,7 @@ public class PostingRegisterService {
 		
 		posting.setCustomerSeq(manager.getCustomerSeq());
 		
-		posting.setPosingTitle(request.getPostingTitle());
+		posting.setPostingTitle(request.getPostingTitle());
 		posting.setStatus(PostingStatus.ING);
 		
 		if (StringUtils.isNotEmpty(request.getEndYmd())) {	//날짜 포맷은 yyyy-mm-dd
@@ -61,14 +61,14 @@ public class PostingRegisterService {
 		if (request.getNeedAcademicLevel() != null) {
 			posting.setNeedAcademicLevelValue(request.getNeedAcademicLevel().getVal());
 		} else {
-			posting.setNeedAcademicLevelValue(0);
+			posting.setNeedAcademicLevelValue(100);
 		}
 		
 		posting.setNeedFreeGrade(request.getNeedFreeGrade());
 		if (request.getNeedFreeGrade() != null) {
 			posting.setNeedFreeGradeValue(request.getNeedFreeGrade().getDevGradeValue());
 		} else {
-			posting.setNeedFreeGradeValue(0);
+			posting.setNeedFreeGradeValue(100);
 		}
 		
 		posting.setLimitWorkYearMin(request.getLimitWorkYearMin());

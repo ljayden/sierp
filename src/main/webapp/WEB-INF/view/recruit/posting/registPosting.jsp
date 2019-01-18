@@ -14,7 +14,12 @@
     <form class="needs-validation" id="regForm" novalidate> <!--  -->
     
 		<div class="form-row">
-        	<div class="form-group col-md-6 mb-3"><h4 class="mb-3">채용공고 등록하기</h4></div>
+        	<div class="form-group col-md-7 mb-3"><h4 class="mb-3">채용공고 등록하기</h4></div>
+        	<div class="form-group col-md-2 mb-3">
+        		<label for="postingEndYear" class="col-form-label-sm">공고 마감일<span class="text-muted">(Optional)</span></label>
+                <input type="text" class="form-control form-control-sm d-block w-100" id="postingEnd">
+        	</div>
+        	<div class="form-group col-md-1 mb-3"></div>
         	<div class="form-group col-md-2 mb-3 float-right">
 				<label for="projectName" class="col-form-label-sm ">게시 여부 </label>
 				<div>
@@ -24,37 +29,37 @@
 					</div>
 				</div>
         	</div>
-        	<div class="form-group col-md-2 mb-3">
-            	<label for="postingEndYear" class="col-form-label-sm">공고 마감일<span class="text-muted">(Optional)</span></label>
-                <select class="custom-select custom-select-sm d-block w-100" id="postingEndYear">
-                	<option value="">년도</option>
- 					<c:forEach var="year" begin="${ thisYear - 20 }" end="${ thisYear + 3 }" step="1">
-				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) eq thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}" selected="selected">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
-				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) ne thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if>
-				    </c:forEach>
-                </select>
-                <div class="invalid-feedback">년도를 선택해 주세요.</div>
-			</div>
-            <div class="form-group col-md-1 mb-3">
-              	<label for="postingEndMonth" class="col-form-label-sm">&nbsp;</label>
-               	<select class="custom-select custom-select-sm d-block w-100" id="postingEndMonth">
-               		<option value="">월</option>
-				    <c:forEach var="month" begin="1" end="12" step="1">
-				    	<c:if test="${ month eq thisMonth }"><option value="${month}" selected="selected"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if>
-				    	<c:if test="${ month ne thisMonth }"><option value="${month}"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if>
-				    </c:forEach>
-              	</select>
-            </div>
-            <div class="form-group col-md-1 mb-3">
-                <label for="postingEndDay" class="col-form-label-sm">&nbsp;</label>
-               	<select class="custom-select custom-select-sm d-block w-100" id="postingEndDay">
-               		<option value="">일</option>
-				    <c:forEach var="day" begin="1" end="31" step="1">
-				    	<c:if test="${ day eq thisDay }"><option value="${day}" selected="selected"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
-				    	<c:if test="${ day ne thisDay }"><option value="${day}"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if>
-				    </c:forEach>
-              	</select>
-            </div>
+<!--         	<div class="form-group col-md-2 mb-3"> -->
+<!--             	<label for="postingEndYear" class="col-form-label-sm">공고 마감일<span class="text-muted">(Optional)</span></label> -->
+<!--                 <select class="custom-select custom-select-sm d-block w-100" id="postingEndYear"> -->
+<!--                 	<option value="">년도</option> -->
+<%--  					<c:forEach var="year" begin="${ thisYear - 20 }" end="${ thisYear + 3 }" step="1"> --%>
+<%-- 				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) eq thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}" selected="selected">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if> --%>
+<%-- 				    	<c:if test="${ ((thisYear + 3) - year + (thisYear - 20)) ne thisYear }"><option value="${(thisYear + 3) - year + (thisYear - 20)}">${(thisYear + 3) - year + (thisYear - 20)}</option></c:if> --%>
+<%-- 				    </c:forEach> --%>
+<!--                 </select> -->
+<!--                 <div class="invalid-feedback">년도를 선택해 주세요.</div> -->
+<!-- 			</div> -->
+<!--             <div class="form-group col-md-1 mb-3"> -->
+<!--               	<label for="postingEndMonth" class="col-form-label-sm">&nbsp;</label> -->
+<!--                	<select class="custom-select custom-select-sm d-block w-100" id="postingEndMonth"> -->
+<!--                		<option value="">월</option> -->
+<%-- 				    <c:forEach var="month" begin="1" end="12" step="1"> --%>
+<%-- 				    	<c:if test="${ month eq thisMonth }"><option value="${month}" selected="selected"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if> --%>
+<%-- 				    	<c:if test="${ month ne thisMonth }"><option value="${month}"><fmt:formatNumber pattern="00" value="${month}"/></option></c:if> --%>
+<%-- 				    </c:forEach> --%>
+<!--               	</select> -->
+<!--             </div> -->
+<!--             <div class="form-group col-md-1 mb-3"> -->
+<!--                 <label for="postingEndDay" class="col-form-label-sm">&nbsp;</label> -->
+<!--                	<select class="custom-select custom-select-sm d-block w-100" id="postingEndDay"> -->
+<!--                		<option value="">일</option> -->
+<%-- 				    <c:forEach var="day" begin="1" end="31" step="1"> --%>
+<%-- 				    	<c:if test="${ day eq thisDay }"><option value="${day}" selected="selected"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if> --%>
+<%-- 				    	<c:if test="${ day ne thisDay }"><option value="${day}"><fmt:formatNumber pattern="00" value="${day}" /></option></c:if> --%>
+<%-- 				    </c:forEach> --%>
+<!--               	</select> -->
+<!--             </div> -->
 		</div>  
 		<br>
     	<div class="form-row">
@@ -200,7 +205,7 @@
         	<div class="form-group col-md-3 mb-3">
                 <label for="needAcademicLevel" class="col-form-label-sm">학력 제한 </label>
                 <select class="custom-select custom-select-sm d-block w-100" style="font-weight: bold" id="needAcademicLevel">
-                	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="무관" optionNameSuffix=" 이상"></mt:enumOptions>
+                	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="없음" optionNameSuffix=" 이상"></mt:enumOptions>
                 </select>
         	</div>
 			<div class="form-group col-md-3 mb-3">
@@ -678,6 +683,7 @@ var companyList = [//'네이년','네이놈',
 			return company.length == 1;
 		});
 		
+		COMMON.calendar('postingEnd', {defaultDate: +30});
 		
 		if ($('#selectedCompanyName').val() != '') {
 			$('#company').val($('#selectedCompanyName').val());
@@ -832,6 +838,7 @@ function prefersSave() {
 function regPosting() {
 	var param = {};
 	
+	param.endYmd = $('#postingEnd').val();
 	var company = companyList.filter(function (value) {
         return (value == $('#company').val());
     });
@@ -978,4 +985,6 @@ function regPosting() {
 }
 
 //TODO 등록 후에 프리랜서 검색으로 이동해서 검색되고.... 검색 조건 체크하는 항목
+
+//파트너사 관리 - 파트너의 공고라는 의미
 </script>

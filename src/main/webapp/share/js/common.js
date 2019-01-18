@@ -245,87 +245,26 @@ var COMMON = {
      * datepicker
      * @NOTE : calendar가 아니라 datepicker임
      */
-    calendar: function (calendarIdOrOjc, datePickerOptionParam, timePickerOptionParam) {
-        var result = {};
-
-        var timePickerOption = {
-            showMeridian: false,
-            defaultHour: 0,
-            defaultMinute: 0,
-            minuteStep: 5
-        }
-
-        var datePickerOption = {
-            element: null,
-            dateForm: 'yyyy-mm-dd',
-            pos: {
-                top: 34,
-                left: 1
-            }
-        };
-
-        if (timePickerOptionParam) {
-            $.each(timePickerOptionParam, function (name, val) {
-                timePickerOption[name] = val;
+    calendar: function (eldId, optionParam) {
+	
+        var datepickerOption = {
+					    	        dateFormat: "yy-mm-dd",
+					    	        changeMonth: true,
+					    	        changeYear: true,
+					    	        monthNames:  [ "1월", "2월", "3월", "4월", "5월", "6월",  "7월", "8월", "9월", "10월", "11월", "12월" ],
+					    	        monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월",  "7월", "8월", "9월", "10월", "11월", "12월" ],
+					    			dayNamesMin:   ["일", "월", "화", "수", "목", "금", "토",]
+					    			//minDate: new Date(2012, 1 - 1, 1) 
+					    			
+    							}
+        if (optionParam) {
+        	$.each(optionParam, function (name, val) {
+        		datepickerOption[name] = val;
             });
-
-            result.timePicker = new tui.component.TimePicker(timePickerOption);
-            datePickerOption.timePicker = result.timePicker;
         }
-
-        if (datePickerOptionParam) {
-            $.each(datePickerOptionParam, function (name, val) {
-                datePickerOption[name] = val;
-            });
-
-            if (datePickerOption.element) {
-                var $el = $(datePickerOption.element);
-                if ($el && $el.val().length > 7) {
-                    var dateArr = $el.val().split("-");
-                    var startDate = new Date(dateArr[0], dateArr[1] - 1, dateArr[2]);
-
-                    datePickerOption.date = {
-                        year: startDate.getFullYear(),
-                        month: startDate.getMonth() + 1,
-                        date: startDate.getDate()
-                    }
-                }
-            } else {
-                //에러
-            }
-        }
-
-        result.calendar = new tui.component.Calendar({
-            element: calendarIdOrOjc,
-            titleFormat: "yyyy-mm", //설정될 title의 형식
-            yearTitleFormat: "yyyy"
-            //bDrawOnload : true //로딩과 동시에 바로 그릴것인지 여부
-        });
-        result.calendar.draw();
-
-
-        result.datePicker = new tui.component.DatePicker(datePickerOption, result.calendar);
-
-
-        $(calendarIdOrOjc).on('click', function (event) {
-            var $el = $(event.target);
-
-            if ($el.hasClass('selectable')) {
-                result.datePicker.close();
-            }
-        });
-
-        $(datePickerOption.element).click(function () {
-            $('.sel').removeClass('on');
-        });
-
-        $(datePickerOption.openers[0]).click(function () {
-            $('.sel').removeClass('on');
-        });
-
-        return result;
+        
+    	$('#' + eldId).datepicker(datepickerOption);
     },
-
 
     /*
      * dateFormat

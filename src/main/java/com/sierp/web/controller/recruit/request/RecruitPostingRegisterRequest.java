@@ -25,7 +25,7 @@ public class RecruitPostingRegisterRequest {
 	private String endYmd;
 	
 	@NotNull private Integer companySeq;			
-	@NotNull private Integer companyStaffSeq;
+	private Integer companyStaffSeq;
 	private Integer projectSeq;
 	
 	private WorkType workType;
@@ -33,8 +33,8 @@ public class RecruitPostingRegisterRequest {
 	private RecruitType recruitType;
 	private int recruitManCount;
 
-	private AcademicLevel needAcademicLevel;
-	private FreelancerGrade needFreeGrade;
+	private AcademicLevel needAcademicLevel; //NULL은 무관하다는 의미
+	private FreelancerGrade needFreeGrade;	//NULL은 무관하다는 의미
 	private Integer limitWorkYearMin;
 	private Integer limitWorkYearMax;
 	private Integer limitAgeMin;
