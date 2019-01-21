@@ -243,7 +243,10 @@ CREATE TABLE posting (
 	
 	main_manager_id  VARCHAR(50),
 	register_manager_id VARCHAR(50) not null,
-	register_ymdt DATETIME not null
+	register_ymdt DATETIME not null,
+	
+	modify_manager_id VARCHAR(50),
+	modify_ymdt DATETIME
 );
 
 

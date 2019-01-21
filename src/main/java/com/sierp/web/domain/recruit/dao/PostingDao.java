@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sierp.web.domain.recruit.model.Posting;
 import com.sierp.web.domain.recruit.model.PostingCondition;
+import com.sierp.web.domain.recruit.model.PostingConditionJoin;
+import com.sierp.web.domain.recruit.model.PostingJoin;
 import com.sierp.web.domain.recruit.model.PostingSearch;
 import com.sierp.web.result.Pager;
 
@@ -26,6 +28,14 @@ public class PostingDao {
 	
 	public int insertPostingCondition(PostingCondition postingCondition) {
 		return sql.insert(MAPPER_NAMESPACE + "insertPostingCondition", postingCondition);
+	}
+	
+	public PostingJoin selectPostingJoin(int postingSeq) {
+		return sql.selectOne(MAPPER_NAMESPACE + "selectPostingJoin", postingSeq);
+	}
+	
+	public List<PostingConditionJoin> selectPostingConditionJoinList(int postingSeq) {
+		return sql.selectList(MAPPER_NAMESPACE + "selectPostingConditionJoinList", postingSeq);
 	}
 	
 	public void selectPostingListCount(String postingYn, String mainManagerId, Integer freelancerGradeValue, String workType, String recruitType, 

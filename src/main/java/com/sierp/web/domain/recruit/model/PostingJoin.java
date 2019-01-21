@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false) 
 public class PostingJoin extends Posting {
 	
-	private String companyName = "계약중";
+	private String companyName;
 	private String companyStaffName;
 	private String projectName;
 }

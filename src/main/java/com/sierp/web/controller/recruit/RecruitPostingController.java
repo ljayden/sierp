@@ -17,8 +17,12 @@ import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.dao.ProjectDao;
 import com.sierp.web.domain.business.model.CustomerManager;
+import com.sierp.web.domain.business.model.ProjectJoin;
 import com.sierp.web.domain.common.constant.SkillSetType;
 import com.sierp.web.domain.common.dao.CommonDao;
+import com.sierp.web.domain.recruit.dao.PostingDao;
+import com.sierp.web.domain.recruit.model.Posting;
+import com.sierp.web.domain.recruit.model.PostingJoin;
 import com.sierp.web.domain.recruit.service.PostingRegisterService;
 import com.sierp.web.domain.recruit.service.PostingSearchService;
 import com.sierp.web.result.JsonResult;
@@ -32,9 +36,11 @@ public class RecruitPostingController {
 	@Autowired ProjectDao projectDao;
 	@Autowired CustomerDao customDao;
 	@Autowired CommonDao commonDao;
+	@Autowired PostingDao postingDao;
 	
 	@Autowired PostingRegisterService postingRegisterService;
 	@Autowired PostingSearchService postingSearchService;
+	
 	
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String main(Model model, CustomerManager manager) {
@@ -92,5 +98,19 @@ public class RecruitPostingController {
 		postingRegisterService.registerPostingProc(request, manager);
 		 
 		return JsonResults.success(1);
+	}
+	
+	@RequestMapping(value = "/viewPosting", method = RequestMethod.GET)
+	public String viewPosting(Model model, CustomerManager manager, @RequestParam(name = "postingSeq") int postingSeq) {
+		
+		PostingJoin posting = postingDao.selectPostingJoin(postingSeq);
+		if (posting.getCustomerSeq() != manager.getCustomerSeq()) {
+			throw new RuntimeException("권한이 없다");
+		}
+ 
+		model.addAttribute("posting", posting);
+		model.addAttribute("conditions", postingDao.selectPostingConditionJoinList(postingSeq));
+		
+		return "recruit/posting/viewPosting";
 	}
 }

@@ -66,4 +66,7 @@ public class Posting {
 	private String mainManagerId;
 	private Date registerYmdt;
 	private String registerManagerId;
+	
+	private Date modifyYmdt;
+	private String modifyManagerId;
 }
