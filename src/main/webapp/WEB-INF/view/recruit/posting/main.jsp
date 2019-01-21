@@ -209,7 +209,17 @@ $(document).ready(function() {
 function formReset() {
 
 	$('#searchTap select, input[type="text"]').val('');
-	$('#pageInput').val('1')
+	$('#pageInput').val('1');
+	$('#statusReady').prop('checked',true);
+	$('#statusIng').prop('checked',true);
+	$('#statusEnd').prop('checked',false);
+	
+	$('#postingAll').prop('checked',true);
+	
+	$('#workWhereAll').prop('checked',true);
+	$('#workWhereOffice').prop('checked',false);
+	$('#workWhereOfficeHome').prop('checked',false);
+	$('#workWhereHome').prop('checked',false);
 }
 
 function goPage(page) {

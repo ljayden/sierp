@@ -11,6 +11,6 @@ public enum FreelancerGrade {
 	HIGH("고급", 4),
 	SPEC("특급", 8);
 	
-	@Getter private String descripion;
+	@Getter private String description;
 	@Getter private int devGradeValue;
 }

@@ -17,11 +17,9 @@ import com.sierp.web.domain.business.dao.CompanyDao;
 import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.dao.ProjectDao;
 import com.sierp.web.domain.business.model.CustomerManager;
-import com.sierp.web.domain.business.model.ProjectJoin;
 import com.sierp.web.domain.common.constant.SkillSetType;
 import com.sierp.web.domain.common.dao.CommonDao;
 import com.sierp.web.domain.recruit.dao.PostingDao;
-import com.sierp.web.domain.recruit.model.Posting;
 import com.sierp.web.domain.recruit.model.PostingJoin;
 import com.sierp.web.domain.recruit.service.PostingRegisterService;
 import com.sierp.web.domain.recruit.service.PostingSearchService;
@@ -97,7 +95,7 @@ public class RecruitPostingController {
 		
 		postingRegisterService.registerPostingProc(request, manager);
 		 
-		return JsonResults.success(1);
+		return JsonResults.success();
 	}
 	
 	@RequestMapping(value = "/viewPosting", method = RequestMethod.GET)

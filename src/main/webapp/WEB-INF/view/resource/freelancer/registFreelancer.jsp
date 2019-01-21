@@ -97,14 +97,6 @@
 		</div>
 		<hr class="mb-4">
 		<div class="form-row">
-			<div class="form-group col-md-3 mb-3">
-				<select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="expertType" required>
-	            	<mt:enumOptions enumClass="WorkerExpertType" emptyValueName="직업 선택"></mt:enumOptions>
-	            </select>
-	            <div class="invalid-feedback">직업을 선택해 주세요.</div>
-	        </div>
-		</div>
-		<div class="form-row">
 			<div class="form-group col-md-5 mb-3">
 				<div class="form-row">
 						<div class="form-group col-md-5 mb-3">
@@ -141,7 +133,17 @@
                 <input type="text" class="form-control form-control-sm text-success" id="calcuFreeGrade"  value="" readonly="readonly">
 			</div>
 		</div>
-
+		<div class="form-row">
+			<div class="form-group col-md-3 mb-3">
+				<select class="custom-select custom-select-sm d-block w-100" style="background-color: #E3F2F5; font-weight: bold" id="expertType" required>
+	            	<mt:enumOptions enumClass="WorkerExpertType" emptyValueName="직업 선택"></mt:enumOptions>
+	            </select>
+	            <div class="invalid-feedback">직업을 선택해 주세요.</div>
+	        </div>
+	        <div class="form-group col-md-9 mb-3 small">
+	        기본직업군 - 웹개발(개발 + 웹개발), 디자이너, 앱개발자(개발- 앱개발), 어플개발, QA --> 기본
+	        </div>
+		</div>
 		
 		<hr class="mb-3">
 		<h6><b>보유기술</b></h6>

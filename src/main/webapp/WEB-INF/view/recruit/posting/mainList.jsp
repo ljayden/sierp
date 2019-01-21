@@ -11,8 +11,8 @@
 	      		<th scope="col">진행상태</th>
 	      		<th scope="col">마감일</th>
 	      		<th scope="col">게시상태</th>
-	      		<th scope="col" class="">채용구분</th>
 	      		<th scope="col">공고명</th>
+	      		<th scope="col" class="">채용구분</th>
 	      		<th scope="col">업체</th>
 	      		<th scope="col">담당자</th>
 	    	</tr>
@@ -34,8 +34,8 @@
 		      			</c:if>
 		      		</td>
 		      		<td>${ posting.sitePostingStatusInfo }</td>
-		      		<td>${ posting.recruitType.description }</td>
 		      		<td><a href="/recruit/posting/viewPosting.do?postingSeq=${ posting.postingSeq}"><b>${ posting.postingTitle }</b></a></td>
+		      		<td>${ posting.recruitType.description }</td>
 		      		<td><a href="/business/company/viewCompany.do?companySeq=${ posting.companySeq}"><b>${ posting.companyName }</b></a></td>
 		      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ posting.mainManagerId }"/></td>
 		    	</tr>

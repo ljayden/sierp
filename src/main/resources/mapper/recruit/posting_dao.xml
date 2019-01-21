@@ -24,11 +24,11 @@
 
 	<select id="selectPostingJoin" parameterType="int" resultType="com.sierp.web.domain.recruit.model.PostingJoin">
 		SELECT  p.*, c.company_name , cs.name AS companyStaffName, pj.project_name
-		FROM 	posting p, company c, company_staff cs, project pj
-		WHERE 	posting_seq = #{postingSeq} 
-		AND 	p.company_seq = c.company_seq 
-		AND		p.company_staff_seq = cs.company_staff_seq 
-		AND		p.project_seq = pj.project_seq 
+		FROM 	posting p 
+          left outer join company c ON p.company_seq = c.company_seq 
+          left outer join company_staff cs ON	p.company_staff_seq = cs.company_staff_seq 
+          left outer join project pj ON	p.project_seq = pj.project_seq 
+		WHERE 	posting_seq = #{postingSeq}
 	</select>
 
 	<select id="selectPostingConditionJoinList" parameterType="int" resultType="com.sierp.web.domain.recruit.model.PostingConditionJoin">

@@ -174,7 +174,7 @@
 		
 		<div class="form-row">
         	<div class="form-group col-md-8 mb-3">
-                <label for="projectName" class="col-form-label-sm">근무 형태</label>
+                <label for="projectName" class="col-form-label-sm">근무 가능 형태</label>
                 <div>
 		           	<div class="custom-control custom-checkbox custom-control-inline">
 						<input type="checkbox" id="officeWorkYn"  value="Y" class="custom-control-input" checked="checked">

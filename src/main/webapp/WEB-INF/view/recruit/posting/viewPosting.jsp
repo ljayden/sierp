@@ -12,86 +12,219 @@
 
 <div class="my-3 p-3 bg-white rounded shadow">
 	
-	<div class="row text-muted small">
-		<div class="col-md-12 text-right">
+	<div class="row">
+		<div class="col-md-12 text-right text-muted small">
 		등록 :<fmt:formatDate value="${posting.registerYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ posting.registerManagerId }"/>)
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3 mb-2">
-		<b>업체명 : ${ posting.companyName } </b>
+		<div class="col-md-12 mb-2 text-right text-muted small">
+		수정 : 
+		<c:if test="${ not empty freelancer.modifyYmdt }">
+			<fmt:formatDate value="${posting.modifyYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ posting.modifyManagerId }"/>)
+		</c:if>
+		<c:if test="${ empty freelancer.modifyYmdt }">
+			<fmt:formatDate value="${posting.registerYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ posting.registerManagerId }"/>)
+		</c:if>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-3 mb-2">
-		사업자 번호 :  
+	
+	<div class="row ">
+		<div class="col-md-8 mb-4">
+		<b>${ posting.postingTitle } </b>
 		</div>
+	</div>
+	
+	<div class="row ">
+		<div class="col-md-9 mb-4"></div>
+		<c:if test="${ not empty posting.endYmdt }">
+			<div class="col-md-3 mb-4 text-right"><b>마감일: <fmt:formatDate value="${posting.endYmdt}" type="date" pattern="yyyy.MM.dd"/> </b></div>
+		</c:if>
+		<c:if test="${ empty posting.endYmdt }">
+			<div class="col-md-3 mb-4 text-right text-muted"><b>마감일: 없음</b></div>
+		</c:if>
+	</div>
+	
+	<div class="row small ">
+		<div class="col-md-10 mb-2">
+		<b>업체명 : </b> ${ posting.companyName } <c:if test="${ not empty posting.companyStaffName }">&nbsp;&nbsp;&nbsp;( 담당자 : ${ posting.companyStaffName })</c:if>
+		</div>
+	</div>
+	<c:if test="${ not empty posting.projectSeq }">
+		<div class="row small">
+			<div class="col-md-6 mb-2">
+			<b>프로젝트명 : </b> ${ posting.projectName }
+			</div>
+		</div>
+	</c:if>
+	<div class="row small">
+        <div class="col-md-8 mb-0">
+        	<div class="custom-control custom-checkbox custom-control-inline" style="padding-left: 0px">
+        	<b>근무 형태 : </b>
+        	</div>
+          	<div class="custom-control custom-checkbox custom-control-inline pl-2">
+				<input type="checkbox" id="officeWorkYn" class="custom-control-input" readonly="readonly" <c:if test="${ posting.officeWorkYn == 'Y'}">checked="checked"</c:if>>
+				<label class="custom-control-label custom-control-label-sm" for="">상주</label>
+			</div>
+			<div class="custom-control custom-checkbox custom-control-inline">
+		 		<input type="checkbox" id="officeHomeWorkYn" class="custom-control-input" readonly="readonly" <c:if test="${ posting.officeHomeWorkYn == 'Y'}">checked="checked"</c:if>>
+		 		<label class="custom-control-label custom-control-label-sm"  for="">반상주</label>
+			</div>
+			<div class="custom-control custom-checkbox custom-control-inline">
+		 		<input type="checkbox" id="homeWorkYn"   class="custom-control-input" readonly="readonly" <c:if test="${ posting.homeWorkYn == 'Y'}">checked="checked"</c:if>>
+		 		<label class="custom-control-label custom-control-label-sm"  for="">재택 가능</label>
+			</div>
+		</div>
+	</div>
+	<div class="row small">
+		<div class="col-md-4 mb-2"> </div>
 		<div class="col-md-9 mb-2">
-		주소 :  
+		<b>근무지 정보 : </b> ${ posting.workSido.description }/${ posting.workSigungu.description } &nbsp;&nbsp; ${ posting.workDetailAddr }
 		</div>
 	</div>
-	<div class="mb-3"> 
-		<label for="cutomerMemo" class="col-form-label-sm">업체 메모 :</label>
-		<textarea class="form-control form-control-sm" aria-label="With textarea" rows="5" disabled="disabled">${ company.customerMemo }</textarea>
-	</div>
-	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#companyModifyModal" id="companyModifyModalBtn">업체정보 변경</button>
 	<br>
-	<div class="row">
-		<div class="col-md-3 mb-3">
-		담당자 정보
+	<div class="row small">
+		<div class="col-md-3 mb-1"> 
+			<b>업무 소개 및 안내:</b>
 		</div>
 	</div>
-	<div class="pl-2 pr-2 small">
-		<c:if test="${ empty companyStaffs }">
-			<div class="text-muted">담당자 정보 없음</div>
-			<hr class="mb-2" style="margin-top: 3px;">
+	<div class="row small">
+		<div class="col-md-12 mb-2">
+			<textarea class="form-control form-control-sm small" aria-label="With textarea" rows="5" disabled="disabled">${ posting.jobInfo }</textarea>
+		</div>
+	</div>
+	<br>
+	<div class="row small">
+		<div class="col-md-5 mb-2">
+			<b>SI/SM : </b> <c:if test="${ not empty posting.workType }">${ posting.workType.description }</c:if><c:if test="${ empty posting.workType }"> - </c:if>
+		</div>
+	</div>
+	<div class="row small">
+		<div class="col-md-5 mb-2">
+		<b>채용 정보</b> :  ${ posting.recruitType.description } &nbsp;&nbsp;&nbsp;&nbsp; ${ posting.recruitManCount } 명 채용
+		</div>
+		
+		<c:if test="${ not empty posting.recruitContractUnitValue and posting.recruitContractUnitValue > 0 }">
+			<div class="col-md-5 mb-2">
+				<b>계약 정보(단위) :</b> 
+				<c:if test="${ posting.contractYearUnit > 0 }"> ${ posting.contractYearUnit  } 년&nbsp;&nbsp;</c:if>
+				<c:if test="${ posting.contractMonthUnit > 0 }"> ${ posting.contractMonthUnit } 개월</c:if>
+			</div>
 		</c:if>
-		<c:if test="${ not empty companyStaffs }">
-			<c:forEach var="staff" items="${ companyStaffs }">
- 				<div class="card mb-1 p-1">
-					<div class="row p-1">
-						<div class="col-md-2" style="font-size: 1.0rem; margin-top : -4px;"><strong>${ staff.name }</strong></div>
-						<div class="col-md-3">부서/직급: ${ staff.part }/${ staff.position }</div>
-						<div class="col-md-5">E-mail : ${ staff.email }</div>
-					</div>
-					<div class="row p-1">
-						<div class="col-md-2">&nbsp;</div>
-						<div class="col-md-3">핸드폰 : ${ staff.phoneNo }</div>
-						<div class="col-md-5">회사연락처 : ${ staff.companyPhoneNo }</div>
-						
-					</div>
-					<div class="row p-1">
-						<div class="col-md-2">&nbsp;</div>
-						<div class="col-md-8">메모 : ${ staff.customerMemo }</div>
-						<div class="col-md-2">
-						<button type="button" class="btn btn-outline-secondary btn-sm float-right" onclick="javascript: removeStaff(${staff.companyStaffSeq})">삭제</button>
-						<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" data-toggle="modal" data-target="#staffModifyModal" id="staffModifyModalBtn"
-						onclick="javascript: setCompanyStaffInfo(${staff.companyStaffSeq})">수정</button>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</c:if>
-		<br>
 	</div>
 	
-	<div class=" clearfix mb-4">
-		<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#staffAddModal" id="staffAddModalBtn">담당자 추가</button>
+	<c:if test="${ not empty posting.rewardType }">
+		<div class="row small">
+			<div class="col-md-6 mb-2">
+			<b>보상 정보 :</b>  ${ posting.rewardType.description } &nbsp;
+			
+			<c:if test="${ not empty posting.rewardMinPrice }">${ posting.rewardMinPrice } 만원 이상 </c:if>~ 
+			<c:if test="${ not empty posting.rewardMaxPrice }">${ posting.rewardMaxPrice } 만원 이하 </c:if>
+			</div>
+		</div>
+	</c:if>
+	<br>
+	<div class="row small">
+		<div class="col-md-5 mb-2">
+			<b> 학력 제한 : </b>
+			<c:if test="${ empty posting.needAcademicLevel }">없음</c:if>
+			<c:if test="${ not empty posting.needAcademicLevel }"> ${ posting.needAcademicLevel.description } 이상</c:if>
+		</div>
+		<div class="col-md-5 mb-2">
+			<b> 등급 제한 : </b>
+			<c:if test="${ empty posting.needFreeGrade }">없음</c:if>
+			<c:if test="${ not empty posting.needFreeGrade }"> ${ posting.needFreeGrade.description } 이상</c:if>
+		</div>
+	</div>
+	<div class="row small">
+		<div class="col-md-5 mb-2">
+			<b> 연차 제한 : </b>
+			<c:if test="${ empty posting.limitWorkYearMin and empty posting.limitWorkYearMax  }">없음</c:if>
+			<c:if test="${ not empty posting.limitWorkYearMin or not empty posting.limitWorkYearMax  }">
+				<c:if test="${ not empty posting.limitWorkYearMin }">${ posting.limitWorkYearMin } 년 이상</c:if>
+				<c:if test="${ not empty posting.limitWorkYearMax }"> ~  ${ posting.limitWorkYearMax } 년 이하 </c:if>
+			</c:if>
+		</div>
+		<div class="col-md-5 mb-2">
+			<b> 나이 제한 : </b>
+			<c:if test="${ empty posting.limitAgeMin and empty posting.limitAgeMax  }">없음</c:if>
+			<c:if test="${ not empty posting.limitAgeMin or not empty posting.limitAgeMax  }">
+				<c:if test="${ not empty posting.limitAgeMin }">${ posting.limitAgeMin } 년 이후 출생</c:if> 
+				<c:if test="${ not empty posting.limitAgeMax }">~ ${ posting.limitAgeMax } 년 이전 출생 </c:if>
+			</c:if>
+		</div>
+	</div>
+	<div class="row small">
+		<div class="col-md-10 mb-2">
+		<b> 필수 조건 : </b>
+		<c:forEach var="condition" items="${conditions}">
+			<c:if test="${ condition.conditionType eq 'REQUIRE' }">
+			&nbsp;&nbsp; ${ condition.advantageName } 
+			<c:if test="${ not empty condition.workmanship  }">
+				(${ condition.workmanship.description })
+			</c:if>
+			&nbsp;&nbsp;
+			</c:if>
+		</c:forEach>
+		</div>
+	</div>
+	<div class="row small">
+		<div class="col-md-10 mb-2">
+		<b> 우대 조건 : </b>
+		<c:forEach var="condition" items="${conditions}">
+			<c:if test="${ condition.conditionType ne 'REQUIRE' }">
+			&nbsp;&nbsp; ${ condition.advantageName }
+			<c:if test="${ not empty condition.workmanship  }">
+				(${ condition.workmanship.description })
+			</c:if>
+			</c:if>
+		</c:forEach>
+		</div>
+	</div>
+	<br>
+	<div class="row small">
+		<div class="col-md-3 mb-1"> 
+			<b>채용 안내:</b>
+		</div>
+	</div>
+	<div class="row small">
+		<div class="col-md-12 mb-2">
+			<textarea class="form-control form-control-sm small" aria-label="With textarea" rows="5" disabled="disabled">${ posting.recruitInfo }</textarea>
+		</div>
 	</div>
 	
+	<br>
+	<div class="row small">
+		<div class="col-md-3 mb-1"> 
+			<b>현재 담당: <mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ posting.mainManagerId }"/></b>
+		</div>
+	</div>
+	<div class="row small">
+		<div class="col-md-12 mb-2">
+			<textarea class="form-control form-control-sm small" aria-label="With textarea" rows="5" disabled="disabled">${ posting.managerMemo }</textarea>
+		</div>
+	</div>
+	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal"  id="postingModifyModalBtn">채용공고 수정</button>
+	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal"  id="postingModifyModalBtn">계약 진행</button>
+	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal"  id="postingModifyModalBtn">인재 찾기</button>
+	<br>
+ 
+	<br>
+	<br>
+	<br>
 	<form id="searchForm" action="/business/project/getCompanyProjectList.ldo" method="post" iframe-list-div="listDiv">
 		<input type="hidden" id="pageInput" name="page" value="1"/>
-		<input type="hidden" id="companySeqInput" name="companySeq" value="${ company.companySeq }">
+		<input type="hidden" id="postingSeqInput" name="postingSeq" value="${ posting.postingSeq }">
 	</form>
 	<input type="hidden" id="subMeneTypeInput" name="subMenuType" value="project">
 	<div class="card text-center">
 		<div class="card-header small">
 	    	<ul class="nav nav-tabs card-header-tabs">
 	      		<li class="nav-item">
-	        		<a class="nav-link active" id="nav-link-project" href="javascript:changeSubMenu('project')">프로젝트 정보</a>
+	        		<a class="nav-link active" id="nav-link-suggetion" href="javascript:changeSubMenu('suggetion')">제안 관리</a>
 	      		</li>
 	      		<li class="nav-item">
-	        		<a class="nav-link" id="nav-link-posting" href="javascript:changeSubMenu('posting')">채용 공고</a>
+	        		<a class="nav-link" id="nav-link-applyto" href="javascript:changeSubMenu('applyto')">지원 현황</a>
 	      		</li>
 	      		<li class="nav-item">
 	        		<a class="nav-link" id="nav-link-contract" href="javascript:changeSubMenu('contract')">계약 정보</a>
@@ -106,197 +239,8 @@
 	</div>
 	<br>
 	<div class="clearfix mb-4">
-		<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" onclick="javascript: location.href = '/business/company/main.do'">목록으로..</button>
+		<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" onclick="javascript: location.href = '/recruit/posting/main.do'">목록으로..</button>
 	</div>
-</div>
-
-
-<div class="modal fade" id="staffAddModal" tabindex="-1" role="dialog" aria-labelledby="staffAddModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-    	<div class="modal-content">
-     		<div class="modal-header  text-white bg-info">
-        	<h5 class="modal-title" id="staffAddModalLabel"><b>담당자 추가</b></h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      		</div>
-			
-			<div class="modal-body">
-				<div class="container-fluid">
-					<div class="card">
-						<div class="card-header">
-      						<span class="text-muted small">추가할 담당자 정보를 입력해 주세요.</span>
-						</div>
-						<div class="card-body"> 
-					        <div class="form-row">
-								<div class="form-group col-md-5 mb-3">
-					                <label for="companyStaffName" class="col-form-label-sm">담당자명</label>
-					                <input type="text" class="form-control form-control-sm w-75" id="companyStaffName">
-					        	</div>
-					            <div class="form-group col-md-3 mb-3">
-					              	<label for="companyStaffPart" class="col-form-label-sm">부서<span class="text-muted">(Optional)</span></label>
-					                <input type="text" class="form-control form-control-sm" id="companyStaffPart" value="">
-					        	</div>
-					            <div class="form-group col-md-3 mb-3">
-					              	<label for="companyStaffPosition" class="col-form-label-sm">직급<span class="text-muted">(Optional)</span></label>
-					                <input type="text" class="form-control form-control-sm" id="companyStaffPosition" value="">
-					        	</div>
-					       	</div> 	
-					       	<div class="form-row">
-								<div class="form-group col-md-5 mb-3">
-					            	<label for="companyStaffPhone" class="col-form-label-sm">개인연락처</label>
-					            	<input type="text" class="form-control form-control-sm w-75" id="companyStaffPhone" value="">
-					        	</div>
-					            <div class="form-group col-md-5 mb-3">
-					            	<label for="companyStaffComPhone" class="col-form-label-sm">회사연락처<span class="text-muted">(Optional)</span></label>
-					                <input type="text" class="form-control form-control-sm" id="companyStaffComPhone"  value="">
-					        	</div>
-					       	</div>
-						   	<div class="form-row">
-								<div class="form-group col-md-5 mb-3">
-					            	<label for="companyStaffEmail" class="col-form-label-sm w-75">E-mail<span class="text-muted">(Optional)</span></label>
-					            	<input type="text" class="form-control form-control-sm" id="companyStaffEmail"  value="">
-					        	</div>
-					       	</div>
-							<div class="form-row">
-								<div class="form-group col-md-10 mb-3">
-									<label for="companyStaffMemo" class="col-form-label-sm">메모</label>
-									<textarea class="form-control form-control-sm" id="companyStaffMemo" aria-label="With textarea" rows="3"></textarea>
-								</div>
-					        </div>
-						</div>
-					</div> 
-  				</div>
-			</div>
-    		<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
-        	<button type="button" class="btn btn-primary btn-sm" onclick="javascript:staffAddProc();">등록</button>
-      		</div>
-    	</div>
-  	</div>
-</div>
-
-<div class="modal fade" id="staffModifyModal" tabindex="-1" role="dialog" aria-labelledby="staffModifyModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-    	<div class="modal-content">
-     		<div class="modal-header  text-white bg-info">
-        	<h5 class="modal-title" id="staffModifyModalLabel"><b>담당자 변경</b></h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      		</div>
-			
-			<div class="modal-body">
-				<div class="container-fluid">
-					<div class="card">
-						<div class="card-header">
-      						<span class="text-muted small">담당자 정보를 변경해 주세요.</span>
-						</div>
-						<div class="card-body">
-							<input type="hidden" class="form-control form-control-sm w-75" id="companyStaffSeq">
-					        <div class="form-row">
-								<div class="form-group col-md-5 mb-3">
-					                <label for="companyStaffName" class="col-form-label-sm">담당자명</label>
-					                <input type="text" class="form-control form-control-sm w-75" id="companyStaffNameModify">
-					        	</div>
-					            <div class="form-group col-md-3 mb-3">
-					              	<label for="companyStaffPart" class="col-form-label-sm">부서<span class="text-muted">(Optional)</span></label>
-					                <input type="text" class="form-control form-control-sm" id="companyStaffPartModify" value="">
-					        	</div>
-					            <div class="form-group col-md-3 mb-3">
-					              	<label for="companyStaffPosition" class="col-form-label-sm">직급<span class="text-muted">(Optional)</span></label>
-					                <input type="text" class="form-control form-control-sm" id="companyStaffPositionModify" value="">
-					        	</div>
-					       	</div> 	
-					       	<div class="form-row">
-								<div class="form-group col-md-5 mb-3">
-					            	<label for="companyStaffPhone" class="col-form-label-sm">개인연락처</label>
-					            	<input type="text" class="form-control form-control-sm w-75" id="companyStaffPhoneModify" value="">
-					        	</div>
-					            <div class="form-group col-md-5 mb-3">
-					            	<label for="companyStaffComPhone" class="col-form-label-sm">회사연락처<span class="text-muted">(Optional)</span></label>
-					                <input type="text" class="form-control form-control-sm" id="companyStaffComPhoneModify"  value="">
-					        	</div>
-					       	</div>
-						   	<div class="form-row">
-								<div class="form-group col-md-5 mb-3">
-					            	<label for="companyStaffEmail" class="col-form-label-sm w-75">E-mail<span class="text-muted">(Optional)</span></label>
-					            	<input type="text" class="form-control form-control-sm" id="companyStaffEmailModify"  value="">
-					        	</div>
-					       	</div>
-							<div class="form-row">
-								<div class="form-group col-md-10 mb-3">
-									<label for="companyStaffMemo" class="col-form-label-sm">메모</label>
-									<textarea class="form-control form-control-sm" id="companyStaffMemoModify" aria-label="With textarea" rows="3"></textarea>
-								</div>
-					        </div>
-						</div>
-					</div> 
-  				</div>
-			</div>
-    		<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
-        	<button type="button" class="btn btn-primary btn-sm" onclick="javascript:staffModifyProc();">변경</button>
-      		</div>
-    	</div>
-  	</div>
-</div>
-
-
-<div class="modal fade" id="companyModifyModal" tabindex="-1" role="dialog" aria-labelledby="companyModifyModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-    	<div class="modal-content">
-     		<div class="modal-header  text-white bg-info">
-        	<h5 class="modal-title" id="companyModifyModalLabel"><b>업체 기본정보 변경</b></h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      		</div>
-			
-			<div class="modal-body">
-				<div class="container-fluid">
-					<div class="card">
-						<div class="card-header">
-      						<span class="text-muted small">업체 기본 정보를 변경해 주세요.</span>
-						</div>
-						<div class="card-body">
-							<input type="hidden" class="form-control form-control-sm w-75" id="companyStaffSeq">
-					        <div class="form-row">
-					        	<div class="form-group col-md-5 mb-3">
-					                <label for="companyName" class="col-form-label-sm">업체명</label>
-					                <input type="text" class="form-control form-control-sm w-75" id="companyName" value="${ company.companyName }">
-					        	</div>
-					            <div class="form-group col-md-3 mb-3">
-					              	<label for="companyBizNo" class="col-form-label-sm">사업자번호</label>
-					                <input type="text" class="form-control form-control-sm" id="companyBizNo" value="${ company.bizNo }">
-					        	</div>
-					       	</div> 	
-					       	<div class="form-row">
-								<div class="form-group col-md-2 mb-3">
-					                <label for="companySido" class="col-form-label-sm">주소</label>
-					                <select class="custom-select custom-select-sm d-block w-100" id="companySido"  onchange="javascript: getSiGunGuTypeReg('sigungu');">
-									    <mt:enumOptions enumClass="SidoType" emptyValueName="시/도 " selectedValue="${ company.sido }"/>
-								  	</select>
-								</div>
-								<div class="form-group col-md-3 mb-3">
-					                <label for="companySigungu" class="col-form-label-sm">&nbsp;</label>
-					                <select class="custom-select custom-select-sm d-block w-100" id="companySigungu" >
-					                	<option value="">시/도를 선택해 주세요.</option>
-								  	</select>
-								</div>
-								<div class="form-group col-md-7 mb-3">
-					                <label for="companyAddrDetail" class="col-form-label-sm">상세주소</label>
-					 				<input type="text" class="form-control form-control-sm" id="companyAddrDetail" placeholder="" value="${ company.detailAddr }">
-								</div>
-					       	</div> 
-							<div class="form-row">
-								<label for="companyCutomerMemo" class="col-form-label-sm">업체 메모</label>
-								<textarea class="form-control form-control-sm" id="companyCutomerMemo" aria-label="With textarea" rows="3">${ company.customerMemo }</textarea>
-					        </div>
-						</div>
-					</div> 
-  				</div>
-			</div>
-    		<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
-        	<button type="button" class="btn btn-primary btn-sm" onclick="javascript:companyModifyProc();">변경</button>
-      		</div>
-    	</div>
-  	</div>
 </div>
 
 </main>
@@ -308,9 +252,28 @@ $(document).ready(function() {
 
 });
 
-function registerProjectPosting(companySeq, projectSeq) {
-	location.href = '/recruit/posting/registPosting.do?companySeq=' + companySeq + '&projectSeq=' + projectSeq;
+function changeSubMenu(type, aTagObj) {
+	if (type == $('#subMeneTypeInput').val()) {
+		return;
+	}
+
+	$('#subMeneTypeInput').val(type);
+	
+	$('.nav-link').removeClass('active');
+	$('#nav-link-' + type).addClass('active');
+	
+ 	if (type == 'suggetion'){
+ 		$('#searchForm').attr('action','/business/project/getCompanyProjectList.ldo');	
+ 		
+ 	} else if (type == 'applyto'){
+ 		$('#searchForm').attr('action','/recruit/posting/getCompanyPostingList.ldo');	
+ 		
+ 	} else {
+ 		$('#searchForm').attr('action','/' + type);		
+ 	}
+	$('#searchForm').submit();
 }
+
 </script>
 
  
