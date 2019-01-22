@@ -200,6 +200,7 @@
     $(function () {
 		'use strict'
 		
+		COMMON.dateFormat();
 		COMMON.ajax({
 		    url : '/common/getAllSiGunGu.json',
 		    successHandler : function(data){

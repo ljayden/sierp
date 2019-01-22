@@ -8,26 +8,19 @@
 <table class="table h3 small text-center">
 	<thead class="thead-dark" style="borde : 1px">
 	    	<tr>
-	    		<th scope="col">선택</th>
 	      		<th scope="col">진행상태</th>
-	      		<th scope="col">마감일</th>
-	      		<th scope="col">게시상태</th>
-	      		<th scope="col">공고명</th>
-	      		<th scope="col" class="">채용구분</th>
-	      		<th scope="col">업체</th>
+	      		<th scope="col">채용공고명</th>
+	      		<th scope="col">공고 마감일</th>
+	      		<th scope="col">이름</th>
+	      		<th scope="col" class="">제안일</th>
 	      		<th scope="col">담당자</th>
+	      		<th scope="col"> - </th>
 	    	</tr>
   	</thead>
   	<tbody>
   		<c:if test="${ not empty searchList }">
 	 		<c:forEach var="posting" items="${ searchList }">
 		    	<tr>
-		    		<th class="">
-				  	<div class="custom-control custom-checkbox small mt-m080">
-				    	<input type="checkbox" class="custom-control-input" name="selectPosting" value="${ posting.postingSeq }" id="select_posting_${ posting.postingSeq }" >
-				    	<label class="custom-control-label" for="select_posting_${ posting.postingSeq }"></label>
-				  	</div>
-		    		</th>
 		      		<th scope="row">${ posting.status.description }</th>
 		      		<td>
 		      			<c:if test="${ posting.endLeftDay eq -2 }"> - </c:if>

@@ -140,7 +140,7 @@
                 <label for="rewardType" class="col-form-label-sm">보상 정보<span class="text-muted">(Optional)</span> </label>
                 <div>
 					<select class="custom-select custom-select-sm d-block w-25 float-left"  id="rewardType" onchange="javascript : changeRewardType();">
-	                	<mt:enumOptions enumClass="RewardType" emptyValueName="없음" selectedValue="MONTH"></mt:enumOptions>
+	                	<mt:enumOptions enumClass="RewardType" emptyValueName="비공개" selectedValue="MONTH"></mt:enumOptions>
 	                </select> 
 	                <input type="text" class="form-control form-control-sm w-25 float-left ml-2" id="rewardMinPrice" placeholder="만원 이상">
 	                <div class="float-left ">&nbsp; ~ &nbsp;</div>

@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class Pager {
 	
-	public static final int DEFAULT_PER_PAGE = 10;
+	public static final int DEFAULT_PER_PAGE = 20;
 	public static final int DEFAULT_INDEX_SIZE = 10;
 	
     private int perPage = DEFAULT_PER_PAGE; // 한페이지에 노출될 데이터 갯수

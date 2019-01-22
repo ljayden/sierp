@@ -7,11 +7,11 @@
 
 <main role="main" class="container">
 
-	<form id="searchForm" action="/recruit/posting/getMainList.ldo" method="post" iframe-list-div="listDiv">
+	<form id="searchForm" action="/recruit/suggestion/getMainList.ldo" method="post" iframe-list-div="listDiv">
 	<input type="hidden" id="pageInput" name="page" value="1"/>
 
 	<div class="my-3 p-3 bg-white rounded shadow">
-		<div class="" id="searchTap">
+		<div class="searchFormToggle" id="searchTap">
 			
 			<div class="row">
 				<div class="input-group input-group-sm col-md-6 mb-3">
@@ -33,40 +33,46 @@
 			</div>
 			
 			<div class="row">
-				<div class="input-group input-group-sm col-md-6 mb-3 small">
+				<div class="input-group input-group-sm col-md-6 mb-3">
 				 	<div class="input-group-prepend">
 				    	<label class="input-group-text w80" for="">상태</label>
 				  	</div>
 				  	
 				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3">
-				    	<input type="checkbox" class="custom-control-input" name="status" value="ING" id="statusIng" checked="checked">
-				    	<label class="custom-control-label" for="statusIng">진행</label>
+				    	<input type="checkbox" class="custom-control-input" name="status" value="ING" id="statusReady" checked="checked">
+				    	<label class="custom-control-label custom-control-label-sm" for="statusReady">진행</label>
 				  	</div>
 				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
-				    	<input type="checkbox" class="custom-control-input" name="status" value="CONTRACT" id="statusContract">
-				    	<label class="custom-control-label" for="statusContract">계약</label>
+				    	<input type="checkbox" class="custom-control-input" name="status" value="CONTRACT" id="statusIng" checked="checked">
+				    	<label class="custom-control-label custom-control-label-sm" for="statusIng">계약</label>
 				  	</div>
 				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
 				    	<input type="checkbox" class="custom-control-input" name="status" value="END" id="statusEnd">
 				    	<label class="custom-control-label" for="statusEnd">종료</label>
 				  	</div>
 				</div>
-				<div class="input-group input-group-sm col-md-3 mb-3">
-				 	<div class="input-group-prepend">
-				    	<label class="input-group-text w80" for="mainManagerId">담당자</label>
+				
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
+			    		<span class="input-group-text w80" id="search-name">게시 여부</span>
+			  		</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
+				    	<input type="radio" class="custom-control-input" name="postingYn" value="" id="postingAll" checked="checked">
+				    	<label class="custom-control-label" for="postingAll">전체</label>
 				  	</div>
-					<select class="custom-select custom-select-sm" id="mainManagerId" name="mainManagerId">
-						<option value="">전체</option>
-	                	<c:forEach var="manager" items="${ managerList }" >
-	                		<option value="${ manager.id }">${ manager.name }</option>
-	                	</c:forEach>
-			  		</select>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
+				    	<input type="radio" class="custom-control-input" name="postingYn" value="Y" id="postingY" >
+				    	<label class="custom-control-label" for="postingY">게시건만</label>
+				  	</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-4">
+				    	<input type="radio" class="custom-control-input" name="postingYn" value="N" id="postingN" >
+				    	<label class="custom-control-label" for="postingN">미 게시건만</label>
+				  	</div>
 				</div>
-				<div class="input-group input-group-sm col-md-3 mb-3"></div>
 			</div>
 			
 			
-			<div class="row searchFormToggle">
+			<div class="row">
 				<div class="input-group input-group-sm col-md-3 mb-3">
  					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id="freelancerGrade">요구 등급</span>
@@ -87,7 +93,7 @@
 			</div>	  
 			    
 			    
-			<div class="row searchFormToggle">
+			<div class="row">
 				<div class="input-group input-group-sm col-md-3 mb-3">
  					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id="search-recruit-type">채용구분</span>
@@ -105,8 +111,8 @@
 				</div>
 			</div>    
 			
-			<div class="row searchFormToggle">
-				<div class="input-group input-group-sm col-md-10 mb-3 small">
+			<div class="row">
+				<div class="input-group input-group-sm col-md-10 mb-3">
 				 	<div class="input-group-prepend">
 				    	<label class="input-group-text w80" for="">재택여부</label>
 				  	</div>
@@ -129,25 +135,19 @@
 				</div>
 			</div>
 
-			<div class="row searchFormToggle">
-				<div class="input-group input-group-sm col-md-6 mb-3 small">
-					<div class="input-group-prepend">
-			    		<span class="input-group-text w80" id="search-name">게시 여부</span>
-			  		</div>
-				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
-				    	<input type="radio" class="custom-control-input" name="postingYn" value="" id="postingAll" checked="checked">
-				    	<label class="custom-control-label" for="postingAll">전체</label>
+			<div class="row">
+				<div class="input-group input-group-sm col-md-3 mb-3">
+				 	<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="mainManagerId">담당자</label>
 				  	</div>
-				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
-				    	<input type="radio" class="custom-control-input" name="postingYn" value="Y" id="postingY" >
-				    	<label class="custom-control-label" for="postingY">게시건만</label>
-				  	</div>
-				  	<div class="custom-control custom-radio mb-1 mt-1 ml-4">
-				    	<input type="radio" class="custom-control-input" name="postingYn" value="N" id="postingN" >
-				    	<label class="custom-control-label" for="postingN">미 게시건만</label>
-				  	</div>
+					<select class="custom-select custom-select-sm" id="mainManagerId" name="mainManagerId">
+						<option value="">전체</option>
+	                	<c:forEach var="manager" items="${ managerList }" >
+	                		<option value="${ manager.id }">${ manager.name }</option>
+	                	</c:forEach>
+			  		</select>
 				</div>
-
+				<div class="input-group input-group-sm col-md-3 mb-3"></div>
 				<div class="input-group input-group-sm col-md-6 mb-3">
  					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id=" ">파트너 공고</span>
@@ -158,7 +158,7 @@
 				</div>
 			</div>
   		</div>
-  		<div class="d-inline clearfix ">
+  		<div class="d-inline clearfix">
   			<button type="button" class="btn btn-outline-secondary btn-sm float-right searchFormToggle" id="searchFormOpenBtn">상세 검색 열기</button>
   			<button type="button" class="btn btn-outline-secondary btn-sm float-right searchFormToggle ml-2" id="searchFormCloseBtn">상세 검색 닫기</button>
   			<button type="button" class="btn btn-outline-danger btn-sm float-right searchFormToggle mr-2" id="searchResetBtn">검색 초기화</button>
@@ -177,10 +177,7 @@
   		</div>
  	</div>
 	</form>
-  	
-  	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">채용공고 등록하기</button>
-  	<button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">인재찾기</button>
-  	<button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">채용공고 발송</button>
+
   	<div class="mt-2" id="listDiv">
   	</div>
 
@@ -205,76 +202,14 @@ $(document).ready(function() {
     $('#searchResetBtn').on('click', function () {
     	formReset();
     });
-    
-    $('#workWhereAll').on('click', function () {
-    	if ($(this).is(':checked')) {
-    		//전체를 체크했으니 다 풀자
-    		$('#workWhereOffice').prop('checked', true);
-    		$('#workWhereOfficeHome').prop('checked', true);
-    		$('#workWhereHome').prop('checked', true);
-    	} else {
-    		$('#workWhereOffice').prop('checked', false);
-    		$('#workWhereOfficeHome').prop('checked', false);
-    		$('#workWhereHome').prop('checked', false);
-    	}
-    });
-    
-    $('#workWhereOffice').on('click', function () {
-    	if (!$(this).is(':checked')) {
-    		if ( !$('#workWhereOfficeHome').is(':checked') && !$('#workWhereOfficeHome').is(':checked')) {
-    			$('#workWhereAll').prop('checked', true);
-    		} else {
-        		$('#workWhereAll').prop('checked', false);
-    		}
-    	} else {
-    		if ( $('#workWhereOfficeHome').is(':checked') && $('#workWhereOfficeHome').is(':checked')) {
-    			$('#workWhereAll').prop('checked', true);
-    		} else {
-        		$('#workWhereAll').prop('checked', false);
-    		}
-    	}
-    });
-    
-    $('#workWhereOfficeHome').on('click', function () {
-    	if (!$(this).is(':checked')) {
-    		if ( !$('#workWhereOffice').is(':checked') && !$('#workWhereHome').is(':checked')) {
-    			$('#workWhereAll').prop('checked', true);
-    		} else {
-        		$('#workWhereAll').prop('checked', false);
-    		}
-    	} else {
-    		if ( $('#workWhereOffice').is(':checked') && $('#workWhereHome').is(':checked')) {
-    			$('#workWhereAll').prop('checked', true);
-    		} else {
-        		$('#workWhereAll').prop('checked', false);
-    		}
-    	}
-    });
-    
-    $('#workWhereHome').on('click', function () {
-    	if (!$(this).is(':checked')) {
-    		if ( !$('#workWhereOffice').is(':checked') && !$('#workWhereOfficeHome').is(':checked')) {
-    			$('#workWhereAll').prop('checked', true);
-    		} else {
-        		$('#workWhereAll').prop('checked', false);
-    		}
-    	} else {
-    		if ( $('#workWhereOffice').is(':checked') && $('#workWhereOfficeHome').is(':checked')) {
-    			$('#workWhereAll').prop('checked', true);
-    		} else {
-        		$('#workWhereAll').prop('checked', false);
-    		}
-    	}
-    });
 });
 
-	
 function formReset() {
 
 	$('#searchTap select, input[type="text"]').val('');
 	$('#pageInput').val('1');
+	$('#statusReady').prop('checked',true);
 	$('#statusIng').prop('checked',true);
-	$('#statusContract').prop('checked',false);
 	$('#statusEnd').prop('checked',false);
 	
 	$('#postingAll').prop('checked',true);
@@ -291,29 +226,19 @@ function goPage(page) {
 }
 
 function selectSomethingEnd() {
-	addDay(Number($('#endDayInput').val()));
+	
 }
 
 function selectMonthEnd() {
-	var now = new Date();
-	var last = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-	var str = last.format('yyyy-MM-dd');
-	$('#closeEnd').val(str);
+	
 }
 
 function selectWeekEnd() {
-	addDay(7 - new Date().getDay());
+	
 }
 
 function select7DayEnd() {
-	addDay(7);
-}
-
-function addDay(day) {
-	var now = new Date();
-	now.setDate(now.getDate() + day);
-	var str = now.format('yyyy-MM-dd');
-	$('#closeEnd').val(str);
+	
 }
 </script>
 <!-- TODO 파트너사 넣자 -->
