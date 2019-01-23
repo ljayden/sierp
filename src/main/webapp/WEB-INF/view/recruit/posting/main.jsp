@@ -179,10 +179,72 @@
 	</form>
   	
   	<button type="button" class="btn btn-success btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">채용공고 등록하기</button>
-  	<button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">인재찾기</button>
-  	<button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript:location.href = '/recruit/posting/registPosting.do'">채용공고 발송</button>
+  	<button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript: recommandWorker();" id="recommandWorkerBtn" disabled="disabled">맞춤 인재 찾기</button>
+  	<button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript: findWorker();" id="findWorkerBtn" disabled="disabled">인재 참기</button>
+  	<button type="button" class="btn btn-outline-primary btn-sm " onclick="javascript: sendPosting();" id="sendPostingBtn" disabled="disabled">채용공고 발송</button>
   	<div class="mt-2" id="listDiv">
   	</div>
+
+<div class="modal fade" id="recommandWorkerModal" tabindex="-1" role="dialog" aria-labelledby="recommandWorkerModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+     		<div class="modal-header  text-white bg-info">
+        		<h5 class="modal-title" id="recommandWorkerModalLabel"><b>"<span id="recomModalTitle"></span>" 의 채용 조건</b></h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      		</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="card">
+						<div class="card-header">
+      						<span class="text-muted small">검색 조건을 확인해 주세요.</span>
+						</div>
+						<div class="card-body p-2">
+ 							
+							<div class="form-row" id="recomModalNeedAcademic">
+					        	<div class="input-group input-group-sm col-md-5 mb-3  ">
+								  	<div class="custom-control custom-checkbox small mt-m080 small">
+								    	<input type="checkbox" class="custom-control-input" name="selectPosting" value="${ posting.postingSeq }" id="select_posting_${ posting.postingSeq }" data_status="${ posting.status }" onclick="javascript : selectPosting(this.id);">
+								    	<label class="custom-control-label" for="select_posting_${ posting.postingSeq }"></label>
+								  	</div>
+	        						<div class="input-group-prepend">
+							    		<span class="input-group-text">학력 제한  : </span>
+							  		</div>
+					                <select class="custom-select custom-select-sm d-block w-50" style="font-weight: bold" id="needAcademicLevel">
+					                	<mt:enumOptions enumClass="AcademicLevel" emptyValueName="없음" optionNameSuffix=" 이상"></mt:enumOptions>
+					                </select>
+					        	</div>
+					        	<div class="form-group col-md-1 mb-3"></div>
+ 							</div>
+ 
+							<div class="form-row" id="recomModalNeedFreeGrade">
+					        	<div class="input-group input-group-sm col-md-5 mb-3  ">
+								  	<div class="custom-control custom-checkbox small mt-m080 small">
+								    	<input type="checkbox" class="custom-control-input" name="selectPosting" value="${ posting.postingSeq }" id="select_posting_${ posting.postingSeq }" data_status="${ posting.status }" onclick="javascript : selectPosting(this.id);">
+								    	<label class="custom-control-label" for="select_posting_${ posting.postingSeq }"></label>
+								  	</div>
+	        						<div class="input-group-prepend">
+							    		<span class="input-group-text">등급 제한  : </span>
+							  		</div>
+					                <select class="custom-select custom-select-sm d-block w-50" style="font-weight: bold" id="needFreeGrade">
+					                	<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="없음" optionNameSuffix=" 이상"></mt:enumOptions>
+					                </select>
+					        	</div>
+					        	<div class="form-group col-md-1 mb-3"></div>
+ 							</div>
+ 							
+ 							
+ 							<button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript: findWorker();" id="findWorkerBtn" disabled="disabled">위 조건으로 찾기</button>
+ 
+						</div>
+					</div> 
+  				</div>
+			</div>
+    		<div class="modal-footer">
+        		<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">닫기</button>
+      		</div>
+    	</div>
+  	</div>
+</div>  
 
 <script>
 $(document).ready(function() {
@@ -315,5 +377,68 @@ function addDay(day) {
 	var str = now.format('yyyy-MM-dd');
 	$('#closeEnd').val(str);
 }
+
+var selectedValidPosting;
+
+function selectPosting() {
+	selectedValidPosting = new Array();
+	$('input[name="selectPosting"]:checked').each(function(i, posting) {
+		if ($(this).attr('data_status') == 'ING' ) {
+			selectedValidPosting.push($(this).val());
+		}
+	});
+	
+	if (selectedValidPosting.length == 0) {
+		//선택한 공고가 하나도 없다면..
+		$('#recommandWorkerBtn').prop('disabled',true);
+		$('#findWorkerBtn').prop('disabled',true);
+		$('#sendPostingBtn').prop('disabled',true);
+	} else {
+		$('#findWorkerBtn').prop('disabled',false);
+		$('#sendPostingBtn').prop('disabled',false);
+		if (selectedValidPosting.length > 1) {
+			//한개 이상 선택
+			$('#recommandWorkerBtn').prop('disabled',true);
+		} else {
+			//한개 선택
+			$('#recommandWorkerBtn').prop('disabled',false);
+		}
+	}
+}
+
+function recommandWorker() {
+	//선택한 공고로 팝업을 띄우자..
+	var postingSeq = selectedValidPosting[0];
+	
+	COMMON.ajax({
+   		url : '/recruit/posting/getPosting.json?postingSeq=' + postingSeq,
+   		successHandler : function(data){
+  			var posting = data.result;
+  			
+  			$('#recomModalTitle').text(posting.postingTitle);
+  			
+  			if (posting.needAcademicLevel != null) {
+  				//학력 제한 보이게 하기, 체크넣기
+  			}
+  			//학력 제한
+  			//등급제한
+  			//연차제한
+  			//나이제한
+  			//상주가능, 반상주 재택 여부
+  			//필요조건이 있는 사람
+   			$('#recommandWorkerModal').modal('show');
+   			
+		}
+	});
+   	
+}
+
+function findWorker() {
+	
+}
+
+function sendPosting() {
+	
+}
+
 </script>
-<!-- TODO 파트너사 넣자 -->

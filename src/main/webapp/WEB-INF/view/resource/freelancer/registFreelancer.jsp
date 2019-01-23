@@ -92,7 +92,7 @@
 			</div>
 			<div class="form-group col-md-7 mb-3">
                 <label for="addrDetail" class="col-form-label-sm">상세주소<span class="text-muted">(Optional)</span></label>
- 				<input type="text" class="form-control form-control-sm" id="addrDetail" placeholder="ex: 강남구청역 푸르지오">
+ 				<input type="text" class="form-control form-control-sm" id="addrDetail" placeholder="ex: 상세주소 or 지명">
 			</div>
 		</div>
 		<hr class="mb-4">

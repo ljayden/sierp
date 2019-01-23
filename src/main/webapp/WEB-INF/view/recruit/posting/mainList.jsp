@@ -24,7 +24,7 @@
 		    	<tr>
 		    		<th class="">
 				  	<div class="custom-control custom-checkbox small mt-m080">
-				    	<input type="checkbox" class="custom-control-input" name="selectPosting" value="${ posting.postingSeq }" id="select_posting_${ posting.postingSeq }" >
+				    	<input type="checkbox" class="custom-control-input" name="selectPosting" value="${ posting.postingSeq }" id="select_posting_${ posting.postingSeq }" data_status="${ posting.status }" onclick="javascript : selectPosting(this.id);">
 				    	<label class="custom-control-label" for="select_posting_${ posting.postingSeq }"></label>
 				  	</div>
 		    		</th>

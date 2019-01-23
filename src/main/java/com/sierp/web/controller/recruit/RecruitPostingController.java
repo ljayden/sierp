@@ -111,4 +111,16 @@ public class RecruitPostingController {
 		
 		return "recruit/posting/viewPosting";
 	}
+	
+	@RequestMapping(value = "/getPosting", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult getPosting(CustomerManager manager, @RequestParam(name = "postingSeq") int postingSeq) {
+
+		PostingJoin posting = postingDao.selectPostingJoin(postingSeq);
+		if (posting.getCustomerSeq() != manager.getCustomerSeq()) {
+			throw new RuntimeException("권한이 없다");
+		}
+
+		return JsonResults.success(posting);
+	}
 }

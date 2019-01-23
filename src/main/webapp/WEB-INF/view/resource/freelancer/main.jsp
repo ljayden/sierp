@@ -14,37 +14,69 @@
 	<input type="hidden" id="skillsetInput" name="skillsets" value=""/>
 	
 	<div class="my-3 p-3 bg-white rounded shadow">
-		<div class="searchFormToggle" id="searchTap">
+		<div class="" id="searchTap">
+			<div class="row">
+				<div class="input-group input-group-sm col-md-12 mb-1 small d-inline clearfix">
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3 float-right">
+				    	<input type="checkbox" class="custom-control-input " name="status" value="ING" id="statusIng" checked="checked">
+				    	<label class="custom-control-label " for="statusIng">구직 거절 제외하고 검색</label>
+				  	</div>
+				</div>
+			</div>
+				
 			<div class="row">
 				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
 			    		<span class="input-group-text w80 " id="search-name">등록일</span>
 			  		</div>
-			  		<input type="text" class="form-control" id="" name="" aria-label="시작일" aria-describedby="">
+			  		<input type="text" class="form-control" id="regStart" name="" aria-label="시작일" aria-describedby="">
 			  		&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
-			  		<input type="text" class="form-control" id="" name="" aria-label="종료일" aria-describedby="">
+			  		<input type="text" class="form-control" id="regEnd" name="" aria-label="종료일" aria-describedby="">
 				</div>
 				<div class="input-group input-group-sm col-md-6 mb-3">
-			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" >지난주</button>
-			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" >지난달</button>
-			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-4" >오늘</button>
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" onclick="javascript: selectMonthEnd();">이번달</button>
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-2" onclick="javascript: selectWeekEnd();">이번주</button>
+			  		<button type="button" class="btn btn-outline-secondary btn-sm mr-4" onclick="javascript: select7DayEnd();">7일간</button>
 			  		
-			  		<input type="text" style="font-size: 90%" id="" name="" size=2 aria-label="" aria-describedby="">
-			  		<button type="button" class="btn btn-outline-secondary btn-sm" >일 간</button>
+			  		<input type="text" style="font-size: 90%" id="endDayInput"  size=2 aria-label="" aria-describedby="">
+			  		<button type="button" class="btn btn-outline-secondary btn-sm" onclick="javascript: selectSomethingEnd();">일 간</button>
 				</div>
 			</div>
 			<div class="row">
-				<div class="input-group input-group-sm col-md-3 mb-3">
+				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id="search-name">이름</span>
 			  		</div>
 			  		<input type="text" class="form-control" id="name" name="name" aria-label="검색할 이름을 입력해 주세요." aria-describedby="search-name">
 				</div>
-				<div class="input-group input-group-sm col-md-3 mb-3">
+				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
-			    		<span class="input-group-text w80" id="search-age">나이</span>
+			    		<span class="input-group-text w80" id="search-email">이메일</span>
 			  		</div>
-			  		<input type="text" class="form-control" id="age" name="age" placeholder="yyyy" aria-label="생년월 입력해 주세요."  aria-describedby="search-age">
+			  		<input type="text" class="form-control" id="email" name="email" placeholder="" aria-label="이메일을 입력해 주세요."  aria-describedby="search-email">
+				</div>
+			</div>
+			
+			<div class="row searchFormToggle">
+				<div class="input-group input-group-sm col-md-6 mb-3">
+					<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="search-age">나이</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="minAge" name="minAge" onchange="javascript: changeMinAge()">
+	                	<option value="" selected="selected">전체</option>
+	                	<option value="NULL">없음</option>
+	 					<c:forEach var="year" begin="1965" end="2000" step="1">
+					    	<option value="${year}">${year}</option>
+					    </c:forEach>
+				  	</select>
+				  	&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
+					<select class="custom-select custom-select-sm" id="maxAge" name=maxAge onchange="javascript: changeMaxAge()">
+	                	<option value="" selected="selected">전체</option>
+	                	<option value="NULL">없음</option>
+	 					<c:forEach var="year" begin="1965" end="2000" step="1">
+					    	<option value="${year}">${year}</option>
+					    </c:forEach>
+				  	</select>
 				</div>
 				<div class="input-group input-group-sm col-md-6 mb-3">
 			  		<div class="input-group-prepend ">
@@ -58,39 +90,48 @@
 			  		</select>
 			  	</div>
 			</div>
-			<div class="row">
-				<div class="input-group input-group-sm col-md-3 mb-3">
-			  		<div class="input-group-prepend ">
-				    	<label class="input-group-text input-group-text-sm w80" for="workerExpertType">전문 영역</label>
-				  	</div>
-					<select class="custom-select custom-select-sm" id="workerExpertType" name="workerExpertType">
-						<mt:enumOptions enumClass="WorkerExpertType" emptyValueName="전체"></mt:enumOptions>
-				  	</select>
-				</div>
-				
-				<div class="input-group input-group-sm col-md-3 mb-3">
+			
+			<div class="row searchFormToggle">				
+				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
-				    	<label class="input-group-text w80" for="work-year-month">연차(만)</label>
+				    	<label class="input-group-text w80" for="">연차</label>
 				  	</div>
-					<input type="text" class="form-control" id="workYear" name="workYear" aria-label="" width="5" placeholder="년" aria-describedby="work-year-month">
-					<input type="text" class="form-control" id="workMonth" name="workMonth" aria-label="" width="5" placeholder="월" aria-describedby="work-year-month">
+					<select class="custom-select custom-select-sm" id="minWorkYear" name="minWorkYear" onchange="javascript: changeMinWorkYear()">
+	                	<option value="" selected="selected">전체</option>
+	           			<option value="NULL">없음</option>
+	 					<c:forEach var="year" begin="1" end="30" step="1">
+					    	<option value="${year}">${year}</option>
+					    </c:forEach>
+				  	</select>
+				  	&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
+					<select class="custom-select custom-select-sm" id="maxWorkYear" name="maxWorkYear" onchange="javascript: changeMaxWorkYear()">
+	                	<option value="" selected="selected">전체</option>
+	           			<option value="NULL">없음</option>
+	 					<c:forEach var="year" begin="1" end="30" step="1">
+					    	<option value="${year}">${year}</option>
+					    </c:forEach>
+				  	</select>
 				</div>
 				
 				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
-				    	<label class="input-group-text w80" for="minAcademicLevel">학력</label>
+				    	<label class="input-group-text w80" for="">학력</label>
 				  	</div>
-					<select class="custom-select custom-select-sm" id="minAcademicLevel" name="minAcademicLevel">
-						<mt:enumOptions enumClass="AcademicLevel" emptyValueName="전체" optionNameSuffix=" 이상"/>
+					<select class="custom-select custom-select-sm" id="minAcademic" name="minAcademic" onchange="javascript: changeMinAcademic()">
+						<option value="">전체</option>
+						<option value="NULL">없음</option>
+						<mt:enumOptions enumClass="AcademicLevel" optionNameSuffix=" 이상"/>
 				  	</select>
 				  	&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
-					<select class="custom-select custom-select-sm" id="maxAcademicLevel" name="maxAcademicLevel">
+					<select class="custom-select custom-select-sm" id="maxAcademic" name="maxAcademic" onchange="javascript: changeMaxAcademic()">
+						<option value="">전체</option>
+						<option value="NULL">없음</option>
 						<mt:enumOptions enumClass="AcademicLevel" emptyValueName="전체" optionNameSuffix=" 이하"/>
 				  	</select>
 				</div>
 			</div>
 			
-			<div class="row">
+			<div class="row searchFormToggle">
 				<div class="input-group input-group-sm col-md-3 mb-3">
 				 	<div class="input-group-prepend">
 				    	<label class="input-group-text w80" for="">계약상태</label>
@@ -112,20 +153,81 @@
 	                	<c:forEach var="manager" items="${ managerList }" >
 	                		<option value="${ manager.id }">${ manager.name }</option>
 	                	</c:forEach>
+	                	<option value="0">없음</option>
 			  		</select>
 				</div>
 				
-				<div class="input-group input-group-sm col-md-3 mb-3">
+				<div class="input-group input-group-sm col-md-6 mb-3">
 					<div class="input-group-prepend">
 				    	<label class="input-group-text w80" for="freeGrade">등급구분</label>
 				  	</div>
-					<select class="custom-select custom-select-sm" id="freeGrade" name="freeGrade">
-						<mt:enumOptions enumClass="FreelancerGrade" emptyValueName="전체"/>
+					<select class="custom-select custom-select-sm" id="minGrade" name="minGrade" onchange="javascript: changeMinGrade()">
+						<option value="">전체</option>
+						<option value="NULL">없음</option>
+						<mt:enumOptions enumClass="FreelancerGrade" optionNameSuffix=" 이상"/>
+				  	</select>
+				  	&nbsp;&nbsp;<b>~</b>&nbsp;&nbsp;
+					<select class="custom-select custom-select-sm" id="maxGrade" name="maxGrade" onchange="javascript: changeMaxGrade()">
+						<option value="">전체</option>
+						<option value="NULL">없음</option>
+						<mt:enumOptions enumClass="FreelancerGrade"  optionNameSuffix=" 이하"/>
 				  	</select>
 				</div>
 			</div>
 			
-			<div class="row">
+			<div class="row searchFormToggle">
+				<div class="input-group input-group-sm col-md-6 mb-3 small">
+				 	<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="">재택여부</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3">
+				    	<input type="checkbox" class="custom-control-input" value="" id="workWhereAll" checked="checked">
+				    	<label class="custom-control-label" for="workWhereAll">전체</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-3">
+				    	<input type="checkbox" class="custom-control-input" name="officeWorkYn" value="Y" id="workWhereOffice" >
+				    	<label class="custom-control-label" for="workWhereOffice">상주근무</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
+				    	<input type="checkbox" class="custom-control-input" name="officeHomeWorkYn" value="Y" id="workWhereOfficeHome">
+				    	<label class="custom-control-label" for="workWhereOfficeHome">반상주</label>
+				  	</div>
+				  	<div class="custom-control custom-checkbox mb-1 mt-1 ml-4">
+				    	<input type="checkbox" class="custom-control-input" name="homeWorkYn" value="Y" id="workWhereHome">
+				    	<label class="custom-control-label" for="workWhereHome">재택가능</label>
+				  	</div>
+				</div>
+				<div class="input-group input-group-sm col-md-6 mb-3 small">
+				 	<div class="input-group-prepend">
+				    	<label class="input-group-text w80" for="">남자</label>
+				  	</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
+				    	<input type="radio" class="custom-control-input" name="gender" value="" id="genderAll" checked="checked">
+				    	<label class="custom-control-label" for="genderAll">전체</label>
+				  	</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-3">
+				    	<input type="radio" class="custom-control-input" name="gender" value="M" id="genderM" >
+				    	<label class="custom-control-label" for="genderM">남자</label>
+				  	</div>
+				  	<div class="custom-control custom-radio mb-1 mt-1 ml-4">
+				    	<input type="radio" class="custom-control-input" name="gender" value="F" id="genderF" >
+				    	<label class="custom-control-label" for="genderF">여자</label>
+				  	</div>
+				</div>
+			</div>
+			
+			<div class="row searchFormToggle">
+				<div class="input-group input-group-sm col-md-12 mb-3">
+			  		<div class="input-group-prepend ">
+				    	<label class="input-group-text input-group-text-sm w80" for="workerExpertType">전문 영역</label>
+				  	</div>
+					<select class="custom-select custom-select-sm" id="workerExpertType" name="workerExpertType">
+						<mt:enumOptions enumClass="WorkerExpertType" emptyValueName="전체"></mt:enumOptions>
+				  	</select>
+				</div>
+			</div>
+			
+			<div class="row searchFormToggle">
 				<div class="input-group input-group col-md-12 mb-3">
 					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id=""><small>보유기술</small></span>
@@ -138,7 +240,7 @@
 				</div>
 			</div>
 					
-			<div class="row">
+			<div class="row searchFormToggle">
 				<div class="input-group input-group col-md-12 mb-3">
 					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id=""><small>자격증</small></span>
@@ -150,7 +252,7 @@
 				</div>
 			</div>
 			
-			<div class="row">
+			<div class="row searchFormToggle">
 				<div class="input-group input-group col-md-12 mb-3">
 					<div class="input-group-prepend">
 			    		<span class="input-group-text w80" id=""><small>우대조건</small></span>
@@ -171,11 +273,8 @@
   	</div>
   	
  	<div class="pl-4 pr-3">
-  	  	<div class="row">
-  			<div class="col-md-3 mb-3" style="margin-top: -0.5rem">
-			    <input type="checkbox" class="form-check-input " id="rejectSeekingWork" name="rejectSeekingWork" value="true" checked="checked" style="margin-top: .45rem;">
-			    <label class="form-check-label form-check-label-sm" for="rejectSeekingWork" style="font-size: 90%">구직 거절 제외</label>
-  			</div>
+  	  	<div class="row searchFormToggle">
+  			<div class="col-md-3 mb-3"></div>
   			<div class="col-md-7 mb-3"></div>
   			<div class="col-md-2 mb-3 text-right">
   			 	<button type="button" class="btn btn-primary btn-sm w-100" id="searchBtn">조회</button>
@@ -357,6 +456,9 @@ $(document).ready(function() {
 	$('.searchFormToggle').toggle();
 	$('#searchFormOpenBtn').show();
 	
+	COMMON.calendar('regStart');
+	COMMON.calendar('regEnd');
+	
 	$('#searchFormOpenBtn, #searchFormCloseBtn').on('click', function () {
 		$('.searchFormToggle').toggle();
     })
@@ -419,6 +521,67 @@ $(document).ready(function() {
     $('#searchResetBtn').on('click', function () {
     	formReset();
     });
+    
+    $('#workWhereAll').on('click', function () {
+    	if ($(this).is(':checked')) {
+    		//전체를 체크했으니 다 풀자
+    		$('#workWhereOffice').prop('checked', true);
+    		$('#workWhereOfficeHome').prop('checked', true);
+    		$('#workWhereHome').prop('checked', true);
+    	} else {
+    		$('#workWhereOffice').prop('checked', false);
+    		$('#workWhereOfficeHome').prop('checked', false);
+    		$('#workWhereHome').prop('checked', false);
+    	}
+    });
+    
+    $('#workWhereOffice').on('click', function () {
+    	if (!$(this).is(':checked')) {
+    		if ( !$('#workWhereOfficeHome').is(':checked') && !$('#workWhereOfficeHome').is(':checked')) {
+    			$('#workWhereAll').prop('checked', true);
+    		} else {
+        		$('#workWhereAll').prop('checked', false);
+    		}
+    	} else {
+    		if ( $('#workWhereOfficeHome').is(':checked') && $('#workWhereOfficeHome').is(':checked')) {
+    			$('#workWhereAll').prop('checked', true);
+    		} else {
+        		$('#workWhereAll').prop('checked', false);
+    		}
+    	}
+    });
+    
+    $('#workWhereOfficeHome').on('click', function () {
+    	if (!$(this).is(':checked')) {
+    		if ( !$('#workWhereOffice').is(':checked') && !$('#workWhereHome').is(':checked')) {
+    			$('#workWhereAll').prop('checked', true);
+    		} else {
+        		$('#workWhereAll').prop('checked', false);
+    		}
+    	} else {
+    		if ( $('#workWhereOffice').is(':checked') && $('#workWhereHome').is(':checked')) {
+    			$('#workWhereAll').prop('checked', true);
+    		} else {
+        		$('#workWhereAll').prop('checked', false);
+    		}
+    	}
+    });
+    
+    $('#workWhereHome').on('click', function () {
+    	if (!$(this).is(':checked')) {
+    		if ( !$('#workWhereOffice').is(':checked') && !$('#workWhereOfficeHome').is(':checked')) {
+    			$('#workWhereAll').prop('checked', true);
+    		} else {
+        		$('#workWhereAll').prop('checked', false);
+    		}
+    	} else {
+    		if ( $('#workWhereOffice').is(':checked') && $('#workWhereOfficeHome').is(':checked')) {
+    			$('#workWhereAll').prop('checked', true);
+    		} else {
+        		$('#workWhereAll').prop('checked', false);
+    		}
+    	}
+    });
 });
 
 function formReset() {
@@ -428,7 +591,14 @@ function formReset() {
  	$('.skillSetRow').remove();
 
 	$('#searchTap select, input').val('');
-	$('#pageInput').val('1')
+	$('#pageInput').val('1');
+	
+	$('#workWhereAll').prop('checked',true);
+	$('#workWhereOffice').prop('checked',false);
+	$('#workWhereOfficeHome').prop('checked',false);
+	$('#workWhereHome').prop('checked',false);
+	
+	$('#genderAll').prop('checked', true);
 }
 
 function goPage(page) {
@@ -511,6 +681,99 @@ function skillSetSave() {
 	$('#skillSets').append($('#skillSetPopupDiv').html());
 	$('#skillSetConfModal').modal('hide');
 }
+
+function selectSomethingEnd() {
+	addDay(-Number($('#endDayInput').val()));
+}
+
+function selectMonthEnd() {
+	var now = new Date();
+	var last = new Date(now.getFullYear(), now.getMonth(), 1);
+	var str = last.format('yyyy-MM-dd');
+	$('#regStart').val(str);
+}
+
+function selectWeekEnd() {
+	var getMonday = new Date().getDay();
+	addDay( - getMonday + (getMonday == 0 ? -6:1));
+}
+
+function select7DayEnd() {
+	addDay(-7);
+}
+
+function addDay(day) {
+	var now = new Date();
+	now.setDate(now.getDate() + day);
+	var str = now.format('yyyy-MM-dd');
+	$('#regStart').val(str);
+}
+
+function changeMinAge() {
+	var inputMin = $('#minAge').val();
+	if (inputMin) {
+		var inputMax = $('#maxAge').val();
+		if (inputMax) {
+			if (parseInt(inputMax) < parseInt(inputMin)) {
+				$('#minAge').val(inputMax);
+			}
+		}
+	}
+}
+
+function changeMaxAge() {
+	var inputMax = $('#maxAge').val();
+	if (inputMax) {
+		var inputMin = $('#minAge').val();
+		if (inputMin) {
+			if (parseInt(inputMax) < parseInt(inputMin)) {
+				$('#maxAge').val(inputMin);
+			}
+		}
+	}
+}
+
+function changeMinWorkYear() {
+	var inputMin = $('#minWorkYear').val();
+	if (inputMin) {
+		var inputMax = $('#maxWorkYear').val();
+		if (inputMax) {
+			if (parseInt(inputMax) < parseInt(inputMin)) {
+				$('#minWorkYear').val(inputMax);
+			}
+		}
+	}
+}
+
+function changeMaxWorkYear() {
+	var inputMax = $('#maxWorkYear').val();
+	if (inputMax) {
+		var inputMin = $('#minWorkYear').val();
+		if (inputMin) {
+			if (parseInt(inputMax) < parseInt(inputMin)) {
+				$('#maxWorkYear').val(inputMin);
+			}
+		}
+	}
+}
+
+function changeMinAcamemic() {
+
+}
+
+function changeMaxAcademic() {
+
+}
+
+function changeMinGrade(){
+
+}
+
+function changeMaxGrade() {
+
+}
+
+
 </script>
 
-<!-- 구직거절 제외 구현, 쿠키에 검색값 저장, 페이지 이동, 학사 선택시 대소값 비교, 주소 항목, 등록일 항목 채우기 -->
+<!-- 쿠키에 검색값 저장, 페이지 이동   -->
