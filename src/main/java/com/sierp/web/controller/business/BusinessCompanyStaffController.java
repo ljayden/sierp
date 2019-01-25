@@ -73,7 +73,7 @@ public class BusinessCompanyStaffController {
     public JsonResult modifyCompanyStaffProc(CustomerManager manager, @RequestBody @Valid CompanyStaffModifyRequest request) {
 		
 		companyDao.updateCompanyStaff(request.getSeq(), request.getName(), request.getPhoneNo(), request.getCompanyPhoneNo(), 
-				request.getEmail(), request.getPosition(), request.getPart(), request.getMemo());
+				request.getEmail(), request.getPosition(), request.getPart(), request.getMemo(), manager.getId());
 		return JsonResults.success();
     }
 	

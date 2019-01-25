@@ -9,10 +9,10 @@
 	<thead class="thead-dark" style="borde : 1px">
     	<tr>
       		<th scope="col" class="text-center">업체명</th>
-      		<th scope="col">주소</th>
       		<th scope="col">업체 담당자</th>
-      		<th scope="col">계약중 건</th>
-      		<th scope="col" class="">총 계약건수</th>
+      		<th scope="col">채용 진행 건</th>
+      		<th scope="col">유효 계약 건</th>
+      		<th scope="col">누적 계약 건</th>
       		<th scope="col">등록자</th>
     	</tr>
   	</thead>
@@ -21,26 +21,10 @@
 	 		<c:forEach var="company" items="${ companyList }">
 		    	<tr>
 		      		<th scope="row"><a href="/business/company/viewCompany.do?companySeq=${ company.companySeq}">${ company.companyName }</a></th>
-		      		<td>
-		      		
-		      		<c:if test="${ not empty company.sido }">
-		      			${ company.sido.description }
-		      			<c:if test="${ not empty company.siGunGu }">
-		      				/${ company.siGunGu.description }
-		      			</c:if>
-		      			<c:if test="${ empty company.siGunGu }">
-		      				/ -
-		      			</c:if>
-		      		</c:if>
-		      		<c:if test="${ empty company.sido }">
-		      			- / - 
-		      		</c:if>	
-						
-		      			
-		      		</td>
 		      		<td>${ company.staffCnt }명</td>
-		      		<td>1건</td>
-		      		<td><b>4건</b></td>
+		      		<td><a href="">1건</a></td>
+		      		<td><a href="">1건</a></td>
+		      		<td><a href="">4건</a></td>
 		      		<td><mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/></td>
 		    	</tr>
 	 		</c:forEach>

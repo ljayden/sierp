@@ -91,10 +91,8 @@ public class FreelancerRegisterService {
 		for (FreelancerRegisterRequestCareer career : careers) {
 			WorkerCareer workerCareer = new WorkerCareer();
 			workerCareer.setWorkerSeq(workerSeq);
-			workerCareer.setWorkStartYear(career.getWorkStartYear());
-			workerCareer.setWorkStartMonth(career.getWorkStartMonth());
-			workerCareer.setWorkEndYear(career.getWorkEndYear());
-			workerCareer.setWorkEndMonth(career.getWorkEndMonth());
+			workerCareer.setWorkStartYm(career.getWorkStartYear() + "-" + career.getWorkStartMonth());
+			workerCareer.setWorkEndYm(career.getWorkEndYear() + "-" + career.getWorkEndMonth());
 			workerCareer.setRecruitType(career.getRecruitType());
 			workerCareer.setJobDesc(career.getJobDesc());
 			workerCareer.setCompanyName(career.getCompanyName());

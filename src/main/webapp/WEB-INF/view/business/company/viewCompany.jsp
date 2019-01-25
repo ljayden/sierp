@@ -17,56 +17,70 @@
 		등록 :<fmt:formatDate value="${company.registerYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.registerManagerId }"/>)
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-3 mb-2">
-		<b>업체명 : ${ company.companyName } </b>
+	<div class="row text-muted small">
+		<div class="col-md-12 text-right">
+		수정 :<fmt:formatDate value="${company.modifyYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ company.modifyManagerId }"/>)
 		</div>
 	</div>
+	
 	<div class="row">
+		<div class="col-md-3 mb-4">
+		<b>회사명 : ${ company.companyName } </b>
+		</div>
+	</div>
+	<div class="row small">
 		<div class="col-md-3 mb-2">
-		사업자 번호 : ${ company.bizNo }
+		<b>사업자 번호 : </b> ${ company.bizNo }
 		</div>
 		<div class="col-md-9 mb-2">
-		주소 : ${ company.sido.description }/${ company.siGunGu.description }    ${ company.detailAddr }
+		<b>주소 :</b> ${ company.sido.description }/${ company.sigungu.description }    ${ company.detailAddr }
 		</div>
 	</div>
-	<div class="mb-3"> 
-		<label for="cutomerMemo" class="col-form-label-sm">업체 메모 :</label>
-		<textarea class="form-control form-control-sm" aria-label="With textarea" rows="5" disabled="disabled">${ company.customerMemo }</textarea>
+	<div class="mb-3 small"> 
+		<label for="cutomerMemo" class="col-form-label-sm"><b>회사 소개 :</b></label>
+		<textarea class="form-control form-control-sm small" aria-label="With textarea" rows="5" disabled="disabled">${ company.companyIntro }</textarea>
 	</div>
-	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#companyModifyModal" id="companyModifyModalBtn">업체정보 변경</button>
 	<br>
-	<div class="row">
+	<div class="mb-3 small"> 
+		<label for="cutomerMemo" class="col-form-label-sm"><b>담당자 메모 :</b></label>
+		<textarea class="form-control form-control-sm small" aria-label="With textarea" rows="5" disabled="disabled">${ company.managerMemo }</textarea>
+	</div>
+    <div class="form-group col-md-12 m-1 mt-m2 small text-right text-info">
+    	<a href="javascript: return fasle;"  data-toggle="modal" data-target="#companyModifyModal" id="companyModifyModalBtn">업체 정보 변경</a>&nbsp;
+    </div>
+	<br>
+	<div class="row small">
 		<div class="col-md-3 mb-3">
-		담당자 정보
+		<b>업체 담당자 정보</b>
 		</div>
 	</div>
 	<div class="pl-2 pr-2 small">
 		<c:if test="${ empty companyStaffs }">
-			<div class="text-muted">담당자 정보 없음</div>
+			<div class="text-muted">업체 담당자 정보 없음</div>
 			<hr class="mb-2" style="margin-top: 3px;">
 		</c:if>
 		<c:if test="${ not empty companyStaffs }">
 			<c:forEach var="staff" items="${ companyStaffs }">
  				<div class="card mb-1 p-1">
 					<div class="row p-1">
-						<div class="col-md-2" style="font-size: 1.0rem; margin-top : -4px;"><strong>${ staff.name }</strong></div>
-						<div class="col-md-3">부서/직급: ${ staff.part }/${ staff.position }</div>
-						<div class="col-md-5">E-mail : ${ staff.email }</div>
+						<div class="col-md-2" style=" margin-top : -4px;"><span style="font-size: 1.0rem;"><strong>${ staff.name }</strong></span>&nbsp;${ staff.position }</div>
+						<div class="col-md-4">부서: ${ staff.part }</div>
+						<div class="col-md-4">E-mail : ${ staff.email }</div>
 					</div>
 					<div class="row p-1">
 						<div class="col-md-2">&nbsp;</div>
-						<div class="col-md-3">핸드폰 : ${ staff.phoneNo }</div>
-						<div class="col-md-5">회사연락처 : ${ staff.companyPhoneNo }</div>
-						
+						<div class="col-md-4">개인연락처 : ${ staff.phoneNo }</div>
+						<div class="col-md-4">회사연락처 : ${ staff.companyPhoneNo }</div>
 					</div>
 					<div class="row p-1">
 						<div class="col-md-2">&nbsp;</div>
-						<div class="col-md-8">메모 : ${ staff.customerMemo }</div>
-						<div class="col-md-2">
-						<button type="button" class="btn btn-outline-secondary btn-sm float-right" onclick="javascript: removeStaff(${staff.companyStaffSeq})">삭제</button>
-						<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" data-toggle="modal" data-target="#staffModifyModal" id="staffModifyModalBtn"
-						onclick="javascript: setCompanyStaffInfo(${staff.companyStaffSeq})">수정</button>
+						<div class="col-md-8">메모 : ${ staff.managerMemo }</div>
+						<div class="col-md-2 text-right text-info">
+						<a href="javascript: return false;" onclick="setCompanyStaffInfo(${staff.companyStaffSeq});"  data-toggle="modal" data-target="#staffModifyModal" id="staffModifyModalBtn">수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="javascript: removeStaff(${staff.companyStaffSeq})">삭제</a>
+<%-- 						<button type="button" class="btn btn-outline-secondary btn-sm float-right" onclick="javascript: removeStaff(${staff.companyStaffSeq})">삭제</button> --%>
+<!-- 						<button type="button" class="btn btn-outline-secondary btn-sm float-right mr-2" data-toggle="modal" data-target="#staffModifyModal" id="staffModifyModalBtn" -->
+<%-- 						onclick="javascript: setCompanyStaffInfo(${staff.companyStaffSeq})">수정</button> --%>
 						</div>
 					</div>
 				</div>
@@ -74,12 +88,12 @@
 		</c:if>
 		<br>
 	</div>
-	
-	<div class=" clearfix mb-4">
-		<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#staffAddModal" id="staffAddModalBtn">담당자 추가</button>
-	</div>
-	
-	<form id="searchForm" action="/business/project/getCompanyProjectList.ldo" method="post" iframe-list-div="listDiv">
+    <div class="form-group col-md-12 m-1 mt-m3 small text-right text-info">
+    	<a href="javascript: return fasle;"  data-toggle="modal" data-target="#staffAddModal" id="staffAddModalBtn">담당자 추가</a>&nbsp;
+    </div>
+
+	<br><br>
+	<form id="searchForm" action="/recruit/posting/getCompanyPostingList.ldo" method="post" iframe-list-div="listDiv">
 		<input type="hidden" id="pageInput" name="page" value="1"/>
 		<input type="hidden" id="companySeqInput" name="companySeq" value="${ company.companySeq }">
 	</form>
@@ -88,13 +102,13 @@
 		<div class="card-header small">
 	    	<ul class="nav nav-tabs card-header-tabs">
 	      		<li class="nav-item">
-	        		<a class="nav-link active" id="nav-link-project" href="javascript:changeSubMenu('project')">프로젝트 정보</a>
-	      		</li>
-	      		<li class="nav-item">
-	        		<a class="nav-link" id="nav-link-posting" href="javascript:changeSubMenu('posting')">채용 공고</a>
+	        		<a class="nav-link active" id="nav-link-posting" href="javascript:changeSubMenu('posting')">채용 공고</a>
 	      		</li>
 	      		<li class="nav-item">
 	        		<a class="nav-link" id="nav-link-contract" href="javascript:changeSubMenu('contract')">계약 정보</a>
+	      		</li>
+	      		<li class="nav-item">
+	        		<a class="nav-link" id="nav-link-project" href="javascript:changeSubMenu('project')">프로젝트 정보</a>
 	      		</li>
 	    	</ul>
 	  	</div>
@@ -115,7 +129,7 @@
 	<div class="modal-dialog modal-lg" role="document">
     	<div class="modal-content">
      		<div class="modal-header  text-white bg-info">
-        	<h5 class="modal-title" id="staffAddModalLabel"><b>담당자 추가</b></h5>
+        	<h5 class="modal-title" id="staffAddModalLabel"><b>업체 담당자 추가</b></h5>
         	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       		</div>
 			
@@ -178,7 +192,7 @@
 	<div class="modal-dialog modal-lg" role="document">
     	<div class="modal-content">
      		<div class="modal-header  text-white bg-info">
-        	<h5 class="modal-title" id="staffModifyModalLabel"><b>담당자 변경</b></h5>
+        	<h5 class="modal-title" id="staffModifyModalLabel"><b>업체 담당자 정보 변경</b></h5>
         	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       		</div>
 			
@@ -284,8 +298,12 @@
 								</div>
 					       	</div> 
 							<div class="form-row">
-								<label for="companyCutomerMemo" class="col-form-label-sm">업체 메모</label>
-								<textarea class="form-control form-control-sm" id="companyCutomerMemo" aria-label="With textarea" rows="3">${ company.customerMemo }</textarea>
+								<label for="companyIntro" class="col-form-label-sm">회사 소개</label>
+								<textarea class="form-control form-control-sm" id="companyIntro" aria-label="With textarea" rows="3">${ company.companyIntro }</textarea>
+					        </div>
+							<div class="form-row">
+								<label for="companyManagerMemo" class="col-form-label-sm">담당자 메모</label>
+								<textarea class="form-control form-control-sm" id="companyManagerMemo" aria-label="With textarea" rows="3">${ company.managerMemo }</textarea>
 					        </div>
 						</div>
 					</div> 
@@ -303,6 +321,9 @@
 
 
 <script>
+//https://www.scout.co.kr/company/resumedb/part/
+//http://www.jobkorea.co.kr/Top100/?Main_Career_Type=1&Search_Type=1&BizJobtype_Bctgr_Code=0&BizJobtype_Bctgr_Name=%EC%A0%84%EC%B2%B4&Major_Big_Code=0&Major_Big_Name=%EC%A0%84%EC%B2%B4&Edu_Level_Code=9&Edu_Level_Name=%EC%A0%84%EC%B2%B4
+//http://chief.incruit.com/hh_info/jobpost.asp?job=1901250001198
 $(document).ready(function() {
 	
 	$('#staffAddModal').on('shown.bs.modal', function () {
@@ -310,12 +331,12 @@ $(document).ready(function() {
    	})
    	
    	$('#staffModifyModal').on('shown.bs.modal', function () {
-   		$('#staffModifyModalBtn').trigger('focus');
+ 
    	})
    	
    	$('#companyModifyModal').on('shown.bs.modal', function () {
    		$('#companyModifyModalBtn').trigger('focus');
-   		getSiGunGuTypeReg('companySido','companySigungu', '${ company.siGunGu }');
+   		getSiGunGuTypeReg('companySido','companySigungu', '${ company.sigungu }');
    	})
    
 });
@@ -333,7 +354,7 @@ function setCompanyStaffInfo(companyStaffSeq) {
 	    	$('#companyStaffPhoneModify').val(staff.phoneNo);
 	    	$('#companyStaffComPhoneModify').val(staff.companyPhoneNo);
 	    	$('#companyStaffEmailModify').val(staff.email);
-	    	$('#companyStaffMemoModify').val(staff.customerMemo);
+	    	$('#companyStaffMemoModify').val(staff.managerMemo);
 	    }
 	});
 }
@@ -378,7 +399,7 @@ function companyModifyProc() {
 		param.sigungu = $('#companySigungu').val();
 	}
 	param.addrDetail = $('#companyAddrDetail').val();
-	param.customerMemo = $('#companyCutomerMemo').val();
+	param.managerMemo = $('#companyManagerMemo').val();
 
 	COMMON.ajax({
 	    url : '/business/company/modifyCompanyProc.json',

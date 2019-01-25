@@ -74,7 +74,7 @@ public class BusinessCompanyController {
 	@ResponseBody
     public JsonResult modifyCompanyProc(CustomerManager manager, @RequestBody @Valid CompanyModifyRequest request) {
 		
-		companyDao.updateCompany(request.getSeq(), request.getName(), request.getBizNo(), request.getSido(), request.getSigungu(), request.getAddrDetail(), request.getCustomerMemo());
+		companyDao.updateCompany(request.getSeq(), request.getName(), request.getBizNo(), request.getSido(), request.getSigungu(), request.getAddrDetail(), request.getManagerMemo(), manager.getId());
 		return JsonResults.success();
     }
 	

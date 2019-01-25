@@ -14,14 +14,16 @@ public class Company {
 	
 	private int customerSeq;	//0경우 없는거
 	private String companyName;
-	
-	private String bizNo;
+	private String companyIntro;	//업체 소개 - 채용제안서에 찍히는 정보
+	private String bizNo;			//과연 사업자 번호를 받아야 하는가...
 	
 	private SidoType sido;
-	private SiGunGuType siGunGu;
+	private SiGunGuType sigungu;
 	private String detailAddr;
 	
-	private String customerMemo;
+	private String managerMemo;
 	private Date registerYmdt;
 	private String registerManagerId;
+	private Date modifyYmdt;
+	private String modifyManagerId;
 }

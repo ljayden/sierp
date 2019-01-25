@@ -5,8 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="mt" uri="myTags" %>
 
-<div class="mb-3 float-right">
-   	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="javacript: location.href = '/recruit/posting/registPosting.do?companySeq=${param.companySeq}'">채용공고 등록</button>
+<div class="mb-3 small text-right text-info">
+<%--    	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="javacript: location.href = '/recruit/posting/registPosting.do?companySeq=${param.companySeq}'">채용공고 등록</button> --%>
+	<a href="javascript: location.href = '/recruit/posting/registPosting.do?companySeq=${param.companySeq}'">채용공고 등록</a>&nbsp;
 </div>
 	    	
 <table class="table h3 small text-center">

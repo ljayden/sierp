@@ -228,7 +228,7 @@
         <hr class="mb-4">
         <h6><b>구직 정보</b></h6>
         <div class="form-row">
-        	<div class="col-md-6 mb-3">
+        	<div class="col-md-5 mb-3">
 	           	<div class="custom-control custom-checkbox custom-control-inline">
 					<input type="checkbox" id="hopeWorkPosiType4" name="hopeWorkPosiType" value="4" class="custom-control-input" checked="checked">
 					<label class="custom-control-label custom-control-label-sm" for="hopeWorkPosiType4">상주</label>
@@ -242,19 +242,13 @@
 			 		<label class="custom-control-label custom-control-label-sm"  for="hopeWorkPosiType1">재택</label>
 				</div>
         	</div>
-        	<div class="col-md-6 mb-3">
-	           	<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" id="hopeRecruitType16" name="hopeRecruitType"  value="16" class="custom-control-input">
-					<label class="custom-control-label custom-control-label-sm" for="hopeRecruitType16">정규직</label>
-				</div>
-				<div class="custom-control custom-checkbox custom-control-inline">
-			 		<input type="checkbox" id="hopeRecruitType8" name="hopeRecruitType"  value="8" class="custom-control-input">
-			 		<label class="custom-control-label custom-control-label-sm"  for="hopeRecruitType8">프리랜서</label>
-				</div>
-				<div class="custom-control custom-checkbox custom-control-inline">
-			 		<input type="checkbox" id="hopeRecruitType2" name="hopeRecruitType"  value="2" class="custom-control-input">
-			 		<label class="custom-control-label custom-control-label-sm"  for="hopeRecruitType2">알바</label>
-				</div>
+        	<div class="col-md-7 mb-3">
+        		<c:forEach var="recruitType" items="${ recruitTypeList }">
+		           	<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" id="hopeRecruitType${ recruitType.code }" name="hopeRecruitType"  value="${ recruitType.code  }" class="custom-control-input">
+						<label class="custom-control-label custom-control-label-sm" for="hopeRecruitType${ recruitType.code  }">${ recruitType.description  }</label>
+					</div>
+        		</c:forEach>
         	</div>
         </div>
 		<div class="form-row">

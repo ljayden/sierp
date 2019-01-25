@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AcademicLevel {
 	
-	MID_SCH("중학교 졸", 3),
-	HIGH_SCH("고등학교 졸", 6),
+	MID_SCH("중학교 졸업", 3),
+	HIGH_SCH("고등학교 졸업", 6),
 	JUNMUN_COL("전문학사", 8),
 	COLLEGE("학사", 10),
 	MASTER("석사", 12),

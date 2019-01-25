@@ -9,10 +9,8 @@ public class WorkerCareer {
 
 	private int workerSeq;
 	
-	private int workStartYear;
-	private int workStartMonth;
-	private Integer workEndYear;
-	private Integer workEndMonth;
+	private String workStartYm;
+	private String workEndYm;
 
 	private RecruitType recruitType;
 	private String jobDesc;

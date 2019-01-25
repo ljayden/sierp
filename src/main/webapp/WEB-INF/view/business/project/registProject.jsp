@@ -140,17 +140,16 @@
                 <label for="sigungu" class="col-form-label-sm">&nbsp;</label>
                 <select class="custom-select custom-select-sm d-block w-100" id="sigungu" required>
                 	<option value="">시/도를 선택해 주세요.</option>
-<%-- 				    <mt:enumOptions enumClass="SiGunGuType" emptyValueName="시/도를 선택해 주세요."/> --%>
 			  	</select>
 			  	<div class="invalid-feedback" style="width: 100%;">시/군/구를 선택해 주세요.</div>
 			</div>
 			<div class="form-group col-md-7 mb-3">
                 <label for="addrDetail" class="col-form-label-sm">상세 근무지<span class="text-muted">(Optional)</span></label>
- 				<input type="text" class="form-control form-control-sm" id="addrDetail" placeholder="ex: 강남구청역 푸르지오">
+ 				<input type="text" class="form-control form-control-sm" id="addrDetail" placeholder="상세 주소">
 			</div>
 		</div>
 		<div class="mb-3"> 
-        	<label for="projectDesc" class="col-form-label-sm">프로젝트 설명</label>
+        	<label for="projectDesc" class="col-form-label-sm">프로젝트 설명<span class="small text-info">(프리랜서에게 채용공고 제안시 프로젝트 설명이 노출됩니다.)</span></label>
 			<textarea class="form-control form-control-sm" id="projectDesc" aria-label="With textarea" rows="3"></textarea>
 		</div>   
 		<div class="form-row">
@@ -165,8 +164,8 @@
         	</div>
 		</div>
 		<div class="mb-3"> 
-        	<label for="cutomerMemo" class="col-form-label-sm">메모</label>
-			<textarea class="form-control form-control-sm" id="customerMemo" aria-label="With textarea" rows="3"></textarea>
+        	<label for="cutomerMemo" class="col-form-label-sm">담당자 메모</label>
+			<textarea class="form-control form-control-sm" id="managerMemo" aria-label="With textarea" rows="3"></textarea>
 		</div>                                                 
   		<br>
   		<br>
@@ -361,7 +360,7 @@ function regProject(flag) {
 	
 	var start = param.startYear + '-' + param.startMonth + '-' + param.startDay;
 	var end = param.endYear + '-' + param.endMonth + '-' + param.endDay;
-	if (end > start) {
+	if (end < start) {
 		alert('프로젝트 기간을 확인해 주세요.');
 		return false;
 	}
@@ -372,7 +371,7 @@ function regProject(flag) {
 	
 	param.projectDesc = $('#projectDesc').val();
 	param.mainManagerId = $('#manager').val();
-	param.customerMemo = $('#customerMemo').val(); 
+	param.managerMemo = $('#managerMemo').val(); 
 
 	event.preventDefault();
     event.stopPropagation();

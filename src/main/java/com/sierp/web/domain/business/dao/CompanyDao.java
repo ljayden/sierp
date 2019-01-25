@@ -1,5 +1,6 @@
 package com.sierp.web.domain.business.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Maps;
 import com.sierp.web.domain.business.model.Company;
-import com.sierp.web.domain.business.model.CompanyManagerSearch;
+import com.sierp.web.domain.business.model.CompanyStaffSearch;
 import com.sierp.web.domain.business.model.CompanySearch;
 import com.sierp.web.domain.business.model.CompanyStaff;
 import com.sierp.web.domain.common.constant.SiGunGuType;
@@ -86,7 +87,7 @@ public class CompanyDao {
 		pager.setTotalCount(sql.selectOne(MAPPER_NAMESPACE + "selectCompanyStaffListCount", params));
 	}
 	
-	public List<CompanyManagerSearch> selectCompanyStaffList(int customerSeq, String companyName, String companyStaffName, String phoneNo, String registerManagerId, Pager pager) {
+	public List<CompanyStaffSearch> selectCompanyStaffList(int customerSeq, String companyName, String companyStaffName, String phoneNo, String registerManagerId, Pager pager) {
 		Map<String, Object> params = pager.initParamMapWithPager();
 		params.put("customerSeq", customerSeq);
 		params.put("companyName", companyName);
@@ -96,19 +97,21 @@ public class CompanyDao {
 		return sql.selectList(MAPPER_NAMESPACE + "selectCompanyStaffList", params);
 	}
 	
-	public int updateCompany(int companySeq, String name, String bizNo, SidoType sido, SiGunGuType siGunGu, String detailAddr, String customerMemo) {
+	public int updateCompany(int companySeq, String name, String bizNo, SidoType sido, SiGunGuType sigungu, String detailAddr, String managerMemo, String managerId) {
 		Map<String, Object> params = Maps.newHashMap();
 		params.put("companySeq", companySeq);
 		params.put("companyName", name);
 		params.put("bizNo", bizNo);
 		params.put("sido", sido);
-		params.put("siGunGu", siGunGu);
+		params.put("siGunGu", sigungu);
 		params.put("detailAddr", detailAddr);
-		params.put("customerMemo", customerMemo);
+		params.put("managerMemo", managerMemo);
+		params.put("modifyYmdt", new Date());
+		params.put("modifyManagerId", managerId);
 		return sql.update(MAPPER_NAMESPACE + "updateCompany", params);
 	}
-	
-	public int updateCompanyStaff(int companyStaffSeq, String name, String phoneNo, String companyPhoneNo, String email, String position, String part, String customerMemo) {
+
+	public int updateCompanyStaff(int companyStaffSeq, String name, String phoneNo, String companyPhoneNo, String email, String position, String part, String managerMemo, String managerId) {
 		Map<String, Object> params = Maps.newHashMap();
 		params.put("companyStaffSeq", companyStaffSeq);
 		params.put("name", name);
@@ -117,7 +120,9 @@ public class CompanyDao {
 		params.put("email", email);
 		params.put("position", position);
 		params.put("part", part);
-		params.put("customerMemo", customerMemo);
+		params.put("managerMemo", managerMemo);
+		params.put("modifyYmdt", new Date());
+		params.put("modifyManagerId", managerId);
 		return sql.update(MAPPER_NAMESPACE + "updateCompanyStaff", params);
 	}
 	

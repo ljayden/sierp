@@ -30,14 +30,17 @@ INSERT INTO customer_manager values(1, 'demouser3', 'test3@hanmail.net', 'A6xnQh
 CREATE TABLE company(
           company_seq integer PRIMARY KEY,
 		  customer_seq integer,
-		  company_name VARCHAR(30),  
+		  company_name VARCHAR(30),
+		  company_intro VARCHAR(5000),
 		  biz_no VARCHAR(10),
 		  sido VARCHAR(20),
-		  si_gun_gu VARCHAR(20),
+		  sigungu VARCHAR(20),
 		  detail_addr VARCHAR(100),
-		  customer_memo VARCHAR(500),
+		  manager_memo VARCHAR(500),
 		  register_ymdt DATETIME,
-		  register_manager_id VARCHAR(50)
+		  register_manager_id VARCHAR(50),
+		  modify_ymdt DATETIME,
+		  modify_manager_id VARCHAR(50)
 );
 
 INSERT INTO company values(1 , 1, '네이버', '1238796542', 'GYUNGGI', 'SUNGNAM_BUNDANG', '정자역', '갑질업체', datetime('now'), 'demouser2');
@@ -52,9 +55,11 @@ CREATE TABLE company_staff (
 	email VARCHAR(50),
 	position  VARCHAR(20),
 	part VARCHAR(40),
-	customer_memo VARCHAR(500),
+	manager_memo VARCHAR(500),
  	register_ymdt DATETIME,
 	register_manager_id VARCHAR(50),
+	modify_ymdt DATETIME,
+	modify_manager_id VARCHAR(50),
 	remove_yn char(1) default 'N'
 ) ;
 	
@@ -184,10 +189,12 @@ CREATE TABLE project (
 	sigungu VARCHAR(20),
 	detail_addr VARCHAR(200),
 	project_desc VARCHAR(500),
-	customer_memo VARCHAR(1000),
+	manager_memo VARCHAR(2000),
 	register_manager_id VARCHAR(50),
 	register_ymdt DATETIME,
-	
+	modify_ymdt DATETIME,
+	modify_manager_id VARCHAR(50),
+	remove_yn char(1) default 'N',
 	end_yn VARCHAR(1)
 );
 

@@ -43,14 +43,18 @@ public class CompanyRegisterService {
 	 
 		company.setCustomerSeq(manager.getCustomerSeq());
 		company.setCompanyName(request.getName());
+		company.setCompanyIntro(request.getCompanyIntro());
 		company.setBizNo(request.getBizNo());
 		company.setSido(request.getSido());
-		company.setSiGunGu(request.getSigungu());
+		company.setSigungu(request.getSigungu());
 		company.setDetailAddr(request.getAddrDetail());
-		company.setCustomerMemo(request.getCustomerMemo());
+		company.setManagerMemo(request.getManagerMemo());
 		company.setRegisterManagerId(manager.getId());
-		company.setRegisterYmdt(new Date());
 		
+		Date registerYmdt = new Date();
+		company.setRegisterYmdt(registerYmdt);
+		company.setModifyManagerId(manager.getId());
+		company.setModifyYmdt(registerYmdt);
 		companyDao.insertCompany(company);
 		return company;
 	}
@@ -59,20 +63,22 @@ public class CompanyRegisterService {
 	@Transactional(rollbackFor = {Exception.class})
 	public void registerCompanyStaff(int companySeq, CompanyStaffRegisterRequest staff, CustomerManager manager, Date registerYmdt) {
 
-			CompanyStaff companyStaff = new CompanyStaff();
-			companyStaff.setCompanySeq(companySeq);
-			companyStaff.setName(staff.getName());
-			String phoneNo = StringUtils.isNotEmpty(staff.getPhoneNo()) ? staff.getPhoneNo().replace("-", "") : null;
-			companyStaff.setPhoneNo(phoneNo);
-			companyStaff.setCompanyPhoneNo(staff.getCompanyPhoneNo());
-			companyStaff.setEmail(staff.getEmail());
-			
-			companyStaff.setPosition(staff.getPosition());
-			companyStaff.setPart(staff.getPart());
-			companyStaff.setCustomerMemo(staff.getMemo());
-			companyStaff.setRegisterYmdt(registerYmdt);
-			companyStaff.setRegisterManagerId(manager.getId());
-			companyDao.insertCompanyStaff(companyStaff);
+		CompanyStaff companyStaff = new CompanyStaff();
+		companyStaff.setCompanySeq(companySeq);
+		companyStaff.setName(staff.getName());
+		String phoneNo = StringUtils.isNotEmpty(staff.getPhoneNo()) ? staff.getPhoneNo().replace("-", "") : null;
+		companyStaff.setPhoneNo(phoneNo);
+		companyStaff.setCompanyPhoneNo(staff.getCompanyPhoneNo());
+		companyStaff.setEmail(staff.getEmail());
+		
+		companyStaff.setPosition(staff.getPosition());
+		companyStaff.setPart(staff.getPart());
+		companyStaff.setManagerMemo(staff.getMemo());
+		companyStaff.setRegisterYmdt(registerYmdt);
+		companyStaff.setRegisterManagerId(manager.getId());
+		companyStaff.setModifyManagerId(manager.getId());
+		companyStaff.setModifyYmdt(registerYmdt);
+		companyDao.insertCompanyStaff(companyStaff);
 	 
 	}
 }

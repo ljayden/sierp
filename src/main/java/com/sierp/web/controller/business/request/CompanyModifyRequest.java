@@ -18,5 +18,5 @@ public class CompanyModifyRequest {
 	private SidoType sido;
 	private SiGunGuType sigungu;
 	private String addrDetail;
-	private String customerMemo;
+	private String managerMemo;
 }

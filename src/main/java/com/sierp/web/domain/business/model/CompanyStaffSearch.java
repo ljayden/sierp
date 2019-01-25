@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class CompanyManagerSearch extends CompanyStaff {
+public class CompanyStaffSearch extends CompanyStaff {
 
 	 private String companyName;
 }

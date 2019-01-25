@@ -16,6 +16,7 @@ import com.sierp.web.controller.resource.request.FreelancerRegisterRequest;
 import com.sierp.web.controller.resource.request.FreelancerSearchRequest;
 import com.sierp.web.domain.business.dao.CustomerDao;
 import com.sierp.web.domain.business.model.CustomerManager;
+import com.sierp.web.domain.common.constant.RecruitType;
 import com.sierp.web.domain.common.constant.SkillSetType;
 import com.sierp.web.domain.common.dao.CommonDao;
 import com.sierp.web.domain.resource.dao.FreelancerDao;
@@ -66,7 +67,7 @@ public class ResourceFreeLancerController {
 		model.addAttribute("advantageList", commonDao.selectAdvantageList(manager.getCustomerCode(), null, null, true));
 		model.addAttribute("skillSetTypeList", SkillSetType.values());
 		model.addAttribute("managerList", customDao.selectCustomerManagerList(manager.getCustomerSeq()));
-		
+		model.addAttribute("recruitTypeList", RecruitType.values());
 		return "resource/freelancer/registFreelancer";
 	}
 	

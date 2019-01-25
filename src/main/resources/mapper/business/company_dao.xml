@@ -3,16 +3,15 @@
 <mapper namespace="mapper.business.company_dao">
 
 	<insert id="insertCompany" parameterType="com.sierp.web.domain.business.model.Company" useGeneratedKeys="true" keyProperty="companySeq">
-		INSERT INTO company(customer_seq, company_name, biz_no, sido,  si_gun_gu, detail_addr, customer_memo, register_ymdt, register_manager_id)
-		VALUES (#{customerSeq}, #{companyName}, #{bizNo}, #{sido}, #{siGunGu}, #{detailAddr}, #{customerMemo}, #{registerYmdt}, #{registerManagerId})
+		INSERT INTO company(customer_seq, company_name, biz_no, company_intro, sido,  sigungu, detail_addr, manager_memo, register_ymdt, register_manager_id, modify_ymdt, modify_manager_id)
+		VALUES (#{customerSeq}, #{companyName}, #{companyIntro}, #{bizNo}, #{sido}, #{sigungu}, #{detailAddr}, #{managerMemo}, #{registerYmdt}, #{registerManagerId}, #{modifyYmdt}, #{modifyManagerId})
 	</insert>
 	 
 	<insert id="insertCompanyStaff" parameterType="com.sierp.web.domain.business.model.CompanyStaff" useGeneratedKeys="true" keyProperty="companyStaffSeq">
 		INSERT INTO company_staff
-		       (company_seq, name, phone_no, company_phone_no,  email, position, part, customer_memo, register_ymdt, register_manager_id)
-		VALUES (#{companySeq}, #{name}, #{phoneNo}, #{companyPhoneNo}, #{email}, #{position}, #{part}, #{customerMemo}, #{registerYmdt}, #{registerManagerId})
+		       (company_seq, name, phone_no, company_phone_no,  email, position, part, manager_memo, register_ymdt, register_manager_id, modify_ymdt, modify_manager_id)
+		VALUES (#{companySeq}, #{name}, #{phoneNo}, #{companyPhoneNo}, #{email}, #{position}, #{part}, #{managerMemo}, #{registerYmdt}, #{registerManagerId}, #{modifyYmdt}, #{modifyManagerId})
 	</insert>
- 
  
  
     <select id="selectCompany" parameterType="map" resultType="com.sierp.web.domain.business.model.Company">
@@ -33,7 +32,7 @@
 	
 	<select id="selectCompanyList" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanySearch">
 		SELECT  c.*, 
-				(SELECT count(*) FROM company_staff WHERE company_seq = c.company_seq  AND delete_yn = 'N') as staffCnt
+				(SELECT count(*) FROM company_staff WHERE company_seq = c.company_seq  AND remove_yn = 'N') as staffCnt
 		FROM 	company c
 	 	<where><include refid="companySearchCondition"/></where>
 		LIMIT #{offset}, #{limit}
@@ -53,8 +52,8 @@
 			AND c.sido = #{sido}
 		</if>
 		
-		<if test="siGunGu != null">
-			AND c.sigungu = #{siGunGu}
+		<if test="sigungu != null">
+			AND c.sigungu = #{sigungu}
 		</if>
     </sql>
     
@@ -70,7 +69,7 @@
     <select id="selectCompanyStaffListByCompanySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanyStaff">
     	SELECT 	* 
     	FROM 	company_staff
-    	WHERE	company_seq = #{companySeq} AND delete_yn = 'N'
+    	WHERE	company_seq = #{companySeq} AND remove_yn = 'N'
     </select>
     
 
@@ -80,7 +79,7 @@
 		<where><include refid="companyStaffSearchCondition"/></where>
 	</select>
 	
-	<select id="selectCompanyStaffList" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanyManagerSearch">
+	<select id="selectCompanyStaffList" parameterType="map" resultType="com.sierp.web.domain.business.model.CompanyStaffSearch">
 		SELECT  cs.*, c.company_name
 		FROM 	company c, company_staff cs
 	 	<where><include refid="companyStaffSearchCondition"/></where>
@@ -89,7 +88,7 @@
 	
     <sql id="companyStaffSearchCondition">
         cs.company_seq = c.company_seq
-        AND cs.delete_yn = 'N'
+        AND cs.remove_yn = 'N'
 		AND c.customer_seq = #{customerSeq} 
 		<if test="!@org.apache.commons.lang3.StringUtils@isEmpty(companyName)">
 			AND c.company_name like CONCAT('%',#{companyName},'%')
@@ -113,9 +112,11 @@
     	SET		company_name = #{companyName},
     			biz_no = #{bizNo},
     			sido = #{sido},
-    			si_gun_gu = #{siGunGu},
+    			sigungu = #{sigungu},
     			detail_addr = #{detailAddr},
-    			customer_memo = #{customerMemo}
+    			manager_memo = #{managerMemo},
+    			modify_ymdt = #{modifyYmdt}, 
+    			modify_manager_id = #{modifyManagerId}
     	WHERE	company_seq = #{companySeq}
     </update>
 	
@@ -127,13 +128,15 @@
     			email = #{email},
     			position = #{position},
     			part = #{part},
-    			customer_memo = #{customerMemo}
+    			manager_memo = #{managerMemo},
+    			modify_ymdt = #{modifyYmdt}, 
+    			modify_manager_id = #{modifyManagerId}
     	WHERE	company_staff_seq = #{companyStaffSeq}
     </update>
     
     <update id="deleteCompanyStaff" parameterType="map">
     	UPDATE	company_staff 
-    	SET		delete_yn = 'Y'
+    	SET		remove_yn = 'Y'
     	WHERE	company_staff_seq = #{companyStaffSeq}
     </update>
     

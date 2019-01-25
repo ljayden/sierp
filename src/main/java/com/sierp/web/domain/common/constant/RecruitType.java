@@ -15,5 +15,5 @@ public enum RecruitType {
 	ALBA("아르바이트", 1);
 	
 	@Getter private String description;
-	@Setter private int code;
+	@Setter @Getter private int code;
 }

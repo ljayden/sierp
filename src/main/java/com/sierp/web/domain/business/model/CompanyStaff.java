@@ -21,8 +21,10 @@ public class CompanyStaff {
 	private String position;	//직급
 	private String part;	//부서
 	
-	private String customerMemo;
+	private String managerMemo;
 	
 	private Date registerYmdt;
 	private String registerManagerId;	//담당자
+	private Date modifyYmdt;
+	private String modifyManagerId;
 }

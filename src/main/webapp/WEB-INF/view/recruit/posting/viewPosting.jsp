@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="col-md-12 mb-2 text-right text-muted small">
 		수정 : 
-		<c:if test="${ not empty freelancer.modifyYmdt }">
+		<c:if test="${ not empty posting.modifyYmdt }">
 			<fmt:formatDate value="${posting.modifyYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ posting.modifyManagerId }"/>)
 		</c:if>
 		<c:if test="${ empty freelancer.modifyYmdt }">

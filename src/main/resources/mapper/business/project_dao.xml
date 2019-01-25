@@ -3,12 +3,12 @@
 <mapper namespace="mapper.business.project_dao">
  
 	<insert id="insertProject" parameterType="com.sierp.web.domain.business.model.Project" useGeneratedKeys="true" keyProperty="projectSeq">
-		INSERT INTO project(customer_seq, main_manager_id, company_seq, company_staff_seq, main_company_seq, main_company_staff_seq, project_name,
-		start_year, start_month, start_day, start_ymdt,end_year, end_month, end_day, end_ymdt, sido, sigungu, detail_addr, project_desc, customer_memo,register_manager_id, register_ymdt, end_yn)
+		INSERT INTO project(customer_seq, main_manager_id, company_seq, company_staff_seq, main_company_seq, main_company_staff_seq, project_name, start_year, start_month, start_day, start_ymdt,
+		end_year, end_month, end_day, end_ymdt, sido, sigungu, detail_addr, project_desc, manager_memo,register_manager_id, register_ymdt, modify_ymdt, modify_manager_id, end_yn)
 		
 		VALUES (#{customerSeq}, #{mainManagerId}, #{companySeq}, #{companyStaffSeq}, #{mainCompanySeq}, #{mainCompanyStaffSeq}, #{projectName}, 
-		#{startYear}, #{startMonth}, #{startDay}, #{startYmdt}, #{endYear}, #{endMonth}, #{endDay}, #{endYmdt}, #{sido}, #{siGunGu}, #{detailAddr}, 
-		#{projectDesc}, #{customerMemo}, #{registerManagerId}, #{registerYmdt}, 'N')
+		#{startYear}, #{startMonth}, #{startDay}, #{startYmdt}, #{endYear}, #{endMonth}, #{endDay}, #{endYmdt}, #{sido}, #{sigungu}, #{detailAddr}, 
+		#{projectDesc}, #{managerMemo}, #{registerManagerId}, #{registerYmdt}, #{modifyYmdt}, #{modifyManagerId}, 'N')
 	</insert>
 
 	<select id="selectProjectBySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.Project">
@@ -20,9 +20,9 @@
 	<select id="selectProjectJoinBySeq" parameterType="map" resultType="com.sierp.web.domain.business.model.ProjectJoin">
 		SELECT  p.*,
 				(SELECT company_name FROM company WHERE company_seq = p.company_seq ) AS companyName,
-				(SELECT name FROM company_staff WHERE company_staff_seq = p.company_staff_seq AND delete_yn = 'N' ) AS companyStaffName,
+				(SELECT name FROM company_staff WHERE company_staff_seq = p.company_staff_seq AND remove_yn = 'N' ) AS companyStaffName,
 				(SELECT company_name FROM company WHERE company_seq = p.main_company_seq ) AS mainCompanyName,
-				(SELECT name FROM company_staff WHERE company_staff_seq = p.main_company_staff_seq AND delete_yn = 'N'  ) AS mainCompanyStaffName
+				(SELECT name FROM company_staff WHERE company_staff_seq = p.main_company_staff_seq AND remove_yn = 'N'  ) AS mainCompanyStaffName
 				
 		FROM	project p
 		WHERE	project_seq = #{projectSeq}

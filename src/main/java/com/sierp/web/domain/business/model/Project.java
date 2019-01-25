@@ -33,15 +33,18 @@ public class Project {
 	private Date endYmdt;
 	
 	private SidoType sido;
-	private SiGunGuType siGunGu;
+	private SiGunGuType sigungu;
 	private String detailAddr;
 	
 	private String projectDesc;
-	private String customerMemo;
+	private String managerMemo;
 	
 	private Date registerYmdt;
 	private String registerManagerId;
-
+	private Date modifyYmdt;
+	private String modifyManagerId;
+	
+	private String removeYn;
 	private String endYn;
 }
  

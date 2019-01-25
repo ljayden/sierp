@@ -32,6 +32,6 @@ public class ProjectRegisterRequest {
 	
 	private String projectDesc;
 	private String mainManagerId;
-	private String customerMemo;
+	private String managerMemo;
 
 }

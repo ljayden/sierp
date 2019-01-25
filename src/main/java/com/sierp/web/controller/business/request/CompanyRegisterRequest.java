@@ -16,11 +16,13 @@ import lombok.Data;
 public class CompanyRegisterRequest {
 	
 	@NotEmpty private String name;
+	
+	private String companyIntro;
 	private String bizNo;
 	private SidoType sido;
 	private SiGunGuType sigungu;
 	private String addrDetail;
-	private String customerMemo;
+	private String managerMemo;
 	
 	@Valid private List<CompanyStaffRegisterRequest> staffs;
 }

@@ -75,16 +75,18 @@ public class ProjectRegisterService {
 		}
 		
 		project.setSido(request.getSido());
-		project.setSiGunGu(request.getSigungu());
+		project.setSigungu(request.getSigungu());
 		project.setDetailAddr(request.getAddrDetail());
 		
 		project.setProjectDesc(request.getProjectDesc());
 		project.setMainManagerId(request.getMainManagerId());
-		project.setCustomerMemo(request.getCustomerMemo());
+		project.setManagerMemo(request.getManagerMemo());
 	 	
-		project.setRegisterYmdt(new Date());
+		Date registerYmdt = new Date();
+		project.setRegisterYmdt(registerYmdt);
 		project.setRegisterManagerId(manager.getId());
-		
+		project.setModifyYmdt(registerYmdt);
+		project.setModifyManagerId(manager.getId());
 		projectDao.insertProject(project);
 		
 		return project;

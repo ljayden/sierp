@@ -17,16 +17,22 @@
 		등록 :<fmt:formatDate value="${project.registerYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ project.registerManagerId }"/>)
 		</div>
 	</div>
-	<div class="row">
+	<div class="row text-muted small">
+		<div class="col-md-12 text-right">
+		수정 :<fmt:formatDate value="${project.modifyYmdt}" type="both" timeStyle="short"/> (<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ project.modifyManagerId }"/>)
+		</div>
+	</div>
+	
+	<div class="row small">
 		<div class="col-md-10 mb-2">
 		<b>프로젝트 명 : ${ project.projectName } <c:if test="${ empty project.projectName }"> ${ project.companyName } 의 프로젝트</c:if></b>
 		<c:if test="${ not empty project.mainManagerId }">(주 담당:<mt:mgrNm customerCode="${ sessionScope.customer.customerCode }" managerId="${ project.mainManagerId }"/>)</c:if>
 		</div>
 	</div>
 	<br>
-	<div class="row">
+	<div class="row small">
 		<div class="col-md-5 mb-2">
-			<b>업체명 : ${ project.companyName }</b>
+			<b>업체명 : <a href="">${ project.companyName }</a></b>
 			<c:if test="${ not empty project.companyStaffName }">
 				(담당자: ${ project.companyStaffName })
 			</c:if>
@@ -34,7 +40,7 @@
 		
 		<div class="col-md-5 mb-2">
 			<c:if test="${ not empty project.mainCompanyName }">
-				<b>수행사 : ${ project.mainCompanyName }</b>
+				<b>수행사 : <a href="">${ project.mainCompanyName }</a></b>
 				<c:if test="${ not empty project.mainCompanyStaffName }">
 					(담당자: ${ project.mainCompanyStaffName })
 				</c:if>
@@ -42,7 +48,7 @@
 		</div>
 	</div>
 	
-	<div class="row">
+	<div class="row small">
 		<div class="col-md-10 mb-2">
 		프로젝트 기간 : 
 		<c:if test="${ not empty project.startYear }">
@@ -67,25 +73,24 @@
 		</div>
 	</div>
 	
-	<div class="row">
+	<div class="row  small">
 		<div class="col-md-10 mb-2">
-		근무지 : ${ project.sido.description }/${ project.siGunGu.description }  ${ project.detailAddr }
+		근무지 : ${ project.sido.description }/${ project.sigungu.description }  ${ project.detailAddr }
 		</div>
 	</div>
 	<br>
-	<div class="mb-3"> 
-		프로젝트 설명
+	<div class="mb-3 small"> 
+		<label for="cutomerMemo" class="col-form-label-sm"><b>프로젝트 설명 :</b></label>
 		<textarea class="form-control form-control-sm" aria-label="With textarea" rows="3" disabled="disabled">${ project.projectDesc }</textarea>
 	</div>
-	<br>
-	<div class="mb-3">
-		메모
-		<textarea class="form-control form-control-sm" aria-label="With textarea" rows="3" disabled="disabled">${ project.customerMemo }</textarea>
+
+	<div class="mb-3 small">
+		<label for="cutomerMemo" class="col-form-label-sm"><b>담당자 메모 :</b></label>
+		<textarea class="form-control form-control-sm" aria-label="With textarea" rows="3" disabled="disabled">${ project.managerMemo }</textarea>
 	</div>
 	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" id="projectModifyModalBtn">수정 페이지로 이동</button>
 	<button type="button" class="btn btn-outline-primary btn-sm float-right mr-2" onclick="registerProjectPosting(${ project.companySeq}, ${project.projectSeq})">채용공고 등록</button>
 	
-	<br>
 	<br>
 	<br>
 </div>
